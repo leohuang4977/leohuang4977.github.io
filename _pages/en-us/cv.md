@@ -2,7 +2,7 @@
 page_id: cv
 layout: default
 permalink: /cv/
-title: Resume and Curriculum Vitae 
+title: Resume and CV
 nav: true
 nav_order: 4
 ---
