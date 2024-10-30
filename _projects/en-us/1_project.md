@@ -1,7 +1,7 @@
 ---
 page_id: project_1
 layout: page
-title: project 1
+title: Metagame of Psychology Posters
 description: with background image
 img: assets/img/12.jpg
 importance: 1
@@ -45,6 +45,7 @@ To give your project a background in the portfolio page, just add the img tag to
     This image can also have a caption. It's like magic.
 </div>
 
+THIS PROJECT IS ABOUT HTE POSTER METAGAEM PROJECT
 You can also put regular text between your rows of images, even citations {% cite einstein1950meaning %}.
 Say you wanted to write a bit about your project before you posted the rest of the images.
 You describe how you toiled, sweated, _bled_ for your project, and then... you reveal its glory in the next row of images.

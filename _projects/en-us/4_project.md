@@ -1,13 +1,13 @@
 ---
 page_id: project_4
 layout: page
-title: project 4
+title: CIBC Navigation Optimization
 description: another without an image
 img:
 importance: 3
 category: fun
 ---
-
+improving naviationg at cibc and page display
 Every project has a beautiful feature showcase page.
 It's easy to include images in a flexible 3-column grid format.
 Make your photos 1/3, 2/3, or full width.
