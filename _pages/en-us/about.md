@@ -1,7 +1,7 @@
 ---
-page_id: about
+page_id: About
 layout: about
-title: about
+title: About
 permalink: /
 subtitle: 
 
