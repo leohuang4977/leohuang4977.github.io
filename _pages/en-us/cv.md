@@ -2,15 +2,22 @@
 page_id: cv
 layout: default
 permalink: /cv/
-title: Curriculum Vitae
+title: Resume and Curriculum Vitae 
 nav: true
 nav_order: 4
 ---
+# Resume
+
+<p align="center">
+  <a href="/assets/pdf/Resume_2024.pdf" class="btn btn-primary btn-lg" download aria-label="Download my Curriculum Vitae">
+    <i class="fas fa-download"></i> Download My CV
+  </a>
+</p>
 
 # Curriculum Vitae
 
 <p align="center">
-  <a href="/assets/pdf/your-cv.pdf" class="btn btn-primary btn-lg" download aria-label="Download my Curriculum Vitae">
+  <a href="/assets/pdf/CV_2024.pdf" class="btn btn-primary btn-lg" download aria-label="Download my Curriculum Vitae">
     <i class="fas fa-download"></i> Download My CV
   </a>
 </p>
