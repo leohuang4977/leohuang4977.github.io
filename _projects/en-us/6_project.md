@@ -5,7 +5,7 @@ title: IBG Project
 description: a project with no image
 img:
 importance: 4
-category: fun
+category: DS
 ---
 IBG Project pipeline
 Every project has a beautiful feature showcase page.

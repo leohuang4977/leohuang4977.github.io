@@ -5,7 +5,7 @@ title: UKBB Neuroimaging pipeline
 description: a project with a background image
 img: assets/img/1.jpg
 importance: 3
-category: fun
+category: DS
 ---
 pipeline project
 Every project has a beautiful feature showcase page.

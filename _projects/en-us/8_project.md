@@ -4,7 +4,7 @@ title: "Project 8"
 description: "Showcasing 8_project.JPG"
 img: assets/img/8_project.JPG  # This sets the background image for the project card (if used)
 importance: 1
-category: work
+category: UX
 related_publications: true
 ---
 

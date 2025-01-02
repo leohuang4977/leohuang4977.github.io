@@ -6,6 +6,8 @@ blog:
 categories:
   fun: fun
   work: work
+  DS: Data Science
+  UX: User Experience
 citation:
   bibtex: "or as a BibTeX entry:"
   introduction: "If you found this useful, please cite this as:"

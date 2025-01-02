@@ -5,7 +5,7 @@ title: "Project 7"
 description: "Embedding a PDF with a custom icon on the project card"
 img: 
 importance: 1
-category: DS
+category: UX
 related_publications: false
 ---
 
