@@ -2,9 +2,9 @@
 # Site settings
 # -----------------------------------------------------------------------------
 
-title: Leo Huang | Psychology # the website title 
-first_name: Leo  
-middle_name: 
+title: Leo Huang | Psychology # the website title
+first_name: Leo
+middle_name:
 last_name: Huang
 email: leo.huang4977@gmail.com
 keywords: jekyll, jekyll-theme, academic-website, portfolio-website # add your own keywords or leave empty
@@ -22,7 +22,7 @@ back_to_top: true # set to false to disable the back to top button
 # -----------------------------------------------------------------------------
 
 # repo color theme
-repo_theme_light: dark  # https://github.com/anuraghazra/github-readme-stats/blob/master/themes/README.md
+repo_theme_light: dark # https://github.com/anuraghazra/github-readme-stats/blob/master/themes/README.md
 repo_theme_dark: default # https://github.com/anuraghazra/github-readme-stats/blob/master/themes/README.md
 repo_trophies:
   enabled: false
@@ -86,8 +86,6 @@ pirsch_analytics: # your Pirsch analytics site ID (length 32 characters)
 # For Google Search Console, see https://support.google.com/webmasters/answer/9008080?hl=en#meta_tag_verification&zippy=%2Chtml-tag
 google_site_verification: # your google-site-verification ID (Google Search Console)
 bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
-
-
 
 # -----------------------------------------------------------------------------
 # Newsletter

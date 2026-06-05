@@ -48,7 +48,7 @@ Breaking the ratings out by dimension showed the gap wasn't uniform: the site he
 
 {% include figure.liquid loading="eager" path="assets/img/wealth-ux-themes.png" class="img-fluid rounded z-depth-1" zoomable=true %}
 
-The numbers tell you *that* something is off; the words tell you *why*. I coded several hundred open-ended comments into recurring themes, turning a wall of free text into a short, prioritized list of what was working and what to fix.
+The numbers tell you _that_ something is off; the words tell you _why_. I coded several hundred open-ended comments into recurring themes, turning a wall of free text into a short, prioritized list of what was working and what to fix.
 
 ## From insight to direction
 
