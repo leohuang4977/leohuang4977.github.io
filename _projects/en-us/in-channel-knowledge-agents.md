@@ -10,11 +10,11 @@ tags: [Mixed-method triangulation]
 
 {% include figure.liquid loading="eager" path="assets/img/ckas-cover.png" class="img-fluid rounded z-depth-1" %}
 
-> **Portfolio version.** A generalized, anonymized account of real research. The product is unnamed and every figure is *illustrative* — recreated to show the method and reasoning, not to report actual results.
+> **Portfolio version.** A generalized, anonymized account of real research. The product is unnamed and every figure is _illustrative_ — recreated to show the method and reasoning, not to report actual results.
 
 ## The brief
 
-A team-chat platform was exploring an *in-channel knowledge agent*: an AI that helps people find answers right where they already work, instead of sending them off to a separate knowledge base. Three questions mattered — do people actually want this, where does it earn its place, and how should it behave? I ran it mixed-method on purpose, because what people *say* about getting help and what they *do* to get it are rarely the same thing.
+A team-chat platform was exploring an _in-channel knowledge agent_: an AI that helps people find answers right where they already work, instead of sending them off to a separate knowledge base. Three questions mattered — do people actually want this, where does it earn its place, and how should it behave? I ran it mixed-method on purpose, because what people _say_ about getting help and what they _do_ to get it are rarely the same thing.
 
 ## How I ran it
 
@@ -46,9 +46,9 @@ That single disagreement reframed the product. The opportunity isn't to nag peop
   </div>
 </div>
 
-## Help happens here — but users want the agent *there*
+## Help happens here — but users want the agent _there_
 
-The second triangulation was about scope, and it produced a clean crossover. Most peer help today happens on **live project work** — exactly the judgment-heavy territory where users are *least* comfortable handing things to an agent. Where they *do* want an agent is the knowable, low-judgment stuff: policy and HR, IT and tools, how-to and process. An agent that respects that line earns trust; one that wades into live project judgment loses it.
+The second triangulation was about scope, and it produced a clean crossover. Most peer help today happens on **live project work** — exactly the judgment-heavy territory where users are _least_ comfortable handing things to an agent. Where they _do_ want an agent is the knowable, low-judgment stuff: policy and HR, IT and tools, how-to and process. An agent that respects that line earns trust; one that wades into live project judgment loses it.
 
 {% include figure.liquid loading="eager" path="assets/img/ckas-expectation.png" class="img-fluid rounded z-depth-1" %}
 

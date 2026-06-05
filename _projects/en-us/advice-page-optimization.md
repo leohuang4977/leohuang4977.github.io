@@ -10,7 +10,7 @@ tags: [Trust & credibility]
 
 {% include figure.liquid loading="eager" path="assets/img/advice-cover.png" class="img-fluid rounded z-depth-1" %}
 
-> **About this case study.** This is a generalized, anonymized version of real client work. The firm is unnamed, internal context has been removed, and every figure shown is *illustrative* — recreated to demonstrate method, not to report any client's results.
+> **About this case study.** This is a generalized, anonymized version of real client work. The firm is unnamed, internal context has been removed, and every figure shown is _illustrative_ — recreated to demonstrate method, not to report any client's results.
 
 ## The brief
 
@@ -43,7 +43,7 @@ The ranking task was unambiguous: credibility beats capability. Trustworthiness,
 
 ## What makes them switch
 
-Valuing an advisor and *switching* to one are different decisions, so I asked about them separately. Here the picture shifts: when people weigh moving to a new advisor, investment performance and lower fees dominate. The trust signals still matter — they're the cost of being considered — but on their own they rarely tip the decision.
+Valuing an advisor and _switching_ to one are different decisions, so I asked about them separately. Here the picture shifts: when people weigh moving to a new advisor, investment performance and lower fees dominate. The trust signals still matter — they're the cost of being considered — but on their own they rarely tip the decision.
 
 {% include figure.liquid loading="eager" path="assets/img/advice-switching.png" class="img-fluid rounded z-depth-1" %}
 
@@ -69,7 +69,7 @@ The findings pointed to a clear, prioritized direction the design team could act
 
 ## How I'd pressure-test this
 
-A ranking survey tells you what people *say* matters, which is the right place to start but the wrong place to stop. A few things I'd hold loosely and validate before betting heavily on them:
+A ranking survey tells you what people _say_ matters, which is the right place to start but the wrong place to stop. A few things I'd hold loosely and validate before betting heavily on them:
 
 - **Stated vs. revealed preference.** "Credibility over features" is a self-report. I'd confirm it against on-page behavior — scroll depth, what content actually drives contact — and ideally a live A/B of a credibility-forward layout against the current one, measured on intent-to-contact rather than clicks.
 - **Segment sample sizes.** Cutting 150 responses four ways leaves thin cells, so I'd treat the subgroup differences as directional and re-run the segments that drive a real design decision with a larger, balanced sample.

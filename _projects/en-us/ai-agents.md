@@ -10,11 +10,11 @@ tags: [Strategy & segmentation]
 
 {% include figure.liquid loading="eager" path="assets/img/agents-cover.png" class="img-fluid rounded z-depth-1" %}
 
-> **Portfolio version.** This is a generalized, anonymized account of a real study. The platform is unnamed and all figures are *illustrative* — recreated to show how the research shaped strategy, not to report actual numbers.
+> **Portfolio version.** This is a generalized, anonymized account of a real study. The platform is unnamed and all figures are _illustrative_ — recreated to show how the research shaped strategy, not to report actual numbers.
 
 ## The brief
 
-A platform was weighing how seriously to invest in AI *agents* — assistants that can take actions on a user's behalf, not just answer questions. The leadership question wasn't "is the technology impressive?" It was strategic: are customers actually ready, where should we start, and what will hold adoption back? The research had to turn an open-ended bet into a sequenced plan.
+A platform was weighing how seriously to invest in AI _agents_ — assistants that can take actions on a user's behalf, not just answer questions. The leadership question wasn't "is the technology impressive?" It was strategic: are customers actually ready, where should we start, and what will hold adoption back? The research had to turn an open-ended bet into a sequenced plan.
 
 <div class="row mt-4">
   <div class="col-md-4 mt-2 mt-md-0">
@@ -33,7 +33,7 @@ A platform was weighing how seriously to invest in AI *agents* — assistants th
 
 ## A survey built to generalize
 
-I ran a large stratified survey and applied two-stage weighting so the results would represent the whole user base rather than the subset who happened to respond. (The companion writing-assistant study goes deeper on the statistics; here the method is the foundation, and the story is what it told us to *do*.)
+I ran a large stratified survey and applied two-stage weighting so the results would represent the whole user base rather than the subset who happened to respond. (The companion writing-assistant study goes deeper on the statistics; here the method is the foundation, and the story is what it told us to _do_.)
 
 {% include figure.liquid loading="eager" path="assets/img/agents-funnel.png" class="img-fluid rounded z-depth-1" %}
 
@@ -51,7 +51,7 @@ Crucially, the gap isn't driven by resistance. When asked how open they are to a
 
 ## Where to start: the beachhead
 
-This is the part that changed the roadmap conversation. Readiness isn't uniform — it concentrates in specific job functions, and each high-readiness function wants a *different* first agent. Segmenting this way converts "build agents" into a concrete sequence: start where awareness and openness are highest, and lead with the capability that function actually asked for.
+This is the part that changed the roadmap conversation. Readiness isn't uniform — it concentrates in specific job functions, and each high-readiness function wants a _different_ first agent. Segmenting this way converts "build agents" into a concrete sequence: start where awareness and openness are highest, and lead with the capability that function actually asked for.
 
 {% include figure.liquid loading="eager" path="assets/img/agents-segmentation.png" class="img-fluid rounded z-depth-1" %}
 

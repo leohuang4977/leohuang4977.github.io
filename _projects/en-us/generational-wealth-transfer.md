@@ -34,13 +34,13 @@ An enormous amount of wealth is moving from one generation to the next — and t
 
 ## How I approached it
 
-This was a depth question, not a counting question, so I ran it qualitatively. I conducted twelve in-depth interviews with financial advisors, recruited as a *purposive* sample spanning firm type, tenure, and book complexity — the goal being to hear the full range of how households are managed, and to keep interviewing until themes stopped changing. Secondary research framed the market around those conversations. I then coded the transcripts thematically rather than cherry-picking memorable lines.
+This was a depth question, not a counting question, so I ran it qualitatively. I conducted twelve in-depth interviews with financial advisors, recruited as a _purposive_ sample spanning firm type, tenure, and book complexity — the goal being to hear the full range of how households are managed, and to keep interviewing until themes stopped changing. Secondary research framed the market around those conversations. I then coded the transcripts thematically rather than cherry-picking memorable lines.
 
 {% include figure.liquid loading="eager" path="assets/img/wealth-participants.png" class="img-fluid rounded z-depth-1" %}
 
 ## The moments that open the conversation
 
-The first thing I heard across interviews: transfer planning almost never starts on its own. It's triggered by life events — and by the time the event arrives, it's too late to start building the relationship. Advisors who retain the next generation are *already* in the household when these moments hit.
+The first thing I heard across interviews: transfer planning almost never starts on its own. It's triggered by life events — and by the time the event arrives, it's too late to start building the relationship. Advisors who retain the next generation are _already_ in the household when these moments hit.
 
 {% include figure.liquid loading="eager" path="assets/img/wealth-triggers.png" class="img-fluid rounded z-depth-1" %}
 
@@ -51,7 +51,7 @@ The first thing I heard across interviews: transfer planning almost never starts
 The advisors who keep heirs treat the whole family as the client years before any money moves — meeting the kids, sitting in on conversations, becoming "the family's advisor" rather than "Mom and Dad's advisor." The ones who lose heirs wait for the transfer and then try to earn a relationship that no longer has time to form.
 
 > "By the time the inheritance is happening, the decision's already made. If I haven't known the kids for years, I'm a stranger asking to manage their money."
-> — P7, family office advisor *(illustrative)*
+> — P7, family office advisor _(illustrative)_
 
 ### 2. The tools model individuals; wealth lives in households
 
@@ -60,7 +60,7 @@ This was the core product insight. CRMs are built around individual contacts and
 {% include figure.liquid loading="eager" path="assets/img/wealth-householding.png" class="img-fluid rounded z-depth-1" %}
 
 > "My real household map is a spreadsheet I built myself. The CRM has no idea these ten people are one family."
-> — P3, private banker *(illustrative)*
+> — P3, private banker _(illustrative)_
 
 ### 3. Advisors know exactly what they're missing
 
@@ -101,7 +101,7 @@ Far from being vague, advisors were specific about what would help — and consi
 
 Qualitative work earns its credibility from how it's handled, so I try to be explicit about mine:
 
-- **Twelve interviews answer "how" and "why," not "how many."** I sampled for range and interviewed to saturation, which is the right basis for *themes* — and the wrong basis for prevalence. That's why I don't report percentages from these conversations; the only numbers here are secondary-research context.
+- **Twelve interviews answer "how" and "why," not "how many."** I sampled for range and interviewed to saturation, which is the right basis for _themes_ — and the wrong basis for prevalence. That's why I don't report percentages from these conversations; the only numbers here are secondary-research context.
 - **Secondary sources are framing, not ground truth.** Industry figures carry their own selection and recency biases, so I triangulated across sources and used them to size the stakes, not to settle questions.
 - **A vivid quote isn't a finding.** I coded across all twelve transcripts and weighted what recurred, so the themes reflect the pattern rather than the most quotable advisor.
 - **The next steps are about magnitude and proof.** I'd run a quantitative advisor survey to size these themes, concept- and usability-test a relationship-mapping prototype with advisors, and — ideally — track whether better householding actually improves heir retention, since that's the business outcome the whole effort exists to move.

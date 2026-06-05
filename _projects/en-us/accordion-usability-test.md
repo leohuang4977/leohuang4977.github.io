@@ -10,7 +10,7 @@ tags: [Behavior beats preference]
 
 {% include figure.liquid loading="eager" path="assets/img/accordion-cover.png" class="img-fluid rounded z-depth-1" %}
 
-> **A note on the data.** A generalized, anonymized version of real client work. Figures are *illustrative*, recreated to demonstrate the method rather than to report any client's results.
+> **A note on the data.** A generalized, anonymized version of real client work. Figures are _illustrative_, recreated to demonstrate the method rather than to report any client's results.
 
 ## The question
 
@@ -33,7 +33,7 @@ On mobile, a page's section tabs collapse into an accordion. That left the desig
 
 ## What I compared
 
-I built two Figma prototypes that differed in exactly one way — the first section's default state — and ran a within-subjects test so every participant experienced both. Each person completed the same set of find-the-content tasks on each version. I captured two things in parallel: which version they *said* they preferred, and how long it actually took them to locate content in each.
+I built two Figma prototypes that differed in exactly one way — the first section's default state — and ran a within-subjects test so every participant experienced both. Each person completed the same set of find-the-content tasks on each version. I captured two things in parallel: which version they _said_ they preferred, and how long it actually took them to locate content in each.
 
 {% include figure.liquid loading="eager" path="assets/img/accordion-conditions.png" class="img-fluid rounded z-depth-1" %}
 
@@ -51,7 +51,7 @@ I built two Figma prototypes that differed in exactly one way — the first sect
 
 ## Open is faster — especially deeper in the page
 
-Behavior told a much clearer story than opinion did. People located content meaningfully faster when the first section was already open — and the advantage *grew* the further down the page the target sat. Starting closed taxes every interaction; starting open pays that cost back, most of all where it's hardest to navigate.
+Behavior told a much clearer story than opinion did. People located content meaningfully faster when the first section was already open — and the advantage _grew_ the further down the page the target sat. Starting closed taxes every interaction; starting open pays that cost back, most of all where it's hardest to navigate.
 
 {% include figure.liquid loading="eager" path="assets/img/accordion-time.png" class="img-fluid rounded z-depth-1" %}
 
@@ -72,8 +72,8 @@ Behavior told a much clearer story than opinion did. People located content mean
 
 A moderated study with eight people is the right tool for some questions and the wrong one for others, and I try to be clear about which is which:
 
-- **Don't over-read the preference split.** With n = 8, a 4&ndash;2&ndash;2 breakdown is far too thin to treat as a real distribution. The honest takeaway is the *absence* of a strong preference, not the exact proportions — which is precisely why I leaned on behavior to make the call.
+- **Don't over-read the preference split.** With n = 8, a 4&ndash;2&ndash;2 breakdown is far too thin to treat as a real distribution. The honest takeaway is the _absence_ of a strong preference, not the exact proportions — which is precisely why I leaned on behavior to make the call.
 - **The timing result is directional.** Eight participants are enough to see a consistent, sensible pattern, but not to put a confidence interval around the gap. I'd frame it as a strong signal pointing one way, and validate it at scale with a larger remote unmoderated timing test or a live A/B before treating the size of the effect as settled.
-- **Watch the design's own confounds.** Within-subjects exposure invites order and novelty effects, so I'd confirm the conditions were counterbalanced. And the open-first advantage likely *interacts* with page length — it should matter more on long pages — which is the first thing I'd probe next.
+- **Watch the design's own confounds.** Within-subjects exposure invites order and novelty effects, so I'd confirm the conditions were counterbalanced. And the open-first advantage likely _interacts_ with page length — it should matter more on long pages — which is the first thing I'd probe next.
 
 Small-sample usability is for finding problems and pointing the way, not for declaring effect sizes. Saying that plainly is what lets a team act on the direction now while knowing exactly which experiment would confirm it.

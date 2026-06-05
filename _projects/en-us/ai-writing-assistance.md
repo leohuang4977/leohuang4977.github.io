@@ -10,11 +10,11 @@ tags: [Quantitative rigor]
 
 {% include figure.liquid loading="eager" path="assets/img/writing-cover.png" class="img-fluid rounded z-depth-1" %}
 
-> **Anonymized case study.** The product, population, and every figure here are *illustrative* — removed or replaced to demonstrate the research method, not to report a client's results.
+> **Anonymized case study.** The product, population, and every figure here are _illustrative_ — removed or replaced to demonstrate the research method, not to report a client's results.
 
 ## Context
 
-Workplace teams already reach for general AI assistants and dedicated writing tools every day. The open question for a messaging platform was narrower: what do people actually want from a writing assistant built into the place they already communicate — and does living *inside* the product raise the bar, because the assistant can see a user's own work voice and the context around them?
+Workplace teams already reach for general AI assistants and dedicated writing tools every day. The open question for a messaging platform was narrower: what do people actually want from a writing assistant built into the place they already communicate — and does living _inside_ the product raise the bar, because the assistant can see a user's own work voice and the context around them?
 
 <div class="row mt-4">
   <div class="col-md-4 mt-2 mt-md-0">
@@ -77,7 +77,7 @@ Because an in-product assistant can see a user's voice and context, expectations
 
 ## Trust is the price of entry
 
-Adoption hinges on trust before features. When asked what matters most, users prioritized accuracy, privacy, and the ability to customize — and a large share want to know when AI was involved at all. Most also want to draft *privately* first: collaborative assistance is welcome, but not at the cost of a private space to think.
+Adoption hinges on trust before features. When asked what matters most, users prioritized accuracy, privacy, and the ability to customize — and a large share want to know when AI was involved at all. Most also want to draft _privately_ first: collaborative assistance is welcome, but not at the cost of a private space to think.
 
 {% include figure.liquid loading="eager" path="assets/img/writing-trust.png" class="img-fluid rounded z-depth-1" %}
 
@@ -101,9 +101,9 @@ Adoption hinges on trust before features. When asked what matters most, users pr
 
 ## How the method de-risked the decisions
 
-The point of the weighting and the confidence intervals wasn't statistical theater — it was to let the team treat these numbers as population-level evidence and, just as importantly, to know *how much* to trust each one. A few things I'd hold honestly:
+The point of the weighting and the confidence intervals wasn't statistical theater — it was to let the team treat these numbers as population-level evidence and, just as importantly, to know _how much_ to trust each one. A few things I'd hold honestly:
 
-- **Demand is stated intent, not usage.** People say they want proofreading most; whether they *reach for* it most is an empirical question I'd answer with behavioral telemetry once a first version ships.
+- **Demand is stated intent, not usage.** People say they want proofreading most; whether they _reach for_ it most is an empirical question I'd answer with behavioral telemetry once a first version ships.
 - **"Match or beat dedicated tools" is an expectation, not a benchmark.** I'd pair this survey with comparative usability testing against those tools so the quality target is grounded in observed performance, not just self-report.
 - **Subgroups stay directional.** Function- and role-level cuts carry wider intervals, so I report them as leads to pursue, not conclusions to ship on.
 
