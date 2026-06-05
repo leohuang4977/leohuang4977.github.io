@@ -1,34 +1,46 @@
 <div class="col">
-  <a href="{% if project.redirect %}{{ project.redirect }}{% else %}{{ project.url | relative_url }}{% endif %}">
-    <div class="card h-100 hoverable">
+  <a class="project-link" href="{% if project.redirect %}{{ project.redirect }}{% else %}{{ project.url | relative_url }}{% endif %}">
+    <div class="card h-100 project-card{% if project.coming_soon %} project-card--soon{% endif %}">
       {% if project.img %}
-        {%
-          include figure.liquid
-          loading="eager"
-          path=project.img
-          sizes = "250px"
-          alt="project thumbnail"
-          class="card-img-top"
-        %}
+        <div class="project-thumb">
+          {%
+            include figure.liquid
+            loading="eager"
+            path=project.img
+            sizes="(min-width: 992px) 460px, (min-width: 576px) 50vw, 92vw"
+            alt=project.title
+            class="card-img-top"
+          %}
+          {% if project.coming_soon %}
+            <span class="project-badge">Coming soon</span>
+          {% endif %}
+        </div>
       {% endif %}
       <div class="card-body">
         <h2 class="card-title">{{ project.title }}</h2>
         <p class="card-text">{{ project.description }}</p>
-        <div class="row ml-1 mr-1 p-0">
-          {% if project.github %}
-            <div class="github-icon">
-              <div class="icon" data-toggle="tooltip" title="Code Repository">
+        {% if project.tags and project.tags != empty %}
+          <ul class="project-tags">
+            {% for tag in project.tags %}
+              <li class="project-tag">{{ tag }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        {% if project.github %}
+          <div class="project-meta">
+            <span class="github-icon">
+              <span class="icon" data-toggle="tooltip" title="Code Repository">
                 <a href="{{ project.github }}"><i class="fa-brands fa-github gh-icon"></i></a>
-              </div>
+              </span>
               {% if project.github_stars %}
                 <span class="stars" data-toggle="tooltip" title="GitHub Stars">
                   <i class="fa-solid fa-star"></i>
                   <span id="{{ project.github_stars }}-stars"></span>
                 </span>
               {% endif %}
-            </div>
-          {% endif %}
-        </div>
+            </span>
+          </div>
+        {% endif %}
       </div>
     </div>
   </a>

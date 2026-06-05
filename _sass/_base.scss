@@ -617,43 +617,189 @@ footer.sticky-bottom {
   }
 }
 
+// Projects page intro
+.projects-intro {
+  max-width: 46rem;
+  margin: 0.5rem 0 1rem;
+
+  .projects-lead {
+    font-size: 1.3rem;
+    line-height: 1.5;
+    font-weight: 400;
+    color: var(--global-text-color);
+    margin-bottom: 0.75rem;
+
+    em {
+      font-style: italic;
+      color: #3f8f84;
+    }
+  }
+
+  .projects-sub {
+    font-size: 0.95rem;
+    color: var(--global-text-color-light);
+    margin-bottom: 0;
+  }
+}
+
 // Projects
 
 .projects {
-  a {
-    text-decoration: none;
+  --proj-slate: #2b3548;
+  --proj-teal: #3f8f84;
+  --proj-teal-strong: #357268;
 
-    &:hover {
-      .card-title {
-        color: var(--global-theme-color);
-      }
+  margin-top: 1.5rem;
+
+  // Section headings (e.g. "Applied UX Research")
+  h2.category {
+    color: var(--global-text-color);
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: left;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--global-divider-color);
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 3rem;
+      height: 3px;
+      background-color: var(--proj-teal);
     }
   }
 
-  .card {
-    img {
-      width: 100%;
-    }
+  // First section sits closer to the intro
+  > h2.category:first-of-type {
+    margin-top: 1rem;
   }
 
   .col {
-    padding-bottom: 1rem;
+    padding-bottom: 1.75rem;
   }
 
-  .grid-sizer,
-  .grid-item {
-    width: 250px;
-    margin-bottom: 10px;
+  // The whole card is a link
+  .project-link {
+    display: block;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+
+    &:hover .card-title,
+    &:focus-visible .card-title {
+      color: var(--proj-teal-strong);
+    }
   }
 
-  h2.category {
-    color: var(--global-divider-color);
-    border-bottom: 1px solid var(--global-divider-color);
-    padding-top: 0.5rem;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    text-align: right;
+  .project-card {
+    overflow: hidden;
+    border: 1px solid var(--global-divider-color);
+    border-radius: 14px;
+    background-color: var(--global-card-bg-color);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      border-color 0.2s ease;
+
+    .project-link:hover &,
+    .project-link:focus-visible & {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px rgba(43, 53, 72, 0.16);
+      border-color: rgba(63, 143, 132, 0.5);
+    }
   }
+
+  // Fixed-ratio thumbnail
+  .project-thumb {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background-color: var(--proj-slate);
+
+    figure,
+    picture {
+      display: block;
+      margin: 0;
+      height: 100%;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      padding: 0;
+    }
+  }
+
+  .project-badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 2;
+    padding: 0.28rem 0.7rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: rgba(43, 53, 72, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 999px;
+  }
+
+  .card-body {
+    padding: 1.25rem 1.35rem 1.4rem;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+    transition: color 0.2s ease;
+  }
+
+  .card-text {
+    color: var(--global-text-color-light);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 0.9rem;
+  }
+
+  // Method / skill chips
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .project-tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 0.22rem 0.6rem;
+    border-radius: 999px;
+    color: var(--proj-teal-strong);
+    background-color: rgba(63, 143, 132, 0.1);
+    border: 1px solid rgba(63, 143, 132, 0.22);
+  }
+}
+
+// Lighter teal accents for dark mode contrast
+html[data-theme="dark"] .projects {
+  --proj-teal-strong: #5fb3a6;
 }
 
 // Publications

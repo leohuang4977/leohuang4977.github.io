@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="Onboarding Diary Study cover">
+  <rect width="1600" height="900" fill="#2B3548"/>
+  <!-- faint journey-path motif -->
+  <g fill="none" stroke="#3F8F84" stroke-opacity="0.22" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="120,760 360,700 600,740 840,650 1080,690 1320,600 1480,640"/>
+  </g>
+  <g fill="#3A4861">
+    <circle cx="120" cy="760" r="16"/>
+    <circle cx="360" cy="700" r="16"/>
+    <circle cx="600" cy="740" r="16"/>
+    <circle cx="840" cy="650" r="16"/>
+    <circle cx="1080" cy="690" r="16"/>
+    <circle cx="1320" cy="600" r="16"/>
+    <circle cx="1480" cy="640" r="16"/>
+  </g>
+  <g fill="#3F8F84">
+    <circle cx="840" cy="650" r="10"/>
+    <circle cx="1320" cy="600" r="10"/>
+  </g>
+  <!-- title -->
+  <g font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
+    <text x="100" y="290" fill="#FFFFFF" font-size="96" font-weight="800" letter-spacing="-1">Onboarding</text>
+    <text x="100" y="400" fill="#FFFFFF" font-size="96" font-weight="800" letter-spacing="-1">Diary Study</text>
+    <rect x="104" y="430" width="300" height="8" rx="4" fill="#3F8F84"/>
+    <text x="104" y="520" fill="#9AA6B6" font-size="42" font-weight="400">Tracking new users through their first week</text>
+    <text x="104" y="600" fill="#3F8F84" font-size="34" font-weight="700" letter-spacing="2">DIARY STUDY  &#183;  JOURNEY MAPPING</text>
+  </g>
+</svg>

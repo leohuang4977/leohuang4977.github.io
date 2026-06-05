@@ -4,10 +4,8 @@ archive_year: an archive of posts from this year
 blog:
   navigation_title: blog
 categories:
-  fun: fun
-  work: work
-  DS: Data Science
-  UX: User Experience
+  ux: Applied UX Research
+  academic: Academic Research
 citation:
   bibtex: "or as a BibTeX entry:"
   introduction: "If you found this useful, please cite this as:"
