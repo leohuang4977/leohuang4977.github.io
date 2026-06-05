@@ -5,7 +5,6 @@ blog:
   navigation_title: blog
 categories:
   ux: Applied UX Research
-  academic: Academic Research
 citation:
   bibtex: "or as a BibTeX entry:"
   introduction: "If you found this useful, please cite this as:"

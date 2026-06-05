@@ -5,7 +5,7 @@ description: Mixed-methods usability research benchmarking a wealth-management w
 img: assets/img/wealth-ux-cover.png
 importance: 1
 category: ux
-tags: [Usability testing, Survey & Likert instruments, Competitive benchmarking, Thematic analysis]
+tags: [Competitive benchmarking]
 ---
 
 {% include figure.liquid loading="eager" path="assets/img/wealth-ux-cover.png" class="img-fluid rounded z-depth-1" %}
