@@ -1,0 +1,13 @@
+<!-- Shared sticky topbar. Set `scope_nav` in a page's front matter
+     (about | projects | cv | publications) to highlight the active link. -->
+<header class="topbar">
+  <div class="wrap">
+    <a href="/" class="wordmark"><span class="dot"></span>Leo&nbsp;Huang</a>
+    <nav class="main">
+      <a href="/"{% if page.scope_nav == 'about' %} class="active" aria-current="page"{% endif %}>About</a>
+      <a href="/projects/"{% if page.scope_nav == 'projects' %} class="active" aria-current="page"{% endif %}>Projects</a>
+      <a href="/cv/"{% if page.scope_nav == 'cv' %} class="active" aria-current="page"{% endif %}>CV</a>
+      <a href="/publications/"{% if page.scope_nav == 'publications' %} class="active" aria-current="page"{% endif %}>Publications</a>
+    </nav>
+  </div>
+</header>

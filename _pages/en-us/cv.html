@@ -1,0 +1,203 @@
+---
+layout: scope
+permalink: /cv/
+page_id: cv
+title: CV
+doc_title: Résumé & CV — Leo Huang
+description: UX researcher and behavioral scientist — on-page résumé plus résumé and CV downloads.
+scope_nav: cv
+nav: true
+nav_order: 4
+---
+
+<style>
+  .cv-hero{padding:62px 0 6px}
+  .cv-hero h1{font-family:var(--font-display);font-weight:500;font-size:clamp(36px,6vw,62px);line-height:1.02;letter-spacing:-0.015em;margin-bottom:22px}
+  .cv-hero .dek{font-size:clamp(16px,2vw,19px);color:var(--ink-2);max-width:66ch;line-height:1.6}
+  .cv-hero .dek b{color:var(--ink);font-weight:600}
+
+  .dl-row{display:flex;flex-wrap:wrap;gap:13px;margin-top:30px}
+  .btn-dl{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink);text-decoration:none;border:1px solid var(--line);border-radius:3px;padding:12px 18px;background:var(--panel);transition:border-color .25s,color .25s,transform .25s,background .25s}
+  .btn-dl:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+  .btn-dl .ic{color:var(--accent);transition:color .25s}
+  .btn-dl.primary{background:var(--accent);color:var(--paper);border-color:var(--accent);font-weight:600}
+  .btn-dl.primary .ic{color:var(--paper)}
+  .btn-dl.primary:hover{background:var(--accent-deep);border-color:var(--accent-deep);color:var(--paper);transform:translateY(-2px)}
+
+  .cv-contact{margin-top:20px;display:flex;flex-wrap:wrap;gap:20px;font-family:var(--font-mono);font-size:12px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink-2)}
+  .cv-contact a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s,border-color .2s}
+  .cv-contact a:hover{color:var(--accent);border-color:var(--accent)}
+
+  /* résumé body */
+  .res{display:flex;flex-direction:column}
+  .res-item{padding:26px 0;border-top:1px solid var(--line-soft)}
+  .res-item:first-child{border-top:none;padding-top:4px}
+  .res-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+  .res-role{font-family:var(--font-display);font-size:21px;font-weight:500;letter-spacing:-0.01em}
+  .res-role .org{color:var(--accent)}
+  .res-meta{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-mute);letter-spacing:0.03em;white-space:nowrap}
+  .res-loc{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-2);margin-top:5px;letter-spacing:0.03em}
+  .res-bullets{margin-top:15px;display:flex;flex-direction:column;gap:11px;max-width:78ch}
+  .res-bullets li{list-style:none;position:relative;padding-left:21px;color:var(--ink-2);font-size:15px;line-height:1.55}
+  .res-bullets li::before{content:"";position:absolute;left:0;top:8px;width:7px;height:7px;border:1.5px solid var(--accent);border-radius:50%}
+
+  /* education */
+  .edu{display:flex;flex-direction:column}
+  .edu-item{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding:18px 0;border-top:1px solid var(--line-soft)}
+  .edu-item:first-child{border-top:none;padding-top:2px}
+  .edu-deg{font-family:var(--font-display);font-size:19px;font-weight:500}
+  .edu-deg .inst{color:var(--accent)}
+  .edu-meta{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-mute);letter-spacing:0.03em}
+
+  /* skills */
+  .skills{display:flex;flex-direction:column;gap:24px}
+  .skill-group .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:13px;display:flex;align-items:center;gap:10px}
+  .skill-group .lbl::before{content:"";width:18px;height:1px;background:var(--accent)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-family:var(--font-mono);font-size:12px;color:var(--ink-2);border:1px solid var(--line);border-radius:3px;padding:6px 11px;background:var(--panel)}
+
+  .cv-pubs{margin-top:8px}
+</style>
+
+<section class="cv-hero">
+  <div class="wrap">
+    <div class="kicker reveal"><span class="rule"></span>Résumé &amp; CV</div>
+    <h1 class="reveal" style="transition-delay:.06s">Résumé &amp; CV</h1>
+    <p class="dek reveal" style="transition-delay:.12s"><b>UX researcher and behavioral scientist</b> with 6+ years designing and running large-scale experiments and translating behavioral and telemetry data into product decisions. Experienced across the full research lifecycle for consumer and enterprise products, with deep expertise in causal inference and predictive modeling. Currently completing a Social Psychology PhD focused on human–AI interaction.</p>
+
+    <div class="dl-row reveal" style="transition-delay:.18s">
+      <a class="btn-dl primary" href="/assets/pdf/Leo_Huang_Resume.pdf" download><span class="ic">↓</span> Résumé · PDF</a>
+      <a class="btn-dl" href="/assets/pdf/Leo_Huang_Resume.docx" download><span class="ic">↓</span> Résumé · DOCX</a>
+      <a class="btn-dl" href="/assets/pdf/CV_2024.pdf" download><span class="ic">↓</span> Full CV · PDF</a>
+    </div>
+
+    <div class="cv-contact reveal" style="transition-delay:.24s">
+      <a href="mailto:leo.huang4977@gmail.com">leo.huang4977@gmail.com</a>
+      <a href="https://www.linkedin.com/in/leo-huang-870ab2178">LinkedIn</a>
+      <a href="/">leohuang4977.github.io</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">01</span><h2>Experience</h2></div>
+    <div class="res">
+
+      <div class="res-item reveal">
+        <div class="res-top">
+          <div class="res-role">User Experience Researcher <span class="org">· University of Toronto</span></div>
+          <div class="res-meta">Sept 2020 – Present</div>
+        </div>
+        <div class="res-loc">Toronto, ON</div>
+        <ul class="res-bullets">
+          <li>Designed and ran an 8-week randomized controlled trial (N&nbsp;&gt;&nbsp;500) with weekly longitudinal tracking — a full experimentation pipeline from hypothesis and instrumentation through analysis — measuring the behavioral and psychological effects of sustained AI social chatbot use.</li>
+          <li>Built predictive models (LASSO, SEM, multilevel modeling) that turned complex behavioral data into decision-ready findings across 10+ studies and 9 peer-reviewed publications.</li>
+        </ul>
+      </div>
+
+      <div class="res-item reveal">
+        <div class="res-top">
+          <div class="res-role">User Experience Researcher <span class="org">· Slack</span></div>
+          <div class="res-meta">Jun 2025 – Sept 2025</div>
+        </div>
+        <div class="res-loc">San Francisco, CA</div>
+        <ul class="res-bullets">
+          <li>Led mixed-methods research on adoption of Slack's native AI features (Search, Summaries, Recap, Translations), combining surveys, interviews, and behavioral/telemetry analysis to map user journeys from onboarding through sustained engagement.</li>
+          <li>Conducted studies on engagement interventions, measuring downstream behavior change rather than surface-level click metrics, and translated results into growth recommendations.</li>
+          <li>Built Slack's first user-segmentation model, turning raw self-reported data into validated archetypes adopted across product, marketing, and sales to target underperforming cohorts.</li>
+        </ul>
+      </div>
+
+      <div class="res-item reveal">
+        <div class="res-top">
+          <div class="res-role">User Experience Researcher <span class="org">· CIBC</span></div>
+          <div class="res-meta">May 2024 – Aug 2024</div>
+        </div>
+        <div class="res-loc">Toronto, ON</div>
+        <ul class="res-bullets">
+          <li>Led 11 multi-study research projects across 3 divisions using journey mapping, persona development, analytics, user testing, and AI-driven methods to identify pain points and validate features, partnering with 4 design teams on new UIs that supported $5–50M+ in assets under management.</li>
+          <li>Co-developed wireframes and prototypes that streamlined the Contact Us journey from call-center operations to sales, lifting user satisfaction by 20%.</li>
+        </ul>
+      </div>
+
+      <div class="res-item reveal">
+        <div class="res-top">
+          <div class="res-role">Data Analyst <span class="org">· Besample</span></div>
+          <div class="res-meta">Mar 2024 – Jun 2024</div>
+        </div>
+        <div class="res-loc">Wilmington, DE</div>
+        <ul class="res-bullets">
+          <li>Built a Python data-analysis pipeline grounded in behavioral-science principles that detected bots and low-quality respondents at scale with 97% accuracy, safeguarding data integrity.</li>
+          <li>Managed a PostgreSQL database serving 20+ users and automated feature queries that expanded KPIs from 3 to 15; built dashboards to monitor user-behavior and site-performance trends.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">02</span><h2>Education</h2></div>
+    <div class="edu">
+      <div class="edu-item reveal">
+        <div class="edu-deg"><span class="inst">University of Toronto</span> — PhD in Psychology</div>
+        <div class="edu-meta">Class of 2026</div>
+      </div>
+      <div class="edu-item reveal">
+        <div class="edu-deg"><span class="inst">Queen's University</span> — HBSc in Kinesiology</div>
+        <div class="edu-meta">Class of 2020</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">03</span><h2>Skills</h2></div>
+    <div class="skills reveal" style="transition-delay:.08s">
+      <div class="skill-group">
+        <div class="lbl">Methods</div>
+        <div class="chips">
+          <span class="chip">End-to-end UX research</span>
+          <span class="chip">Usability testing</span>
+          <span class="chip">A/B testing</span>
+          <span class="chip">Survey design</span>
+          <span class="chip">User interviews</span>
+          <span class="chip">Journey mapping</span>
+          <span class="chip">Persona development</span>
+          <span class="chip">Concept &amp; prototype testing</span>
+          <span class="chip">Behavioral &amp; telemetry analysis</span>
+          <span class="chip">Segmentation</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="lbl">Platforms &amp; Tools</div>
+        <div class="chips">
+          <span class="chip">UserTesting</span>
+          <span class="chip">Maze</span>
+          <span class="chip">Dovetail</span>
+          <span class="chip">Optimal Workshop</span>
+          <span class="chip">Qualtrics</span>
+          <span class="chip">Figma / FigJam</span>
+          <span class="chip">Miro</span>
+          <span class="chip">Google Analytics</span>
+          <span class="chip">Adobe Analytics</span>
+          <span class="chip">Tableau</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="lbl">Languages</div>
+        <div class="chips">
+          <span class="chip">Python</span>
+          <span class="chip">SQL</span>
+          <span class="chip">R</span>
+          <span class="chip">MATLAB</span>
+          <span class="chip">bash</span>
+        </div>
+      </div>
+    </div>
+    <a class="allwork cv-pubs reveal" href="/publications/">View the full peer-reviewed record →</a>
+  </div>
+</section>
