@@ -1,0 +1,100 @@
+<!-- Shared "Oscilloscope" design system. Rendered inline so PurgeCSS (which only
+     touches _site/assets/css/*.css) cannot strip it. Source of truth: leo-about-final.html.
+     Page-specific CSS lives in each page's own <style> block. -->
+<style>
+  :root{
+    --paper:#0D0E12; --paper-2:#15171D; --panel:#15171C;
+    --ink:#E9E7DF; --ink-2:#B6B4AB; --ink-mute:#7C7E86;
+    --line:rgba(255,255,255,0.13); --line-soft:rgba(255,255,255,0.06);
+    --accent:#45E0C2; --accent-deep:#2DBBA0; --cool:#5BA8E8; --warn:#C76B45;
+    --font-display:'Fraunces',Georgia,serif;
+    --font-body:'Hanken Grotesk',ui-sans-serif,system-ui,sans-serif;
+    --font-mono:'IBM Plex Mono',ui-monospace,'Courier New',monospace;
+    --maxw:1080px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background-color:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");opacity:0.05;mix-blend-mode:overlay}
+  body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:repeating-linear-gradient(rgba(255,255,255,0.02) 0 1px,transparent 1px 3px),radial-gradient(120% 80% at 50% 0%,transparent 55%,rgba(0,0,0,0.45) 100%)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:1}
+
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+  .reveal{transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  html.js .reveal{opacity:0;transform:translateY(22px)}
+  html.js .reveal.in{opacity:1;transform:none}
+
+  /* topbar */
+  header.topbar{border-bottom:1px solid var(--line);background:rgba(13,14,18,0.72);backdrop-filter:blur(8px);position:sticky;top:0;z-index:50}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;gap:16px;flex-wrap:wrap}
+  .wordmark{font-family:var(--font-mono);font-weight:600;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink)}
+  .wordmark .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(69,224,194,0.22);animation:pulse 2.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.35}}
+  nav.main{display:flex;gap:26px;align-items:center;font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.05em;text-transform:uppercase}
+  nav.main a{color:var(--ink-2);text-decoration:none;position:relative;padding-bottom:3px;transition:color .2s}
+  nav.main a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--accent);transition:width .25s}
+  nav.main a:hover{color:var(--ink)}nav.main a:hover::after,nav.main a.active::after{width:100%}
+  nav.main a.active{color:var(--accent)}
+
+  /* kicker / eyebrow */
+  .kicker{font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:12px;margin-bottom:26px}
+  .kicker .rule{height:1px;width:46px;background:var(--accent);opacity:.5}
+
+  /* sections */
+  .sec{padding:78px 0}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:40px}
+  .sec-head .idx{font-family:var(--font-mono);font-size:12.5px;color:var(--accent);letter-spacing:0.08em}
+  .sec-head h2{font-family:var(--font-display);font-weight:500;font-size:clamp(26px,4vw,40px);letter-spacing:-0.01em}
+
+  /* spec readout (stats) */
+  .specwrap{padding:8px 0 0}
+  .spec-eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:16px}
+  .spec{border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:6px 24px}
+  .spec .row{display:flex;align-items:baseline;gap:14px;padding:16px 0;border-bottom:1px solid var(--line-soft)}
+  .spec .row:last-child{border-bottom:none}
+  .spec .row .k{font-family:var(--font-mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-2)}
+  .spec .row .dots{flex:1;border-bottom:1px dotted var(--line);transform:translateY(-3px)}
+  .spec .row .v{font-family:var(--font-display);font-size:26px;font-weight:500;color:var(--accent);min-width:44px;text-align:right}
+  .spec .row .v.txt{font-family:var(--font-mono);font-size:14px;color:var(--ink-2)}
+
+  /* cards */
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .card{border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:26px 26px 24px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s,border-color .3s}
+  .card:hover{transform:translateY(-4px);box-shadow:0 10px 34px -16px rgba(0,0,0,0.85);border-color:var(--accent)}
+  .card .tag{font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:8px}
+  .card .tag::before{content:"";width:18px;height:1px;background:var(--accent)}
+  .card h3{font-family:var(--font-display);font-size:22px;font-weight:500;line-height:1.15;letter-spacing:-0.01em}
+  .card p{font-size:14.5px;color:var(--ink-2);line-height:1.5;flex:1}
+  .card .foot{display:flex;align-items:center;justify-content:space-between;margin-top:4px}
+  .spark polyline{stroke:var(--accent)}.spark rect,.spark circle{fill:var(--accent)}.spark .lnk{stroke:var(--accent)}
+  .card .go{font-family:var(--font-mono);font-size:12px;color:var(--ink-2);transition:color .25s,transform .25s}
+  .card:hover .go{color:var(--accent);transform:translateX(4px)}
+  .allwork{margin-top:26px;display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:13px;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink);text-decoration:none;border-bottom:1.5px solid var(--accent);padding-bottom:3px;transition:gap .25s}
+  .allwork:hover{gap:16px}
+
+  /* contact / social */
+  .contact{border-top:1px solid var(--line);padding:78px 0 30px}
+  .contact .big{font-family:var(--font-display);font-size:clamp(28px,5vw,50px);font-weight:500;line-height:1.05;letter-spacing:-0.015em;max-width:18ch;margin-bottom:30px}
+  .contact .big a{color:var(--accent);text-decoration:none;border-bottom:2px solid rgba(69,224,194,0.35);transition:border-color .2s}
+  .contact .big a:hover{border-color:var(--accent)}
+  .social{display:flex;flex-wrap:wrap;gap:24px;font-family:var(--font-mono);font-size:13px;text-transform:uppercase;letter-spacing:0.05em}
+  .social a{color:var(--ink-2);text-decoration:none;display:inline-flex;align-items:center;gap:7px;transition:color .2s}
+  .social a:hover{color:var(--accent)}.social a .ar{color:var(--ink-mute)}
+
+  /* footer */
+  footer.foot{border-top:1px solid var(--line);margin-top:0}
+  footer.foot .foot-inner{max-width:var(--maxw);margin:0 auto;padding:24px 28px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.04em;color:var(--ink-mute);text-transform:uppercase}
+  footer.foot .coords{color:var(--ink-2)}
+
+  @media (max-width:760px){
+    body{font-size:16px}
+    .wrap{padding:0 20px}.topbar .wrap{padding:12px 20px;gap:10px}
+    footer.foot .foot-inner{padding:24px 20px 60px}
+    .cards{grid-template-columns:1fr}
+    .sec{padding:56px 0}
+    nav.main{gap:14px;font-size:11.5px}
+    nav.main a{padding:8px 6px 3px}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>

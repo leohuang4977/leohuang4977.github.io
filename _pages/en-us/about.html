@@ -1,0 +1,184 @@
+---
+layout: scope
+permalink: /
+page_id: about
+title: About
+doc_title: Leo Huang — Psychology & Research
+description: Social-psychology PhD and UX researcher studying how people decide, behave, and make sense of the world and machines.
+scope_nav: about
+---
+
+<style>
+  /* hero */
+  .hero{padding:78px 0 50px}
+  .hero h1{font-family:var(--font-display);font-weight:500;font-size:clamp(38px,7vw,76px);line-height:1.02;letter-spacing:-0.015em;max-width:16ch;margin-bottom:30px}
+  .hero h1 em{font-style:italic;color:var(--accent);font-weight:500}
+  .hero .lede{font-size:clamp(17px,2.1vw,21px);color:var(--ink-2);max-width:54ch;line-height:1.55}
+  .hero .lede b{color:var(--ink);font-weight:600}
+
+  /* network hero */
+  .netbox{margin-top:48px;border:1px solid var(--line);background:linear-gradient(90deg,var(--line-soft) 1px,transparent 1px) 0 0/64px 100%,var(--panel);border-radius:3px;position:relative;overflow:hidden}
+  .netbox .scope-label{position:absolute;top:12px;left:16px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-mute);z-index:3;pointer-events:none}
+  .netbox .scope-label .live{color:var(--accent)}
+  .netbox .hint{position:absolute;bottom:10px;right:14px;font-family:var(--font-mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-mute);z-index:3;pointer-events:none}
+  #net{display:block;width:100%;height:320px}
+  #net line.link{stroke:var(--line);stroke-width:1}
+  #net g.node{cursor:grab;touch-action:none}
+  #net g.node:active{cursor:grabbing}
+  #net g.node circle{fill:var(--panel);stroke:var(--accent);stroke-width:1.5;transition:filter .2s}
+  #net g.node.hub circle{fill:var(--accent);stroke:var(--accent)}
+  #net g.node:hover circle{filter:drop-shadow(0 0 7px var(--accent))}
+  #net g.node text{font-family:var(--font-mono);font-size:11px;fill:var(--ink-2);text-anchor:middle;pointer-events:none}
+  #net g.node.hub text{fill:var(--paper);font-weight:600;font-size:13px}
+
+  /* timeline arc */
+  .tl{position:relative;padding:40px 0 8px}
+  .tl .track{position:absolute;left:7%;right:7%;top:56px;height:2px;background:var(--line)}
+  .tl .track .glow{position:absolute;left:0;top:0;height:100%;width:0;background:var(--accent);box-shadow:0 0 8px var(--accent);transition:width 1.5s cubic-bezier(.2,.7,.2,1)}
+  .tl .nodes{display:grid;grid-template-columns:repeat(4,1fr);position:relative}
+  .tl .tn{display:flex;flex-direction:column;align-items:center;text-align:center;cursor:default;padding:0 8px}
+  .tl .tn .dot{width:15px;height:15px;border-radius:50%;background:var(--panel);border:2px solid var(--accent);margin-bottom:20px;transition:box-shadow .25s,transform .25s;z-index:2}
+  .tl .tn:hover .dot{box-shadow:0 0 12px var(--accent);transform:scale(1.25)}
+  .tl .tn .stage{font-family:var(--font-display);font-size:23px;font-weight:500}
+  .tl .tn .field{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:var(--accent);margin-top:4px}
+  .tl .tn .n{font-family:var(--font-mono);font-size:10.5px;color:var(--ink-mute);margin-top:4px}
+
+  /* about body */
+  .about-body{max-width:64ch}
+  .about-body p{font-size:18px;color:var(--ink-2);margin-bottom:20px;line-height:1.62}
+  .about-body p b{color:var(--ink);font-weight:600}
+
+  /* off the clock */
+  .ocA{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;text-align:center;padding:4px 0}
+  .ocA .it{display:flex;flex-direction:column;align-items:center;gap:14px}
+  .ocA .it svg{width:40px;height:40px;stroke:var(--accent);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 5px rgba(69,224,194,0.4))}
+  .ocA .it .t{font-family:var(--font-display);font-size:20px;font-weight:500}
+  .ocA .it .d{font-size:14px;color:var(--ink-mute);max-width:26ch}
+
+  @media (max-width:760px){
+    .hero{padding:54px 0 38px}
+    #net{height:290px}
+    .tl .nodes{grid-template-columns:1fr;gap:26px}.tl .track{display:none}.tl{padding-top:8px}
+    .ocA{grid-template-columns:1fr;gap:26px}
+  }
+</style>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="kicker reveal"><span class="rule"></span>Cognitive &amp; Social Psychology · UX Research · Toronto</div>
+    <h1 class="reveal" style="transition-delay:.08s">I study how people <em>decide</em>, <em>behave</em>, and make sense of the world and <em>machines</em>.</h1>
+    <p class="lede reveal" style="transition-delay:.16s">Social-psychology PhD and UX researcher pairing the rigor of experimental science with the messy reality of how people actually use products.</p>
+
+    <div class="netbox reveal" style="transition-delay:.24s">
+      <div class="scope-label">FIG.01 — Research network&nbsp;&nbsp;<span class="live">● LIVE</span></div>
+      <svg id="net" viewBox="0 0 620 320" aria-hidden="true"></svg>
+      <div class="hint">drag to explore ↗</div>
+    </div>
+  </div>
+</section>
+
+<section class="specwrap reveal">
+  <div class="wrap">
+    <div class="spec-eyebrow">FIG.02 — By the numbers</div>
+    <div class="spec stat-trigger">
+      <div class="row"><span class="k">Years researching</span><span class="dots"></span><span class="v"><span data-count="9">9</span></span></div>
+      <div class="row"><span class="k">Studies run</span><span class="dots"></span><span class="v"><span data-count="100">100</span>+</span></div>
+      <div class="row"><span class="k">People studied</span><span class="dots"></span><span class="v"><span data-count="10000">10,000</span>+</span></div>
+      <div class="row"><span class="k">Publications</span><span class="dots"></span><span class="v"><span data-count="8">8</span></span></div>
+      <div class="row"><span class="k">Home base</span><span class="dots"></span><span class="v txt">Toronto, ON</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">01</span><h2>From body to machine</h2></div>
+    <div class="tl reveal" style="transition-delay:.1s">
+      <div class="track"><div class="glow" data-w="100"></div></div>
+      <div class="nodes">
+        <div class="tn"><span class="dot"></span><div class="stage">Body</div><div class="field">Kinesiology</div><div class="n">Queen's</div></div>
+        <div class="tn"><span class="dot"></span><div class="stage">Brain</div><div class="field">Neuroscience</div><div class="n">U of T</div></div>
+        <div class="tn"><span class="dot"></span><div class="stage">Mind</div><div class="field">Decision</div><div class="n">Behavior</div></div>
+        <div class="tn"><span class="dot"></span><div class="stage">Machine</div><div class="field">Human–AI</div><div class="n">Now</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">02</span><h2>About</h2></div>
+    <div class="about-body reveal" style="transition-delay:.1s">
+      <p>I'm a psychologist who's spent years in the space between people and technology, and what I keep coming back to is pretty simple: I want to understand people. What people want and need, how they connect with each other, and how all of that shifts over time. Lately a lot of my work is about how people relate to AI chatbots, and what that's doing to the ways we interact with one another.</p>
+      <p>My path started with kinesiology at Queen's, came across a wearable EEG club and got interested in the brain, and went on to do my M.A. and PhD at the University of Toronto. I've spent time in a few labs along the way (the Stokes Lab at Johns Hopkins with Prof. Wang Jian, Randy McIntosh's Computational Neuroscience Lab, and Cendri Hutcherson's Decision Neuroscience Lab), and these days I'm in Liz Page-Gould's SPRQL Lab, looking at how people's social worlds get built and how well they hold up.</p>
+      <p>People aren't fixed. What I love about studying people and social groups is catching them in motion, both the slow drift over months and the small shifts in a single interaction, and making sense of why each person said and did what they did in that moment.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">03</span><h2>Selected work</h2></div>
+    <div class="cards">
+      <a class="card reveal" href="/projects/ai-agents/">
+        <span class="tag">Strategy &amp; Segmentation</span>
+        <h3>Customer Perceptions of AI Agents in the Workplace</h3>
+        <p>A large-scale weighted survey on readiness, openness, and the barriers that shape where an agent roadmap should start.</p>
+        <div class="foot"><svg class="spark" aria-hidden="true" width="74" height="22" viewBox="0 0 74 22"><polyline fill="none" stroke-width="1.6" points="0,18 12,14 24,16 36,8 48,10 60,4 74,6"/></svg><span class="go">VIEW →</span></div>
+      </a>
+      <a class="card reveal" style="transition-delay:.08s" href="/projects/ai-writing-assistance/">
+        <span class="tag">Quantitative Rigor</span>
+        <h3>AI Writing Assistance for Workplace Messaging</h3>
+        <p>A weighted survey on what users want from an in-product writing assistant — and just how high they set the bar.</p>
+        <div class="foot"><svg class="spark" aria-hidden="true" width="74" height="22" viewBox="0 0 74 22"><rect x="2" y="10" width="7" height="10"/><rect x="13" y="6" width="7" height="14"/><rect x="24" y="12" width="7" height="8"/><rect x="35" y="3" width="7" height="17"/><rect x="46" y="8" width="7" height="12"/><rect x="57" y="5" width="7" height="15"/></svg><span class="go">VIEW →</span></div>
+      </a>
+      <a class="card reveal" href="/projects/in-channel-knowledge-agents/">
+        <span class="tag">Mixed-Method</span>
+        <h3>What Users Want from In-Channel Knowledge Agents</h3>
+        <p>Pairing survey attitudes with behavioral telemetry to define where an AI help-agent earns its place in team chat.</p>
+        <div class="foot"><svg class="spark" aria-hidden="true" width="74" height="22" viewBox="0 0 74 22"><polyline fill="none" stroke-width="1.6" points="0,12 12,6 24,14 36,4 48,16 60,8 74,11"/></svg><span class="go">VIEW →</span></div>
+      </a>
+      <a class="card reveal" style="transition-delay:.08s" href="/projects/mortgage-switching/">
+        <span class="tag">Comparative / Causal</span>
+        <h3>Why Customers Switch Mortgage Providers</h3>
+        <p>A 200-person comparative study on the drivers of switching versus staying put.</p>
+        <div class="foot"><svg class="spark" aria-hidden="true" width="74" height="22" viewBox="0 0 74 22"><polyline class="lnk" fill="none" stroke-width="1" opacity="0.5" points="10,14 30,8 50,11 68,5"/><circle cx="10" cy="14" r="3"/><circle cx="30" cy="8" r="3"/><circle cx="50" cy="11" r="3"/><circle cx="68" cy="5" r="3"/></svg><span class="go">VIEW →</span></div>
+      </a>
+    </div>
+    <a class="allwork" href="/projects/">View all 8 projects →</a>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">04</span><h2>Off the clock</h2></div>
+    <div class="ocA reveal" style="transition-delay:.08s">
+      <div class="it">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="6" y1="4" x2="6" y2="20"/><path d="M6,4 L16,7 L6,10"/><circle cx="10" cy="20" r="1.4"/></svg>
+        <div class="t">Golf</div><div class="d">Here for the walk, staying for the bogeys.</div>
+      </div>
+      <div class="it">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3,12 C7,7 14,7 18,12 C14,17 7,17 3,12 Z"/><path d="M18,12 L22,8.5 L22,15.5 Z"/><circle cx="7" cy="11" r="0.9"/></svg>
+        <div class="t">Fishing</div><div class="d">Got my 5-pounder. Still hunting for the 10-lb bass.</div>
+      </div>
+      <div class="it">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5,20 L18,6"/><path d="M18,6 c1.5,-1.2 3,-0.6 3.2,0.8"/><path d="M19,20 L6,6"/><path d="M6,6 c-1.5,-1.2 -3,-0.6 -3.2,0.8"/></svg>
+        <div class="t">Skiing</div><div class="d">Plz email me tips on how to ski powder.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">05</span><h2>Get in touch</h2></div>
+    <p class="big reveal" style="transition-delay:.08s">Researching where minds meet machines. <a href="mailto:leo.huang4977@gmail.com">Say hello →</a></p>
+    <div class="social reveal" style="transition-delay:.16s">
+      <a href="mailto:leo.huang4977@gmail.com">Email <span class="ar">↗</span></a>
+      <a href="https://scholar.google.com/citations?user=8s9xOScAAAAJ&hl=en">Google Scholar <span class="ar">↗</span></a>
+      <a href="https://github.com/leohuang4977">GitHub <span class="ar">↗</span></a>
+      <a href="https://www.linkedin.com/in/leo-huang-870ab2178">LinkedIn <span class="ar">↗</span></a>
+      <a href="https://twitter.com/LeoHuan28578819">X <span class="ar">↗</span></a>
+    </div>
+  </div>
+</section>

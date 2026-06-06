@@ -1,0 +1,112 @@
+<!-- Shared motion. Progressive enhancement: content is visible by default and only
+     hidden for animation once html.js is present, with a ~1.8s safety net that reveals
+     everything and fills all numbers/bars even if observers fail. -->
+<script>
+{% raw %}
+(function () {
+  document.documentElement.classList.add('js');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function fmt(n) { return Math.round(n).toLocaleString('en-US'); }
+
+  // Count-up. NOTE: kicked off with requestAnimationFrame(tick), never tick() directly —
+  // calling tick() with no timestamp makes the first frame NaN and the counter sticks.
+  function countUp(el) {
+    if (el.dataset.done) return;
+    var t = parseFloat(el.dataset.count);
+    if (isNaN(t)) return;
+    el.dataset.done = '1';
+    if (reduce) { el.textContent = fmt(t); return; }
+    var dur = 1300, start = performance.now();
+    function tick(now) {
+      var p = Math.min((now - start) / dur, 1);
+      el.textContent = fmt((1 - Math.pow(1 - p, 3)) * t);
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  function fillBar(el) { el.style.width = el.dataset.w + '%'; }
+
+  // Safety net — reveal everything and bake in final numbers/bars no matter what.
+  setTimeout(function () {
+    document.querySelectorAll('.reveal').forEach(function (e) { e.classList.add('in'); });
+    document.querySelectorAll('[data-count]').forEach(countUp);
+    document.querySelectorAll('[data-w]').forEach(fillBar);
+  }, 1800);
+
+  // Orchestrated reveal on scroll.
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+  // Numbers count up / bars fill when scrolled into view (page-agnostic — targets the data elements directly).
+  var cIO = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (!e.isIntersecting) return; countUp(e.target); cIO.unobserve(e.target); });
+  }, { threshold: 0.6 });
+  document.querySelectorAll('[data-count]').forEach(function (el) { cIO.observe(el); });
+
+  var bIO = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (!e.isIntersecting) return; fillBar(e.target); bIO.unobserve(e.target); });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('[data-w]').forEach(function (el) { bIO.observe(el); });
+
+  // Force-directed research network — About page only; bails out cleanly elsewhere.
+  (function () {
+    var svg = document.getElementById('net'); if (!svg) return;
+    var W = 620, H = 320;
+    var nodes = [
+      { id: 'hub', label: 'Leo', hub: true, x: 310, y: 160 },
+      { id: 'beh', label: 'Behavior', x: 160, y: 90 },
+      { id: 'dec', label: 'Decisions', x: 460, y: 95 },
+      { id: 'emo', label: 'Emotion', x: 150, y: 240 },
+      { id: 'bias', label: 'Bias', x: 470, y: 240 },
+      { id: 'bot', label: 'Chatbots', x: 310, y: 55 },
+      { id: 'usr', label: 'Users', x: 310, y: 275 }
+    ];
+    var N = Object.fromEntries(nodes.map(function (n) { return [n.id, n]; }));
+    var links = [['hub', 'beh'], ['hub', 'dec'], ['hub', 'emo'], ['hub', 'bias'], ['hub', 'bot'], ['hub', 'usr'], ['beh', 'dec'], ['dec', 'bias'], ['dec', 'emo'], ['beh', 'usr'], ['bot', 'usr']].map(function (l) { return { s: N[l[0]], t: N[l[1]] }; });
+    nodes.forEach(function (n) { n.vx = 0; n.vy = 0; });
+    var ns = 'http://www.w3.org/2000/svg';
+    var lg = document.createElementNS(ns, 'g'); svg.appendChild(lg);
+    var ng = document.createElementNS(ns, 'g'); svg.appendChild(ng);
+    var L = links.map(function () { var e = document.createElementNS(ns, 'line'); e.setAttribute('class', 'link'); lg.appendChild(e); return e; });
+    nodes.forEach(function (n) {
+      var g = document.createElementNS(ns, 'g'); g.setAttribute('class', 'node' + (n.hub ? ' hub' : ''));
+      var c = document.createElementNS(ns, 'circle'); c.setAttribute('r', n.hub ? 16 : 6);
+      var t = document.createElementNS(ns, 'text'); t.setAttribute('dy', n.hub ? '5' : '-12'); t.textContent = n.label;
+      g.appendChild(c); g.appendChild(t); ng.appendChild(g); n.el = g;
+      g.addEventListener('pointerdown', function (e) { startDrag(e, n); });
+    });
+    function step() {
+      for (var i = 0; i < nodes.length; i++) for (var j = i + 1; j < nodes.length; j++) {
+        var a = nodes[i], b = nodes[j]; var dx = a.x - b.x, dy = a.y - b.y; var d2 = dx * dx + dy * dy || 1; var d = Math.sqrt(d2);
+        var f = 2500 / d2; var fx = dx / d * f, fy = dy / d * f;
+        if (!a.fixed) { a.vx += fx; a.vy += fy; } if (!b.fixed) { b.vx -= fx; b.vy -= fy; }
+      }
+      links.forEach(function (l) {
+        var a = l.s, b = l.t; var dx = b.x - a.x, dy = b.y - a.y; var d = Math.sqrt(dx * dx + dy * dy) || 1;
+        var rest = (a.hub || b.hub) ? 98 : 124; var f = (d - rest) * 0.02; var fx = dx / d * f, fy = dy / d * f;
+        if (!a.fixed) { a.vx += fx; a.vy += fy; } if (!b.fixed) { b.vx -= fx; b.vy -= fy; }
+      });
+      nodes.forEach(function (n) {
+        if (n.fixed) return;
+        n.vx += (W / 2 - n.x) * 0.004; n.vy += (H / 2 - n.y) * 0.004; n.vx *= 0.85; n.vy *= 0.85; n.x += n.vx; n.y += n.vy;
+        n.x = Math.max(36, Math.min(W - 36, n.x)); n.y = Math.max(28, Math.min(H - 28, n.y));
+      });
+      draw();
+    }
+    function draw() {
+      links.forEach(function (l, i) { L[i].setAttribute('x1', l.s.x); L[i].setAttribute('y1', l.s.y); L[i].setAttribute('x2', l.t.x); L[i].setAttribute('y2', l.t.y); });
+      nodes.forEach(function (n) { n.el.setAttribute('transform', 'translate(' + n.x + ',' + n.y + ')'); });
+    }
+    var drag = null;
+    function toSVG(e) { var p = svg.createSVGPoint(); p.x = e.clientX; p.y = e.clientY; return p.matrixTransform(svg.getScreenCTM().inverse()); }
+    function startDrag(e, n) { e.preventDefault(); drag = n; n.fixed = true; try { svg.setPointerCapture(e.pointerId); } catch (_) {} window.addEventListener('pointermove', onMove); window.addEventListener('pointerup', endDrag); }
+    function onMove(e) { if (!drag) return; var p = toSVG(e); drag.x = Math.max(36, Math.min(W - 36, p.x)); drag.y = Math.max(28, Math.min(H - 28, p.y)); drag.vx = 0; drag.vy = 0; if (reduce) draw(); }
+    function endDrag() { if (drag) { drag.fixed = false; drag = null; } window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', endDrag); }
+    if (reduce) { for (var k = 0; k < 420; k++) step(); draw(); } else { (function loop() { step(); requestAnimationFrame(loop); })(); }
+  })();
+})();
+{% endraw %}
+</script>
