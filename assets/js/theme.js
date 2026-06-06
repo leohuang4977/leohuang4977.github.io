@@ -206,11 +206,13 @@ let transTheme = () => {
 };
 
 // Determine the expected state of the theme toggle, which can be "dark", "light", or
-// "system". Default is "system".
+// "system". Default is "dark" so the al-folio project detail pages open dark (no jarring
+// white when arriving from the dark Oscilloscope pages); users can still toggle to
+// light or system, and that choice is remembered.
 let determineThemeSetting = () => {
   let themeSetting = localStorage.getItem("theme");
   if (themeSetting != "dark" && themeSetting != "light" && themeSetting != "system") {
-    themeSetting = "system";
+    themeSetting = "dark";
   }
   return themeSetting;
 };
