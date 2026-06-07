@@ -69,4 +69,35 @@
     document.addEventListener('mouseover', function(e){ if(e.target.closest(interactive)) hovering=true; });
     document.addEventListener('mouseout',  function(e){ if(e.target.closest(interactive)) hovering=false; });
   })();
+
+  // Skills chips — cursor-follow tilt + neighbor echo (CV/Résumé Skills section only).
+  // Skips coarse pointers and reduced motion; static green hover stays via CSS.
+  (function () {
+    var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!fine || reduce) return;
+    var chips = document.querySelectorAll('.skills .chip');
+    if (!chips.length) return;
+    chips.forEach(function (chip) {
+      chip.addEventListener('mousemove', function (e) {
+        var r = chip.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width  - 0.5;  // -0.5..0.5
+        var py = (e.clientY - r.top)  / r.height - 0.5;
+        chip.style.transform =
+          'perspective(500px) translateY(-2px) scale(1.04) rotateY(' +
+          (px * 10) + 'deg) rotateX(' + (-py * 10) + 'deg)';
+      });
+      chip.addEventListener('mouseenter', function () {
+        var sibs = chip.parentElement ? chip.parentElement.children : [];
+        for (var i = 0; i < sibs.length; i++) {
+          if (sibs[i] !== chip && sibs[i].classList.contains('chip')) sibs[i].classList.add('neighbor');
+        }
+      });
+      chip.addEventListener('mouseleave', function () {
+        chip.style.transform = '';
+        var sibs = chip.parentElement ? chip.parentElement.children : [];
+        for (var i = 0; i < sibs.length; i++) sibs[i].classList.remove('neighbor');
+      });
+    });
+  })();
 })();

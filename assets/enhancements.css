@@ -25,3 +25,33 @@ html.has-cursor-blob, html.has-cursor-blob a, html.has-cursor-blob button{ curso
 html.has-cursor-blob input, html.has-cursor-blob textarea, html.has-cursor-blob [contenteditable]{ cursor:text; }
 @media (hover:none),(pointer:coarse){ .cursor-blob{ display:none; } }
 @media (prefers-reduced-motion:reduce){ .cursor-blob{ display:none; } }
+
+/* Skills chips — cursor-reactive hover (CV/Résumé Skills section only).
+   Uses a DEDICATED green hover token, intentionally separate from --accent.
+   Scoped to `.skills .chip` so nothing outside the Skills section is affected. */
+:root{
+  --skill-hover: #4ADE80;
+  --skill-hover-soft: rgba(74,222,128,.16);
+}
+.skills .chip{
+  transition: color .2s ease, border-color .2s ease, background-color .2s ease,
+              box-shadow .2s ease, transform .15s ease;
+  transform: perspective(500px) rotateX(0) rotateY(0) translateY(0);
+  will-change: transform;
+}
+.skills .chip:hover{
+  color: var(--skill-hover);
+  border-color: var(--skill-hover);
+  background-color: var(--skill-hover-soft);
+  box-shadow: 0 0 14px -2px var(--skill-hover);
+  transform: perspective(500px) translateY(-2px) scale(1.04);
+}
+.skills .chip:hover :is(span, a, .label){ color: var(--skill-hover); }
+/* soft echo on the chip's siblings */
+.skills .chip.neighbor{ box-shadow: 0 0 8px -3px var(--skill-hover); border-color: var(--skill-hover-soft); }
+
+@media (prefers-reduced-motion: reduce){
+  .skills .chip{ transition: color .2s ease, border-color .2s ease, background-color .2s ease; transform: none; }
+  .skills .chip:hover{ transform: none; box-shadow: none; }
+  .skills .chip.neighbor{ box-shadow: none; }
+}
