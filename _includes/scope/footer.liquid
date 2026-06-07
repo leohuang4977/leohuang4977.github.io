@@ -1,7 +1,8 @@
-<!-- Shared footer: copyright + Toronto coordinates. -->
+<!-- Shared footer: copyright only. The Toronto coordinate now lives ONLY on the
+     Contact page, which opts in by setting `footer_coords` in its front matter. -->
 <footer class="foot">
   <div class="foot-inner">
     <span>© 2026 Leo Huang</span>
-    <span class="coords">43.6532° N, 79.3832° W — Toronto, ON</span>
+    {% if page.footer_coords %}<span class="coords">{{ page.footer_coords }}</span>{% endif %}
   </div>
 </footer>

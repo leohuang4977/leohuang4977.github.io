@@ -11,10 +11,13 @@ scope_nav: about
 <style>
   /* hero */
   .hero{padding:78px 0 50px}
-  .hero h1{font-family:var(--font-display);font-weight:500;font-size:clamp(38px,7vw,76px);line-height:1.02;letter-spacing:-0.015em;max-width:16ch;margin-bottom:30px}
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1.38fr) minmax(0,1fr);gap:36px;align-items:center}
+  .hero h1{font-family:var(--font-display);font-weight:500;font-size:clamp(36px,5.4vw,64px);line-height:1.05;letter-spacing:-0.015em;max-width:none;margin-bottom:30px}
   .hero h1 em{font-style:italic;color:var(--accent);font-weight:500}
-  .hero .lede{font-size:clamp(17px,2.1vw,21px);color:var(--ink-2);max-width:54ch;line-height:1.55}
+  .hero .lede{font-size:clamp(17px,2.1vw,21px);color:var(--ink-2);max-width:52ch;line-height:1.55}
   .hero .lede b{color:var(--ink);font-weight:600}
+  .portrait{margin:0;border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:8px;align-self:start}
+  .portrait img{display:block;width:100%;height:auto;border-radius:2px}
 
   /* network hero */
   .netbox{margin-top:48px;border:1px solid var(--line);background:linear-gradient(90deg,var(--line-soft) 1px,transparent 1px) 0 0/64px 100%,var(--panel);border-radius:3px;position:relative;overflow:hidden}
@@ -51,12 +54,14 @@ scope_nav: about
   /* off the clock */
   .ocA{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;text-align:center;padding:4px 0}
   .ocA .it{display:flex;flex-direction:column;align-items:center;gap:14px}
-  .ocA .it svg{width:40px;height:40px;stroke:var(--accent);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 5px rgba(69,224,194,0.4))}
+  .ocA .it svg{width:40px;height:40px;stroke:var(--accent);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 5px rgba(16,185,129,0.4))}
   .ocA .it .t{font-family:var(--font-display);font-size:20px;font-weight:500}
   .ocA .it .d{font-size:14px;color:var(--ink-mute);max-width:26ch}
 
   @media (max-width:760px){
     .hero{padding:54px 0 38px}
+    .hero-grid{grid-template-columns:1fr;gap:26px}
+    .hero-grid .portrait{order:-1;justify-self:center;max-width:340px}
     #net{height:290px}
     .tl .nodes{grid-template-columns:1fr;gap:26px}.tl .track{display:none}.tl{padding-top:8px}
     .ocA{grid-template-columns:1fr;gap:26px}
@@ -65,12 +70,22 @@ scope_nav: about
 
 <section class="hero">
   <div class="wrap">
-    <div class="kicker reveal"><span class="rule"></span>Cognitive &amp; Social Psychology · UX Research · Toronto</div>
-    <h1 class="reveal" style="transition-delay:.08s">I study how people <em>decide</em>, <em>behave</em>, and make sense of the world and <em>machines</em>.</h1>
-    <p class="lede reveal" style="transition-delay:.16s">Social-psychology PhD and UX researcher pairing the rigor of experimental science with the messy reality of how people actually use products.</p>
+    <div class="hero-grid">
+      <div class="hero-text">
+        <h1 class="reveal">
+          I study how
+          <span class="rotate" data-words="people, users, minds, teams" aria-hidden="true">people</span><span class="sr-only">people</span>
+          make decisions, behave, and make sense of their world.
+        </h1>
+        <p class="lede reveal" style="transition-delay:.08s">I'm a psychology PhD and researcher who brings experimental rigor to the messy, human reality of how people interact with services and products.</p>
+      </div>
+      <figure class="portrait reveal" style="transition-delay:.16s">
+        <img src="/assets/img/leo-portrait.jpg" alt="Leo Huang" width="1080" height="1350" loading="eager" fetchpriority="high">
+      </figure>
+    </div>
 
     <div class="netbox reveal" style="transition-delay:.24s">
-      <div class="scope-label">FIG.01 — Research network&nbsp;&nbsp;<span class="live">● LIVE</span></div>
+      <div class="scope-label">FIG.01 — Research network</div>
       <svg id="net" viewBox="0 0 620 320" aria-hidden="true"></svg>
       <div class="hint">drag to explore ↗</div>
     </div>
@@ -81,11 +96,11 @@ scope_nav: about
   <div class="wrap">
     <div class="spec-eyebrow">FIG.02 — By the numbers</div>
     <div class="spec stat-trigger">
+      <div class="row"><span class="k">Publications</span><span class="dots"></span><span class="v"><span data-count="8">8</span></span></div>
       <div class="row"><span class="k">Years researching</span><span class="dots"></span><span class="v"><span data-count="9">9</span></span></div>
       <div class="row"><span class="k">Studies run</span><span class="dots"></span><span class="v"><span data-count="100">100</span>+</span></div>
       <div class="row"><span class="k">People studied</span><span class="dots"></span><span class="v"><span data-count="10000">10,000</span>+</span></div>
-      <div class="row"><span class="k">Publications</span><span class="dots"></span><span class="v"><span data-count="8">8</span></span></div>
-      <div class="row"><span class="k">Home base</span><span class="dots"></span><span class="v txt">Toronto, ON</span></div>
+      <div class="row"><span class="k">Days on Earth</span><span class="dots"></span><span class="v"><span data-count="10692" data-days-since="1997-02-27">10,692</span></span></div>
     </div>
   </div>
 </section>
@@ -97,8 +112,8 @@ scope_nav: about
       <div class="track"><div class="glow" data-w="100"></div></div>
       <div class="nodes">
         <div class="tn"><span class="dot"></span><div class="stage">Body</div><div class="field">Kinesiology</div><div class="n">Queen's</div></div>
-        <div class="tn"><span class="dot"></span><div class="stage">Brain</div><div class="field">Neuroscience</div><div class="n">U of T</div></div>
-        <div class="tn"><span class="dot"></span><div class="stage">Mind</div><div class="field">Decision</div><div class="n">Behavior</div></div>
+        <div class="tn"><span class="dot"></span><div class="stage">Brain</div><div class="field">Neuroscience</div><div class="n">Baycrest</div></div>
+        <div class="tn"><span class="dot"></span><div class="stage">Mind</div><div class="field">Social Psychology</div><div class="n">U of T</div></div>
         <div class="tn"><span class="dot"></span><div class="stage">Machine</div><div class="field">Human–AI</div><div class="n">Now</div></div>
       </div>
     </div>
@@ -109,9 +124,8 @@ scope_nav: about
   <div class="wrap">
     <div class="sec-head reveal"><span class="idx">02</span><h2>About</h2></div>
     <div class="about-body reveal" style="transition-delay:.1s">
-      <p>I'm a psychologist who's spent years in the space between people and technology, and what I keep coming back to is pretty simple: I want to understand people. What people want and need, how they connect with each other, and how all of that shifts over time. Lately a lot of my work is about how people relate to AI chatbots, and what that's doing to the ways we interact with one another.</p>
-      <p>My path started with kinesiology at Queen's, came across a wearable EEG club and got interested in the brain, and went on to do my M.A. and PhD at the University of Toronto. I've spent time in a few labs along the way (the Stokes Lab at Johns Hopkins with Prof. Wang Jian, Randy McIntosh's Computational Neuroscience Lab, and Cendri Hutcherson's Decision Neuroscience Lab), and these days I'm in Liz Page-Gould's SPRQL Lab, looking at how people's social worlds get built and how well they hold up.</p>
-      <p>People aren't fixed. What I love about studying people and social groups is catching them in motion, both the slow drift over months and the small shifts in a single interaction, and making sense of why each person said and did what they did in that moment.</p>
+      <p>I've spent my whole research life circling one question: how do people actually work? I've chased it through the body, the brain, the social worlds people build around themselves, and now into what happens as AI integrates into every part of that world. The field kept changing; the question never did.</p>
+      <p>These days, that means studying human–AI interactions directly. I conducted longitudinal and cross-sectional studies to explore how sustained use of AI and social chatbots affects people's wellbeing and real relationships. In industry, I've done the same kind of work on AI products people use every day, turning messy behavioral and telemetry data into findings that teams can act on.</p>
     </div>
   </div>
 </section>
@@ -174,7 +188,6 @@ scope_nav: about
     <div class="sec-head reveal"><span class="idx">05</span><h2>Get in touch</h2></div>
     <p class="big reveal" style="transition-delay:.08s">Researching where minds meet machines. <a href="mailto:leo.huang4977@gmail.com">Say hello →</a></p>
     <div class="social reveal" style="transition-delay:.16s">
-      <a href="mailto:leo.huang4977@gmail.com">Email <span class="ar">↗</span></a>
       <a href="https://scholar.google.com/citations?user=8s9xOScAAAAJ&hl=en">Google Scholar <span class="ar">↗</span></a>
       <a href="https://github.com/leohuang4977">GitHub <span class="ar">↗</span></a>
       <a href="https://www.linkedin.com/in/leo-huang-870ab2178">LinkedIn <span class="ar">↗</span></a>
@@ -182,3 +195,17 @@ scope_nav: about
     </div>
   </div>
 </section>
+
+<script>
+  // Days on Earth — set the live target before the shared count-up runs.
+  // This inline script is in page content, so it executes before the
+  // shared scripts.liquid (included after {{ content }}) reads data-count.
+  (function () {
+    var el = document.querySelector('[data-days-since]');
+    if (!el) return;
+    var birth = new Date(el.getAttribute('data-days-since') + 'T00:00:00');
+    var days = Math.floor((Date.now() - birth.getTime()) / 86400000);
+    el.setAttribute('data-count', String(days));   // existing countUp() animates to this
+    el.textContent = days.toLocaleString('en-US');  // no-JS-animation fallback
+  })();
+</script>

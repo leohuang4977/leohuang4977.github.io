@@ -1,0 +1,39 @@
+---
+layout: scope
+permalink: /contact/
+page_id: contact
+title: Contact
+doc_title: Contact — Leo Huang
+description: Get in touch with Leo Huang — psychology PhD and UX researcher in Toronto.
+scope_nav: contact
+nav: true
+nav_order: 6
+footer_coords: "43.7837° N, 79.3469° W — Toronto, ON"
+---
+
+<style>
+  .ct-hero{padding:78px 0 40px}
+  .ct-hero h1{font-family:var(--font-display);font-weight:500;font-size:clamp(36px,6vw,62px);line-height:1.02;letter-spacing:-0.015em;margin-bottom:24px}
+  .ct-msg{font-size:clamp(17px,2.1vw,21px);color:var(--ink-2);max-width:58ch;line-height:1.6;margin-bottom:38px}
+
+  .ct-cta{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+  .btn-email{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:13px;letter-spacing:0.06em;text-transform:uppercase;font-weight:600;color:var(--paper);background:var(--accent);border:1px solid var(--accent);border-radius:3px;padding:15px 26px;text-decoration:none;transition:background .25s,border-color .25s,transform .25s}
+  .btn-email:hover{background:var(--accent-deep);border-color:var(--accent-deep);transform:translateY(-2px)}
+  .btn-email .ar{transition:transform .25s}
+  .btn-email:hover .ar{transform:translateX(4px)}
+  .ct-addr{font-family:var(--font-mono);font-size:13.5px;color:var(--ink-2);letter-spacing:0.02em}
+  .ct-addr a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s,border-color .2s}
+  .ct-addr a:hover{color:var(--accent);border-color:var(--accent)}
+</style>
+
+<section class="ct-hero">
+  <div class="wrap">
+    <div class="kicker reveal"><span class="rule"></span>Contact</div>
+    <h1 class="reveal" style="transition-delay:.06s">Get in touch</h1>
+    <p class="ct-msg reveal" style="transition-delay:.12s">Whether you're building a team, working on something where people and tech meet, or just want to chat, I'd like to hear from you. The quickest way to reach me is right here.</p>
+    <div class="ct-cta reveal" style="transition-delay:.18s">
+      <a class="btn-email" href="mailto:leo.huang4977@gmail.com?subject=Hello%20from%20your%20site">Email me <span class="ar">→</span></a>
+      <div class="ct-addr"><a href="mailto:leo.huang4977@gmail.com">leo.huang4977@gmail.com</a></div>
+    </div>
+  </div>
+</section>

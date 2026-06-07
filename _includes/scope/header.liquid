@@ -2,12 +2,13 @@
      (about | projects | cv | publications) to highlight the active link. -->
 <header class="topbar">
   <div class="wrap">
-    <a href="/" class="wordmark"><span class="dot"></span>Leo&nbsp;Huang</a>
+    <a href="/" class="wordmark"><span class="dot"></span><img class="avatar" src="/assets/img/leo-avatar.jpg" alt="" aria-hidden="true" width="26" height="26">Leo&nbsp;Huang</a>
     <nav class="main">
       <a href="/"{% if page.scope_nav == 'about' %} class="active" aria-current="page"{% endif %}>About</a>
       <a href="/projects/"{% if page.scope_nav == 'projects' %} class="active" aria-current="page"{% endif %}>Projects</a>
-      <a href="/cv/"{% if page.scope_nav == 'cv' %} class="active" aria-current="page"{% endif %}>CV</a>
+      <a href="/cv/"{% if page.scope_nav == 'cv' %} class="active" aria-current="page"{% endif %}>Résumé</a>
       <a href="/publications/"{% if page.scope_nav == 'publications' %} class="active" aria-current="page"{% endif %}>Publications</a>
+      <a href="/contact/"{% if page.scope_nav == 'contact' %} class="active" aria-current="page"{% endif %}>Contact</a>
     </nav>
   </div>
 </header>
