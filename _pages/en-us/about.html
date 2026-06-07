@@ -198,8 +198,8 @@ scope_nav: about
 
 <script>
   // Days on Earth — set the live target before the shared count-up runs.
-  // This inline script is in page content, so it executes before the
-  // shared scripts.liquid (included after {{ content }}) reads data-count.
+  // Runs in page content, so it executes before the shared scripts include
+  // (and its count-up) reads the data-count attribute.
   (function () {
     var el = document.querySelector('[data-days-since]');
     if (!el) return;
