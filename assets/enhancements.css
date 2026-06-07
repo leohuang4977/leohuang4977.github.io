@@ -1,0 +1,27 @@
+/* Interactive enhancements layer — additive only, references the shared --accent
+   token (emerald). Served verbatim: this file lives OUTSIDE assets/css/ so PurgeCSS
+   (css: ["_site/assets/css/*.css"]) never strips the JS-toggled classes
+   (.shrunk, .cursor-blob, .has-cursor-blob), and it is listed in
+   jekyll-minifier.exclude so the compressor leaves it alone — same handling as
+   assets/scope.css. Paired with assets/js/enhancements.js. */
+
+/* 7.1 — Rotating hero word */
+.rotate{ color: var(--accent, #10B981); display:inline-block; text-align:left; will-change: opacity, transform; }
+.sr-only{ position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+/* 7.2 — Sticky / shrinking nav */
+header.topbar{ transition: box-shadow .25s ease, background .25s ease; }
+header.topbar .wrap{ transition: padding .25s ease; }
+header.topbar .wordmark{ transition: font-size .25s ease; }
+header.topbar.shrunk{ box-shadow: 0 6px 18px -12px rgba(0,0,0,.35); }
+header.topbar.shrunk .wrap{ padding-top:10px; padding-bottom:10px; }   /* was ~18px */
+header.topbar.shrunk .wordmark{ font-size:13px; }                       /* was ~14px */
+
+/* 7.4 — Custom cursor "squishy blob" */
+.cursor-blob{ position:fixed; top:0; left:0; width:26px; height:26px; border-radius:50%;
+  background: var(--accent, #10B981); pointer-events:none; z-index:9999;
+  opacity:0; transition: opacity .25s ease, background .2s ease; will-change: transform; }
+html.has-cursor-blob, html.has-cursor-blob a, html.has-cursor-blob button{ cursor:none; }
+html.has-cursor-blob input, html.has-cursor-blob textarea, html.has-cursor-blob [contenteditable]{ cursor:text; }
+@media (hover:none),(pointer:coarse){ .cursor-blob{ display:none; } }
+@media (prefers-reduced-motion:reduce){ .cursor-blob{ display:none; } }
