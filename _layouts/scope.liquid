@@ -5,7 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{% if page.doc_title %}{{ page.doc_title }}{% else %}{{ page.title }} — Leo Huang{% endif %}</title>
 {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%A0%3C/text%3E%3C/svg%3E">
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+
+<!-- Open Graph / Twitter card — global card; per-page URL via page.url. -->
+<meta property="og:title" content="Leo Huang — UX Research">
+<meta property="og:description" content="UX researcher with a social psychology PhD, based in Toronto.">
+<meta property="og:image" content="https://leohuang4977.github.io/assets/img/og-card.png">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Leo Huang — UX Research">
+<meta name="twitter:description" content="UX researcher with a social psychology PhD, based in Toronto.">
+<meta name="twitter:image" content="https://leohuang4977.github.io/assets/img/og-card.png">
+
+<!-- Favicon: emerald pulsing dot from the topbar, inline SVG (no extra file). Matches --accent #10B981. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='34' fill='%2310B981'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -13,8 +27,11 @@
 <link rel="stylesheet" href="/assets/enhancements.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 {% include scope/header.liquid %}
+<main id="main">
 {{ content }}
+</main>
 {% include scope/footer.liquid %}
 {% include scope/scripts.liquid %}
 <script src="/assets/js/enhancements.js" defer></script>
