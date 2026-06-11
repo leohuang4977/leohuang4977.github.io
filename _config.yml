@@ -198,8 +198,20 @@ sass:
 # Jekyll Minifier
 # -----------------------------------------------------------------------------
 
+# Patterns match OUTPUT paths (dest-relative). The project case-study pages
+# (built to projects/<slug>/index.html) are excluded for the same reason as
+# scope.css: their inline <style> carries the grain feTurbulence data-URI,
+# which the CSS compressor silently drops (build still exits 0).
 jekyll-minifier:
-  exclude: ["robots.txt", "assets/js/search/*.js", "assets/libs/**/*", "assets/scope.css", "assets/enhancements.css", "assets/js/enhancements.js"]
+  exclude:
+    - "robots.txt"
+    - "assets/js/search/*.js"
+    - "assets/libs/**/*"
+    - "assets/scope.css"
+    - "assets/enhancements.css"
+    - "assets/js/enhancements.js"
+    - "projects/*/index.html"
+    - "projects/**/*.html"
   uglifier_args:
     harmony: true
 

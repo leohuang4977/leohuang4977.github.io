@@ -20,6 +20,8 @@ _pages/en-us/contact.html
 _pages/en-us/cv.html
 _pages/en-us/projects.html
 _pages/en-us/publications.html
+_pages/en-us/404.html
+_projects/en-us/*.html
 assets/scope.css
 assets/enhancements.css
 assets/js/enhancements.js
