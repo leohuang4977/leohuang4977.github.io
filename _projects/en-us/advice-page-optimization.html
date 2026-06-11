@@ -1,0 +1,474 @@
+---
+layout: none
+permalink: /projects/advice-page-optimization/
+---
+<!DOCTYPE html>
+<html lang="en" data-theme="scope">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Survey research on what clients value in an advisor and how they prefer to make contact, turned into design direction for an advice page.">
+<title>Advice &amp; Contact Page Optimization — Leo Huang</title>
+<link rel="canonical" href="https://leohuang4977.github.io/projects/advice-page-optimization/">
+<meta property="og:title" content="Advice &amp; Contact Page Optimization — Leo Huang">
+<meta property="og:description" content="Survey research on what clients value in an advisor and how they prefer to make contact, turned into design direction for an advice page.">
+<meta property="og:image" content="https://leohuang4977.github.io/assets/img/og-card.png">
+<meta property="og:url" content="https://leohuang4977.github.io/projects/advice-page-optimization/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='34' fill='%2310B981'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#0D0E12; --paper-2:#15171D; --panel:#15171C;
+    --ink:#E9E7DF; --ink-2:#B6B4AB; --ink-mute:#84868E;
+    --line:rgba(255,255,255,0.13); --line-soft:rgba(255,255,255,0.06);
+    /* Accent — emerald #10B981, matching the site design system (teal→emerald flip done in the 2026-06-11 integration pass). --todo stays amber. */
+    --accent:#10B981; --accent-deep:#059669; --cool:#5BA8E8;
+    --accent-wash:rgba(16,185,129,0.14); --accent-wash-2:rgba(16,185,129,0.08);
+    --todo:#F2B33C; --todo-soft:rgba(242,179,60,0.08); --todo-line:rgba(242,179,60,0.5);
+    --font-display:'Fraunces',Georgia,serif;
+    --font-body:'Hanken Grotesk',ui-sans-serif,system-ui,sans-serif;
+    --font-mono:'IBM Plex Mono',ui-monospace,'Courier New',monospace;
+    --maxw:1000px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background-color:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");opacity:0.05;mix-blend-mode:overlay}
+  body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:repeating-linear-gradient(rgba(255,255,255,0.02) 0 1px,transparent 1px 3px),radial-gradient(120% 70% at 50% 0%,transparent 58%,rgba(0,0,0,0.4) 100%)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:1}
+
+  .reveal{transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  html.js .reveal{opacity:0;transform:translateY(20px)}
+  html.js .reveal.in{opacity:1;transform:none}
+
+  /* topbar */
+  header.topbar{border-bottom:1px solid var(--line);background:rgba(13,14,18,0.72);backdrop-filter:blur(8px);position:sticky;top:0;z-index:50}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;gap:16px;flex-wrap:wrap;max-width:1080px}
+  .wordmark{font-family:var(--font-mono);font-weight:600;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink)}
+  .wordmark .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-wash);animation:pulse 2.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.35}}
+  nav.main{display:flex;gap:24px;align-items:center;font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.05em;text-transform:uppercase}
+  nav.main a{color:var(--ink-2);text-decoration:none;position:relative;padding-bottom:3px;transition:color .2s}
+  nav.main a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--accent);transition:width .25s}
+  nav.main a:hover{color:var(--ink)}nav.main a:hover::after,nav.main a.active::after{width:100%}
+  nav.main a.active{color:var(--accent)}
+
+  /* hero */
+  .case-hero{padding:62px 0 26px}
+  .kicker{font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:12px;margin-bottom:22px}
+  .kicker .rule{height:1px;width:46px;background:var(--accent);opacity:.5}
+  .case-hero h1{font-family:var(--font-display);font-weight:500;font-size:clamp(34px,5.4vw,58px);line-height:1.04;letter-spacing:-0.015em;max-width:20ch;margin-bottom:22px}
+  .case-hero h1 em{font-style:italic;color:var(--accent);font-weight:500}
+  .case-hero .lede{font-size:clamp(16px,2vw,20px);color:var(--ink-2);max-width:62ch;line-height:1.55}
+  .case-hero .lede b{color:var(--ink);font-weight:600}
+
+  /* spec readout */
+  .specwrap{padding:14px 0 0}
+  .spec-eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:14px}
+  .spec{border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:6px 24px}
+  .spec .row{display:flex;align-items:baseline;gap:14px;padding:15px 0;border-bottom:1px solid var(--line-soft)}
+  .spec .row:last-child{border-bottom:none}
+  .spec .row .k{font-family:var(--font-mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-2)}
+  .spec .row .dots{flex:1;border-bottom:1px dotted var(--line);transform:translateY(-3px)}
+  .spec .row .v{font-family:var(--font-display);font-size:24px;font-weight:500;color:var(--accent);min-width:44px;text-align:right}
+  .spec .row .v.txt{font-family:var(--font-mono);font-size:13.5px;color:var(--ink-2)}
+
+  /* sections */
+  .sec{padding:54px 0 0}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:26px}
+  .sec-head .idx{font-family:var(--font-mono);font-size:12.5px;color:var(--accent);letter-spacing:0.08em}
+  .sec-head h2{font-family:var(--font-display);font-weight:500;font-size:clamp(24px,3.6vw,36px);letter-spacing:-0.01em}
+  .body-copy{max-width:66ch}
+  .body-copy p{font-size:17.5px;color:var(--ink-2);margin-bottom:18px;line-height:1.62}
+  .body-copy p b{color:var(--ink);font-weight:600}
+  .body-copy em{color:var(--ink);font-style:italic}
+  .subhead{font-family:var(--font-display);font-size:20px;font-weight:500;color:var(--ink);margin:30px 0 14px}
+
+  /* pre-publish TODO callout (amber, stays amber under any accent) */
+  .todo{max-width:66ch;margin-top:18px;border:1px dashed var(--todo-line);background:var(--todo-soft);border-radius:3px;padding:13px 16px;font-family:var(--font-mono);font-size:12px;line-height:1.6;color:var(--ink-2);letter-spacing:0.01em}
+  .todo b{color:var(--todo);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;font-size:11px;display:block;margin-bottom:6px}
+
+  /* figure box (instrument-panel style) */
+  .figbox{margin:22px 0 6px;border:1px solid var(--line);background:linear-gradient(90deg,var(--line-soft) 1px,transparent 1px) 0 0/64px 100%,var(--panel);border-radius:3px;position:relative;overflow:hidden;padding:40px 22px 22px}
+  .figbox .scope-label{position:absolute;top:12px;left:16px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-mute);z-index:3}
+  .figcap{margin-top:14px;font-family:var(--font-mono);font-size:11px;line-height:1.55;letter-spacing:0.02em;color:var(--ink-mute)}
+  .fig{display:block;width:100%;height:auto}
+  .fig text{font-family:var(--font-mono);fill:var(--ink-2)}
+  .fig .lbl{fill:var(--accent)}
+  .fig .mut{fill:var(--ink-mute)}
+  .fig .ink{fill:var(--ink)}
+  .fig .box-o{fill:var(--panel);stroke:var(--line);stroke-width:1.2}
+  .fig .box-a{fill:var(--accent-wash);stroke:var(--accent);stroke-width:1.4}
+  .fig .ln{stroke:var(--line);stroke-width:1;fill:none}
+  .fig .lnA{stroke:var(--accent);stroke-width:1.6;fill:none}
+  .fig .dash{stroke:var(--line);stroke-width:1;stroke-dasharray:4 4;fill:none}
+  .fig .dotA{fill:var(--accent)}
+  .fig .barA{fill:var(--accent)}
+  .fig .barA2{fill:var(--accent);opacity:.62}
+  .fig .barA3{fill:var(--accent);opacity:.4}
+  .fig .barM{fill:var(--ink-mute);opacity:.5}
+  .fig .fillsoft{fill:var(--line-soft)}
+
+  /* recommendations */
+  .recs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:8px 0 4px}
+  .rec{border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:22px;display:flex;flex-direction:column;gap:9px}
+  .rec .n{font-family:var(--font-mono);font-size:12px;color:var(--accent);letter-spacing:0.08em}
+  .rec h4{font-family:var(--font-display);font-size:19px;font-weight:500;line-height:1.2;color:var(--ink)}
+  .rec p{font-size:14.5px;color:var(--ink-2);line-height:1.5}
+
+  /* contact / footer */
+  .contact{border-top:1px solid var(--line);margin-top:54px;padding:44px 0 26px}
+  .backlink{font-family:var(--font-mono);font-size:12.5px;text-transform:uppercase;letter-spacing:0.05em;color:var(--ink-2);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:gap .25s,color .2s}
+  .backlink:hover{color:var(--accent);gap:14px}
+  footer.foot{border-top:1px solid var(--line);margin-top:46px;padding:24px 0 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.04em;color:var(--ink-mute);text-transform:uppercase}
+  footer.foot .coords{color:var(--ink-2)}
+
+  @media (max-width:760px){
+    body{font-size:16px}
+    .wrap{padding:0 20px}.topbar .wrap{padding:16px 20px}
+    .case-hero{padding:46px 0 22px}
+    .recs{grid-template-columns:1fr}
+    nav.main{gap:14px;font-size:11px}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+  /* ═══ scope-fx · shared interaction layer — identical block on every project page ═══ */
+  #scopebar{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);box-shadow:0 0 10px var(--accent);z-index:90;pointer-events:none}
+  html.js header.topbar{transition:box-shadow .3s ease}
+  html.js header.topbar .wrap{transition:padding .3s ease}
+  html.js header.topbar.shrunk .wrap{padding-top:10px;padding-bottom:10px}
+  html.js header.topbar.shrunk{box-shadow:0 10px 28px rgba(0,0,0,0.38)}
+  .sweepfx{position:relative;overflow:hidden}
+  html.js .sweepfx::after{content:"";position:absolute;top:0;bottom:0;left:-14%;width:9%;background:linear-gradient(90deg,transparent,var(--accent) 50%,transparent);opacity:0;pointer-events:none}
+  html.js .sweepfx.swept::after{animation:scopesweep 1.05s cubic-bezier(.33,.62,.29,1) .12s 1 both}
+  @keyframes scopesweep{0%{left:-14%;opacity:0}10%{opacity:.18}90%{opacity:.14}100%{left:108%;opacity:0}}
+  .mtools{max-width:66ch;margin:30px 0 0;font-family:var(--font-mono);font-size:11.5px;line-height:1.7;letter-spacing:0.03em;color:var(--ink-mute);border-top:1px solid var(--line);padding-top:16px}
+  .mtools b{color:var(--ink-2);font-weight:600;letter-spacing:0.08em}
+  .disc{margin-top:26px;font-family:var(--font-mono);font-size:11.5px;line-height:1.6;letter-spacing:0.02em;color:var(--ink-mute);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;border-left:0;background:none;border-radius:0}
+  @media (hover:hover) and (pointer:fine){
+    .rec,.study,.pcard,.ta,.w{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+    .rec:hover,.study:hover,.pcard:hover,.ta:hover,.w:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 12px 30px rgba(0,0,0,0.35)}
+  }
+  a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+  @media (prefers-reduced-motion:reduce){html.js .sweepfx::after{display:none!important}}
+  .skip{position:absolute;left:8px;top:-48px;z-index:100;background:var(--accent);color:var(--paper);font-family:var(--font-mono);font-size:13px;font-weight:600;letter-spacing:0.04em;padding:10px 16px;border-radius:0 0 4px 4px;text-decoration:none;transition:top .18s}
+  .skip:focus{top:0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="wrap">
+    <a href="https://leohuang4977.github.io/" class="wordmark"><span class="dot"></span>Leo&nbsp;Huang</a>
+    <nav class="main">
+      <a href="https://leohuang4977.github.io/">About</a>
+      <a href="https://leohuang4977.github.io/projects/" class="active">Projects</a>
+      <a href="https://leohuang4977.github.io/cv/">Résumé</a>
+      <a href="https://leohuang4977.github.io/publications/">Publications</a>
+      <a href="https://leohuang4977.github.io/contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="case-hero">
+  <div class="wrap">
+    <div class="kicker reveal"><span class="rule"></span>Survey Research · Ranking &amp; Likert · Wealth Management</div>
+    <h1 class="reveal" style="transition-delay:.06s">What moves someone to contact an advisor, and what just gets in the <em>way</em>.</h1>
+    <p class="lede reveal" style="transition-delay:.12s">A 150-person survey of current and prospective wealth clients, built to answer three questions before a redesign: <b>what people value in an advisor, what moves them to reach out, and how they want to do it.</b></p>
+    <div class="disc reveal" style="transition-delay:.18s">// Anonymized account of confidential client work. The firm is unnamed and every figure is an illustrative recreation made for this portfolio, drawn to show the method rather than report results.</div>
+  </div>
+</section>
+
+<section class="specwrap reveal">
+  <div class="wrap">
+    <div class="spec-eyebrow">By the numbers</div>
+    <div class="spec stat-trigger">
+      <div class="row"><span class="k">Participants</span><span class="dots"></span><span class="v"><span data-count="150">150</span></span></div>
+      <div class="row"><span class="k">Survey items</span><span class="dots"></span><span class="v"><span data-count="16">16</span></span></div>
+      <div class="row"><span class="k">Segments analyzed</span><span class="dots"></span><span class="v"><span data-count="4">4</span></span></div>
+      <div class="row"><span class="k">Audience</span><span class="dots"></span><span class="v txt">Current &amp; prospective clients</span></div>
+      <div class="row"><span class="k">Screened on</span><span class="dots"></span><span class="v txt">Investing experience · investable assets</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">01</span><h2>The brief</h2></div>
+    <div class="body-copy reveal" style="transition-delay:.08s">
+      <p>A wealth-management firm was redesigning the page where prospective clients learn about its advice offering and decide whether to get in touch. Before locking the design, the team wanted answers from clients themselves: what they actually value in an advisor, what would prompt them to make contact, and how they would want to do it. I built one survey to answer all three at once.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">02</span><h2>My role &amp; the team</h2></div>
+    <div class="body-copy reveal" style="transition-delay:.08s">
+      <p>I ran this study end to end inside the bank's research practice: scoping the questions with the partners who owned the advice and contact experience, writing the 16-item instrument, setting the screening criteria, and fielding the survey. The analysis was mine as well, both the segmentation cuts and the thematic coding of the open-ended responses. The readout went back to those partners as design direction rather than a data dump.</p>
+    </div>
+    <div class="todo reveal" style="transition-delay:.12s"><b>✎ TODO before publishing</b>This role account is drafted from the project's shape, not verified memory. Confirm who you worked with and the split of work, then rewrite the paragraph above in your own words and delete this note.</div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">03</span><h2>How I ran it</h2></div>
+    <div class="body-copy reveal" style="transition-delay:.08s">
+      <p>I designed a 16-item instrument that mixed three kinds of questions. Ranking tasks forced trade-offs instead of letting everything be important. Likert items measured strength of feeling on the things the rankings surfaced. Open-ended questions caught whatever the structured items missed.</p>
+      <p>I fielded it to 150 current and prospective clients, screened on investing experience and investable assets so the sample looked like the audience the page serves. Then I read the results two ways: segmentation cuts by age, region, and investor type, and thematic coding across every open-ended response.</p>
+    </div>
+
+    <div class="figbox reveal" style="transition-delay:.1s">
+      <span class="scope-label">FIG.01 — Study design</span>
+      <svg class="fig" viewBox="0 0 720 240" role="img" aria-label="Diagram of the study design. Three question types, ranking tasks, Likert scales, and open-ended items, feed one instrument answered by 150 screened clients, which is then read two ways: segmentation and thematic coding.">
+        <rect class="box-o" x="24" y="36" width="168" height="42" rx="3"/>
+        <text class="ink" x="108" y="53" text-anchor="middle" font-size="10">RANKING TASKS</text>
+        <text class="mut" x="108" y="68" text-anchor="middle" font-size="8.5">forced trade-offs</text>
+        <rect class="box-o" x="24" y="94" width="168" height="42" rx="3"/>
+        <text class="ink" x="108" y="111" text-anchor="middle" font-size="10">LIKERT SCALES</text>
+        <text class="mut" x="108" y="126" text-anchor="middle" font-size="8.5">strength of feeling</text>
+        <rect class="box-o" x="24" y="152" width="168" height="42" rx="3"/>
+        <text class="ink" x="108" y="169" text-anchor="middle" font-size="10">OPEN-ENDED ITEMS</text>
+        <text class="mut" x="108" y="184" text-anchor="middle" font-size="8.5">their own words</text>
+
+        <line class="ln" x1="192" y1="57" x2="234" y2="98"/>
+        <line class="ln" x1="192" y1="115" x2="234" y2="122"/>
+        <line class="ln" x1="192" y1="173" x2="234" y2="146"/>
+
+        <rect class="box-a" x="234" y="78" width="204" height="88" rx="3"/>
+        <text class="ink" x="336" y="110" text-anchor="middle" font-size="16">150 clients</text>
+        <text class="mut" x="336" y="130" text-anchor="middle" font-size="9">screened on investing experience</text>
+        <text class="mut" x="336" y="143" text-anchor="middle" font-size="9">and investable assets</text>
+
+        <line class="ln" x1="438" y1="104" x2="486" y2="87"/>
+        <line class="ln" x1="438" y1="140" x2="486" y2="163"/>
+
+        <rect class="box-o" x="486" y="56" width="210" height="62" rx="3"/>
+        <text class="lbl" x="502" y="82" font-size="10">SEGMENTATION</text>
+        <text class="mut" x="502" y="99" font-size="9">age · region · investor type</text>
+        <rect class="box-o" x="486" y="132" width="210" height="62" rx="3"/>
+        <text class="lbl" x="502" y="158" font-size="10">THEMATIC CODING</text>
+        <text class="mut" x="502" y="175" font-size="9">every open-ended response</text>
+
+        <text class="mut" x="360" y="226" text-anchor="middle" font-size="10">one instrument, two kinds of evidence</text>
+      </svg>
+      <div class="figcap">One 16-item instrument, read two ways. The same 150 screened clients feed the segmentation cuts and the thematic coding.</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">04</span><h2>What clients value</h2></div>
+    <div class="body-copy reveal" style="transition-delay:.08s">
+      <p>The rankings were not close. <b>Trustworthiness, ethical standards, and deep experience sat far above everything else.</b> Capability claims, the technology and the global reach the industry likes to advertise, clustered at the bottom of the list in every segment we cut.</p>
+      <p>Valuing an advisor and contacting one are different decisions, so the instrument asked about them separately rather than letting one stand in for the other. The credibility result held on both sides. It is what people respect, and it is what gets them to reach out.</p>
+    </div>
+
+    <div class="figbox reveal" style="transition-delay:.1s">
+      <span class="scope-label">FIG.02 — What clients value in an advisor</span>
+      <svg class="fig" viewBox="0 0 720 258" role="img" aria-label="Ranked bar chart. Trustworthiness and ethics, deep experience, and strong track record rank far above technology and digital tools and global reach.">
+        <text class="lbl" x="212" y="34" font-size="9.5" letter-spacing="0.08em">CREDIBILITY CLUSTER</text>
+        <text class="ink" x="200" y="60" text-anchor="end" font-size="10.5">Trustworthiness &amp; ethics</text>
+        <rect class="barA" x="212" y="46" width="428" height="20" rx="1.5"/>
+        <text class="ink" x="200" y="96" text-anchor="end" font-size="10.5">Deep experience</text>
+        <rect class="barA2" x="212" y="82" width="372" height="20" rx="1.5"/>
+        <text class="ink" x="200" y="132" text-anchor="end" font-size="10.5">Strong track record</text>
+        <rect class="barA3" x="212" y="118" width="344" height="20" rx="1.5"/>
+
+        <line class="dash" x1="24" y1="160" x2="696" y2="160"/>
+
+        <text class="mut" x="212" y="182" font-size="9.5" letter-spacing="0.08em">CAPABILITY CLUSTER</text>
+        <text class="mut" x="200" y="204" text-anchor="end" font-size="10.5">Technology &amp; digital tools</text>
+        <rect class="barM" x="212" y="190" width="150" height="20" rx="1.5"/>
+        <text class="mut" x="200" y="240" text-anchor="end" font-size="10.5">Global reach</text>
+        <rect class="barM" x="212" y="226" width="118" height="20" rx="1.5"/>
+      </svg>
+      <div class="figcap">Ranked importance, all segments pooled. Conceptual, with illustrative lengths. The gap between the credibility cluster and the capability cluster was the study's clearest result.</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">05</span><h2>How they want to reach out</h2></div>
+    <div class="body-copy reveal" style="transition-delay:.08s">
+      <p>When clients decide to make contact, they want a person. <b>Phone, email, and in-person conversations led in every segment.</b> The web form came last, and the open-ended comments explained why: a form feels like a message into the void when the whole point is to start a relationship.</p>
+    </div>
+
+    <div class="figbox reveal" style="transition-delay:.1s">
+      <span class="scope-label">FIG.03 — Preferred first contact</span>
+      <svg class="fig" viewBox="0 0 720 222" role="img" aria-label="Bar chart of preferred first contact channels. Phone, email, and in person rank well above the web form.">
+        <text class="ink" x="200" y="58" text-anchor="end" font-size="10.5">Phone</text>
+        <rect class="barA" x="212" y="44" width="356" height="20" rx="1.5"/>
+        <text class="ink" x="200" y="102" text-anchor="end" font-size="10.5">Email</text>
+        <rect class="barA2" x="212" y="88" width="326" height="20" rx="1.5"/>
+        <text class="ink" x="200" y="146" text-anchor="end" font-size="10.5">In person</text>
+        <rect class="barA3" x="212" y="132" width="296" height="20" rx="1.5"/>
+
+        <line class="dash" x1="24" y1="168" x2="696" y2="168"/>
+
+        <text class="mut" x="200" y="196" text-anchor="end" font-size="10.5">Web form</text>
+        <rect class="barM" x="212" y="182" width="132" height="20" rx="1.5"/>
+        <text class="mut" x="358" y="196" font-size="10">a fallback, not a preference</text>
+      </svg>
+      <div class="figcap">First-choice channel for starting a conversation. Conceptual, with illustrative lengths.</div>
+    </div>
+
+    <div class="body-copy reveal" style="transition-delay:.08s">
+      <p style="margin-top:26px">The form itself produced the study's most useful nuance. There was no consensus on how long it should be. There was near-total agreement on what belongs in it. People volunteered the same three things: why they are reaching out, what they want help with, and enough about their financial situation to make the first conversation useful. <b>The fix was not a shorter form. It was the right fields.</b></p>
+    </div>
+
+    <div class="figbox reveal" style="transition-delay:.1s">
+      <span class="scope-label">FIG.04 — The form</span>
+      <svg class="fig" viewBox="0 0 720 220" role="img" aria-label="Diagram of a typical contact form with the three fields clients volunteer highlighted: reason for reaching out, area of interest, and financial details.">
+        <rect class="box-o" x="24" y="30" width="300" height="176" rx="3"/>
+        <text class="mut" x="40" y="52" font-size="9.5" letter-spacing="0.08em">A TYPICAL CONTACT FORM</text>
+        <rect class="fillsoft" x="40" y="62" width="268" height="16" rx="2"/>
+        <text class="mut" x="48" y="74" font-size="9">name</text>
+        <rect class="fillsoft" x="40" y="86" width="268" height="16" rx="2"/>
+        <text class="mut" x="48" y="98" font-size="9">email</text>
+        <rect class="box-a" x="40" y="110" width="268" height="16" rx="2"/>
+        <text class="ink" x="48" y="122" font-size="9">reason for reaching out</text>
+        <rect class="box-a" x="40" y="134" width="268" height="16" rx="2"/>
+        <text class="ink" x="48" y="146" font-size="9">area of interest</text>
+        <rect class="box-a" x="40" y="158" width="268" height="16" rx="2"/>
+        <text class="ink" x="48" y="170" font-size="9">financial details</text>
+        <rect class="fillsoft" x="40" y="182" width="268" height="16" rx="2"/>
+        <text class="mut" x="48" y="194" font-size="9">+ more fields</text>
+
+        <text class="lbl" x="372" y="52" font-size="10" letter-spacing="0.08em">WHAT CLIENTS OFFER UNPROMPTED</text>
+        <rect class="dotA" x="372" y="76" width="4" height="4"/>
+        <text class="ink" x="386" y="84" font-size="11">why they are reaching out</text>
+        <rect class="dotA" x="372" y="104" width="4" height="4"/>
+        <text class="ink" x="386" y="112" font-size="11">what they want help with</text>
+        <rect class="dotA" x="372" y="132" width="4" height="4"/>
+        <text class="ink" x="386" y="140" font-size="11">their financial picture</text>
+
+        <text class="mut" x="372" y="180" font-size="10">field count: no consensus.</text>
+        <text class="mut" x="372" y="196" font-size="10">fields that matter: near-total agreement.</text>
+      </svg>
+      <div class="figcap">No consensus on form length. Near-total agreement on which fields matter. The highlighted rows are the ones clients volunteered unprompted.</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">06</span><h2>From insight to design</h2></div>
+    <div class="body-copy reveal" style="transition-delay:.08s">
+      <p>The readout went to the team as three design directions, each tied to the evidence behind it.</p>
+    </div>
+    <div class="recs reveal" style="transition-delay:.1s">
+      <div class="rec">
+        <span class="n">REC 01</span>
+        <h4>Lead with credibility</h4>
+        <p>Put trustworthiness, ethics, and experience at the top of the page, in plain language with proof behind it. Capability messaging can support, but it should not lead.</p>
+      </div>
+      <div class="rec">
+        <span class="n">REC 02</span>
+        <h4>Streamline the form</h4>
+        <p>Ask for what clients already want to share: why they are reaching out, what they want help with, and enough financial context to route them well. Every field beyond that is friction with no consensus behind it.</p>
+      </div>
+      <div class="rec">
+        <span class="n">REC 03</span>
+        <h4>Offer real channels</h4>
+        <p>Make a phone number, an email address, and a way to book a conversation as prominent as the form. The form is the fallback. The page should not treat it as the main event.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">07</span><h2>What it changed</h2></div>
+    <div class="body-copy reveal" style="transition-delay:.08s">
+      <p>The findings went to the team that owned the advice and contact experience.</p>
+    </div>
+    <div class="todo reveal" style="transition-delay:.12s"><b>✎ TODO before publishing</b>Add the real outcome here: what the team changed on the page or in the flow, and any signal that it moved. If you can't verify one, say what the readout led to and leave it at that. Then delete this note.</div>
+    <div class="mtools reveal" style="transition-delay:.14s"><b>METHODS &amp; TOOLS</b><br>Survey design · ranking &amp; Likert instruments · screened recruitment · segmentation · thematic analysis</div>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="wrap">
+    <a class="backlink reveal" href="https://leohuang4977.github.io/projects/">&#8592; All projects</a>
+    <footer class="foot">
+      <span>© 2026 Leo Huang</span>
+      <span class="coords">43.6532° N, 79.3832° W — Toronto, ON</span>
+    </footer>
+  </div>
+</section>
+
+</main>
+<script>
+  /* scope-fx · unified page script (reveal · counters · progress · shrink · sweep) — identical on every project page */
+  (function(){
+    var de=document.documentElement;
+    de.classList.add('js');
+    if(de.dataset.lhFx){return;} de.dataset.lhFx='1'; /* guard so a site-wide enhancement pass can no-op this block */
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* scroll progress + shrinking topbar */
+    var bar=document.createElement('div'); bar.id='scopebar'; document.body.appendChild(bar);
+    var topbar=document.querySelector('header.topbar'); var ticking=false;
+    function onScroll(){
+      if(ticking)return; ticking=true;
+      requestAnimationFrame(function(){
+        var max=de.scrollHeight-de.clientHeight;
+        bar.style.width=(max>0?(window.scrollY/max)*100:0)+'%';
+        if(topbar)topbar.classList.toggle('shrunk',window.scrollY>24);
+        ticking=false;
+      });
+    }
+    window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+    /* oscilloscope sweep targets: every figure panel */
+    document.querySelectorAll('.figbox, figure.fig, div.fig').forEach(function(f){f.classList.add('sweepfx');});
+
+    /* count-up (NaN-safe: first frame gets a real timestamp via rAF) */
+    function countUp(el){
+      if(el.dataset.done)return;
+      var t=parseFloat(el.dataset.count); if(isNaN(t))return;
+      el.dataset.done='1';
+      var fmt=function(n){return Math.round(n).toLocaleString('en-US');};
+      if(reduce){el.textContent=fmt(t);return;}
+      var dur=1100,start=null;
+      function tick(now){
+        if(start===null)start=now;
+        var p=Math.min((now-start)/dur,1);
+        el.textContent=fmt((1-Math.pow(1-p,3))*t);
+        if(p<1)requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    function arm(el){
+      el.classList.add('in');
+      if(el.classList.contains('sweepfx')&&!reduce)el.classList.add('swept');
+      el.querySelectorAll('[data-count]').forEach(countUp);
+    }
+
+    /* safety net: everything visible + counters finalized even if observers never fire */
+    setTimeout(function(){
+      document.querySelectorAll('.reveal,.sweepfx').forEach(arm);
+      document.querySelectorAll('[data-count]').forEach(countUp);
+    },1800);
+
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){
+        es.forEach(function(e){if(e.isIntersecting){arm(e.target);io.unobserve(e.target);}});
+      },{threshold:0.12,rootMargin:'0px 0px -7% 0px'});
+      document.querySelectorAll('.reveal,.sweepfx,.stat-trigger').forEach(function(el){io.observe(el);});
+    } else {
+      document.querySelectorAll('.reveal,.sweepfx').forEach(arm);
+    }
+  })();
+</script>
+</body>
+</html>

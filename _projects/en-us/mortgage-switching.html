@@ -1,0 +1,465 @@
+---
+layout: none
+permalink: /projects/mortgage-switching/
+---
+<!DOCTYPE html>
+<html lang="en" data-theme="scope">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A two-group comparative survey on what drives customers to switch mortgage providers, and what keeps eligible ones from moving.">
+<title>Why Customers Switch Mortgage Providers — Leo Huang</title>
+<link rel="canonical" href="https://leohuang4977.github.io/projects/mortgage-switching/">
+<meta property="og:title" content="Why Customers Switch Mortgage Providers — Leo Huang">
+<meta property="og:description" content="A two-group comparative survey on what drives customers to switch mortgage providers, and what keeps eligible ones from moving.">
+<meta property="og:image" content="https://leohuang4977.github.io/assets/img/og-card.png">
+<meta property="og:url" content="https://leohuang4977.github.io/projects/mortgage-switching/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='34' fill='%2310B981'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#0D0E12; --paper-2:#15171D; --panel:#15171C;
+    --ink:#E9E7DF; --ink-2:#B6B4AB; --ink-mute:#84868E;
+    --line:rgba(255,255,255,0.13); --line-soft:rgba(255,255,255,0.06);
+    /* Accent — emerald #10B981, matching the site design system (teal→emerald flip done in the 2026-06-11 integration pass). --todo stays amber. */
+    --accent:#10B981; --todo:#F2B33C; --todo-soft:rgba(242,179,60,0.08); --todo-line:rgba(242,179,60,0.5); --accent-deep:#059669; --cool:#5BA8E8;
+    --accent-wash:rgba(16,185,129,0.12); --accent-wash-2:rgba(16,185,129,0.05);
+    --font-display:'Fraunces',Georgia,serif;
+    --font-body:'Hanken Grotesk',ui-sans-serif,system-ui,sans-serif;
+    --font-mono:'IBM Plex Mono',ui-monospace,'Courier New',monospace;
+    --maxw:1000px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background-color:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");opacity:0.05;mix-blend-mode:overlay}
+  body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:repeating-linear-gradient(rgba(255,255,255,0.02) 0 1px,transparent 1px 3px),radial-gradient(120% 70% at 50% 0%,transparent 58%,rgba(0,0,0,0.4) 100%)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:1}
+
+  .reveal{transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  html.js .reveal{opacity:0;transform:translateY(20px)}
+  html.js .reveal.in{opacity:1;transform:none}
+
+  /* topbar */
+  header.topbar{border-bottom:1px solid var(--line);background:rgba(13,14,18,0.72);backdrop-filter:blur(8px);position:sticky;top:0;z-index:50}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;gap:16px;flex-wrap:wrap;max-width:1080px}
+  .wordmark{font-family:var(--font-mono);font-weight:600;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink)}
+  .wordmark .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-wash);animation:pulse 2.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.35}}
+  nav.main{display:flex;gap:24px;align-items:center;font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.05em;text-transform:uppercase}
+  nav.main a{color:var(--ink-2);text-decoration:none;position:relative;padding-bottom:3px;transition:color .2s}
+  nav.main a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--accent);transition:width .25s}
+  nav.main a:hover{color:var(--ink)}nav.main a:hover::after,nav.main a.active::after{width:100%}
+  nav.main a.active{color:var(--accent)}
+
+  /* breadcrumb back */
+
+  /* hero */
+  .cs-hero{padding:30px 0 26px}
+  .kicker{font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:12px;margin-bottom:22px;flex-wrap:wrap}
+  .kicker .rule{height:1px;width:46px;background:var(--accent);opacity:.5}
+  .cs-hero h1{font-family:var(--font-display);font-weight:500;font-size:clamp(34px,6vw,60px);line-height:1.03;letter-spacing:-0.015em;margin-bottom:22px;max-width:18ch}
+  .cs-hero .lede{font-size:clamp(17px,2.1vw,20px);color:var(--ink-2);max-width:58ch;line-height:1.55}
+
+  /* one-line disclaimer */
+
+  /* spec readout */
+  .specwrap{padding:14px 0 0}
+  .spec-eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:14px}
+  .spec{border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:6px 24px}
+  .spec .row{display:flex;align-items:baseline;gap:14px;padding:15px 0;border-bottom:1px solid var(--line-soft)}
+  .spec .row:last-child{border-bottom:none}
+  .spec .row .k{font-family:var(--font-mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-2)}
+  .spec .row .dots{flex:1;border-bottom:1px dotted var(--line);transform:translateY(-3px)}
+  .spec .row .v{font-family:var(--font-display);font-size:24px;font-weight:500;color:var(--accent);min-width:44px;text-align:right}
+  .spec .row .v.txt{font-family:var(--font-mono);font-size:13.5px;color:var(--ink-2)}
+
+  /* sections */
+  .sec{padding:56px 0 0}
+  .sec.gap{padding-bottom:8px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:24px}
+  .sec-head .idx{font-family:var(--font-mono);font-size:12.5px;color:var(--accent);letter-spacing:0.08em}
+  .sec-head h2{font-family:var(--font-display);font-weight:500;font-size:clamp(24px,3.6vw,36px);letter-spacing:-0.01em}
+
+  .prose{max-width:64ch}
+  .prose p{font-size:18px;color:var(--ink-2);margin-bottom:18px;line-height:1.62}
+  .prose p:last-child{margin-bottom:0}
+
+  /* finding sub-blocks */
+  .finding{margin-top:38px}
+  .finding:first-of-type{margin-top:8px}
+  .finding h3{font-family:var(--font-display);font-size:clamp(20px,2.6vw,25px);font-weight:500;line-height:1.18;letter-spacing:-0.01em;margin-bottom:14px}
+  .finding .prose{margin-bottom:0}
+
+  /* pre-publish TODO marker (kept visible until Leo fills it in) */
+  .todo{margin-top:18px;border:1px dashed var(--todo-line);background:var(--todo-soft);border-radius:3px;padding:13px 16px;font-family:var(--font-mono);font-size:12px;line-height:1.6;color:var(--ink-2);letter-spacing:0.01em}
+  .todo b{color:var(--todo);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;font-size:11px;display:block;margin-bottom:6px}
+
+  /* conceptual figures */
+  .fig{border:1px solid var(--line);border-radius:3px;background:linear-gradient(90deg,var(--line-soft) 1px,transparent 1px) 0 0/56px 100%,var(--panel);padding:22px 22px 16px;margin:26px 0 0;position:relative;overflow:hidden}
+  .fig-label{font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:14px}
+  .fig svg{display:block;width:100%;height:auto}
+  .fig figcaption{font-family:var(--font-mono);font-size:10.5px;color:var(--ink-mute);margin-top:14px;letter-spacing:0.02em;line-height:1.5}
+  .fig .ax{stroke:var(--line);stroke-width:1}
+  .fig .boxO{fill:var(--panel);stroke:var(--line);stroke-width:1.2}
+  .fig .grid{stroke:var(--line-soft);stroke-width:1}
+  .fig .barA{fill:var(--accent)}
+  .fig .barB{fill:var(--ink-mute)}
+  .fig .dotA{fill:var(--accent)}
+  .fig .dotB{fill:var(--ink-mute)}
+  .fig .lineA{stroke:var(--accent);fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+  .fig .lineB{stroke:var(--ink-mute);fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:2 6}
+  .fig .endA{fill:var(--accent)}.fig .endB{fill:var(--ink-mute)}
+  .fig .wash{fill:var(--accent-wash)}
+  .fig .pen{stroke:var(--ink-mute);stroke-width:1;stroke-dasharray:3 4;fill:none}
+  .fig .lab{font-family:var(--font-mono);font-size:13px;fill:var(--ink-2)}
+  .fig .lab.sm{font-size:11px;fill:var(--ink-mute)}
+  .fig .lab.a{fill:var(--accent)}
+  .fig .lab.r{text-anchor:end}
+  .fig .tag{font-family:var(--font-mono);font-size:11px;fill:var(--paper);font-weight:600}
+
+  /* recommendation cards */
+  .recs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+  .rec{border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:22px 22px 20px;position:relative;overflow:hidden;transition:transform .3s cubic-bezier(.2,.7,.2,1),border-color .3s}
+  .rec:hover{transform:translateY(-3px);border-color:var(--accent)}
+  .rec .n{font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:0.08em;margin-bottom:12px}
+  .rec h4{font-family:var(--font-display);font-size:19px;font-weight:500;line-height:1.18;margin-bottom:10px}
+  .rec p{font-size:14.5px;color:var(--ink-2);line-height:1.5}
+
+  /* methods & tools tag */
+
+  /* contact CTA */
+  .cta{border-top:1px solid var(--line);margin-top:56px;padding:44px 0 26px}
+  .cta .back{font-family:var(--font-mono);font-size:12.5px;text-transform:uppercase;letter-spacing:0.05em;color:var(--ink-2);text-decoration:none;display:inline-flex;align-items:center;gap:9px;transition:color .2s,gap .2s}
+  .cta .back:hover{color:var(--accent);gap:13px}
+
+  footer.foot{border-top:1px solid var(--line);margin-top:50px;padding:24px 0 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.04em;color:var(--ink-mute);text-transform:uppercase}
+  footer.foot .coords{color:var(--ink-2)}
+
+  @media (max-width:760px){
+    body{font-size:16px}
+    .wrap{padding:0 20px}.topbar .wrap{padding:16px 20px}
+    .cs-hero{padding:24px 0 22px}
+    .recs{grid-template-columns:1fr}
+    .sec{padding:44px 0 0}
+    nav.main{gap:15px;font-size:11px}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+  /* ═══ scope-fx · shared interaction layer — identical block on every project page ═══ */
+  #scopebar{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);box-shadow:0 0 10px var(--accent);z-index:90;pointer-events:none}
+  html.js header.topbar{transition:box-shadow .3s ease}
+  html.js header.topbar .wrap{transition:padding .3s ease}
+  html.js header.topbar.shrunk .wrap{padding-top:10px;padding-bottom:10px}
+  html.js header.topbar.shrunk{box-shadow:0 10px 28px rgba(0,0,0,0.38)}
+  .sweepfx{position:relative;overflow:hidden}
+  html.js .sweepfx::after{content:"";position:absolute;top:0;bottom:0;left:-14%;width:9%;background:linear-gradient(90deg,transparent,var(--accent) 50%,transparent);opacity:0;pointer-events:none}
+  html.js .sweepfx.swept::after{animation:scopesweep 1.05s cubic-bezier(.33,.62,.29,1) .12s 1 both}
+  @keyframes scopesweep{0%{left:-14%;opacity:0}10%{opacity:.18}90%{opacity:.14}100%{left:108%;opacity:0}}
+  .mtools{max-width:66ch;margin:30px 0 0;font-family:var(--font-mono);font-size:11.5px;line-height:1.7;letter-spacing:0.03em;color:var(--ink-mute);border-top:1px solid var(--line);padding-top:16px}
+  .mtools b{color:var(--ink-2);font-weight:600;letter-spacing:0.08em}
+  .disc{margin-top:26px;font-family:var(--font-mono);font-size:11.5px;line-height:1.6;letter-spacing:0.02em;color:var(--ink-mute);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;border-left:0;background:none;border-radius:0}
+  @media (hover:hover) and (pointer:fine){
+    .rec,.study,.pcard,.ta,.w{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+    .rec:hover,.study:hover,.pcard:hover,.ta:hover,.w:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 12px 30px rgba(0,0,0,0.35)}
+  }
+  a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+  @media (prefers-reduced-motion:reduce){html.js .sweepfx::after{display:none!important}}
+  .skip{position:absolute;left:8px;top:-48px;z-index:100;background:var(--accent);color:var(--paper);font-family:var(--font-mono);font-size:13px;font-weight:600;letter-spacing:0.04em;padding:10px 16px;border-radius:0 0 4px 4px;text-decoration:none;transition:top .18s}
+  .skip:focus{top:0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="wrap">
+    <a href="https://leohuang4977.github.io/" class="wordmark"><span class="dot"></span>Leo&nbsp;Huang</a>
+    <nav class="main">
+      <a href="https://leohuang4977.github.io/">About</a>
+      <a href="https://leohuang4977.github.io/projects/" class="active">Projects</a>
+      <a href="https://leohuang4977.github.io/cv/">Résumé</a>
+      <a href="https://leohuang4977.github.io/publications/">Publications</a>
+      <a href="https://leohuang4977.github.io/contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="cs-hero">
+  <div class="wrap">
+    <div class="kicker reveal"><span class="rule"></span>Comparative survey · Retail banking</div>
+    <h1 class="reveal" style="transition-delay:.06s">Why customers switch mortgage providers</h1>
+    <p class="lede reveal" style="transition-delay:.12s">A two-group survey built to read switchers and non-switchers side by side, so a bank could see what actually moves a mortgage and what keeps one parked.</p>
+    <div class="disc reveal" style="transition-delay:.18s">Anonymized portfolio version of a client study. The bank is unnamed and the figures are illustrative, recreated to show the design and analysis rather than to report real results.</div>
+  </div>
+</section>
+
+<section class="specwrap reveal">
+  <div class="wrap">
+    <div class="spec-eyebrow">By the numbers</div>
+    <div class="spec stat-trigger">
+      <div class="row"><span class="k">Participants</span><span class="dots"></span><span class="v"><span data-count="200">200</span></span></div>
+      <div class="row"><span class="k">Two balanced groups</span><span class="dots"></span><span class="v txt">100 switchers / 100 stayers</span></div>
+      <div class="row"><span class="k">Survey items</span><span class="dots"></span><span class="v"><span data-count="16">16</span></span></div>
+      <div class="row"><span class="k">Design</span><span class="dots"></span><span class="v txt">Comparative, two-group</span></div>
+      <div class="row"><span class="k">Sector</span><span class="dots"></span><span class="v txt">Retail banking</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">01</span><h2>The brief</h2></div>
+    <div class="prose reveal" style="transition-delay:.08s">
+      <p>A retail bank wanted to win more of the mortgages its customers held elsewhere, and a redesign of the switching flow was on the table. Before anyone touched the page, the open question was behavioral. What actually moves someone to bring a mortgage over, and what keeps an otherwise eligible customer where they are?</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">02</span><h2>My role &amp; the team</h2></div>
+    <div class="prose reveal" style="transition-delay:.08s">
+      <p>I was the researcher on the squad redesigning the switching flow, working day to day with the lead designer and a product manager, with a senior researcher reviewing the work. I wrote the 16-item questionnaire, including the true/false knowledge check, and set the screening rules that split recruitment into balanced groups of recent switchers and stayers. Once the data was in I ran the analysis end to end, then brought the findings into the squad's design reviews, where the three recommendations below took shape.</p>
+    </div>
+    <div class="todo reveal" style="transition-delay:.12s">
+      <b>✎ TODO before publishing</b>
+      This account is drafted, modeled on your verified pod from the same internship. Confirm the team makeup and the split of work against what you would say in an interview, then delete this note.
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">03</span><h2>How I ran it</h2></div>
+    <div class="prose reveal" style="transition-delay:.08s">
+      <p>The design was built for comparison. I recruited a balanced sample, 100 recent switchers and 100 people who had stayed with their provider, so the two groups could be read against each other. Everyone answered the same set of questions: a few demographics, a short true/false check on how mortgages work, a ranking of what matters when choosing a provider, and how hard they expected switching to be. From there I compared the groups item by item, tested which gaps held up statistically, and looked for places where two factors worked together rather than reading each one on its own.</p>
+    </div>
+
+    <figure class="fig reveal" style="transition-delay:.12s">
+      <div class="fig-label">FIG.01 — Study design</div>
+      <svg viewBox="0 0 720 250" role="img" aria-label="Two balanced groups of one hundred participants, read head to head: switchers and stayers.">
+        <!-- left group: switchers -->
+        <rect x="34" y="34" width="300" height="182" rx="6" class="ax wash"/>
+        <text x="50" y="62" class="lab a">Switchers</text>
+        <text x="284" y="62" class="lab sm r">n = 100</text>
+        <!-- dots: switchers -->
+        <g>
+          <circle class="dotA" cx="74"  cy="104" r="7"/><circle class="dotA" cx="118" cy="104" r="7"/><circle class="dotA" cx="162" cy="104" r="7"/><circle class="dotA" cx="206" cy="104" r="7"/><circle class="dotA" cx="250" cy="104" r="7"/><circle class="dotA" cx="294" cy="104" r="7"/>
+          <circle class="dotA" cx="74"  cy="142" r="7"/><circle class="dotA" cx="118" cy="142" r="7"/><circle class="dotA" cx="162" cy="142" r="7"/><circle class="dotA" cx="206" cy="142" r="7"/><circle class="dotA" cx="250" cy="142" r="7"/><circle class="dotA" cx="294" cy="142" r="7"/>
+          <circle class="dotA" cx="74"  cy="180" r="7"/><circle class="dotA" cx="118" cy="180" r="7"/><circle class="dotA" cx="162" cy="180" r="7"/><circle class="dotA" cx="206" cy="180" r="7"/><circle class="dotA" cx="250" cy="180" r="7"/><circle class="dotA" cx="294" cy="180" r="7"/>
+        </g>
+        <!-- center divider -->
+        <line x1="360" y1="40" x2="360" y2="210" class="pen"/>
+        <text x="360" y="232" class="lab sm" text-anchor="middle">read head to head</text>
+        <!-- right group: stayers -->
+        <rect x="386" y="34" width="300" height="182" rx="6" class="boxO"/>
+        <text x="402" y="62" class="lab">Stayers</text>
+        <text x="670" y="62" class="lab sm r">n = 100</text>
+        <g>
+          <circle class="dotB" cx="426" cy="104" r="7"/><circle class="dotB" cx="470" cy="104" r="7"/><circle class="dotB" cx="514" cy="104" r="7"/><circle class="dotB" cx="558" cy="104" r="7"/><circle class="dotB" cx="602" cy="104" r="7"/><circle class="dotB" cx="646" cy="104" r="7"/>
+          <circle class="dotB" cx="426" cy="142" r="7"/><circle class="dotB" cx="470" cy="142" r="7"/><circle class="dotB" cx="514" cy="142" r="7"/><circle class="dotB" cx="558" cy="142" r="7"/><circle class="dotB" cx="602" cy="142" r="7"/><circle class="dotB" cx="646" cy="142" r="7"/>
+          <circle class="dotB" cx="426" cy="180" r="7"/><circle class="dotB" cx="470" cy="180" r="7"/><circle class="dotB" cx="514" cy="180" r="7"/><circle class="dotB" cx="558" cy="180" r="7"/><circle class="dotB" cx="602" cy="180" r="7"/><circle class="dotB" cx="646" cy="180" r="7"/>
+        </g>
+      </svg>
+      <figcaption>Two balanced groups answered the same battery, then were compared item by item. Schematic. The dots are illustrative, not a literal count.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">04</span><h2>What we found</h2></div>
+
+    <div class="finding reveal" style="transition-delay:.06s">
+      <h3>Experience predicts switching</h3>
+      <div class="prose">
+        <p>The strongest signal had little to do with who someone was and a lot to do with what they had already done. People who had switched a mortgage before stood well apart from those who never had, on intent, on confidence, and on how easy they expected the move to be. Age, income, and region barely registered next to that.</p>
+      </div>
+      <figure class="fig">
+        <div class="fig-label">FIG.02 — The experience gap</div>
+        <svg viewBox="0 0 720 250" role="img" aria-label="People who have switched before show much higher intent to switch again than those who never have.">
+          <line x1="60" y1="212" x2="660" y2="212" class="ax"/>
+          <!-- switched before: tall -->
+          <rect class="barA" x="150" y="64" width="120" height="148"/>
+          <text x="210" y="238" class="lab" text-anchor="middle">Switched before</text>
+          <!-- never switched: short -->
+          <rect class="barB" x="450" y="150" width="120" height="62"/>
+          <text x="510" y="238" class="lab" text-anchor="middle">Never switched</text>
+          <!-- gap bracket -->
+          <path class="pen" d="M280 64 H360 V150 H440"/>
+          <text x="360" y="52" class="lab sm a" text-anchor="middle">the gap</text>
+        </svg>
+        <figcaption>Likelihood to switch again, switchers vs. never-switched. Conceptual, with illustrative proportions.</figcaption>
+      </figure>
+    </div>
+
+    <div class="finding reveal" style="transition-delay:.06s">
+      <h3>Difficulty is the wall for first-timers</h3>
+      <div class="prose">
+        <p>Expected difficulty mattered, but mostly for one group. For people who had never switched, the harder the process looked, the more likely they were to stay put. For people who had done it before, difficulty hardly moved them. The two groups only met at the point where switching felt genuinely easy. The same first-timers scored lowest on the true/false knowledge check, so the dread tracks what people have not done yet more than what the process actually demands.</p>
+      </div>
+      <figure class="fig">
+        <div class="fig-label">FIG.03 — An interaction, not a main effect</div>
+        <svg viewBox="0 0 720 250" role="img" aria-label="Perceived ease lifts intent sharply for first-timers and barely at all for prior switchers; the two lines converge when switching feels easy.">
+          <!-- axes -->
+          <line x1="70" y1="40" x2="70" y2="200" class="ax"/>
+          <line x1="70" y1="200" x2="660" y2="200" class="ax"/>
+          <text x="78" y="34" class="lab sm">intent to switch →</text>
+          <text x="92" y="222" class="lab sm">feels hard</text>
+          <text x="640" y="222" class="lab sm r">feels easy</text>
+          <!-- switched before: flat, high -->
+          <path class="lineA" d="M100 86 C260 80, 460 76, 636 70"/>
+          <circle class="endA" cx="636" cy="70" r="5"/>
+          <text x="120" y="74" class="lab sm a">switched before</text>
+          <!-- never switched: steep -->
+          <path class="lineB" d="M100 184 C260 168, 470 110, 636 82"/>
+          <circle class="endB" cx="636" cy="82" r="5"/>
+          <text x="146" y="153" class="lab sm">never switched</text>
+        </svg>
+        <figcaption>Expected ease against intent to switch, split by prior experience. Conceptual, with illustrative curves.</figcaption>
+      </figure>
+    </div>
+
+    <div class="finding reveal" style="transition-delay:.06s">
+      <h3>Rate sits on top</h3>
+      <div class="prose">
+        <p>One factor outranked the rest from every angle we asked about. Why people would switch, what they weighed most, what put them off: the interest rate came first each time. Fees, trust, and the existing relationship all sat well behind it.</p>
+      </div>
+      <figure class="fig">
+        <div class="fig-label">FIG.04 — Decision factors, ranked</div>
+        <svg viewBox="0 0 720 250" role="img" aria-label="Interest rate ranks first among decision factors, ahead of fees and penalties, trust in provider, and the existing relationship.">
+          <!-- rate (top, accent, longest) -->
+          <text x="186" y="58" class="lab r">Interest rate</text>
+          <rect class="barA" x="200" y="40" width="430" height="30"/>
+          <rect x="598" y="40" width="32" height="30" rx="2" style="fill:var(--accent-deep)"/>
+          <text x="614" y="60" class="tag" text-anchor="middle">#1</text>
+          <!-- fees -->
+          <text x="186" y="113" class="lab r">Fees &amp; penalties</text>
+          <rect class="barB" x="200" y="95" width="286" height="30"/>
+          <!-- trust -->
+          <text x="186" y="168" class="lab r">Trust in provider</text>
+          <rect class="barB" x="200" y="150" width="232" height="30"/>
+          <!-- relationship -->
+          <text x="186" y="223" class="lab r">Existing relationship</text>
+          <rect class="barB" x="200" y="205" width="150" height="30"/>
+        </svg>
+        <figcaption>Relative weight of decision factors across switch reasons, priorities, and obstacles. Conceptual, with illustrative lengths.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">05</span><h2>From insight to design</h2></div>
+    <div class="recs reveal" style="transition-delay:.08s">
+      <div class="rec">
+        <div class="n">01</div>
+        <h4>Demystify the move</h4>
+        <p>Show, step by step, how ordinary switching a mortgage really is. Aim it at first-time switchers, who tend to overestimate the hassle.</p>
+      </div>
+      <div class="rec">
+        <div class="n">02</div>
+        <h4>Put the rate first</h4>
+        <p>Make the rate the most prominent, scannable thing on the page. It drives the decision more than anything else does.</p>
+      </div>
+      <div class="rec">
+        <div class="n">03</div>
+        <h4>Clear the obstacles early</h4>
+        <p>Name the things people dread, like paperwork and penalties, and answer them up front instead of leaving them to the end of the flow.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec gap">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">06</span><h2>What it changed</h2></div>
+    <div class="prose reveal" style="transition-delay:.08s">
+      <p>The study fed a redesign of the switching flow, and the team shipped it. The new version followed the recommendations above, with the rate pulled to the top of the page and the process laid out step by step for people who had never moved a mortgage before. Switching volume picked up in the months that followed. I hold that result loosely, though. Rates were moving over the same stretch, and without a holdout there is no clean way to split what the redesign earned from what the market handed us.</p>
+    </div>
+    <div class="mtools reveal" style="transition-delay:.12s"><b>METHODS &amp; TOOLS</b><br>Comparative two-group survey · balanced screener recruitment · ranked-factor &amp; Likert measurement · group-difference &amp; interaction testing · Qualtrics · Python</div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <a class="back reveal" style="transition-delay:.08s" href="https://leohuang4977.github.io/projects/">← All projects</a>
+    <footer class="foot">
+      <span>© 2026 Leo Huang</span>
+      <span class="coords">43.6532° N, 79.3832° W — Toronto, ON</span>
+    </footer>
+  </div>
+</section>
+
+</main>
+<script>
+  /* scope-fx · unified page script (reveal · counters · progress · shrink · sweep) — identical on every project page */
+  (function(){
+    var de=document.documentElement;
+    de.classList.add('js');
+    if(de.dataset.lhFx){return;} de.dataset.lhFx='1'; /* guard so a site-wide enhancement pass can no-op this block */
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* scroll progress + shrinking topbar */
+    var bar=document.createElement('div'); bar.id='scopebar'; document.body.appendChild(bar);
+    var topbar=document.querySelector('header.topbar'); var ticking=false;
+    function onScroll(){
+      if(ticking)return; ticking=true;
+      requestAnimationFrame(function(){
+        var max=de.scrollHeight-de.clientHeight;
+        bar.style.width=(max>0?(window.scrollY/max)*100:0)+'%';
+        if(topbar)topbar.classList.toggle('shrunk',window.scrollY>24);
+        ticking=false;
+      });
+    }
+    window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+    /* oscilloscope sweep targets: every figure panel */
+    document.querySelectorAll('.figbox, figure.fig, div.fig').forEach(function(f){f.classList.add('sweepfx');});
+
+    /* count-up (NaN-safe: first frame gets a real timestamp via rAF) */
+    function countUp(el){
+      if(el.dataset.done)return;
+      var t=parseFloat(el.dataset.count); if(isNaN(t))return;
+      el.dataset.done='1';
+      var fmt=function(n){return Math.round(n).toLocaleString('en-US');};
+      if(reduce){el.textContent=fmt(t);return;}
+      var dur=1100,start=null;
+      function tick(now){
+        if(start===null)start=now;
+        var p=Math.min((now-start)/dur,1);
+        el.textContent=fmt((1-Math.pow(1-p,3))*t);
+        if(p<1)requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    function arm(el){
+      el.classList.add('in');
+      if(el.classList.contains('sweepfx')&&!reduce)el.classList.add('swept');
+      el.querySelectorAll('[data-count]').forEach(countUp);
+    }
+
+    /* safety net: everything visible + counters finalized even if observers never fire */
+    setTimeout(function(){
+      document.querySelectorAll('.reveal,.sweepfx').forEach(arm);
+      document.querySelectorAll('[data-count]').forEach(countUp);
+    },1800);
+
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){
+        es.forEach(function(e){if(e.isIntersecting){arm(e.target);io.unobserve(e.target);}});
+      },{threshold:0.12,rootMargin:'0px 0px -7% 0px'});
+      document.querySelectorAll('.reveal,.sweepfx,.stat-trigger').forEach(function(el){io.observe(el);});
+    } else {
+      document.querySelectorAll('.reveal,.sweepfx').forEach(arm);
+    }
+  })();
+</script>
+</body>
+</html>

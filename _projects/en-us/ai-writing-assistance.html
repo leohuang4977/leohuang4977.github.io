@@ -1,0 +1,388 @@
+---
+layout: none
+permalink: /projects/ai-writing-assistance/
+---
+<!DOCTYPE html>
+<html lang="en" data-theme="scope">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A weighted survey of 1,000 people measuring demand for an in-product AI writing assistant and the quality bar it has to clear before people adopt it.">
+<title>AI Writing Assistance for Workplace Messaging — Leo Huang</title>
+<link rel="canonical" href="https://leohuang4977.github.io/projects/ai-writing-assistance/">
+<meta property="og:title" content="AI Writing Assistance for Workplace Messaging — Leo Huang">
+<meta property="og:description" content="A weighted survey of 1,000 people measuring demand for an in-product AI writing assistant and the quality bar it has to clear before people adopt it.">
+<meta property="og:image" content="https://leohuang4977.github.io/assets/img/og-card.png">
+<meta property="og:url" content="https://leohuang4977.github.io/projects/ai-writing-assistance/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='34' fill='%2310B981'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#0D0E12; --paper-2:#15171D; --panel:#15171C;
+    --ink:#E9E7DF; --ink-2:#B6B4AB; --ink-mute:#84868E;
+    --line:rgba(255,255,255,0.13); --line-soft:rgba(255,255,255,0.06);
+    /* Accent — emerald #10B981, matching the site design system (teal→emerald flip done in the 2026-06-11 integration pass). */
+    --accent:#10B981; --accent-deep:#059669; --cool:#5BA8E8;
+    --accent-wash:rgba(16,185,129,0.14); --accent-wash-2:rgba(16,185,129,0.07);
+    --font-display:'Fraunces',Georgia,serif;
+    --font-body:'Hanken Grotesk',ui-sans-serif,system-ui,sans-serif;
+    --font-mono:'IBM Plex Mono',ui-monospace,'Courier New',monospace;
+    --maxw:1000px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background-color:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");opacity:0.05;mix-blend-mode:overlay}
+  body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:repeating-linear-gradient(rgba(255,255,255,0.02) 0 1px,transparent 1px 3px),radial-gradient(120% 70% at 50% 0%,transparent 58%,rgba(0,0,0,0.4) 100%)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:1}
+
+  .reveal{transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  html.js .reveal{opacity:0;transform:translateY(20px)}
+  html.js .reveal.in{opacity:1;transform:none}
+
+  /* topbar */
+  header.topbar{border-bottom:1px solid var(--line);background:rgba(13,14,18,0.72);backdrop-filter:blur(8px);position:sticky;top:0;z-index:50}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;gap:16px;flex-wrap:wrap;max-width:1080px}
+  .wordmark{font-family:var(--font-mono);font-weight:600;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink)}
+  .wordmark .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-wash);animation:pulse 2.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.35}}
+  nav.main{display:flex;gap:24px;align-items:center;font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.05em;text-transform:uppercase}
+  nav.main a{color:var(--ink-2);text-decoration:none;position:relative;padding-bottom:3px;transition:color .2s}
+  nav.main a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--accent);transition:width .25s}
+  nav.main a:hover{color:var(--ink)}nav.main a:hover::after,nav.main a.active::after{width:100%}
+  nav.main a.active{color:var(--accent)}
+
+  /* case hero */
+  .casehero{padding:64px 0 26px}
+  .kicker{font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:12px;margin-bottom:22px;flex-wrap:wrap}
+  .kicker .rule{height:1px;width:46px;background:var(--accent);opacity:.5}
+  .kicker .tag{color:var(--ink-mute)}
+  .casehero h1{font-family:var(--font-display);font-weight:500;font-size:clamp(34px,6vw,62px);line-height:1.04;letter-spacing:-0.015em;max-width:20ch;margin:0 0 22px}
+  .casehero h1 em{font-style:italic;color:var(--accent);font-weight:500}
+  .casehero .lede{font-size:clamp(17px,2.1vw,20px);color:var(--ink-2);max-width:60ch;line-height:1.55}
+
+  /* sections */
+  .sec{padding:54px 0}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:26px}
+  .sec-head .idx{font-family:var(--font-mono);font-size:12.5px;color:var(--accent);letter-spacing:0.08em}
+  .sec-head h2{font-family:var(--font-display);font-weight:500;font-size:clamp(24px,4vw,36px);letter-spacing:-0.01em}
+
+  /* prose */
+  .prose{max-width:64ch}
+  .prose p{font-size:18px;color:var(--ink-2);margin-bottom:18px;line-height:1.62}
+  .prose p b{color:var(--ink);font-weight:600}
+  .prose p:last-child{margin-bottom:0}
+
+  /* spec readout */
+  .spec-eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-mute);margin:30px 0 14px}
+  .spec{border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:6px 24px;max-width:64ch}
+  .spec .row{display:flex;align-items:baseline;gap:14px;padding:15px 0;border-bottom:1px solid var(--line-soft)}
+  .spec .row:last-child{border-bottom:none}
+  .spec .row .k{font-family:var(--font-mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-2)}
+  .spec .row .dots{flex:1;border-bottom:1px dotted var(--line);transform:translateY(-3px)}
+  .spec .row .v{font-family:var(--font-display);font-size:23px;font-weight:500;color:var(--accent);text-align:right}
+  .spec .row .v.txt{font-family:var(--font-mono);font-size:13px;color:var(--ink-2);font-weight:400}
+
+  /* figures */
+  .figbox{margin:24px 0 8px;border:1px solid var(--line);background:linear-gradient(90deg,var(--line-soft) 1px,transparent 1px) 0 0/64px 100%,var(--panel);border-radius:3px;position:relative;overflow:hidden;padding:32px 26px 24px}
+  .figbox .fig-label{position:absolute;top:12px;left:16px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-mute);z-index:2}
+  .figbox svg{display:block;width:100%;height:auto;margin-top:12px}
+  .figbox .cap{font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);margin-top:14px;line-height:1.5;letter-spacing:0.01em}
+  .fig-mono{font-family:var(--font-mono);font-size:11px;letter-spacing:0.04em}
+
+  /* disclaimer */
+
+  /* contact / footer */
+  .contact{border-top:1px solid var(--line);padding:44px 0 26px}
+  .backlink{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:13px;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink);text-decoration:none;border-bottom:1.5px solid var(--accent);padding-bottom:3px;transition:gap .25s}
+  .backlink:hover{gap:16px}
+  footer.foot{border-top:1px solid var(--line);margin-top:48px;padding:24px 0 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.04em;color:var(--ink-mute);text-transform:uppercase}
+  footer.foot .coords{color:var(--ink-2)}
+
+  @media (max-width:760px){
+    body{font-size:16px}
+    .wrap{padding:0 20px}.topbar .wrap{padding:16px 20px}
+    .casehero{padding:46px 0 22px}
+    .sec{padding:42px 0}
+    .figbox{padding:30px 16px 20px}
+    nav.main{gap:15px;font-size:11px}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+  /* ═══ scope-fx · shared interaction layer — identical block on every project page ═══ */
+  #scopebar{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);box-shadow:0 0 10px var(--accent);z-index:90;pointer-events:none}
+  html.js header.topbar{transition:box-shadow .3s ease}
+  html.js header.topbar .wrap{transition:padding .3s ease}
+  html.js header.topbar.shrunk .wrap{padding-top:10px;padding-bottom:10px}
+  html.js header.topbar.shrunk{box-shadow:0 10px 28px rgba(0,0,0,0.38)}
+  .sweepfx{position:relative;overflow:hidden}
+  html.js .sweepfx::after{content:"";position:absolute;top:0;bottom:0;left:-14%;width:9%;background:linear-gradient(90deg,transparent,var(--accent) 50%,transparent);opacity:0;pointer-events:none}
+  html.js .sweepfx.swept::after{animation:scopesweep 1.05s cubic-bezier(.33,.62,.29,1) .12s 1 both}
+  @keyframes scopesweep{0%{left:-14%;opacity:0}10%{opacity:.18}90%{opacity:.14}100%{left:108%;opacity:0}}
+  .mtools{max-width:66ch;margin:30px 0 0;font-family:var(--font-mono);font-size:11.5px;line-height:1.7;letter-spacing:0.03em;color:var(--ink-mute);border-top:1px solid var(--line);padding-top:16px}
+  .mtools b{color:var(--ink-2);font-weight:600;letter-spacing:0.08em}
+  .disc{margin-top:26px;font-family:var(--font-mono);font-size:11.5px;line-height:1.6;letter-spacing:0.02em;color:var(--ink-mute);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;border-left:0;background:none;border-radius:0}
+  @media (hover:hover) and (pointer:fine){
+    .rec,.study,.pcard,.ta,.w{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+    .rec:hover,.study:hover,.pcard:hover,.ta:hover,.w:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 12px 30px rgba(0,0,0,0.35)}
+  }
+  a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+  @media (prefers-reduced-motion:reduce){html.js .sweepfx::after{display:none!important}}
+  .skip{position:absolute;left:8px;top:-48px;z-index:100;background:var(--accent);color:var(--paper);font-family:var(--font-mono);font-size:13px;font-weight:600;letter-spacing:0.04em;padding:10px 16px;border-radius:0 0 4px 4px;text-decoration:none;transition:top .18s}
+  .skip:focus{top:0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="wrap">
+    <a href="https://leohuang4977.github.io/" class="wordmark"><span class="dot"></span>Leo&nbsp;Huang</a>
+    <nav class="main">
+      <a href="https://leohuang4977.github.io/">About</a>
+      <a href="https://leohuang4977.github.io/projects/" class="active">Projects</a>
+      <a href="https://leohuang4977.github.io/cv/">Résumé</a>
+      <a href="https://leohuang4977.github.io/publications/">Publications</a>
+      <a href="https://leohuang4977.github.io/contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="casehero">
+  <div class="wrap">
+    <div class="kicker reveal"><span class="rule"></span>Quantitative UX research<span class="tag">· Workplace messaging</span></div>
+    <h1 class="reveal" style="transition-delay:.06s">What people want from a writing assistant, and how high they set the <em>bar</em>.</h1>
+    <p class="lede reveal" style="transition-delay:.12s">A weighted survey measuring two things at once: how much people want an in-product writing assistant, and the quality it has to clear before they keep using it. The demand was easy to find. The bar was the harder number, and the one that decided the build.</p>
+    <div class="disc reveal" style="transition-delay:.18s">// Anonymized account of client work. The numbers on this page, figures and outcome metrics included, are illustrative reconstructions for portfolio use. No client names, real estimates, or proprietary findings appear. The methodology is the study's real architecture: the weighting, the confidence intervals, and the segmentation all ran as described.</div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:18px">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">01</span><h2>The question</h2></div>
+    <div class="prose reveal" style="transition-delay:.08s">
+      <p>A product team was deciding whether to add an AI writing assistant to a piece of workplace software, and how good it had to be on day one. "Do people want this" is the easy version of that question. The one that shapes a roadmap is quieter: how good does the first version have to be before people keep it on instead of switching it off.</p>
+      <p>A weak assistant does not sit harmlessly at zero. It costs trust, and people stop opening the feature after a couple of bad suggestions. So the study measured demand and the adoption threshold together, because shipping below the bar is worse than not shipping at all.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">02</span><h2>Approach</h2></div>
+    <div class="prose reveal" style="transition-delay:.08s">
+      <p>This was a weighted survey of 1,000 people who write as part of their job, built to give estimates I could stand behind rather than a read on whoever happened to answer. A raw survey sample leans toward the people most willing to fill one out, so responses were weighted to workforce demographics before any number got reported.</p>
+      <p>Every estimate carries a 95% confidence interval. A four-point gap between two options means something different when the intervals overlap than when they sit clearly apart, and reporting the intervals kept that distinction in front of the team. Results were cut by role, tenure, and current AI use, since a daily AI user and a skeptic want different things from the same feature.</p>
+    </div>
+    <div class="spec-eyebrow reveal">FIG.00 — Study at a glance</div>
+    <div class="spec stat-trigger reveal" style="transition-delay:.06s">
+      <div class="row"><span class="k">Design</span><span class="dots"></span><span class="v txt">Weighted online survey</span></div>
+      <div class="row"><span class="k">Sample</span><span class="dots"></span><span class="v"><span data-count="1000">1,000</span></span></div>
+      <div class="row"><span class="k">Weighting</span><span class="dots"></span><span class="v txt">Raked to workforce demographics</span></div>
+      <div class="row"><span class="k">Precision</span><span class="dots"></span><span class="v"><span data-count="95">95</span>% CI</span></div>
+      <div class="row"><span class="k">Segments</span><span class="dots"></span><span class="v txt">Role · tenure · AI use</span></div>
+      <div class="row"><span class="k">Analysis</span><span class="dots"></span><span class="v txt">Python · weighted estimation</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">03</span><h2>What we found</h2></div>
+    <div class="prose reveal" style="transition-delay:.06s">
+      <p>Three findings carried the recommendation. They build on each other, so the order matters.</p>
+      <p>The demand question came back loud. Across roles and tenure, most people said they wanted writing help, and the segments agreed with each other more than expected. The threshold question came back louder. When we asked how good the feature had to be before they would leave it on, the bar people set sat well above what a fast first version tends to deliver. FIG.01 puts both on the same axis.</p>
+    </div>
+
+    <!-- FIG 01 — the bar sits above a quick MVP -->
+    <div class="figbox reveal" style="transition-delay:.08s">
+      <div class="fig-label">FIG.01 — Where the adoption bar sits</div>
+      <svg viewBox="0 0 620 190" role="img" aria-label="A quality axis showing a typical MVP landing below the adoption threshold, with the gap between them marked as the zone where the feature gets switched off.">
+        <!-- axis -->
+        <line x1="60" y1="120" x2="585" y2="120" stroke-width="1.5" style="stroke:var(--line)"/>
+        <polygon points="585,120 575,115 575,125" style="fill:var(--ink-mute)"/>
+        <text x="60" y="150" class="fig-mono" style="fill:var(--ink-mute)">LOW QUALITY</text>
+        <text x="585" y="150" text-anchor="end" class="fig-mono" style="fill:var(--ink-mute)">HIGH QUALITY →</text>
+        <!-- switched-off zone (MVP -> threshold) -->
+        <rect x="300" y="70" width="180" height="50" style="fill:var(--accent-wash)"/>
+        <!-- MVP marker -->
+        <circle cx="300" cy="120" r="6" stroke-width="1.5" style="fill:var(--panel);stroke:var(--ink-2)"/>
+        <line x1="300" y1="120" x2="300" y2="62" stroke-width="1" stroke-dasharray="3 3" style="stroke:var(--ink-2)"/>
+        <text x="300" y="52" text-anchor="middle" class="fig-mono" style="fill:var(--ink-2)">A QUICK MVP</text>
+        <!-- threshold marker -->
+        <line x1="480" y1="58" x2="480" y2="132" stroke-width="2" stroke-dasharray="5 4" style="stroke:var(--accent)"/>
+        <circle cx="480" cy="120" r="6" style="fill:var(--accent)"/>
+        <text x="480" y="48" text-anchor="middle" class="fig-mono" font-weight="600" style="fill:var(--accent)">ADOPTION BAR</text>
+        <!-- gap label -->
+        <text x="390" y="100" text-anchor="middle" class="fig-mono" style="fill:var(--ink)">worse than none</text>
+      </svg>
+      <div class="cap">Demand sat high across segments. The quality people required before they would keep the feature sat higher. A version good enough to demo can still land inside the zone where people turn it off.</div>
+    </div>
+
+    <div class="prose reveal" style="transition-delay:.06s">
+      <p>That gap between a quick MVP and the adoption bar is the whole argument of the study. It is also why the analysis leaned so hard on precision. If the team was going to gate a launch on a threshold, the estimates feeding that call had to hold up, so every number went out with a 95% confidence interval. FIG.02 shows how that played out across the four launch criteria the team cared about most.</p>
+    </div>
+
+    <!-- FIG 02 — weighted estimates with CIs -->
+    <div class="figbox reveal" style="transition-delay:.08s">
+      <div class="fig-label">FIG.02 — Weighted estimates, 95% CI</div>
+      <svg viewBox="0 0 620 220" role="img" aria-label="Four weighted point estimates with horizontal 95% confidence interval whiskers against a vertical reference line. Two intervals clear the line, two overlap it.">
+        <!-- reference line -->
+        <line x1="300" y1="30" x2="300" y2="180" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.8" style="stroke:var(--accent)"/>
+        <text x="300" y="205" text-anchor="middle" class="fig-mono" style="fill:var(--accent)">decision line</text>
+        <!-- rows: each = label, whisker, dot -->
+        <!-- row 1 (clears) -->
+        <text x="40" y="54" class="fig-mono" style="fill:var(--ink-2)">Accuracy</text>
+        <line x1="360" y1="50" x2="470" y2="50" stroke-width="2" style="stroke:var(--accent)"/>
+        <line x1="360" y1="44" x2="360" y2="56" stroke-width="2" style="stroke:var(--accent)"/>
+        <line x1="470" y1="44" x2="470" y2="56" stroke-width="2" style="stroke:var(--accent)"/>
+        <circle cx="415" cy="50" r="5.5" style="fill:var(--accent)"/>
+        <!-- row 2 (clears) -->
+        <text x="40" y="94" class="fig-mono" style="fill:var(--ink-2)">Tone match</text>
+        <line x1="330" y1="90" x2="430" y2="90" stroke-width="2" style="stroke:var(--accent)"/>
+        <line x1="330" y1="84" x2="330" y2="96" stroke-width="2" style="stroke:var(--accent)"/>
+        <line x1="430" y1="84" x2="430" y2="96" stroke-width="2" style="stroke:var(--accent)"/>
+        <circle cx="380" cy="90" r="5.5" style="fill:var(--accent)"/>
+        <!-- row 3 (overlaps) -->
+        <text x="40" y="134" class="fig-mono" style="fill:var(--ink-mute)">Speed</text>
+        <line x1="240" y1="130" x2="350" y2="130" stroke-width="2" style="stroke:var(--ink-mute)"/>
+        <line x1="240" y1="124" x2="240" y2="136" stroke-width="2" style="stroke:var(--ink-mute)"/>
+        <line x1="350" y1="124" x2="350" y2="136" stroke-width="2" style="stroke:var(--ink-mute)"/>
+        <circle cx="295" cy="130" r="5.5" stroke-width="1.5" style="fill:var(--panel);stroke:var(--ink-mute)"/>
+        <!-- row 4 (overlaps) -->
+        <text x="40" y="174" class="fig-mono" style="fill:var(--ink-mute)">Suggestion volume</text>
+        <line x1="250" y1="170" x2="372" y2="170" stroke-width="2" style="stroke:var(--ink-mute)"/>
+        <line x1="250" y1="164" x2="250" y2="176" stroke-width="2" style="stroke:var(--ink-mute)"/>
+        <line x1="372" y1="164" x2="372" y2="176" stroke-width="2" style="stroke:var(--ink-mute)"/>
+        <circle cx="311" cy="170" r="5.5" stroke-width="1.5" style="fill:var(--panel);stroke:var(--ink-mute)"/>
+      </svg>
+      <div class="cap">Reporting every estimate with its interval kept the team from chasing differences that were inside the noise. Two priorities cleared the line cleanly. Two overlapped it, and got held back from the roadmap.</div>
+    </div>
+
+    <div class="prose reveal" style="transition-delay:.06s">
+      <p>Reading FIG.02 takes ten seconds once you know the trick. A dot is the weighted estimate, the whiskers are the range the data can actually support, and the dashed line is the decision threshold. Where the whole interval sits past the line, the finding holds even at the pessimistic end. Where the interval crosses it, the honest answer is "can't tell yet," and accuracy and tone match were the two that held. That left one question: of everything people said mattered, what actually moves them to adopt? FIG.03 ranks the answers.</p>
+    </div>
+
+    <!-- FIG 03 — what earns adoption (ranked) -->
+    <div class="figbox reveal" style="transition-delay:.08s">
+      <div class="fig-label">FIG.03 — What earns adoption</div>
+      <svg viewBox="0 0 620 240" role="img" aria-label="Four ranked horizontal bars showing the qualities that drive adoption, with accuracy and trust leading by a wide margin.">
+        <!-- bar 1 highlighted -->
+        <text x="20" y="36" class="fig-mono" style="fill:var(--ink)">Accuracy &amp; trust</text>
+        <rect x="20" y="44" width="540" height="18" rx="2" style="fill:var(--accent)"/>
+        <text x="552" y="57" text-anchor="end" class="fig-mono" font-weight="600" style="fill:var(--paper)">leads</text>
+        <!-- bar 2 -->
+        <text x="20" y="92" class="fig-mono" style="fill:var(--ink-2)">Tone &amp; voice match</text>
+        <rect x="20" y="100" width="360" height="18" rx="2" opacity="0.55" style="fill:var(--accent)"/>
+        <!-- bar 3 -->
+        <text x="20" y="148" class="fig-mono" style="fill:var(--ink-2)">Privacy of what they write</text>
+        <rect x="20" y="156" width="300" height="18" rx="2" opacity="0.4" style="fill:var(--accent)"/>
+        <!-- bar 4 -->
+        <text x="20" y="204" class="fig-mono" style="fill:var(--ink-mute)">Speed of suggestions</text>
+        <rect x="20" y="212" width="190" height="18" rx="2" opacity="0.28" style="fill:var(--accent)"/>
+      </svg>
+      <div class="cap">When people described what would make them keep the feature, a short list did most of the work, and accuracy led by a wide margin. Volume of suggestions ranked low. People did not want more help. They wanted help they could trust without re-reading.</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">04</span><h2>What it changed</h2></div>
+    <div class="prose reveal" style="transition-delay:.08s">
+      <p>The recommendation was to hold the launch to a high accuracy bar and cut scope rather than ship a broad, average version. The development team used the findings to focus their quality work, putting effort against accuracy and tone match and trimming what had ranked low.</p>
+      <p>The product shipped on that narrower scope and was well received. In a later in-product review survey, satisfaction averaged 4.2 out of 5, and weekly usage settled around 31% of eligible users by the end of the first quarter. For an optional assist feature, that is the pattern you want: people who tried it kept it on.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">05</span><h2>My role</h2></div>
+    <div class="prose reveal" style="transition-delay:.08s">
+      <p>I was the lead UX researcher on the study, working with the product manager and the designer. The PM brought the roadmap questions, and part of my job was to guide and narrow them into things a survey can measure cleanly. From there I designed the instrument, set the weighting scheme, and ran the analysis in Python. The PM and I presented the readout together, pairing what the data said with what the team should do about it.</p>
+    </div>
+    <div class="mtools reveal" style="transition-delay:.12s"><b>METHODS &amp; TOOLS</b><br>Weighted online survey · raked weighting to workforce demographics · 95% confidence intervals · segmentation (role · tenure · AI use) · Python</div>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="wrap">
+    <div class="reveal"><a class="backlink" href="https://leohuang4977.github.io/projects/">← All projects</a></div>
+    <footer class="foot">
+      <span>© 2026 Leo Huang</span>
+      <span class="coords">43.6532° N, 79.3832° W — Toronto, ON</span>
+    </footer>
+  </div>
+</section>
+
+</main>
+<script>
+  /* scope-fx · unified page script (reveal · counters · progress · shrink · sweep) — identical on every project page */
+  (function(){
+    var de=document.documentElement;
+    de.classList.add('js');
+    if(de.dataset.lhFx){return;} de.dataset.lhFx='1'; /* guard so a site-wide enhancement pass can no-op this block */
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* scroll progress + shrinking topbar */
+    var bar=document.createElement('div'); bar.id='scopebar'; document.body.appendChild(bar);
+    var topbar=document.querySelector('header.topbar'); var ticking=false;
+    function onScroll(){
+      if(ticking)return; ticking=true;
+      requestAnimationFrame(function(){
+        var max=de.scrollHeight-de.clientHeight;
+        bar.style.width=(max>0?(window.scrollY/max)*100:0)+'%';
+        if(topbar)topbar.classList.toggle('shrunk',window.scrollY>24);
+        ticking=false;
+      });
+    }
+    window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+    /* oscilloscope sweep targets: every figure panel */
+    document.querySelectorAll('.figbox, figure.fig, div.fig').forEach(function(f){f.classList.add('sweepfx');});
+
+    /* count-up (NaN-safe: first frame gets a real timestamp via rAF) */
+    function countUp(el){
+      if(el.dataset.done)return;
+      var t=parseFloat(el.dataset.count); if(isNaN(t))return;
+      el.dataset.done='1';
+      var fmt=function(n){return Math.round(n).toLocaleString('en-US');};
+      if(reduce){el.textContent=fmt(t);return;}
+      var dur=1100,start=null;
+      function tick(now){
+        if(start===null)start=now;
+        var p=Math.min((now-start)/dur,1);
+        el.textContent=fmt((1-Math.pow(1-p,3))*t);
+        if(p<1)requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    function arm(el){
+      el.classList.add('in');
+      if(el.classList.contains('sweepfx')&&!reduce)el.classList.add('swept');
+      el.querySelectorAll('[data-count]').forEach(countUp);
+    }
+
+    /* safety net: everything visible + counters finalized even if observers never fire */
+    setTimeout(function(){
+      document.querySelectorAll('.reveal,.sweepfx').forEach(arm);
+      document.querySelectorAll('[data-count]').forEach(countUp);
+    },1800);
+
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){
+        es.forEach(function(e){if(e.isIntersecting){arm(e.target);io.unobserve(e.target);}});
+      },{threshold:0.12,rootMargin:'0px 0px -7% 0px'});
+      document.querySelectorAll('.reveal,.sweepfx,.stat-trigger').forEach(function(el){io.observe(el);});
+    } else {
+      document.querySelectorAll('.reveal,.sweepfx').forEach(arm);
+    }
+  })();
+</script>
+</body>
+</html>

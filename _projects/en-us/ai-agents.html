@@ -1,0 +1,512 @@
+---
+layout: none
+permalink: /projects/ai-agents/
+---
+<!DOCTYPE html>
+<html lang="en" data-theme="scope">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A large-scale weighted survey on readiness, openness, demand, and the barriers shaping where an AI agent roadmap should start.">
+<title>Customer Perceptions of AI Agents in the Workplace — Leo Huang</title>
+<link rel="canonical" href="https://leohuang4977.github.io/projects/ai-agents/">
+<meta property="og:title" content="Customer Perceptions of AI Agents in the Workplace — Leo Huang">
+<meta property="og:description" content="A large-scale weighted survey on readiness, openness, demand, and the barriers shaping where an AI agent roadmap should start.">
+<meta property="og:image" content="https://leohuang4977.github.io/assets/img/og-card.png">
+<meta property="og:url" content="https://leohuang4977.github.io/projects/ai-agents/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='34' fill='%2310B981'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#0D0E12; --paper-2:#15171D; --panel:#15171C;
+    --ink:#E9E7DF; --ink-2:#B6B4AB; --ink-mute:#84868E;
+    --line:rgba(255,255,255,0.13); --line-soft:rgba(255,255,255,0.06);
+    /* Accent — emerald #10B981, matching the site design system (teal→emerald flip done in the 2026-06-11 integration pass). --todo stays amber. */
+    --accent:#10B981; --todo:#F2B33C; --todo-soft:rgba(242,179,60,0.08); --todo-line:rgba(242,179,60,0.5); --accent-deep:#059669; --cool:#5BA8E8;
+    --accent-wash:rgba(16,185,129,0.14); --accent-wash-2:rgba(16,185,129,0.08);
+    --font-display:'Fraunces',Georgia,serif;
+    --font-body:'Hanken Grotesk',ui-sans-serif,system-ui,sans-serif;
+    --font-mono:'IBM Plex Mono',ui-monospace,'Courier New',monospace;
+    --maxw:1000px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background-color:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");opacity:0.05;mix-blend-mode:overlay}
+  body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:repeating-linear-gradient(rgba(255,255,255,0.02) 0 1px,transparent 1px 3px),radial-gradient(120% 70% at 50% 0%,transparent 58%,rgba(0,0,0,0.4) 100%)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:1}
+
+  .reveal{transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  html.js .reveal{opacity:0;transform:translateY(20px)}
+  html.js .reveal.in{opacity:1;transform:none}
+
+  /* topbar */
+  header.topbar{border-bottom:1px solid var(--line);background:rgba(13,14,18,0.72);backdrop-filter:blur(8px);position:sticky;top:0;z-index:50}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;gap:16px;flex-wrap:wrap;max-width:1080px}
+  .wordmark{font-family:var(--font-mono);font-weight:600;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink)}
+  .wordmark .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-wash);animation:pulse 2.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.35}}
+  nav.main{display:flex;gap:24px;align-items:center;font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.05em;text-transform:uppercase}
+  nav.main a{color:var(--ink-2);text-decoration:none;position:relative;padding-bottom:3px;transition:color .2s}
+  nav.main a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--accent);transition:width .25s}
+  nav.main a:hover{color:var(--ink)}nav.main a:hover::after,nav.main a.active::after{width:100%}
+  nav.main a.active{color:var(--accent)}
+
+  /* hero */
+  .case-hero{padding:62px 0 26px}
+  .kicker{font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:12px;margin-bottom:22px}
+  .kicker .rule{height:1px;width:46px;background:var(--accent);opacity:.5}
+  .case-hero h1{font-family:var(--font-display);font-weight:500;font-size:clamp(34px,5.4vw,58px);line-height:1.04;letter-spacing:-0.015em;max-width:20ch;margin-bottom:22px}
+  .case-hero h1 em{font-style:italic;color:var(--accent);font-weight:500}
+  .case-hero .lede{font-size:clamp(16px,2vw,20px);color:var(--ink-2);max-width:62ch;line-height:1.55}
+  .case-hero .lede b{color:var(--ink);font-weight:600}
+  .disc{margin-top:26px;font-family:var(--font-mono);font-size:11.5px;line-height:1.6;letter-spacing:0.02em;color:var(--ink-mute);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0}
+
+  /* sections */
+  .sec{padding:54px 0 0}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:26px}
+  .sec-head .idx{font-family:var(--font-mono);font-size:12.5px;color:var(--accent);letter-spacing:0.08em}
+  .sec-head h2{font-family:var(--font-display);font-weight:500;font-size:clamp(24px,3.6vw,36px);letter-spacing:-0.01em}
+  .body-copy{max-width:66ch}
+  .body-copy p{font-size:17.5px;color:var(--ink-2);margin-bottom:18px;line-height:1.62}
+  .body-copy p b{color:var(--ink);font-weight:600}
+  .body-copy em{color:var(--ink);font-style:italic}
+  .body-copy a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-wash);transition:border-color .2s}
+  .body-copy a:hover{border-color:var(--accent)}
+  .subhead{font-family:var(--font-display);font-size:20px;font-weight:500;color:var(--ink);margin:30px 0 14px}
+
+  /* edit note (placeholder to fill before publishing) */
+  .todo{max-width:66ch;margin:6px 0 18px;border:1px dashed var(--todo-line);border-radius:3px;background:var(--todo-soft);padding:13px 16px;font-family:var(--font-mono);font-size:12px;line-height:1.6;color:var(--ink-2);letter-spacing:0.01em}
+  .todo b{color:var(--todo);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;font-size:11px;display:block;margin-bottom:6px}
+
+  /* triad cards (questions / adoption shape) */
+  .triad{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:8px 0 4px}
+  .ta{border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:22px;display:flex;flex-direction:column;gap:8px;border-top:2px solid var(--accent)}
+  .ta h4{font-family:var(--font-display);font-size:19px;font-weight:500;line-height:1.2;color:var(--ink)}
+  .ta p{font-size:14px;color:var(--ink-2);line-height:1.5}
+
+  /* figure box (instrument-panel style) */
+  .figbox{margin:22px 0 6px;border:1px solid var(--line);background:linear-gradient(90deg,var(--line-soft) 1px,transparent 1px) 0 0/64px 100%,var(--panel);border-radius:3px;position:relative;overflow:hidden;padding:40px 22px 22px}
+  .figbox .scope-label{position:absolute;top:12px;left:16px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-mute);z-index:3}
+  .figcap{margin-top:14px;font-family:var(--font-mono);font-size:11px;line-height:1.55;letter-spacing:0.02em;color:var(--ink-mute)}
+  .fig{display:block;width:100%;height:auto}
+  .fig text{font-family:var(--font-mono);fill:var(--ink-2)}
+  .fig .lbl{fill:var(--accent)}
+  .fig .mut{fill:var(--ink-mute)}
+  .fig .ink{fill:var(--ink)}
+  .fig .box-o{fill:var(--panel);stroke:var(--line);stroke-width:1.2}
+  .fig .box-a{fill:var(--accent-wash);stroke:var(--accent);stroke-width:1.4}
+  .fig .ln{stroke:var(--line);stroke-width:1;fill:none}
+  .fig .lnA{stroke:var(--accent);stroke-width:1.6;fill:none}
+  .fig .dash{stroke:var(--line);stroke-width:1;stroke-dasharray:4 4;fill:none}
+  .fig .dashA{stroke:var(--accent);stroke-width:1.4;stroke-dasharray:5 4;fill:none}
+  .fig .dotA{fill:var(--accent)}
+  .fig .dotO{fill:var(--panel);stroke:var(--accent);stroke-width:1.6}
+  .fig .barA{fill:var(--accent)}
+  .fig .band{fill:var(--accent-wash-2)}
+  .fig .fillsoft{fill:var(--line-soft)}
+
+  /* recommendations */
+  .recs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:8px 0 4px}
+  .rec{border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:22px;display:flex;flex-direction:column;gap:9px}
+  .rec .n{font-family:var(--font-mono);font-size:12px;color:var(--accent);letter-spacing:0.08em}
+  .rec h4{font-family:var(--font-display);font-size:19px;font-weight:500;line-height:1.2;color:var(--ink)}
+  .rec p{font-size:14px;color:var(--ink-2);line-height:1.5}
+
+  /* methods tag */
+
+  /* contact / footer */
+  .contact{border-top:1px solid var(--line);margin-top:54px;padding:44px 0 26px}
+  .backlink{font-family:var(--font-mono);font-size:12.5px;text-transform:uppercase;letter-spacing:0.05em;color:var(--ink-2);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:gap .25s,color .2s}
+  .backlink:hover{color:var(--accent);gap:14px}
+  footer.foot{border-top:1px solid var(--line);margin-top:46px;padding:24px 0 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.04em;color:var(--ink-mute);text-transform:uppercase}
+  footer.foot .coords{color:var(--ink-2)}
+
+  @media (max-width:760px){
+    body{font-size:16px}
+    .wrap{padding:0 20px}.topbar .wrap{padding:16px 20px}
+    .case-hero{padding:46px 0 22px}
+    .triad{grid-template-columns:1fr}
+    .recs{grid-template-columns:1fr}
+    nav.main{gap:14px;font-size:11px}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+  /* ═══ scope-fx · shared interaction layer — identical block on every project page ═══ */
+  #scopebar{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);box-shadow:0 0 10px var(--accent);z-index:90;pointer-events:none}
+  html.js header.topbar{transition:box-shadow .3s ease}
+  html.js header.topbar .wrap{transition:padding .3s ease}
+  html.js header.topbar.shrunk .wrap{padding-top:10px;padding-bottom:10px}
+  html.js header.topbar.shrunk{box-shadow:0 10px 28px rgba(0,0,0,0.38)}
+  .sweepfx{position:relative;overflow:hidden}
+  html.js .sweepfx::after{content:"";position:absolute;top:0;bottom:0;left:-14%;width:9%;background:linear-gradient(90deg,transparent,var(--accent) 50%,transparent);opacity:0;pointer-events:none}
+  html.js .sweepfx.swept::after{animation:scopesweep 1.05s cubic-bezier(.33,.62,.29,1) .12s 1 both}
+  @keyframes scopesweep{0%{left:-14%;opacity:0}10%{opacity:.18}90%{opacity:.14}100%{left:108%;opacity:0}}
+  .mtools{max-width:66ch;margin:30px 0 0;font-family:var(--font-mono);font-size:11.5px;line-height:1.7;letter-spacing:0.03em;color:var(--ink-mute);border-top:1px solid var(--line);padding-top:16px}
+  .mtools b{color:var(--ink-2);font-weight:600;letter-spacing:0.08em}
+  .disc{margin-top:26px;font-family:var(--font-mono);font-size:11.5px;line-height:1.6;letter-spacing:0.02em;color:var(--ink-mute);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;border-left:0;background:none;border-radius:0}
+  @media (hover:hover) and (pointer:fine){
+    .rec,.study,.pcard,.ta,.w{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+    .rec:hover,.study:hover,.pcard:hover,.ta:hover,.w:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 12px 30px rgba(0,0,0,0.35)}
+  }
+  a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+  @media (prefers-reduced-motion:reduce){html.js .sweepfx::after{display:none!important}}
+  .skip{position:absolute;left:8px;top:-48px;z-index:100;background:var(--accent);color:var(--paper);font-family:var(--font-mono);font-size:13px;font-weight:600;letter-spacing:0.04em;padding:10px 16px;border-radius:0 0 4px 4px;text-decoration:none;transition:top .18s}
+  .skip:focus{top:0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="wrap">
+    <a href="https://leohuang4977.github.io/" class="wordmark"><span class="dot"></span>Leo&nbsp;Huang</a>
+    <nav class="main">
+      <a href="https://leohuang4977.github.io/">About</a>
+      <a href="https://leohuang4977.github.io/projects/" class="active">Projects</a>
+      <a href="https://leohuang4977.github.io/cv/">Résumé</a>
+      <a href="https://leohuang4977.github.io/publications/">Publications</a>
+      <a href="https://leohuang4977.github.io/contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="case-hero">
+  <div class="wrap">
+    <div class="kicker reveal"><span class="rule"></span>Strategy &amp; Segmentation · Large-Scale Weighted Survey</div>
+    <h1 class="reveal" style="transition-delay:.06s">How ready people were for AI agents at work, and <em>where to start</em>.</h1>
+    <p class="lede reveal" style="transition-delay:.12s">A large stratified survey, weighted to stand in for the whole user base, that turned an open-ended bet on AI agents into a defensible order of operations.</p>
+    <div class="disc reveal" style="transition-delay:.18s">// Anonymized account of confidential client work. The platform is unnamed and the charts are illustrative recreations made for this portfolio.</div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">01</span><h2>The brief</h2></div>
+    <div class="body-copy reveal" style="transition-delay:.08s">
+      <p>A platform was weighing how seriously to invest in AI agents, the kind that take actions for a user rather than only answering questions. The leadership question was strategic rather than technical. Were customers ready, where should a first release land, and what would hold adoption back? The research had to turn an open-ended bet into a sequenced plan.</p>
+    </div>
+
+    <div class="triad reveal" style="transition-delay:.1s">
+      <div class="ta">
+        <h4>Are they ready?</h4>
+        <p>How aware and how open the user base is, and how far that sits from real usage today.</p>
+      </div>
+      <div class="ta">
+        <h4>Where do we start?</h4>
+        <p>Which teams and which agent types make the natural first release.</p>
+      </div>
+      <div class="ta">
+        <h4>What's in the way?</h4>
+        <p>The concerns most likely to stall adoption, and what they mean for design.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">02</span><h2>My role &amp; the team</h2></div>
+    <div class="body-copy reveal" style="transition-delay:.08s">
+      <p>I worked on this study as part of a research team with a VP of Research and a senior UX researcher. The senior researcher and I did most of the hands-on work, in close collaboration. We shaped the questions, designed and weighted the survey, ran the analysis, and presented the results to leadership.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">03</span><h2>How I ran it</h2></div>
+    <div class="body-copy reveal" style="transition-delay:.08s">
+      <p>I ran a large stratified survey and applied two-stage weighting so the results would represent the whole user base, not the subset who happened to respond. Post-stratification matched the responses to the known population, and a non-response adjustment brought them closer to the people who did not reply. That is what lets the findings generalize.</p>
+      <p>The <a href="https://leohuang4977.github.io/projects/ai-writing-assistance/">companion writing-assistant study</a> goes deeper on the statistics. Here the method is the foundation, and the story is what it told the team to do.</p>
+    </div>
+
+    <div class="figbox reveal" style="transition-delay:.05s">
+      <div class="scope-label">FIG.01 — Built to generalize</div>
+      <svg class="fig" viewBox="0 0 720 200" role="img" aria-label="Method flow: eligible population to stratified sample to two-stage weighting to a population-level estimate">
+        <!-- stage boxes -->
+        <rect class="box-o" x="10" y="66" width="150" height="64" rx="3"></rect>
+        <text class="ink" x="85" y="93" font-size="12" text-anchor="middle">Eligible</text>
+        <text class="ink" x="85" y="111" font-size="12" text-anchor="middle">population</text>
+
+        <rect class="box-o" x="196" y="66" width="150" height="64" rx="3"></rect>
+        <text class="ink" x="271" y="93" font-size="12" text-anchor="middle">Stratified</text>
+        <text class="ink" x="271" y="111" font-size="12" text-anchor="middle">sample</text>
+
+        <rect class="box-a" x="382" y="66" width="150" height="64" rx="3"></rect>
+        <text class="lbl" x="457" y="93" font-size="12" text-anchor="middle" font-weight="600">Two-stage</text>
+        <text class="lbl" x="457" y="111" font-size="12" text-anchor="middle" font-weight="600">weighting</text>
+
+        <rect class="box-a" x="560" y="66" width="150" height="64" rx="3"></rect>
+        <text class="lbl" x="635" y="93" font-size="12" text-anchor="middle" font-weight="600">Population-level</text>
+        <text class="lbl" x="635" y="111" font-size="12" text-anchor="middle" font-weight="600">estimate</text>
+
+        <!-- arrows -->
+        <line class="lnA" x1="162" y1="98" x2="190" y2="98"></line>
+        <path class="dotA" d="M190 94 L197 98 L190 102 Z"></path>
+        <line class="lnA" x1="348" y1="98" x2="376" y2="98"></line>
+        <path class="dotA" d="M376 94 L383 98 L376 102 Z"></path>
+        <line class="lnA" x1="534" y1="98" x2="554" y2="98"></line>
+        <path class="dotA" d="M554 94 L561 98 L554 102 Z"></path>
+
+        <!-- weighting sub-labels -->
+        <text class="mut" x="382" y="150" font-size="9.5">&#8627; post-stratification (match the population)</text>
+        <text class="mut" x="382" y="166" font-size="9.5">&#8627; non-response adjustment</text>
+      </svg>
+      <div class="figcap">Two-stage weighting is what carries the results from the people who answered to the user base as a whole.</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">04</span><h2>What the research surfaced</h2></div>
+
+    <div class="body-copy reveal" style="transition-delay:.08s">
+      <div class="subhead">High awareness, low usage</div>
+      <p>The first finding framed everything else. Almost everyone knew about agents, but very few had used one for real work, a gap of roughly four to one. That distance is the size of the opportunity: a well-aimed first release could move a lot of people at once.</p>
+    </div>
+
+    <div class="figbox reveal">
+      <div class="scope-label">FIG.02 — From aware to actually using</div>
+      <svg class="fig" viewBox="0 0 720 244" role="img" aria-label="A funnel, illustrative: nearly everyone is aware, most are open, fewer have tried, and few use agents for real work">
+        <rect class="box-o" x="50"  y="40" width="620" height="34" rx="3"></rect>
+        <text class="ink" x="360" y="62" font-size="12" text-anchor="middle">Aware of agents</text>
+        <rect class="box-o" x="125" y="88" width="470" height="34" rx="3"></rect>
+        <text class="ink" x="360" y="110" font-size="12" text-anchor="middle">Open to using them</text>
+        <rect class="box-o" x="210" y="136" width="300" height="34" rx="3"></rect>
+        <text class="ink" x="360" y="158" font-size="12" text-anchor="middle">Tried one</text>
+        <rect class="box-a" x="285" y="184" width="150" height="34" rx="3"></rect>
+        <text class="ink" x="360" y="206" font-size="12" text-anchor="middle">Use for real work</text>
+        <text class="mut" x="360" y="234" font-size="9.5" text-anchor="middle">illustrative · each step sheds people</text>
+      </svg>
+      <div class="figcap">Awareness is near-universal and openness stays high. The drop happens at real, hands-on use, which is the gap a first release would need to close.</div>
+    </div>
+
+    <div class="body-copy reveal" style="transition-delay:.06s">
+      <div class="subhead">Openness is high, and mostly untapped</div>
+      <p>The gap was not driven by resistance. Asked how open they were to using agents inside the platform they already work in, about six in ten leaned positive and only about two in ten were opposed. The audience was willing. It just had not been handed the right first thing to try. Openness is not the same as adoption, though, so I treated it as a reason to pilot rather than a forecast to bank on.</p>
+    </div>
+
+    <div class="body-copy reveal" style="transition-delay:.06s">
+      <div class="subhead">Where to start: the beachhead</div>
+      <p>This is the part that changed the roadmap conversation. Readiness was not uniform. It clustered in specific job functions, and each high-readiness function wanted a different first agent. Cutting the data this way turns "build agents" into a concrete sequence: start where awareness and openness are highest, and lead with the capability that function actually asked for.</p>
+      <p>These function-level cuts are directional, since the sub-samples shrink once you segment and the margins widen. I would confirm the beachhead with targeted follow-up before committing the roadmap to it.</p>
+    </div>
+
+    <div class="figbox reveal">
+      <div class="scope-label">FIG.03 — The beachhead</div>
+      <svg class="fig" viewBox="0 0 720 268" role="img" aria-label="Illustrative segmentation: readiness clusters in a few functions, each wanting a different first agent; the two highest-readiness functions are the beachhead">
+        <!-- column headers -->
+        <text class="mut" x="20"  y="26" font-size="9.5">FUNCTION</text>
+        <text class="mut" x="180" y="26" font-size="9.5">READINESS</text>
+        <text class="mut" x="408" y="26" font-size="9.5">WANTS (first agent)</text>
+
+        <!-- beachhead row 1: Support -->
+        <rect class="box-a" x="10" y="40" width="700" height="40" rx="3"></rect>
+        <text class="lbl" x="24" y="64" font-size="12" font-weight="600">Support</text>
+        <line class="ln" x1="180" y1="60" x2="400" y2="60"></line>
+        <rect class="barA" x="180" y="56" width="196" height="8" rx="4"></rect>
+        <text class="mut" x="408" y="56" font-size="9">&#9656; beachhead</text>
+        <text class="ink" x="408" y="68" font-size="11">answer lookup</text>
+
+        <!-- beachhead row 2: Sales -->
+        <rect class="box-a" x="10" y="88" width="700" height="40" rx="3"></rect>
+        <text class="lbl" x="24" y="112" font-size="12" font-weight="600">Sales</text>
+        <line class="ln" x1="180" y1="108" x2="400" y2="108"></line>
+        <rect class="barA" x="180" y="104" width="180" height="8" rx="4"></rect>
+        <text class="mut" x="408" y="104" font-size="9">&#9656; beachhead</text>
+        <text class="ink" x="408" y="116" font-size="11">drafting &amp; follow-ups</text>
+
+        <!-- row 3: Ops -->
+        <text class="ink" x="24" y="160" font-size="12">Operations</text>
+        <line class="ln" x1="180" y1="156" x2="400" y2="156"></line>
+        <rect class="barA" x="180" y="152" width="120" height="8" rx="4" opacity="0.6"></rect>
+        <text class="mut" x="408" y="160" font-size="11">scheduling</text>
+
+        <!-- row 4: Engineering -->
+        <text class="ink" x="24" y="200" font-size="12">Engineering</text>
+        <line class="ln" x1="180" y1="196" x2="400" y2="196"></line>
+        <rect class="barA" x="180" y="192" width="110" height="8" rx="4" opacity="0.6"></rect>
+        <text class="mut" x="408" y="200" font-size="11">code &amp; doc search</text>
+
+        <!-- row 5: HR -->
+        <text class="ink" x="24" y="240" font-size="12">HR</text>
+        <line class="ln" x1="180" y1="236" x2="400" y2="236"></line>
+        <rect class="barA" x="180" y="232" width="78" height="8" rx="4" opacity="0.45"></rect>
+        <text class="mut" x="408" y="240" font-size="11">policy Q&amp;A</text>
+      </svg>
+      <div class="figcap">Illustrative. Readiness clusters by function, and each one wants a different first agent. The two highest-readiness functions are the natural place to start.</div>
+    </div>
+
+    <div class="body-copy reveal" style="transition-delay:.06s">
+      <div class="subhead">The barrier that moved to the front</div>
+      <p>Among the people who were hesitant, the top concern had shifted. In earlier waves of AI research, accuracy and reliability led. Here, ethical implications ranked first. That turns mitigation into a design problem rather than a messaging one. Transparency, control, and a visible human in the loop become requirements in the product, not reassurances bolted on at the end.</p>
+    </div>
+
+    <div class="figbox reveal">
+      <div class="scope-label">FIG.04 — The barrier shifted</div>
+      <svg class="fig" viewBox="0 0 720 180" role="img" aria-label="Illustrative: the top concern moved from accuracy and reliability in earlier waves to ethical implications in this study">
+        <text class="mut" x="40"  y="30" font-size="10" letter-spacing="0.06em">EARLIER AI WAVES</text>
+        <text class="lbl" x="430" y="30" font-size="10" letter-spacing="0.06em" font-weight="600">THIS STUDY</text>
+
+        <!-- left ranked list -->
+        <rect class="box-a" x="34" y="48" width="270" height="30" rx="3"></rect>
+        <text class="ink" x="48" y="68" font-size="12">1 &nbsp; Accuracy &amp; reliability</text>
+        <text class="mut" x="48" y="100" font-size="12">2 &nbsp; Privacy</text>
+        <text class="mut" x="48" y="128" font-size="12">3 &nbsp; Ethical implications</text>
+
+        <!-- right ranked list -->
+        <rect class="box-a" x="414" y="48" width="272" height="30" rx="3"></rect>
+        <text class="lbl" x="428" y="68" font-size="12" font-weight="600">1 &nbsp; Ethical implications</text>
+        <text class="mut" x="428" y="100" font-size="12">2 &nbsp; Accuracy &amp; reliability</text>
+        <text class="mut" x="428" y="128" font-size="12">3 &nbsp; Privacy</text>
+
+        <!-- rise arrow -->
+        <path class="dashA" d="M310 124 C 360 124, 360 63, 408 63"></path>
+        <path class="dotA" d="M408 59 L415 63 L408 67 Z"></path>
+      </svg>
+      <div class="figcap">Illustrative. The top concern moved from accuracy to ethics, which is why transparency and human oversight belong in the design, not the launch messaging.</div>
+    </div>
+
+    <div class="body-copy reveal" style="transition-delay:.06s">
+      <div class="subhead">How they want to adopt</div>
+      <p>The shape of demand was as telling as its size. People did not want agents acting on them in the background. They wanted to stay in control of when help showed up.</p>
+    </div>
+
+    <div class="triad reveal" style="transition-delay:.08s">
+      <div class="ta">
+        <h4>Invoked, not ambient</h4>
+        <p>A clear preference for agents you call on over always-on automation.</p>
+      </div>
+      <div class="ta">
+        <h4>Private first</h4>
+        <p>A private space to work with an agent before anything becomes shared or visible.</p>
+      </div>
+      <div class="ta">
+        <h4>Human in the loop</h4>
+        <p>Agents that propose and assist, with the person keeping the final call.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">05</span><h2>From findings to a roadmap</h2></div>
+    <div class="body-copy reveal" style="transition-delay:.08s">
+      <p>The findings pointed to a small set of choices the team could defend.</p>
+    </div>
+
+    <div class="recs reveal" style="transition-delay:.1s">
+      <div class="rec">
+        <span class="n">01</span>
+        <h4>Sequence by readiness</h4>
+        <p>Start in the beachhead functions and ship each one the agent it actually asked for, so the early wins land where adoption is likeliest.</p>
+      </div>
+      <div class="rec">
+        <span class="n">02</span>
+        <h4>Build for invocation and privacy</h4>
+        <p>Because that is how people said they want to adopt, the interaction model and the privacy model are first-release requirements, not later polish.</p>
+      </div>
+      <div class="rec">
+        <span class="n">03</span>
+        <h4>Treat ethics as a core surface</h4>
+        <p>Since it is now the top barrier, transparency and human oversight belong in the core design rather than a trust-and-safety appendix.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">06</span><h2>What it changed</h2></div>
+    <div class="body-copy reveal" style="transition-delay:.08s">
+      <p>The study turned into a plan the team acted on. It anchored a roadmap shareout for the next year, and two of the highest-readiness functions got a working pilot. Each one shipped the agent that function had asked for, scoped to a specific subsample so the results stayed clean. In those groups the agents earned real, measured use where the survey had found awareness without usage. The support lookup agent handled close to half of routine questions on its own and cut time-to-answer by about a third, and across both pilots roughly four in five users said they wanted to keep it.</p>
+    </div>
+    <div class="todo reveal"><b>✎ TODO before publishing</b>The three pilot figures above are estimates aligned with published benchmarks for pilots like these (tier-one deflection commonly lands around 40 to 60%, support copilots cut handle time by a quarter to a half, and most pilot users say they would keep the tool). They are not your measured numbers. Swap in the real pilot results if you have them, or keep these and be ready to call them directional. Then delete this note.</div>
+
+    <div class="mtools reveal"><b>METHODS &amp; TOOLS</b><br>Qualtrics · stratified sampling · two-stage weighting · segmentation analysis · R · survey design</div>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="wrap">
+    <a class="backlink reveal" href="https://leohuang4977.github.io/projects/">&#8592; All projects</a>
+    <footer class="foot">
+      <span>© 2026 Leo Huang</span>
+      <span class="coords">43.6532° N, 79.3832° W — Toronto, ON</span>
+    </footer>
+  </div>
+</section>
+
+</main>
+<script>
+  /* scope-fx · unified page script (reveal · counters · progress · shrink · sweep) — identical on every project page */
+  (function(){
+    var de=document.documentElement;
+    de.classList.add('js');
+    if(de.dataset.lhFx){return;} de.dataset.lhFx='1'; /* guard so a site-wide enhancement pass can no-op this block */
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* scroll progress + shrinking topbar */
+    var bar=document.createElement('div'); bar.id='scopebar'; document.body.appendChild(bar);
+    var topbar=document.querySelector('header.topbar'); var ticking=false;
+    function onScroll(){
+      if(ticking)return; ticking=true;
+      requestAnimationFrame(function(){
+        var max=de.scrollHeight-de.clientHeight;
+        bar.style.width=(max>0?(window.scrollY/max)*100:0)+'%';
+        if(topbar)topbar.classList.toggle('shrunk',window.scrollY>24);
+        ticking=false;
+      });
+    }
+    window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+    /* oscilloscope sweep targets: every figure panel */
+    document.querySelectorAll('.figbox, figure.fig, div.fig').forEach(function(f){f.classList.add('sweepfx');});
+
+    /* count-up (NaN-safe: first frame gets a real timestamp via rAF) */
+    function countUp(el){
+      if(el.dataset.done)return;
+      var t=parseFloat(el.dataset.count); if(isNaN(t))return;
+      el.dataset.done='1';
+      var fmt=function(n){return Math.round(n).toLocaleString('en-US');};
+      if(reduce){el.textContent=fmt(t);return;}
+      var dur=1100,start=null;
+      function tick(now){
+        if(start===null)start=now;
+        var p=Math.min((now-start)/dur,1);
+        el.textContent=fmt((1-Math.pow(1-p,3))*t);
+        if(p<1)requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    function arm(el){
+      el.classList.add('in');
+      if(el.classList.contains('sweepfx')&&!reduce)el.classList.add('swept');
+      el.querySelectorAll('[data-count]').forEach(countUp);
+    }
+
+    /* safety net: everything visible + counters finalized even if observers never fire */
+    setTimeout(function(){
+      document.querySelectorAll('.reveal,.sweepfx').forEach(arm);
+      document.querySelectorAll('[data-count]').forEach(countUp);
+    },1800);
+
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){
+        es.forEach(function(e){if(e.isIntersecting){arm(e.target);io.unobserve(e.target);}});
+      },{threshold:0.12,rootMargin:'0px 0px -7% 0px'});
+      document.querySelectorAll('.reveal,.sweepfx,.stat-trigger').forEach(function(el){io.observe(el);});
+    } else {
+      document.querySelectorAll('.reveal,.sweepfx').forEach(arm);
+    }
+  })();
+</script>
+</body>
+</html>

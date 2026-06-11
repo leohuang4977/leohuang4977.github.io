@@ -1,0 +1,514 @@
+---
+layout: none
+permalink: /projects/in-channel-knowledge-agents/
+---
+<!DOCTYPE html>
+<html lang="en" data-theme="scope">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>In-Channel Knowledge Agents — Leo Huang</title>
+<link rel="canonical" href="https://leohuang4977.github.io/projects/in-channel-knowledge-agents/">
+<meta property="og:title" content="In-Channel Knowledge Agents — Leo Huang">
+<meta property="og:description" content="A mixed-method study pairing survey attitudes with behavioral telemetry to define where an AI help-agent earns its place in team chat.">
+<meta property="og:image" content="https://leohuang4977.github.io/assets/img/og-card.png">
+<meta property="og:url" content="https://leohuang4977.github.io/projects/in-channel-knowledge-agents/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='34' fill='%2310B981'/%3E%3C/svg%3E">
+<meta name="description" content="A mixed-method study pairing survey attitudes with behavioral telemetry to define where an AI help-agent earns its place in team chat.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#0D0E12; --paper-2:#15171D; --panel:#15171C;
+    --ink:#E9E7DF; --ink-2:#B6B4AB; --ink-mute:#84868E;
+    --line:rgba(255,255,255,0.13); --line-soft:rgba(255,255,255,0.06);
+
+    /* Accent — emerald #10B981, matching the site design system (teal→emerald flip done in the 2026-06-11 integration pass). --todo stays amber. */
+    --accent:#10B981;
+    --accent-deep:#059669;
+    --accent-wash:rgba(16,185,129,0.22);
+    --accent-glow:rgba(16,185,129,0.40);
+    --cool:#5BA8E8;
+    --todo:#F2B33C; --todo-soft:rgba(242,179,60,0.09); --todo-line:rgba(242,179,60,0.45);
+
+    --font-display:'Fraunces',Georgia,serif;
+    --font-body:'Hanken Grotesk',ui-sans-serif,system-ui,sans-serif;
+    --font-mono:'IBM Plex Mono',ui-monospace,'Courier New',monospace;
+    --maxw:1000px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background-color:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");opacity:0.05;mix-blend-mode:overlay}
+  body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:repeating-linear-gradient(rgba(255,255,255,0.02) 0 1px,transparent 1px 3px),radial-gradient(120% 70% at 50% 0%,transparent 58%,rgba(0,0,0,0.4) 100%)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:1}
+
+  .reveal{transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  html.js .reveal{opacity:0;transform:translateY(20px)}
+  html.js .reveal.in{opacity:1;transform:none}
+
+  /* ── topbar (shared chrome) ── */
+  header.topbar{border-bottom:1px solid var(--line);background:rgba(13,14,18,0.72);backdrop-filter:blur(8px);position:sticky;top:0;z-index:50}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;gap:16px;flex-wrap:wrap;max-width:1080px}
+  .wordmark{font-family:var(--font-mono);font-weight:600;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink)}
+  .wordmark .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-wash);animation:pulse 2.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.35}}
+  nav.main{display:flex;gap:24px;align-items:center;font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.05em;text-transform:uppercase}
+  nav.main a{color:var(--ink-2);text-decoration:none;position:relative;padding-bottom:3px;transition:color .2s}
+  nav.main a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--accent);transition:width .25s}
+  nav.main a:hover{color:var(--ink)}nav.main a:hover::after,nav.main a.active::after{width:100%}
+  nav.main a.active{color:var(--accent)}
+
+  /* ── hero ── */
+  .study-hero{padding:64px 0 26px}
+  .kicker{font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:12px;margin-bottom:22px;flex-wrap:wrap}
+  .kicker .rule{height:1px;width:46px;background:var(--accent);opacity:.5}
+  .study-hero h1{font-family:var(--font-display);font-weight:500;font-size:clamp(34px,6vw,60px);line-height:1.03;letter-spacing:-0.015em;max-width:18ch;margin-bottom:22px}
+  .study-hero .dek{font-size:clamp(16px,2.1vw,20px);color:var(--ink-2);max-width:60ch;line-height:1.55}
+
+  /* ── illustrative-data note ── */
+  .note{margin-top:26px;border-left:2px solid var(--line);padding:4px 0 4px 16px;font-size:14px;color:var(--ink-mute);line-height:1.55;max-width:64ch}
+  .note b{color:var(--ink-2);font-weight:600}
+  .note em{font-style:italic;color:var(--ink-2)}
+
+  /* ── methods strip ── */
+  .metastrip{margin-top:30px;border:1px solid var(--line);border-radius:3px;background:var(--panel);display:flex;flex-wrap:wrap}
+  .metastrip .ms{flex:1 1 180px;padding:16px 22px;border-right:1px solid var(--line-soft)}
+  .metastrip .ms:last-child{border-right:none}
+  .metastrip .k{display:block;font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:7px}
+  .metastrip .v{font-family:var(--font-mono);font-size:13px;color:var(--ink-2);line-height:1.45}
+  .metastrip .v.todo-inline{color:var(--todo)}
+
+  /* ── sections ── */
+  .sec{padding:54px 0 0}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:24px}
+  .sec-head .idx{font-family:var(--font-mono);font-size:12.5px;color:var(--accent);letter-spacing:0.08em}
+  .sec-head h2{font-family:var(--font-display);font-weight:500;font-size:clamp(24px,3.6vw,34px);letter-spacing:-0.01em;line-height:1.1}
+  .prose{max-width:66ch}
+  .prose p{font-size:17.5px;color:var(--ink-2);margin-bottom:18px;line-height:1.62}
+  .prose p:last-child{margin-bottom:0}
+  .prose p b{color:var(--ink);font-weight:600}
+  .prose .pull{color:var(--ink);font-family:var(--font-display);font-size:clamp(19px,2.4vw,23px);font-weight:500;line-height:1.35;letter-spacing:-0.005em;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:20px 0;margin:26px 0;max-width:none}
+
+  /* ── figures ── */
+  .fig{margin-top:34px;border:1px solid var(--line);border-radius:3px;background:linear-gradient(90deg,var(--line-soft) 1px,transparent 1px) 0 0/64px 100%,var(--panel);position:relative;overflow:hidden;padding:44px 22px 24px}
+  .fig .scope-label{position:absolute;top:13px;left:16px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-mute);pointer-events:none}
+  .fig .scope-label .em{color:var(--accent)}
+  .fig svg{display:block;width:100%;height:auto}
+  .fig .cap{margin-top:16px;font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);letter-spacing:0.01em;line-height:1.55;border-top:1px solid var(--line-soft);padding-top:13px}
+  .fig text{font-family:var(--font-mono)}
+
+  /* ── principle cards ── */
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:8px}
+  .pcard{border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:24px;position:relative;overflow:hidden}
+  .pcard .tag{font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:8px;margin-bottom:13px}
+  .pcard .tag::before{content:"";width:18px;height:1px;background:var(--accent)}
+  .pcard h3{font-family:var(--font-display);font-size:20px;font-weight:500;line-height:1.15;letter-spacing:-0.01em;margin-bottom:9px}
+  .pcard p{font-size:14.5px;color:var(--ink-2);line-height:1.5}
+
+  /* ── TODO callout ── */
+  .todo{margin-top:26px;border:1px dashed var(--todo-line);border-radius:3px;background:var(--todo-soft);padding:22px 24px}
+  .todo .tlabel{font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--todo);display:flex;align-items:center;gap:9px;margin-bottom:12px}
+  .todo .tlabel .mk{font-size:13px}
+  .todo .stand{font-size:16px;color:var(--ink-2);line-height:1.6;margin-bottom:14px}
+  .todo .stand b{color:var(--ink);font-weight:600}
+  .todo .ask{font-family:var(--font-mono);font-size:12.5px;color:var(--ink-mute);line-height:1.6}
+  .todo .ask b{color:var(--todo);font-weight:600}
+
+  /* ── reflection list ── */
+  .reflect{margin-top:8px;list-style:none}
+  .reflect li{border-top:1px solid var(--line-soft);padding:20px 0 20px 30px;position:relative;font-size:16.5px;color:var(--ink-2);line-height:1.6;max-width:72ch}
+  .reflect li:first-child{border-top:none}
+  .reflect li::before{content:"//";position:absolute;left:0;top:21px;font-family:var(--font-mono);font-size:13px;color:var(--accent)}
+  .reflect li b{color:var(--ink);font-weight:600}
+
+  /* ── CTA ── */
+  .cta{border-top:1px solid var(--line);margin-top:60px;padding:44px 0 26px}
+  .backrow{display:flex;flex-wrap:wrap;gap:24px;font-family:var(--font-mono);font-size:13px;text-transform:uppercase;letter-spacing:0.05em}
+  .backrow a{color:var(--ink-2);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:color .2s,gap .2s}
+  .backrow a:hover{color:var(--accent);gap:13px}
+
+  footer.foot{border-top:1px solid var(--line);margin-top:50px;padding:24px 0 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.04em;color:var(--ink-mute);text-transform:uppercase}
+  footer.foot .coords{color:var(--ink-2)}
+
+  @media (max-width:760px){
+    body{font-size:16px}
+    .wrap{padding:0 20px}.topbar .wrap{padding:16px 20px}
+    .study-hero{padding:46px 0 22px}
+    .metastrip .ms{flex:1 1 100%;border-right:none;border-bottom:1px solid var(--line-soft)}
+    .metastrip .ms:last-child{border-bottom:none}
+    .cards{grid-template-columns:1fr}
+    .sec{padding:44px 0 0}
+    nav.main{gap:15px;font-size:11px}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+  /* ═══ scope-fx · shared interaction layer — identical block on every project page ═══ */
+  #scopebar{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);box-shadow:0 0 10px var(--accent);z-index:90;pointer-events:none}
+  html.js header.topbar{transition:box-shadow .3s ease}
+  html.js header.topbar .wrap{transition:padding .3s ease}
+  html.js header.topbar.shrunk .wrap{padding-top:10px;padding-bottom:10px}
+  html.js header.topbar.shrunk{box-shadow:0 10px 28px rgba(0,0,0,0.38)}
+  .sweepfx{position:relative;overflow:hidden}
+  html.js .sweepfx::after{content:"";position:absolute;top:0;bottom:0;left:-14%;width:9%;background:linear-gradient(90deg,transparent,var(--accent) 50%,transparent);opacity:0;pointer-events:none}
+  html.js .sweepfx.swept::after{animation:scopesweep 1.05s cubic-bezier(.33,.62,.29,1) .12s 1 both}
+  @keyframes scopesweep{0%{left:-14%;opacity:0}10%{opacity:.18}90%{opacity:.14}100%{left:108%;opacity:0}}
+  .mtools{max-width:66ch;margin:30px 0 0;font-family:var(--font-mono);font-size:11.5px;line-height:1.7;letter-spacing:0.03em;color:var(--ink-mute);border-top:1px solid var(--line);padding-top:16px}
+  .mtools b{color:var(--ink-2);font-weight:600;letter-spacing:0.08em}
+  .disc{margin-top:26px;font-family:var(--font-mono);font-size:11.5px;line-height:1.6;letter-spacing:0.02em;color:var(--ink-mute);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;border-left:0;background:none;border-radius:0}
+  @media (hover:hover) and (pointer:fine){
+    .rec,.study,.pcard,.ta,.w{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+    .rec:hover,.study:hover,.pcard:hover,.ta:hover,.w:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 12px 30px rgba(0,0,0,0.35)}
+  }
+  a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+  @media (prefers-reduced-motion:reduce){html.js .sweepfx::after{display:none!important}}
+  .skip{position:absolute;left:8px;top:-48px;z-index:100;background:var(--accent);color:var(--paper);font-family:var(--font-mono);font-size:13px;font-weight:600;letter-spacing:0.04em;padding:10px 16px;border-radius:0 0 4px 4px;text-decoration:none;transition:top .18s}
+  .skip:focus{top:0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="wrap">
+    <a href="https://leohuang4977.github.io/" class="wordmark"><span class="dot"></span>Leo&nbsp;Huang</a>
+    <nav class="main">
+      <a href="https://leohuang4977.github.io/">About</a>
+      <a href="https://leohuang4977.github.io/projects/" class="active">Projects</a>
+      <a href="https://leohuang4977.github.io/cv/">Résumé</a>
+      <a href="https://leohuang4977.github.io/publications/">Publications</a>
+      <a href="https://leohuang4977.github.io/contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="study-hero">
+  <div class="wrap">
+    <div class="kicker reveal"><span class="rule"></span>Mixed-Method · Survey + Behavioral Telemetry · Team Chat</div>
+    <h1 class="reveal" style="transition-delay:.06s">What Users Want from In-Channel Knowledge Agents</h1>
+    <p class="dek reveal" style="transition-delay:.12s">Where an AI help-agent earns its place inside team chat, settled by reading what people say about getting help against what they actually do to get it.</p>
+
+    <p class="note reveal" style="transition-delay:.16s"><b>Portfolio version.</b> A generalized, anonymized account of real research. The product is unnamed and every figure is <em>illustrative</em>, recreated to show the method and the reasoning rather than actual results.</p>
+
+    <div class="metastrip reveal" style="transition-delay:.2s">
+      <div class="ms"><span class="k">Method</span><span class="v">Mixed-method, triangulated</span></div>
+      <div class="ms"><span class="k">Lenses</span><span class="v">Survey + behavioral telemetry</span></div>
+      <div class="ms"><span class="k">Sample</span><span class="v todo-inline">TODO — confirm N</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">01</span><h2>The brief</h2></div>
+    <div class="prose reveal" style="transition-delay:.06s">
+      <p>A team-chat platform was weighing an in-channel knowledge agent: an AI that answers questions where people already work, instead of sending them off to a separate knowledge base. Three things had to be settled before any of it was worth building. Whether people wanted it at all. Where it would earn its place. How it should behave once it got there.</p>
+      <p>I ran the study mixed-method on purpose, because what people say about getting help and what they do to get it are rarely the same.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">02</span><h2>How I ran it</h2></div>
+    <div class="prose reveal" style="transition-delay:.06s">
+      <p>I used two lenses and read them against each other. A survey captured attitudes, demand, and what people believe they do. Behavioral telemetry captured what they actually do in-channel.</p>
+      <p>The triangulation is the whole design. Each lens covers the other's blind spot, and the findings that matter most sit exactly where the two disagree.</p>
+    </div>
+
+    <figure class="fig reveal" style="transition-delay:.1s">
+      <div class="scope-label">FIG.01 — Two lenses, read against each other&nbsp;&nbsp;<span class="em">● METHOD</span></div>
+      <svg viewBox="0 0 640 232" role="img" aria-label="Diagram: a survey lens and a telemetry lens converging on the seam where they disagree, where the findings live.">
+        <!-- left: survey -->
+        <rect x="28" y="50" width="196" height="132" rx="4" stroke-width="1.5" style="fill:var(--panel);stroke:var(--accent)"/>
+        <text x="126" y="92" text-anchor="middle" font-size="15" font-weight="600" letter-spacing="0.06em" style="fill:var(--accent)">SURVEY</text>
+        <text x="126" y="116" text-anchor="middle" font-size="12.5" style="fill:var(--ink-2)">what people <tspan font-style="italic">say</tspan></text>
+        <text x="126" y="142" text-anchor="middle" font-size="10.5" style="fill:var(--ink-mute)">attitudes · demand</text>
+        <text x="126" y="158" text-anchor="middle" font-size="10.5" style="fill:var(--ink-mute)">stated behavior</text>
+        <!-- right: telemetry -->
+        <rect x="416" y="50" width="196" height="132" rx="4" stroke-width="1.5" style="fill:var(--panel);stroke:var(--accent)"/>
+        <text x="514" y="92" text-anchor="middle" font-size="15" font-weight="600" letter-spacing="0.06em" style="fill:var(--accent)">TELEMETRY</text>
+        <text x="514" y="116" text-anchor="middle" font-size="12.5" style="fill:var(--ink-2)">what people <tspan font-style="italic">do</tspan></text>
+        <text x="514" y="142" text-anchor="middle" font-size="10.5" style="fill:var(--ink-mute)">actual in-channel</text>
+        <text x="514" y="158" text-anchor="middle" font-size="10.5" style="fill:var(--ink-mute)">behavior</text>
+        <!-- arrows inward -->
+        <line x1="224" y1="116" x2="266" y2="116" stroke-width="1.5" style="stroke:var(--ink-mute)"/>
+        <polygon points="266,116 258,112 258,120" style="fill:var(--ink-mute)"/>
+        <line x1="416" y1="116" x2="374" y2="116" stroke-width="1.5" style="stroke:var(--ink-mute)"/>
+        <polygon points="374,116 382,112 382,120" style="fill:var(--ink-mute)"/>
+        <!-- center: the seam -->
+        <rect x="270" y="90" width="100" height="52" rx="4" style="fill:var(--accent)"/>
+        <text x="320" y="121" text-anchor="middle" font-size="12.5" font-weight="600" letter-spacing="0.04em" style="fill:var(--paper)">THE SEAM</text>
+        <text x="320" y="210" text-anchor="middle" font-size="11" style="fill:var(--ink-2)">the findings live where they disagree</text>
+      </svg>
+      <div class="cap">Neither lens is trusted on its own. The survey records intent and belief. The telemetry records what actually happened. The product decisions came out of the gap between them.</div>
+    </figure>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">03</span><h2>Big appetite, leaky adoption</h2></div>
+    <div class="prose reveal" style="transition-delay:.06s">
+      <p>The demand signal was strong but lossy. Most people want in-channel help. Fewer can get it today, and fewer still use what already exists. Every step from wanting help to actually using it sheds people, and that leak is the gap an agent would have to close.</p>
+    </div>
+
+    <figure class="fig reveal" style="transition-delay:.1s">
+      <div class="scope-label">FIG.02 — From want to use, the funnel narrows&nbsp;&nbsp;<span class="em">● DEMAND</span></div>
+      <svg viewBox="0 0 640 268" role="img" aria-label="A three-tier funnel narrowing from 'want in-channel help' to 'can get it today' to 'actually use what exists'.">
+        <!-- funnel walls -->
+        <polygon points="60,96 580,96 500,116 140,116" style="fill:var(--line-soft)"/>
+        <polygon points="140,170 500,170 420,190 220,190" style="fill:var(--line-soft)"/>
+        <!-- tier 1 -->
+        <rect x="60" y="44" width="520" height="52" rx="3" opacity="0.85" style="fill:var(--accent)"/>
+        <text x="320" y="75" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--paper)">Want in-channel help</text>
+        <!-- tier 2 -->
+        <rect x="140" y="116" width="360" height="52" rx="3" opacity="0.45" style="fill:var(--accent)"/>
+        <text x="320" y="147" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">Can get it today</text>
+        <!-- tier 3 -->
+        <rect x="220" y="190" width="200" height="52" rx="3" opacity="0.85" style="fill:var(--ink-mute)"/>
+        <text x="320" y="221" text-anchor="middle" font-size="12.5" font-weight="600" style="fill:var(--paper)">Actually use what exists</text>
+        <!-- drop markers -->
+        <text x="600" y="110" text-anchor="end" font-size="10" letter-spacing="0.04em" style="fill:var(--ink-mute)">drop-off</text>
+        <text x="600" y="184" text-anchor="end" font-size="10" letter-spacing="0.04em" style="fill:var(--ink-mute)">drop-off</text>
+      </svg>
+      <div class="cap">Widths are illustrative, not measured. The shape is the point: real desire, thinner access, thinner habit. Each step is a place the current setup loses people.</div>
+    </figure>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">04</span><h2>What people say versus what they do</h2></div>
+    <div class="prose reveal" style="transition-delay:.06s">
+      <p>This is the finding the mixed-method design was built to catch. On the survey, people described themselves as searching the knowledge base first. In the telemetry, they overwhelmingly <b>direct-messaged a person</b> instead.</p>
+      <p>The help is real and generous. It just happens in private DMs, where no one else can see it and it never becomes reusable. The knowledge base stays quiet not because people refuse to help, but because helping privately is faster.</p>
+      <p class="pull">That one disagreement reframed the product. The job is not to push people toward search. It is to surface what is already locked inside DMs and threads, and turn one-off answers into something the whole team can find later.</p>
+    </div>
+
+    <figure class="fig reveal" style="transition-delay:.1s">
+      <div class="scope-label">FIG.03 — Stated channel vs actual channel&nbsp;&nbsp;<span class="em">● THE FLIP</span></div>
+      <svg viewBox="0 0 640 312" role="img" aria-label="Two bars. Stated behavior is mostly 'knowledge base'; actual behavior is mostly 'direct message a person', which is private and not reusable.">
+        <!-- legend -->
+        <rect x="120" y="18" width="13" height="13" rx="2" opacity="0.5" style="fill:var(--ink-mute)"/>
+        <text x="140" y="29" font-size="11" style="fill:var(--ink-2)">Knowledge base</text>
+        <rect x="280" y="18" width="13" height="13" rx="2" style="fill:var(--accent)"/>
+        <text x="300" y="29" font-size="11" style="fill:var(--ink-2)">Direct message a person</text>
+
+        <!-- track A : STATED -->
+        <text x="28" y="78" font-size="11" letter-spacing="0.08em" style="fill:var(--ink-mute)">STATED</text>
+        <rect x="120" y="62" width="336" height="44" opacity="0.5" style="fill:var(--ink-mute)"/>
+        <rect x="456" y="62" width="144" height="44" opacity="0.45" style="fill:var(--accent)"/>
+        <text x="288" y="89" text-anchor="middle" font-size="12.5" font-weight="600" style="fill:var(--ink)">Search the knowledge base first</text>
+        <text x="528" y="89" text-anchor="middle" font-size="11" style="fill:var(--paper)">DM</text>
+        <text x="120" y="126" font-size="10.5" style="fill:var(--ink-mute)">What people say they do</text>
+
+        <!-- the flip connector -->
+        <path d="M528,106 C528,140 240,140 240,170" fill="none" stroke-width="1.3" stroke-dasharray="3 4" opacity="0.8" style="stroke:var(--accent)"/>
+        <text x="384" y="143" text-anchor="middle" font-size="10.5" letter-spacing="0.06em" style="fill:var(--accent)">the flip</text>
+
+        <!-- track B : ACTUAL -->
+        <text x="28" y="200" font-size="11" letter-spacing="0.08em" style="fill:var(--ink-mute)">ACTUAL</text>
+        <rect x="120" y="184" width="120" height="44" opacity="0.32" style="fill:var(--ink-mute)"/>
+        <rect x="240" y="184" width="360" height="44" style="filter:drop-shadow(0 0 9px var(--accent-glow));fill:var(--accent)"/>
+        <text x="180" y="211" text-anchor="middle" font-size="11" style="fill:var(--ink-2)">KB</text>
+        <text x="420" y="211" text-anchor="middle" font-size="12.5" font-weight="600" style="fill:var(--paper)">Direct message a person</text>
+        <text x="120" y="248" font-size="10.5" style="fill:var(--ink-mute)">What the telemetry shows</text>
+
+        <!-- private / invisible tag -->
+        <g transform="translate(240,266)">
+          <rect x="0" y="0" width="15" height="12" rx="2" fill="none" stroke-width="1.3" style="stroke:var(--accent)"/>
+          <path d="M3.5,0 V-3 a4,4 0 0 1 8,0 V0" fill="none" stroke-width="1.3" style="stroke:var(--accent)"/>
+          <text x="24" y="10" font-size="10.5" letter-spacing="0.04em" style="fill:var(--accent)">private · invisible · never reusable</text>
+        </g>
+      </svg>
+      <div class="cap">Same population, two readings. People believe they search. The logs show they DM. The answer arrives, but it dies in a private thread instead of becoming something the next person can find.</div>
+    </figure>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">05</span><h2>What users want the agent to do</h2></div>
+    <div class="prose reveal" style="transition-delay:.06s">
+      <p>The headline wants all point the same direction: surface what already exists. People asked for past answers brought back up, confident replies to the questions that come up over and over, and quick summaries of long threads.</p>
+      <p>Graceful handoff ranked lower in raw demand, but it is what makes everything above it safe to trust. Suggesting the right expert, or flagging a human the moment the agent is unsure, is a guardrail rather than a feature.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">06</span><h2>Where help happens, and where the agent belongs</h2></div>
+    <div class="prose reveal" style="transition-delay:.06s">
+      <p>The second disagreement was about scope, and it produced a clean crossover. Most peer help today lands on live project work, which is the judgment-heavy territory where people are least willing to hand things to an agent. Where they do want an agent is the knowable, low-judgment material: policy and HR, IT and tools, how-to and process.</p>
+      <p>An agent that respects that line earns trust. One that wades into live project judgment loses it.</p>
+    </div>
+
+    <figure class="fig reveal" style="transition-delay:.1s">
+      <div class="scope-label">FIG.04 — Two lines that cross&nbsp;&nbsp;<span class="em">● SCOPE</span></div>
+      <svg viewBox="0 0 640 280" role="img" aria-label="A crossover chart. Peer help rises toward judgment-heavy work; demand for an agent falls. They cross in the middle, leaving the knowable domains to the agent and live project judgment to humans.">
+        <!-- legend -->
+        <line x1="120" y1="22" x2="148" y2="22" stroke-width="2.5" style="stroke:var(--accent)"/>
+        <text x="155" y="26" font-size="11" style="fill:var(--ink-2)">Users want an agent</text>
+        <line x1="320" y1="22" x2="348" y2="22" stroke-width="2" style="stroke:var(--cool)"/>
+        <text x="355" y="26" font-size="11" style="fill:var(--ink-2)">Peer help happens</text>
+
+        <!-- plot frame -->
+        <line x1="80" y1="48" x2="80" y2="222" stroke-width="1" style="stroke:var(--line)"/>
+        <line x1="80" y1="222" x2="600" y2="222" stroke-width="1" style="stroke:var(--line)"/>
+
+        <!-- shaded comfort zones -->
+        <polygon points="80,222 340,222 340,48 80,48" opacity="0.5" style="fill:var(--accent-wash)"/>
+        <text x="92" y="66" font-size="10.5" letter-spacing="0.05em" style="fill:var(--accent)">AGENT EARNS TRUST</text>
+        <text x="588" y="66" text-anchor="end" font-size="10.5" letter-spacing="0.05em" style="fill:var(--ink-mute)">KEEP HUMAN</text>
+
+        <!-- line: peer help (rising) -->
+        <polyline points="100,202 240,160 340,135 460,96 580,66" fill="none" stroke-width="2" style="stroke:var(--cool)"/>
+        <circle cx="100" cy="202" r="3.5" style="fill:var(--cool)"/>
+        <circle cx="580" cy="66" r="3.5" style="fill:var(--cool)"/>
+        <!-- line: want agent (falling) -->
+        <polyline points="100,72 240,108 340,135 460,176 580,200" fill="none" stroke-width="2.5" style="stroke:var(--accent)"/>
+        <circle cx="100" cy="72" r="3.5" style="fill:var(--accent)"/>
+        <circle cx="580" cy="200" r="3.5" style="fill:var(--accent)"/>
+        <!-- crossover -->
+        <line x1="340" y1="135" x2="340" y2="222" stroke-width="1" stroke-dasharray="3 4" style="stroke:var(--ink-mute)"/>
+        <circle cx="340" cy="135" r="5" fill="none" stroke-width="1.5" style="stroke:var(--ink)"/>
+
+        <!-- x labels -->
+        <text x="80" y="242" font-size="11" font-weight="600" style="fill:var(--ink-2)">Knowable</text>
+        <text x="80" y="257" font-size="10" style="fill:var(--ink-mute)">policy · IT · how-to</text>
+        <text x="600" y="242" text-anchor="end" font-size="11" font-weight="600" style="fill:var(--ink-2)">Judgment-heavy</text>
+        <text x="600" y="257" text-anchor="end" font-size="10" style="fill:var(--ink-mute)">live project work</text>
+      </svg>
+      <div class="cap">The two needs run opposite. People help each other most exactly where they least want a machine. The agent's room to operate is the left side, and the crossover marks where it should stop.</div>
+    </figure>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">07</span><h2>What this means for design</h2></div>
+    <div class="cards">
+      <div class="pcard reveal"><span class="tag">Scope</span><h3>Scope to the knowable</h3><p>Point the agent at policy, IT, and how-to. Leave the live project judgment that people want to keep human.</p></div>
+      <div class="pcard reveal" style="transition-delay:.06s"><span class="tag">Surface</span><h3>Surface buried answers</h3><p>Mine threads, and the patterns behind what people DM about, then turn them into answers the team can actually find.</p></div>
+      <div class="pcard reveal"><span class="tag">Trust</span><h3>Hand off gracefully</h3><p>Answer only when confident. When it is not, name the right person or loop in a human instead of guessing.</p></div>
+      <div class="pcard reveal" style="transition-delay:.06s"><span class="tag">Place</span><h3>Meet people in-channel</h3><p>Put help where the conversation already is, so reuse never depends on opening a separate tool.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">08</span><h2>What it changed</h2></div>
+    <div class="prose reveal" style="transition-delay:.06s">
+      <p>The recommendation shipped. The agent went out as a scoped pilot in the knowable domains the study marked out, with live project judgment left to people. Satisfaction with the pilot came back strong, which suggested the scope line was drawn about right.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">09</span><h2>My role and the team</h2></div>
+    <div class="prose reveal" style="transition-delay:.06s">
+      <p>I led the research, working with a product manager and a designer who helped scope the questions and carried the findings into the product. Data science partnered on the telemetry side, pulling the in-channel logs the behavioral half of the study ran on. The survey, the analysis, and the triangulation between the two were mine.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">10</span><h2>What I'd validate next</h2></div>
+    <div class="prose reveal" style="transition-delay:.06s;margin-bottom:6px">
+      <p>What I want this study to demonstrate is mixed-method judgment: knowing what each lens can and cannot tell you, and designing for the seam between them. Part of that judgment is being clear about what the study could not settle.</p>
+    </div>
+    <ul class="reflect reveal" style="transition-delay:.1s">
+      <li><b>Telemetry shows what, not why.</b> A DM might be relationship-building rather than search-avoidance. I would pair the behavioral data with a handful of contextual interviews so I am not reading intent into clicks.</li>
+      <li><b>The two samples only overlap.</b> Survey respondents and the telemetry population were not identical, so I treat the comparison as directional and would reconcile it at the individual level wherever the data allows.</li>
+      <li><b>The pilot is the next data source.</b> Now that the agent is live in the knowable domains, the numbers worth tracking are whether it converts buried DMs into reusable answers, and how often it answers confidently when it should have handed off. A wrong answer delivered with confidence is the fastest way to spend the trust the scoping earned.</li>
+    </ul>
+    <div class="mtools reveal" style="transition-delay:.14s"><b>METHODS &amp; TOOLS</b><br>Qualtrics survey design · behavioral log analysis · R · mixed-method triangulation · segmentation</div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <div class="backrow reveal">
+      <a href="https://leohuang4977.github.io/projects/">← All projects</a>
+    </div>
+    <footer class="foot">
+      <span>© 2026 Leo Huang</span>
+      <span class="coords">43.6532° N, 79.3832° W — Toronto, ON</span>
+    </footer>
+  </div>
+</section>
+
+</main>
+<script>
+  /* scope-fx · unified page script (reveal · counters · progress · shrink · sweep) — identical on every project page */
+  (function(){
+    var de=document.documentElement;
+    de.classList.add('js');
+    if(de.dataset.lhFx){return;} de.dataset.lhFx='1'; /* guard so a site-wide enhancement pass can no-op this block */
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* scroll progress + shrinking topbar */
+    var bar=document.createElement('div'); bar.id='scopebar'; document.body.appendChild(bar);
+    var topbar=document.querySelector('header.topbar'); var ticking=false;
+    function onScroll(){
+      if(ticking)return; ticking=true;
+      requestAnimationFrame(function(){
+        var max=de.scrollHeight-de.clientHeight;
+        bar.style.width=(max>0?(window.scrollY/max)*100:0)+'%';
+        if(topbar)topbar.classList.toggle('shrunk',window.scrollY>24);
+        ticking=false;
+      });
+    }
+    window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+    /* oscilloscope sweep targets: every figure panel */
+    document.querySelectorAll('.figbox, figure.fig, div.fig').forEach(function(f){f.classList.add('sweepfx');});
+
+    /* count-up (NaN-safe: first frame gets a real timestamp via rAF) */
+    function countUp(el){
+      if(el.dataset.done)return;
+      var t=parseFloat(el.dataset.count); if(isNaN(t))return;
+      el.dataset.done='1';
+      var fmt=function(n){return Math.round(n).toLocaleString('en-US');};
+      if(reduce){el.textContent=fmt(t);return;}
+      var dur=1100,start=null;
+      function tick(now){
+        if(start===null)start=now;
+        var p=Math.min((now-start)/dur,1);
+        el.textContent=fmt((1-Math.pow(1-p,3))*t);
+        if(p<1)requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    function arm(el){
+      el.classList.add('in');
+      if(el.classList.contains('sweepfx')&&!reduce)el.classList.add('swept');
+      el.querySelectorAll('[data-count]').forEach(countUp);
+    }
+
+    /* safety net: everything visible + counters finalized even if observers never fire */
+    setTimeout(function(){
+      document.querySelectorAll('.reveal,.sweepfx').forEach(arm);
+      document.querySelectorAll('[data-count]').forEach(countUp);
+    },1800);
+
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){
+        es.forEach(function(e){if(e.isIntersecting){arm(e.target);io.unobserve(e.target);}});
+      },{threshold:0.12,rootMargin:'0px 0px -7% 0px'});
+      document.querySelectorAll('.reveal,.sweepfx,.stat-trigger').forEach(function(el){io.observe(el);});
+    } else {
+      document.querySelectorAll('.reveal,.sweepfx').forEach(arm);
+    }
+  })();
+</script>
+</body>
+</html>

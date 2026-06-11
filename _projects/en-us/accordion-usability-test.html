@@ -1,0 +1,520 @@
+---
+layout: none
+permalink: /projects/accordion-usability-test/
+---
+<!DOCTYPE html>
+<html lang="en" data-theme="scope">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open vs. Closed: An Accordion Navigation Test — Leo Huang</title>
+<link rel="canonical" href="https://leohuang4977.github.io/projects/accordion-usability-test/">
+<meta property="og:title" content="Open vs. Closed: An Accordion Navigation Test — Leo Huang">
+<meta property="og:description" content="A moderated mobile-app usability test of two navigation defaults — and what people actually did.">
+<meta property="og:image" content="https://leohuang4977.github.io/assets/img/og-card.png">
+<meta property="og:url" content="https://leohuang4977.github.io/projects/accordion-usability-test/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='34' fill='%2310B981'/%3E%3C/svg%3E">
+<meta name="description" content="A moderated mobile-app usability test of two navigation defaults — and what people actually did.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#0D0E12; --paper-2:#15171D; --panel:#15171C;
+    --ink:#E9E7DF; --ink-2:#B6B4AB; --ink-mute:#84868E;
+    --line:rgba(255,255,255,0.13); --line-soft:rgba(255,255,255,0.06);
+    /* Accent — emerald #10B981, matching the site design system (teal→emerald flip done in the 2026-06-11 integration pass). --warn stays amber. */
+    --accent:#10B981; --accent-deep:#059669; --cool:#5BA8E8;
+    --accent-wash:rgba(16,185,129,0.14); --accent-wash-2:rgba(16,185,129,0.07);
+    --warn:#F2B33C; /* annotation hue — amber, kept distinct from the emerald accent */
+    --font-display:'Fraunces',Georgia,serif;
+    --font-body:'Hanken Grotesk',ui-sans-serif,system-ui,sans-serif;
+    --font-mono:'IBM Plex Mono',ui-monospace,'Courier New',monospace;
+    --maxw:1000px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background-color:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");opacity:0.05;mix-blend-mode:overlay}
+  body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:repeating-linear-gradient(rgba(255,255,255,0.02) 0 1px,transparent 1px 3px),radial-gradient(120% 70% at 50% 0%,transparent 58%,rgba(0,0,0,0.4) 100%)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:1}
+
+  .reveal{transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  html.js .reveal{opacity:0;transform:translateY(20px)}
+  html.js .reveal.in{opacity:1;transform:none}
+
+  /* topbar */
+  header.topbar{border-bottom:1px solid var(--line);background:rgba(13,14,18,0.72);backdrop-filter:blur(8px);position:sticky;top:0;z-index:50}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;gap:16px;flex-wrap:wrap;max-width:1080px}
+  .wordmark{font-family:var(--font-mono);font-weight:600;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink)}
+  .wordmark .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-wash);animation:pulse 2.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.35}}
+  nav.main{display:flex;gap:24px;align-items:center;font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.05em;text-transform:uppercase}
+  nav.main a{color:var(--ink-2);text-decoration:none;position:relative;padding-bottom:3px;transition:color .2s}
+  nav.main a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--accent);transition:width .25s}
+  nav.main a:hover{color:var(--ink)}nav.main a:hover::after,nav.main a.active::after{width:100%}
+  nav.main a.active{color:var(--accent)}
+
+  /* breadcrumb */
+
+  /* hero */
+  .cs-hero{padding:30px 0 18px}
+  .kicker{font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:12px;margin-bottom:22px;flex-wrap:wrap}
+  .kicker .rule{height:1px;width:46px;background:var(--accent);opacity:.5}
+  .cs-hero h1{font-family:var(--font-display);font-weight:500;font-size:clamp(34px,6vw,60px);line-height:1.03;letter-spacing:-0.015em;margin-bottom:22px;max-width:18ch}
+  .cs-hero .lede{font-size:clamp(17px,2.1vw,21px);color:var(--ink-2);max-width:56ch;line-height:1.5}
+  .cs-hero .lede b{color:var(--ink);font-weight:600}
+
+  /* methods+tools tag strip */
+  .tagstrip{display:flex;flex-wrap:wrap;gap:10px 12px;margin-top:30px}
+  .tagstrip .t{font-family:var(--font-mono);font-size:11px;letter-spacing:0.04em;color:var(--ink-2);border:1px solid var(--line);border-radius:999px;padding:6px 13px;display:inline-flex;align-items:center;gap:7px;background:var(--panel)}
+  .tagstrip .t b{color:var(--ink-mute);font-weight:500;text-transform:uppercase;font-size:10px;letter-spacing:0.08em}
+
+  /* disclaimer */
+  .disclaimer{margin-top:26px;border-left:2px solid var(--line);padding:10px 0 10px 16px;font-family:var(--font-mono);font-size:11.5px;line-height:1.6;color:var(--ink-mute);letter-spacing:0.01em;max-width:70ch}
+
+  /* spec strip (stats) */
+  .specstrip{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:3px;background:var(--panel);margin-top:36px;overflow:hidden}
+  .specstrip .cell{padding:22px 24px;border-right:1px solid var(--line-soft)}
+  .specstrip .cell:last-child{border-right:none}
+  .specstrip .v{font-family:var(--font-display);font-size:34px;font-weight:500;color:var(--accent);line-height:1}
+  .specstrip .k{font-family:var(--font-mono);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-2);margin-top:10px}
+
+  /* sections */
+  .sec{padding:58px 0 0}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:24px}
+  .sec-head .idx{font-family:var(--font-mono);font-size:12.5px;color:var(--accent);letter-spacing:0.08em}
+  .sec-head h2{font-family:var(--font-display);font-weight:500;font-size:clamp(24px,3.6vw,34px);letter-spacing:-0.01em;line-height:1.1}
+
+  .prose{max-width:64ch}
+  .prose p{font-size:18px;color:var(--ink-2);margin-bottom:18px;line-height:1.62}
+  .prose p b{color:var(--ink);font-weight:600}
+  .prose p:last-child{margin-bottom:0}
+
+  /* figure panel */
+  .fig{margin:30px 0 4px;border:1px solid var(--line);background:linear-gradient(90deg,var(--line-soft) 1px,transparent 1px) 0 0/56px 100%,var(--panel);border-radius:3px;position:relative;overflow:hidden}
+  .fig .flabel{position:absolute;top:11px;left:15px;font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-mute);z-index:3}
+  .fig svg.plot{display:block;width:100%;height:auto}
+  .fig .cap{padding:0 16px 14px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.02em;color:var(--ink-mute);line-height:1.5}
+  .fig .cap em{color:var(--ink-2);font-style:normal}
+
+  /* recommendations */
+  .recs{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:8px}
+  .rec{border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:24px 24px 22px;position:relative}
+  .rec .num{font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:0.08em;text-transform:uppercase}
+  .rec h3{font-family:var(--font-display);font-size:21px;font-weight:500;line-height:1.18;letter-spacing:-0.01em;margin:10px 0 12px}
+  .rec p{font-size:15px;color:var(--ink-2);line-height:1.55}
+
+  /* outcome callout */
+  .outcome{margin-top:6px;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:3px;background:linear-gradient(90deg,var(--accent-wash-2),transparent 60%),var(--panel);padding:24px 26px}
+  .outcome p{font-size:18px;color:var(--ink-2);line-height:1.6;max-width:64ch}
+  .outcome p b{color:var(--ink);font-weight:600}
+  .outcome p + p{margin-top:14px}
+  .outcome .note{font-family:var(--font-mono);font-size:12px;color:var(--ink-mute);margin-top:16px;line-height:1.55}
+
+  /* skills */
+
+  /* CTA */
+  .cta{border-top:1px solid var(--line);margin-top:54px;padding:44px 0 26px}
+  .cta .back{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12.5px;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-2);text-decoration:none;transition:gap .25s,color .2s}
+  .cta .back:hover{color:var(--accent);gap:16px}
+
+  footer.foot{border-top:1px solid var(--line);margin-top:48px;padding:24px 0 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.04em;color:var(--ink-mute);text-transform:uppercase}
+  footer.foot .coords{color:var(--ink-2)}
+
+  @media (max-width:760px){
+    body{font-size:16px}
+    .wrap{padding:0 20px}.topbar .wrap{padding:16px 20px}
+    .cs-hero{padding:22px 0 14px}
+    .specstrip{grid-template-columns:1fr}
+    .specstrip .cell{border-right:none;border-bottom:1px solid var(--line-soft)}
+    .specstrip .cell:last-child{border-bottom:none}
+    .recs{grid-template-columns:1fr}
+    nav.main{gap:15px;font-size:11px}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+  /* ═══ scope-fx · shared interaction layer — identical block on every project page ═══ */
+  #scopebar{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);box-shadow:0 0 10px var(--accent);z-index:90;pointer-events:none}
+  html.js header.topbar{transition:box-shadow .3s ease}
+  html.js header.topbar .wrap{transition:padding .3s ease}
+  html.js header.topbar.shrunk .wrap{padding-top:10px;padding-bottom:10px}
+  html.js header.topbar.shrunk{box-shadow:0 10px 28px rgba(0,0,0,0.38)}
+  .sweepfx{position:relative;overflow:hidden}
+  html.js .sweepfx::after{content:"";position:absolute;top:0;bottom:0;left:-14%;width:9%;background:linear-gradient(90deg,transparent,var(--accent) 50%,transparent);opacity:0;pointer-events:none}
+  html.js .sweepfx.swept::after{animation:scopesweep 1.05s cubic-bezier(.33,.62,.29,1) .12s 1 both}
+  @keyframes scopesweep{0%{left:-14%;opacity:0}10%{opacity:.18}90%{opacity:.14}100%{left:108%;opacity:0}}
+  .mtools{max-width:66ch;margin:30px 0 0;font-family:var(--font-mono);font-size:11.5px;line-height:1.7;letter-spacing:0.03em;color:var(--ink-mute);border-top:1px solid var(--line);padding-top:16px}
+  .mtools b{color:var(--ink-2);font-weight:600;letter-spacing:0.08em}
+  .disc{margin-top:26px;font-family:var(--font-mono);font-size:11.5px;line-height:1.6;letter-spacing:0.02em;color:var(--ink-mute);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;border-left:0;background:none;border-radius:0}
+  @media (hover:hover) and (pointer:fine){
+    .rec,.study,.pcard,.ta,.w{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+    .rec:hover,.study:hover,.pcard:hover,.ta:hover,.w:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 12px 30px rgba(0,0,0,0.35)}
+  }
+  a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+  @media (prefers-reduced-motion:reduce){html.js .sweepfx::after{display:none!important}}
+  .skip{position:absolute;left:8px;top:-48px;z-index:100;background:var(--accent);color:var(--paper);font-family:var(--font-mono);font-size:13px;font-weight:600;letter-spacing:0.04em;padding:10px 16px;border-radius:0 0 4px 4px;text-decoration:none;transition:top .18s}
+  .skip:focus{top:0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="wrap">
+    <a href="https://leohuang4977.github.io/" class="wordmark"><span class="dot"></span>Leo&nbsp;Huang</a>
+    <nav class="main">
+      <a href="https://leohuang4977.github.io/">About</a>
+      <a href="https://leohuang4977.github.io/projects/" class="active">Projects</a>
+      <a href="https://leohuang4977.github.io/cv/">Résumé</a>
+      <a href="https://leohuang4977.github.io/publications/">Publications</a>
+      <a href="https://leohuang4977.github.io/contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="cs-hero">
+  <div class="wrap">
+    <div class="kicker reveal"><span class="rule"></span>Behavior Beats Preference · Mobile App Usability</div>
+    <h1 class="reveal" style="transition-delay:.06s">Open vs. Closed: an accordion navigation test</h1>
+    <p class="lede reveal" style="transition-delay:.12s">A moderated usability test of two in-app navigation defaults. <b>Stated preference couldn't settle it. Behavior could.</b></p>
+
+    <div class="tagstrip reveal" style="transition-delay:.16s">
+      <span class="t"><b>Method</b> Moderated, within-subjects A/B</span>
+      <span class="t"><b>Measures</b> Stated preference + task timing</span>
+      <span class="t"><b>Built in</b> Figma, with the design team</span>
+    </div>
+
+    <div class="disclaimer reveal" style="transition-delay:.2s">Generalized from real client work, with names removed and every figure recreated as illustrative. It's here to show the method, not to report a client's results.</div>
+
+    <div class="specstrip reveal" style="transition-delay:.24s">
+      <div class="cell"><div class="v">20</div><div class="k">Participants, moderated</div></div>
+      <div class="cell"><div class="v">2</div><div class="k">Prototype versions</div></div>
+      <div class="cell"><div class="v">A / B</div><div class="k">Within-subjects, Figma</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">01</span><h2>The brief</h2></div>
+    <div class="prose reveal" style="transition-delay:.06s">
+      <p>In the mobile app, a screen's sections collapse into an accordion. That left the design team with a small but real choice: should the first section open the moment the screen loads, or should everything start collapsed? They wanted to know which default got people to content faster, and whether anyone even noticed the difference.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">02</span><h2>My role</h2></div>
+    <div class="prose reveal" style="transition-delay:.06s">
+      <p>The product designer owned the navigation pattern and built both prototypes in Figma. I was in those design sessions with him, working through the choices side by side, and I owned the research end of it: I shaped the question and the tasks, moderated every session, and analyzed the timing. He had a strong hunch that open-by-default felt friendlier. I wanted the call made on behavior, not instinct, so we turned the hunch into a test. We watched the session clips together afterward, which meant the decision came out of evidence we both saw rather than one person's taste.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">03</span><h2>What I compared</h2></div>
+    <div class="prose reveal" style="transition-delay:.06s">
+      <p>The two prototypes differed in exactly one thing: whether the first section started open or collapsed. We ran it within-subjects, so every participant used both versions and did the same find-the-content tasks on each. I tracked two things in parallel: which version people said they preferred, and how long they actually took to reach content in each.</p>
+    </div>
+
+    <div class="fig reveal" style="transition-delay:.1s">
+      <div class="flabel">FIG.01 — The one difference</div>
+      <svg class="plot" viewBox="0 0 620 300" role="img" aria-label="Two app prototypes differing only in whether the first accordion section starts open or collapsed.">
+        <g transform="translate(118,46)">
+          <rect x="0" y="0" width="150" height="196" rx="16" fill="none" stroke-width="1.5" style="stroke:var(--line)"/>
+          <rect x="14" y="18" width="86" height="9" rx="4.5" opacity="0.5" style="fill:var(--ink-mute)"/>
+          <g>
+            <rect x="14" y="42" width="122" height="26" rx="5" fill="none" style="stroke:var(--line)"/>
+            <rect x="22" y="52" width="58" height="6" rx="3" opacity="0.5" style="fill:var(--ink-2)"/>
+            <path d="M124,52 l6,3 l-6,3" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--ink-mute)"/>
+          </g>
+          <g>
+            <rect x="14" y="76" width="122" height="26" rx="5" fill="none" style="stroke:var(--line)"/>
+            <rect x="22" y="86" width="48" height="6" rx="3" opacity="0.5" style="fill:var(--ink-2)"/>
+            <path d="M124,86 l6,3 l-6,3" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--ink-mute)"/>
+          </g>
+          <g>
+            <rect x="14" y="110" width="122" height="26" rx="5" fill="none" style="stroke:var(--line)"/>
+            <rect x="22" y="120" width="64" height="6" rx="3" opacity="0.5" style="fill:var(--ink-2)"/>
+            <path d="M124,120 l6,3 l-6,3" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--ink-mute)"/>
+          </g>
+          <g>
+            <rect x="14" y="144" width="122" height="26" rx="5" fill="none" style="stroke:var(--line)"/>
+            <rect x="22" y="154" width="40" height="6" rx="3" opacity="0.5" style="fill:var(--ink-2)"/>
+            <path d="M124,154 l6,3 l-6,3" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--ink-mute)"/>
+          </g>
+          <text x="75" y="226" text-anchor="middle" font-size="11" letter-spacing="0.06em" style="font-family:var(--font-mono);fill:var(--ink-2)">CONDITION A</text>
+          <text x="75" y="244" text-anchor="middle" font-size="10.5" style="font-family:var(--font-mono);fill:var(--ink-mute)">everything starts collapsed</text>
+        </g>
+        <g transform="translate(352,46)">
+          <rect x="0" y="0" width="150" height="196" rx="16" fill="none" stroke-width="1.5" style="stroke:var(--accent)"/>
+          <rect x="14" y="18" width="86" height="9" rx="4.5" opacity="0.5" style="fill:var(--ink-mute)"/>
+          <g>
+            <rect x="14" y="42" width="122" height="64" rx="5" style="fill:var(--accent-wash-2);stroke:var(--accent)"/>
+            <rect x="22" y="52" width="58" height="6" rx="3" style="fill:var(--accent)"/>
+            <path d="M127,55 l-3,4 l-3,-4" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--accent)"/>
+            <rect x="22" y="70" width="104" height="5" rx="2.5" opacity="0.45" style="fill:var(--ink-2)"/>
+            <rect x="22" y="82" width="96" height="5" rx="2.5" opacity="0.45" style="fill:var(--ink-2)"/>
+            <rect x="22" y="94" width="72" height="5" rx="2.5" opacity="0.45" style="fill:var(--ink-2)"/>
+          </g>
+          <g>
+            <rect x="14" y="114" width="122" height="26" rx="5" fill="none" style="stroke:var(--line)"/>
+            <rect x="22" y="124" width="48" height="6" rx="3" opacity="0.5" style="fill:var(--ink-2)"/>
+            <path d="M124,124 l6,3 l-6,3" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--ink-mute)"/>
+          </g>
+          <g>
+            <rect x="14" y="148" width="122" height="26" rx="5" fill="none" style="stroke:var(--line)"/>
+            <rect x="22" y="158" width="64" height="6" rx="3" opacity="0.5" style="fill:var(--ink-2)"/>
+            <path d="M124,158 l6,3 l-6,3" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--ink-mute)"/>
+          </g>
+          <text x="75" y="226" text-anchor="middle" font-size="11" letter-spacing="0.06em" style="font-family:var(--font-mono);fill:var(--accent)">CONDITION B</text>
+          <text x="75" y="244" text-anchor="middle" font-size="10.5" style="font-family:var(--font-mono);fill:var(--ink-mute)">first section starts open</text>
+        </g>
+      </svg>
+      <div class="cap">Identical prototypes apart from one toggle: the opening state of the first section. <em>Conceptual rendering.</em></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">04</span><h2>No clear favorite</h2></div>
+    <div class="prose reveal" style="transition-delay:.06s">
+      <p>Asked which version they preferred, people split, and about half had no strong opinion either way. A useful non-result. Preference couldn't decide this, so the behavioral data would carry the call.</p>
+    </div>
+
+    <div class="fig reveal" style="transition-delay:.1s">
+      <div class="flabel">FIG.02 — Stated preference</div>
+      <svg class="plot" viewBox="0 0 620 142" role="img" aria-label="Of twenty participants, five preferred open, ten had no preference, and five preferred collapsed.">
+        <g style="font-family:var(--font-mono)">
+          <text x="104" y="30" text-anchor="middle" font-size="10.5" letter-spacing="0.04em" style="fill:var(--accent)">PREFERRED OPEN · 5</text>
+          <line x1="44" y1="44" x2="164" y2="44" opacity="0.5" style="stroke:var(--accent)"/>
+          <line x1="44" y1="44" x2="44" y2="50" opacity="0.5" style="stroke:var(--accent)"/><line x1="164" y1="44" x2="164" y2="50" opacity="0.5" style="stroke:var(--accent)"/>
+
+          <text x="299" y="30" text-anchor="middle" font-size="10.5" letter-spacing="0.04em" style="fill:var(--ink-2)">NO PREFERENCE · 10</text>
+          <line x1="174" y1="44" x2="424" y2="44" opacity="0.45" style="stroke:var(--ink-mute)"/>
+          <line x1="174" y1="44" x2="174" y2="50" opacity="0.45" style="stroke:var(--ink-mute)"/><line x1="424" y1="44" x2="424" y2="50" opacity="0.45" style="stroke:var(--ink-mute)"/>
+
+          <text x="494" y="30" text-anchor="middle" font-size="10.5" letter-spacing="0.04em" style="fill:var(--cool)">PREFERRED CLOSED · 5</text>
+          <line x1="434" y1="44" x2="554" y2="44" opacity="0.5" style="stroke:var(--cool)"/>
+          <line x1="434" y1="44" x2="434" y2="50" opacity="0.5" style="stroke:var(--cool)"/><line x1="554" y1="44" x2="554" y2="50" opacity="0.5" style="stroke:var(--cool)"/>
+        </g>
+        <!-- 20 person glyphs, pitch 26 from x=44, y=92 -->
+        <g>
+          <g style="fill:var(--accent)">
+            <g transform="translate(44,92)"><circle cx="8" cy="6" r="6"/><path d="M0,22 a8,8 0 0,1 16,0 z"/></g>
+            <g transform="translate(70,92)"><circle cx="8" cy="6" r="6"/><path d="M0,22 a8,8 0 0,1 16,0 z"/></g>
+            <g transform="translate(96,92)"><circle cx="8" cy="6" r="6"/><path d="M0,22 a8,8 0 0,1 16,0 z"/></g>
+            <g transform="translate(122,92)"><circle cx="8" cy="6" r="6"/><path d="M0,22 a8,8 0 0,1 16,0 z"/></g>
+            <g transform="translate(148,92)"><circle cx="8" cy="6" r="6"/><path d="M0,22 a8,8 0 0,1 16,0 z"/></g>
+          </g>
+          <g opacity="0.72" style="fill:var(--ink-mute)">
+            <g transform="translate(174,92)"><circle cx="8" cy="6" r="6"/><path d="M0,22 a8,8 0 0,1 16,0 z"/></g>
+            <g transform="translate(200,92)"><circle cx="8" cy="6" r="6"/><path d="M0,22 a8,8 0 0,1 16,0 z"/></g>
+            <g transform="translate(226,92)"><circle cx="8" cy="6" r="6"/><path d="M0,22 a8,8 0 0,1 16,0 z"/></g>
+            <g transform="translate(252,92)"><circle cx="8" cy="6" r="6"/><path d="M0,22 a8,8 0 0,1 16,0 z"/></g>
+            <g transform="translate(278,92)"><circle cx="8" cy="6" r="6"/><path d="M0,22 a8,8 0 0,1 16,0 z"/></g>
+            <g transform="translate(304,92)"><circle cx="8" cy="6" r="6"/><path d="M0,22 a8,8 0 0,1 16,0 z"/></g>
+            <g transform="translate(330,92)"><circle cx="8" cy="6" r="6"/><path d="M0,22 a8,8 0 0,1 16,0 z"/></g>
+            <g transform="translate(356,92)"><circle cx="8" cy="6" r="6"/><path d="M0,22 a8,8 0 0,1 16,0 z"/></g>
+            <g transform="translate(382,92)"><circle cx="8" cy="6" r="6"/><path d="M0,22 a8,8 0 0,1 16,0 z"/></g>
+            <g transform="translate(408,92)"><circle cx="8" cy="6" r="6"/><path d="M0,22 a8,8 0 0,1 16,0 z"/></g>
+          </g>
+          <g opacity="0.85" style="fill:var(--cool)">
+            <g transform="translate(434,92)"><circle cx="8" cy="6" r="6"/><path d="M0,22 a8,8 0 0,1 16,0 z"/></g>
+            <g transform="translate(460,92)"><circle cx="8" cy="6" r="6"/><path d="M0,22 a8,8 0 0,1 16,0 z"/></g>
+            <g transform="translate(486,92)"><circle cx="8" cy="6" r="6"/><path d="M0,22 a8,8 0 0,1 16,0 z"/></g>
+            <g transform="translate(512,92)"><circle cx="8" cy="6" r="6"/><path d="M0,22 a8,8 0 0,1 16,0 z"/></g>
+            <g transform="translate(538,92)"><circle cx="8" cy="6" r="6"/><path d="M0,22 a8,8 0 0,1 16,0 z"/></g>
+          </g>
+        </g>
+        <line x1="169" y1="78" x2="169" y2="128" style="stroke:var(--line-soft)"/>
+        <line x1="429" y1="78" x2="429" y2="128" style="stroke:var(--line-soft)"/>
+      </svg>
+      <div class="cap">Across 20 people, no default won on opinion: half had no strong preference and the rest split evenly. <em>Illustrative.</em></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">05</span><h2>Open is faster, especially deeper in the screen</h2></div>
+    <div class="prose reveal" style="transition-delay:.06s">
+      <p>Behavior told a clearer story than opinion did. People reached content faster when the first section was already open, and the advantage grew the further down the screen the target sat. Starting collapsed taxes every tap. Starting open pays that back, and it pays the most on the longest screens.</p>
+    </div>
+
+    <div class="fig reveal" style="transition-delay:.1s">
+      <div class="flabel">FIG.03 — Time to reach content, by screen depth</div>
+      <svg class="plot" viewBox="0 0 620 320" role="img" aria-label="Time to reach content rises with screen depth for both defaults, but rises faster when sections start collapsed, so the gap widens deeper in the screen.">
+        <line x1="92" y1="40" x2="92" y2="246" style="stroke:var(--line)"/>
+        <line x1="92" y1="246" x2="560" y2="246" style="stroke:var(--line)"/>
+        <text x="70" y="150" text-anchor="middle" font-size="10.5" transform="rotate(-90 70 150)" style="font-family:var(--font-mono);fill:var(--ink-mute)">slower  ◄  time to reach  ►  faster</text>
+        <text x="170" y="268" text-anchor="middle" font-size="10.5" style="font-family:var(--font-mono);fill:var(--ink-2)">TOP</text>
+        <text x="326" y="268" text-anchor="middle" font-size="10.5" style="font-family:var(--font-mono);fill:var(--ink-2)">MIDDLE</text>
+        <text x="482" y="268" text-anchor="middle" font-size="10.5" style="font-family:var(--font-mono);fill:var(--ink-2)">BOTTOM</text>
+        <text x="326" y="292" text-anchor="middle" font-size="10" letter-spacing="0.06em" style="font-family:var(--font-mono);fill:var(--ink-mute)">how far down the screen</text>
+
+        <line x1="170" y1="120" x2="170" y2="140" stroke-width="1" stroke-dasharray="2 3" opacity="0.65" style="stroke:var(--warn)"/>
+        <line x1="326" y1="134" x2="326" y2="182" stroke-width="1" stroke-dasharray="2 3" opacity="0.75" style="stroke:var(--warn)"/>
+        <line x1="482" y1="150" x2="482" y2="224" stroke-width="1.4" stroke-dasharray="2 3" opacity="0.9" style="stroke:var(--warn)"/>
+        <text x="498" y="186" font-size="10" opacity="0.9" style="font-family:var(--font-mono);fill:var(--warn)">gap</text>
+        <text x="498" y="199" font-size="10" opacity="0.9" style="font-family:var(--font-mono);fill:var(--warn)">widens</text>
+
+        <polyline fill="none" stroke-width="2.4" points="170,140 326,182 482,224" style="stroke:var(--cool)"/>
+        <circle cx="170" cy="140" r="4" style="fill:var(--cool)"/><circle cx="326" cy="182" r="4" style="fill:var(--cool)"/><circle cx="482" cy="224" r="4" style="fill:var(--cool)"/>
+        <polyline fill="none" stroke-width="2.4" points="170,120 326,134 482,150" style="stroke:var(--accent)"/>
+        <circle cx="170" cy="120" r="4" style="fill:var(--accent)"/><circle cx="326" cy="134" r="4" style="fill:var(--accent)"/><circle cx="482" cy="150" r="4" style="fill:var(--accent)"/>
+
+        <g font-size="11" style="font-family:var(--font-mono)">
+          <line x1="118" y1="62" x2="140" y2="62" stroke-width="2.4" style="stroke:var(--accent)"/>
+          <text x="146" y="66" style="fill:var(--ink-2)">start open</text>
+          <line x1="240" y1="62" x2="262" y2="62" stroke-width="2.4" style="stroke:var(--cool)"/>
+          <text x="268" y="66" style="fill:var(--ink-2)">start collapsed</text>
+        </g>
+      </svg>
+      <div class="cap">Both defaults slow down deeper in the screen, but starting collapsed slows faster, so the gap is widest at the bottom. <em>Illustrative shape, not measured values.</em></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">06</span><h2>The call</h2></div>
+    <div class="recs">
+      <div class="rec reveal" style="transition-delay:.06s">
+        <span class="num">Recommendation 01</span>
+        <h3>Default to the first section open</h3>
+        <p>It measurably speeds up reaching content at no cost in stated preference. A low-risk default the team could ship with confidence.</p>
+      </div>
+      <div class="rec reveal" style="transition-delay:.12s">
+        <span class="num">Recommendation 02</span>
+        <h3>Honor the deep link</h3>
+        <p>When someone opens the app from a deep link, open the section they came for instead of always the first. Let intent override the default.</p>
+      </div>
+    </div>
+
+    <div class="fig reveal" style="transition-delay:.14s">
+      <div class="flabel">FIG.04 — The shipping rule</div>
+      <svg class="plot" viewBox="0 0 620 212" role="img" aria-label="Decision rule: if the user arrived via a deep link, open that section; otherwise open the first section by default.">
+        <g font-size="11.5" style="font-family:var(--font-mono)">
+          <rect x="28" y="80" width="132" height="40" rx="6" style="fill:var(--panel);stroke:var(--line)"/>
+          <text x="94" y="104" text-anchor="middle" style="fill:var(--ink-2)">User opens screen</text>
+
+          <line x1="160" y1="100" x2="236" y2="100" stroke-width="1.4" style="stroke:var(--ink-mute)"/>
+          <path d="M236,100 l-7,-4 v8 z" style="fill:var(--ink-mute)"/>
+
+          <path d="M300,58 l58,42 l-58,42 l-58,-42 z" style="fill:var(--panel);stroke:var(--accent)"/>
+          <text x="300" y="104" text-anchor="middle" font-size="12.5" style="fill:var(--ink)">Deep link?</text>
+
+          <line x1="358" y1="100" x2="430" y2="100" stroke-width="1.4" style="stroke:var(--accent)"/>
+          <path d="M430,100 l-7,-4 v8 z" style="fill:var(--accent)"/>
+          <text x="394" y="90" text-anchor="middle" font-size="10" style="fill:var(--accent)">YES</text>
+          <rect x="430" y="80" width="158" height="40" rx="6" style="fill:var(--accent-wash-2);stroke:var(--accent)"/>
+          <text x="509" y="104" text-anchor="middle" style="fill:var(--ink)">Open that section</text>
+
+          <line x1="300" y1="142" x2="300" y2="170" stroke-width="1.4" style="stroke:var(--ink-mute)"/>
+          <path d="M300,170 l-4,-7 h8 z" style="fill:var(--ink-mute)"/>
+          <text x="315" y="160" font-size="10" style="fill:var(--ink-mute)">NO</text>
+          <rect x="228" y="170" width="144" height="34" rx="6" style="fill:var(--panel);stroke:var(--line)"/>
+          <text x="300" y="191" text-anchor="middle" style="fill:var(--ink-2)">Open the first section</text>
+        </g>
+      </svg>
+      <div class="cap">Open-first as the baseline, with a deep link allowed to override it. <em>Conceptual.</em></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">07</span><h2>What it changed</h2></div>
+    <div class="outcome reveal" style="transition-delay:.06s">
+      <p>The design team adopted the <b>open-first direction for the redesigned section screens</b>, and the deep-link rule shipped with it, so an incoming link now lands people on the section they actually wanted. The timing result is what moved the conversation from opinion to a decision the team could commit to.</p>
+      <p class="note">I scoped a larger unmoderated timing test as the follow-up to size the effect before the team leaned on it any harder.</p>
+      <p>Small, real, and settled by watching what people do. My favorite kind of question.</p>
+    </div>
+    <div class="mtools reveal" style="transition-delay:.12s"><b>METHODS &amp; TOOLS</b><br>Moderated usability testing · within-subjects A/B · task-timing analysis · Figma prototypes · stated preference vs. behavior</div>
+  </div>
+</section>
+
+
+<section class="cta">
+  <div class="wrap">
+    <a class="back reveal" style="transition-delay:.08s" href="https://leohuang4977.github.io/projects/">← All projects</a>
+    <footer class="foot">
+      <span>© 2026 Leo Huang</span>
+      <span class="coords">43.6532° N, 79.3832° W — Toronto, ON</span>
+    </footer>
+  </div>
+</section>
+
+</main>
+<script>
+  /* scope-fx · unified page script (reveal · counters · progress · shrink · sweep) — identical on every project page */
+  (function(){
+    var de=document.documentElement;
+    de.classList.add('js');
+    if(de.dataset.lhFx){return;} de.dataset.lhFx='1'; /* guard so a site-wide enhancement pass can no-op this block */
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* scroll progress + shrinking topbar */
+    var bar=document.createElement('div'); bar.id='scopebar'; document.body.appendChild(bar);
+    var topbar=document.querySelector('header.topbar'); var ticking=false;
+    function onScroll(){
+      if(ticking)return; ticking=true;
+      requestAnimationFrame(function(){
+        var max=de.scrollHeight-de.clientHeight;
+        bar.style.width=(max>0?(window.scrollY/max)*100:0)+'%';
+        if(topbar)topbar.classList.toggle('shrunk',window.scrollY>24);
+        ticking=false;
+      });
+    }
+    window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+    /* oscilloscope sweep targets: every figure panel */
+    document.querySelectorAll('.figbox, figure.fig, div.fig').forEach(function(f){f.classList.add('sweepfx');});
+
+    /* count-up (NaN-safe: first frame gets a real timestamp via rAF) */
+    function countUp(el){
+      if(el.dataset.done)return;
+      var t=parseFloat(el.dataset.count); if(isNaN(t))return;
+      el.dataset.done='1';
+      var fmt=function(n){return Math.round(n).toLocaleString('en-US');};
+      if(reduce){el.textContent=fmt(t);return;}
+      var dur=1100,start=null;
+      function tick(now){
+        if(start===null)start=now;
+        var p=Math.min((now-start)/dur,1);
+        el.textContent=fmt((1-Math.pow(1-p,3))*t);
+        if(p<1)requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    function arm(el){
+      el.classList.add('in');
+      if(el.classList.contains('sweepfx')&&!reduce)el.classList.add('swept');
+      el.querySelectorAll('[data-count]').forEach(countUp);
+    }
+
+    /* safety net: everything visible + counters finalized even if observers never fire */
+    setTimeout(function(){
+      document.querySelectorAll('.reveal,.sweepfx').forEach(arm);
+      document.querySelectorAll('[data-count]').forEach(countUp);
+    },1800);
+
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){
+        es.forEach(function(e){if(e.isIntersecting){arm(e.target);io.unobserve(e.target);}});
+      },{threshold:0.12,rootMargin:'0px 0px -7% 0px'});
+      document.querySelectorAll('.reveal,.sweepfx,.stat-trigger').forEach(function(el){io.observe(el);});
+    } else {
+      document.querySelectorAll('.reveal,.sweepfx').forEach(arm);
+    }
+  })();
+</script>
+</body>
+</html>
