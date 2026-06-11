@@ -5,7 +5,7 @@
    Page-specific CSS stays inline in each page's own <style> block. */
 :root{
   --paper:#0D0E12; --paper-2:#15171D; --panel:#15171C;
-  --ink:#E9E7DF; --ink-2:#B6B4AB; --ink-mute:#7C7E86;
+  --ink:#E9E7DF; --ink-2:#B6B4AB; --ink-mute:#84868E;
   --line:rgba(255,255,255,0.13); --line-soft:rgba(255,255,255,0.06);
   --accent:#10B981; --accent-deep:#059669; --cool:#5BA8E8; --warn:#C76B45;
   --font-display:'Fraunces',Georgia,serif;
@@ -21,6 +21,10 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;back
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:1}
 
 a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+/* skip link — off-screen until keyboard-focused, then drops in below the top edge */
+.skip{position:absolute;left:8px;top:-48px;z-index:100;background:var(--accent);color:var(--paper);font-family:var(--font-mono);font-size:13px;font-weight:600;letter-spacing:0.04em;padding:10px 16px;border-radius:0 0 4px 4px;text-decoration:none;transition:top .18s}
+.skip:focus{top:0}
 
 .reveal{transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
 html.js .reveal{opacity:0;transform:translateY(22px)}
