@@ -74,7 +74,7 @@ scope_nav: about
       <div class="hero-text">
         <h1 class="reveal">
           I study how
-          <span class="rotate" data-words="people, users, minds, teams" aria-hidden="true">people</span><span class="sr-only">people</span>
+          <span class="rotate" data-words="people, users, minds, teams, machines">people</span>
           make decisions, behave, and make sense of their world.
         </h1>
         <p class="lede reveal" style="transition-delay:.08s">I'm a psychology PhD and researcher who brings experimental rigor to the messy, human reality of how people interact with services and products.</p>
@@ -100,7 +100,7 @@ scope_nav: about
       <div class="row"><span class="k">Years researching</span><span class="dots"></span><span class="v"><span data-count="9">9</span></span></div>
       <div class="row"><span class="k">Studies run</span><span class="dots"></span><span class="v"><span data-count="100">100</span>+</span></div>
       <div class="row"><span class="k">People studied</span><span class="dots"></span><span class="v"><span data-count="10000">10,000</span>+</span></div>
-      <div class="row"><span class="k">Days on Earth</span><span class="dots"></span><span class="v"><span data-count="10692" data-days-since="1997-02-27">10,692</span></span></div>
+      <div class="row"><span class="k">Days on Earth</span><span class="dots"></span><span class="v"><span data-count="10693" data-days-since="1997-03-01">10,693</span></span></div>
     </div>
   </div>
 </section>
@@ -208,4 +208,30 @@ scope_nav: about
     el.setAttribute('data-count', String(days));   // existing countUp() animates to this
     el.textContent = days.toLocaleString('en-US');  // no-JS-animation fallback
   })();
+</script>
+
+<script type="application/ld+json">
+{% raw %}
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Leo Huang",
+  "url": "https://leohuang4977.github.io/",
+  "image": "https://leohuang4977.github.io/assets/img/leo-portrait.jpg",
+  "jobTitle": "UX Researcher",
+  "description": "Social-psychology PhD and UX researcher studying how people decide, behave, and make sense of the world and machines.",
+  "homeLocation": { "@type": "Place", "name": "Toronto, ON, Canada" },
+  "alumniOf": [
+    { "@type": "CollegeOrUniversity", "name": "University of Toronto" },
+    { "@type": "CollegeOrUniversity", "name": "Queen's University" }
+  ],
+  "knowsAbout": ["UX Research", "Social Psychology", "Human-AI Interaction", "Experimentation", "Causal Inference"],
+  "sameAs": [
+    "https://scholar.google.com/citations?user=8s9xOScAAAAJ&hl=en",
+    "https://github.com/leohuang4977",
+    "https://www.linkedin.com/in/leo-huang-870ab2178",
+    "https://twitter.com/LeoHuan28578819"
+  ]
+}
+{% endraw %}
 </script>

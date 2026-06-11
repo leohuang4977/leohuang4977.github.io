@@ -11,6 +11,17 @@
     document.querySelectorAll('.rotate[data-words]').forEach(function (el) {
       var words = el.getAttribute('data-words').split(',').map(function (w){return w.trim();}).filter(Boolean);
       if (words.length < 2) return;
+      // Markup ships ONE word. Build the static screen-reader twin and hide the
+      // animated word from assistive tech + crawlers, so the sentence is read /
+      // indexed once ("...how people make decisions...") instead of doubled.
+      var base = (el.textContent || words[0]).trim();
+      el.setAttribute('aria-hidden', 'true');
+      if (!(el.nextSibling && el.nextSibling.classList && el.nextSibling.classList.contains('sr-only'))) {
+        var twin = document.createElement('span');
+        twin.className = 'sr-only';
+        twin.textContent = base;
+        el.parentNode.insertBefore(twin, el.nextSibling);
+      }
       var probe = document.createElement('span');
       probe.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;font:inherit;';
       el.appendChild(probe);
