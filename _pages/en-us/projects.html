@@ -18,6 +18,10 @@ nav_order: 3
   .projects-hero .note{margin-top:24px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-mute);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
   .projects-hero .note .num{font-family:var(--font-display);font-size:20px;color:var(--accent);font-weight:500}
   .projects-grid{padding:34px 0 24px}
+  /* Interactive & Data Projects — all selectors scoped to this section only */
+  .projects-xtra{padding:10px 0 56px}
+  .projects-xtra .sec-dek{margin:-26px 0 30px;font-size:clamp(15px,1.6vw,17px);color:var(--ink-2);line-height:1.55;max-width:60ch}
+  .projects-xtra .card .cover{display:block;width:calc(100% + 52px);max-width:none;height:auto;margin:-26px -26px 0;border-bottom:1px solid var(--line)}
 </style>
 
 <section class="projects-hero">
@@ -89,6 +93,37 @@ nav_order: 3
         <p>A moderated mobile usability test comparing two navigation defaults — and what users actually did.</p>
         <div class="foot"><svg class="spark" aria-hidden="true" width="74" height="22" viewBox="0 0 74 22"><rect x="6" y="6" width="12" height="14"/><rect x="22" y="11" width="12" height="9"/><rect x="40" y="4" width="12" height="16"/><rect x="56" y="13" width="12" height="7"/></svg><span class="go">VIEW →</span></div>
       </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="projects-grid projects-xtra">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Interactive &amp; Data Projects</h2></div>
+    <p class="sec-dek reveal">Self-directed builds — data pipelines, maps, and computer-vision experiments.</p>
+    <div class="cards">
+
+      <a class="card reveal" href="https://leohuang4977.github.io/ghost-rivers-toronto/" target="_blank" rel="noopener">
+        <img class="cover" src="/assets/img/ghost-rivers-cover.png" alt="Dark map of downtown Toronto with its buried creeks glowing in cyan" width="1600" height="1000" loading="lazy">
+        <span class="tag">Interactive Map</span>
+        <h3>Ghost Rivers of Toronto</h3>
+        <p>An interactive map of Toronto's buried creeks. Scrub through 200 years and watch them disappear as the city grows.</p>
+        <div class="foot"><svg class="spark" aria-hidden="true" width="74" height="22" viewBox="0 0 74 22"><polyline fill="none" stroke-width="1.6" points="0,5 10,8 18,7 28,12 38,11 48,16 58,15 74,19"/></svg><span class="go">VIEW →</span></div>
+      </a>
+
+      {% comment %}
+      Draft — Pokémon computer-vision project. Fill in the copy below, drop a 1600x1000
+      cover at /assets/img/pokemon-cover.png, set the href, then move this card out of
+      the comment block.
+      <a class="card reveal" style="transition-delay:.08s" href="/projects/POKEMON-SLUG/">
+        <img class="cover" src="/assets/img/pokemon-cover.png" alt="" width="1600" height="1000" loading="lazy">
+        <span class="tag">Computer Vision</span>
+        <h3>TITLE</h3>
+        <p>ONE-LINER.</p>
+        <div class="foot"><svg class="spark" aria-hidden="true" width="74" height="22" viewBox="0 0 74 22"><polyline fill="none" stroke-width="1.6" points="0,16 12,12 24,14 36,7 48,10 60,5 74,8"/></svg><span class="go">VIEW →</span></div>
+      </a>
+      {% endcomment %}
 
     </div>
   </div>
