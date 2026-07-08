@@ -1,5 +1,5 @@
-{% if site.enable_google_analytics %}
-  <!-- Global site tag (gtag.js) - Google Analytics -->
+{% if site.enable_google_analytics and site.google_analytics %}
+  <!-- Global site tag (gtag.js) - Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -8,6 +8,15 @@
     }
     gtag('js', new Date());
     gtag('config', '{{ site.google_analytics }}');
+    // Clean key event when a resume or CV PDF is downloaded. Delegated, so it needs no markup
+    // on the link (GA4 enhanced measurement also logs its own file_download automatically).
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href*="/assets/pdf/"]');
+      if (!a) return;
+      var f = (a.getAttribute('href') || '').split('/').pop().toLowerCase();
+      if (f.indexOf('resume') > -1) gtag('event', 'resume_download', { file_name: f });
+      else if (f.indexOf('cv') > -1) gtag('event', 'cv_download', { file_name: f });
+    });
   </script>
 {% endif %}
 {% if site.enable_cronitor_analytics %}
