@@ -165,6 +165,24 @@ permalink: /projects/in-channel-knowledge-agents/
   @media (prefers-reduced-motion:reduce){html.js .sweepfx::after{display:none!important}}
   .skip{position:absolute;left:8px;top:-48px;z-index:100;background:var(--accent);color:var(--paper);font-family:var(--font-mono);font-size:13px;font-weight:600;letter-spacing:0.04em;padding:10px 16px;border-radius:0 0 4px 4px;text-decoration:none;transition:top .18s}
   .skip:focus{top:0}
+/* cs-shows + cs-pager (revision 2026-10) */
+.cs-shows{padding:0 0 8px}
+.cs-shows .wrap{display:grid;gap:10px;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:16px 0}
+.cs-shows-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+.cs-shows-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);min-width:52px}
+.cs-tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.cs-tags a{display:inline-block;font-family:var(--font-mono);font-size:12px;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:4px 11px;text-decoration:none;transition:border-color .2s,color .2s}
+.cs-tags a:hover,.cs-tags a:focus-visible{border-color:var(--accent);color:var(--accent)}
+.cs-fits{margin:0;font-size:14px;color:var(--ink-2)}
+.cs-pager{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 22px}
+.cs-pager a{display:block;border:1px solid var(--line);border-radius:4px;padding:14px 16px;color:var(--ink);text-decoration:none;font-family:var(--font-display);font-size:18px;line-height:1.25;transition:border-color .2s}
+.cs-pager a span{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:6px}
+.cs-pager .cs-next{text-align:right}
+.cs-pager a:hover,.cs-pager a:focus-visible{border-color:var(--accent)}
+@media (max-width:560px){.cs-pager{grid-template-columns:1fr}.cs-pager .cs-next{text-align:left}}
+/* fix (c2, verified): the padding above zeroes .wrap's side gutters; keep borders on the text column */
+.cs-shows .wrap{width:calc(100% - 56px);max-width:calc(var(--maxw) - 56px)}
+@media (max-width:760px){.cs-shows .wrap{width:calc(100% - 40px)}}
 </style>
 </head>
 <body>
@@ -186,9 +204,9 @@ permalink: /projects/in-channel-knowledge-agents/
 
 <section class="study-hero">
   <div class="wrap">
-    <div class="kicker reveal"><span class="rule"></span>Mixed-Method · Survey + Behavioral Telemetry · Team Chat</div>
-    <h1 class="reveal" style="transition-delay:.06s">What Users Want from In-Channel Knowledge Agents</h1>
-    <p class="dek reveal" style="transition-delay:.12s">Where an AI help-agent earns its place inside team chat, settled by reading what people say about getting help against what they actually do to get it.</p>
+    <div class="kicker reveal"><span class="rule"></span>Human–AI interaction · Survey + behavioral telemetry · Team chat</div>
+    <h1 class="reveal" style="transition-delay:.06s">What users want from in-channel knowledge agents</h1>
+    <p class="dek reveal" style="transition-delay:.12s">An AI help-agent went out as a pilot inside team chat, scoped to the knowable domains this study marked out (policy, IT, how-to), with live project judgment left to people. The scope line came from reading what people say about getting help against what they actually do to get it.</p>
 
     <p class="note reveal" style="transition-delay:.16s"><b>Portfolio version.</b> A generalized, anonymized account of real research. The product is unnamed and every figure is <em>illustrative</em>, recreated to show the method and the reasoning rather than actual results.</p>
 
@@ -196,6 +214,22 @@ permalink: /projects/in-channel-knowledge-agents/
       <div class="ms"><span class="k">Method</span><span class="v">Mixed-method, triangulated</span></div>
       <div class="ms"><span class="k">Lenses</span><span class="v">Survey + behavioral telemetry</span></div>
       <div class="ms"><span class="k">Sample</span><span class="v">N = 412 survey · 6-week telemetry window</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- cs-shows (revision 2026-10) -->
+<section class="cs-shows" aria-label="What this project shows">
+  <div class="wrap">
+    <div class="cs-shows-row"><span class="cs-shows-label">Shows</span>
+      <ul class="cs-tags">
+        <li><a href="/projects/?f=human-ai">Human–AI interaction</a></li>
+        <li><a href="/projects/?f=data-science">Behavioral data science</a></li>
+        <li><a href="/projects/?f=journeys">Decision &amp; journey design</a></li>
+      </ul>
+    </div>
+    <div class="cs-shows-row"><span class="cs-shows-label">Fits</span>
+      <p class="cs-fits">Quantitative UX research · Research scientist (human–AI interaction) · AI enablement and workflow design</p>
     </div>
   </div>
 </section>
@@ -284,8 +318,8 @@ permalink: /projects/in-channel-knowledge-agents/
     <div class="sec-head reveal"><span class="idx">04</span><h2>What people say versus what they do</h2></div>
     <div class="prose reveal" style="transition-delay:.06s">
       <p>This is the finding the mixed-method design was built to catch. On the survey, people described themselves as searching the knowledge base first. In the telemetry, they overwhelmingly <b>direct-messaged a person</b> instead.</p>
-      <p>The help is real and generous. It just happens in private DMs, where no one else can see it and it never becomes reusable. The knowledge base stays quiet not because people refuse to help, but because helping privately is faster.</p>
-      <p class="pull">That one disagreement reframed the product. The job is not to push people toward search. It is to surface what is already locked inside DMs and threads, and turn one-off answers into something the whole team can find later.</p>
+      <p>The help is real and generous. It just happens in private DMs, where no one else can see it and it never becomes reusable. The knowledge base stays quiet because helping privately is faster.</p>
+      <p class="pull">That one disagreement reframed the product. Instead of pushing people toward search, the agent should surface what is already locked inside DMs and threads, and turn one-off answers into something the whole team can find later.</p>
     </div>
 
     <figure class="fig reveal" style="transition-delay:.1s">
@@ -435,6 +469,10 @@ permalink: /projects/in-channel-knowledge-agents/
 
 <section class="cta">
   <div class="wrap">
+    <nav class="cs-pager" aria-label="More case studies">
+      <a class="cs-prev" href="/projects/ai-agents/"><span>Previous</span>AI agents at work</a>
+      <a class="cs-next" href="/projects/mortgage-switching/"><span>Next</span>Mortgage switching</a>
+    </nav>
     <div class="backrow reveal">
       <a href="https://leohuang4977.github.io/projects/">← All projects</a>
     </div>

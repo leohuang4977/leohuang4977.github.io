@@ -152,6 +152,24 @@ permalink: /projects/competitive-ux-research/
   @media (prefers-reduced-motion:reduce){html.js .sweepfx::after{display:none!important}}
   .skip{position:absolute;left:8px;top:-48px;z-index:100;background:var(--accent);color:var(--paper);font-family:var(--font-mono);font-size:13px;font-weight:600;letter-spacing:0.04em;padding:10px 16px;border-radius:0 0 4px 4px;text-decoration:none;transition:top .18s}
   .skip:focus{top:0}
+/* cs-shows + cs-pager (revision 2026-10) */
+.cs-shows{padding:0 0 8px}
+.cs-shows .wrap{display:grid;gap:10px;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:16px 0}
+.cs-shows-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+.cs-shows-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);min-width:52px}
+.cs-tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.cs-tags a{display:inline-block;font-family:var(--font-mono);font-size:12px;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:4px 11px;text-decoration:none;transition:border-color .2s,color .2s}
+.cs-tags a:hover,.cs-tags a:focus-visible{border-color:var(--accent);color:var(--accent)}
+.cs-fits{margin:0;font-size:14px;color:var(--ink-2)}
+.cs-pager{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 22px}
+.cs-pager a{display:block;border:1px solid var(--line);border-radius:4px;padding:14px 16px;color:var(--ink);text-decoration:none;font-family:var(--font-display);font-size:18px;line-height:1.25;transition:border-color .2s}
+.cs-pager a span{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:6px}
+.cs-pager .cs-next{text-align:right}
+.cs-pager a:hover,.cs-pager a:focus-visible{border-color:var(--accent)}
+@media (max-width:560px){.cs-pager{grid-template-columns:1fr}.cs-pager .cs-next{text-align:left}}
+/* fix (c2, verified): the padding above zeroes .wrap's side gutters; keep borders on the text column */
+.cs-shows .wrap{width:calc(100% - 56px);max-width:calc(var(--maxw) - 56px)}
+@media (max-width:760px){.cs-shows .wrap{width:calc(100% - 40px)}}
 </style>
 </head>
 <body>
@@ -173,10 +191,25 @@ permalink: /projects/competitive-ux-research/
 
 <section class="case-hero">
   <div class="wrap">
-    <div class="kicker reveal"><span class="rule"></span>Competitive Benchmarking · Mixed-Method Usability</div>
+    <div class="kicker reveal"><span class="rule"></span>Within-subjects experiment · Client acquisition</div>
     <h1 class="reveal" style="transition-delay:.06s">Where a wealth-management site stood against its rivals: what to <em>fix first</em>.</h1>
-    <p class="lede reveal" style="transition-delay:.12s">A within-subjects competitive benchmark and a deep-dive page evaluation, both run with high-net-worth users, turned a vague <b>"the site underperforms"</b> into a prioritized, evidence-backed brief for the redesign.</p>
+    <p class="lede reveal" style="transition-delay:.12s">The client approved a redesign built on this research and had it implemented within the quarter. Two studies with high-net-worth users shaped it: a within-subjects benchmark against rival sites, and a deep dive on the client's own pages. Together they turned a vague <b>"the site underperforms"</b> into a prioritized, evidence-backed brief.</p>
     <div class="disc reveal" style="transition-delay:.18s">// Anonymized account of confidential client work. The client and its competitors are disguised, and the charts are illustrative recreations made for this portfolio.</div>
+  </div>
+</section>
+
+<!-- cs-shows (revision 2026-10) -->
+<section class="cs-shows" aria-label="What this project shows">
+  <div class="wrap">
+    <div class="cs-shows-row"><span class="cs-shows-label">Shows</span>
+      <ul class="cs-tags">
+        <li><a href="/projects/?f=experiments">Experiments &amp; causal inference</a></li>
+        <li><a href="/projects/?f=journeys">Decision &amp; journey design</a></li>
+      </ul>
+    </div>
+    <div class="cs-shows-row"><span class="cs-shows-label">Fits</span>
+      <p class="cs-fits">UX and product research · Quantitative UX research · Customer journey, lifecycle and decisioning</p>
+    </div>
   </div>
 </section>
 
@@ -308,7 +341,7 @@ permalink: /projects/competitive-ux-research/
 
     <div class="body-copy reveal" style="transition-delay:.06s">
       <div class="subhead">How it scored on the dimensions that mattered</div>
-      <p>The gap wasn't uniform. The site held its own on some attributes and trailed on others, which is exactly the nuance that tells a design team where to spend effort.</p>
+      <p>The gap wasn't uniform. The site held its own on some attributes and trailed on others, and that split is what tells a design team where to spend effort.</p>
     </div>
 
     <div class="figbox reveal">
@@ -467,6 +500,10 @@ permalink: /projects/competitive-ux-research/
 
 <section class="contact">
   <div class="wrap">
+    <nav class="cs-pager" aria-label="More case studies">
+      <a class="cs-prev" href="/projects/advice-page-optimization/"><span>Previous</span>Advisor contact page</a>
+      <a class="cs-next" href="/projects/generational-wealth-transfer/"><span>Next</span>Generational wealth transfer</a>
+    </nav>
     <a class="backlink reveal" href="https://leohuang4977.github.io/projects/">&#8592; All projects</a>
     <footer class="foot">
       <span>© 2026 Leo Huang</span>
