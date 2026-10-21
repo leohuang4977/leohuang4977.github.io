@@ -1,0 +1,134 @@
+/* Home page (/, _pages/en-us/about.html). Loaded through the page's extra_css hook.
+   Builds on assets/scope.css tokens and components; nothing here is shared.
+   Revision 2026-10: decision-framed hero, capability pillars, team fit, cover cards. */
+
+/* ---------- hero ---------- */
+.hero{padding:78px 0 30px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:48px;align-items:center}
+.hero h1{font-family:var(--font-display);font-weight:500;font-size:clamp(34px,4.6vw,56px);line-height:1.07;letter-spacing:-0.015em;margin-bottom:26px}
+.hero .lede{font-size:clamp(17px,1.9vw,20px);color:var(--ink-2);max-width:54ch;line-height:1.55}
+
+/* availability readout: each item carries its own drawn marker, so a wrapped line
+   still starts cleanly and screen readers hear a plain three-item list */
+.avail{list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px;margin-top:24px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink-2)}
+.avail li{display:inline-flex;align-items:center;white-space:nowrap}
+.avail li::before{content:"";flex:none;width:5px;height:5px;border-radius:50%;border:1px solid var(--ink-mute);margin-right:10px}
+.avail li:first-child::before{width:8px;height:8px;border:none;background:var(--accent);box-shadow:0 0 0 3px rgba(16,185,129,0.2)}
+
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.hbtn{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:3px;padding:13px 20px;transition:border-color .25s,color .25s,background .25s,transform .25s}
+.hbtn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+.hbtn.primary{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+.hbtn.primary:hover{background:var(--accent-deep);border-color:var(--accent-deep);color:var(--paper)}
+
+.portrait{margin:0;border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:8px;align-self:start}
+.portrait img{display:block;width:100%;height:auto;border-radius:2px}
+
+/* staggered entrance for the hero only */
+.reveal.d1{transition-delay:.08s}
+.reveal.d2{transition-delay:.16s}
+.reveal.d3{transition-delay:.24s}
+
+/* section rhythm: the hero already carries bottom space */
+.sec.first{padding-top:56px}
+.sec.tight{padding-top:0}
+
+/* ---------- 01 what I do: four channels ---------- */
+.pillars{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border:1px solid var(--line);border-radius:3px;background:var(--panel)}
+.pillar{display:flex;flex-direction:column;gap:14px;padding:24px 28px 26px;min-width:0}
+.pillar:nth-child(odd){border-right:1px solid var(--line)}
+.pillar:nth-child(n+3){border-top:1px solid var(--line)}
+.pillar h3{font-family:var(--font-display);font-weight:500;font-size:23px;line-height:1.2;letter-spacing:-0.01em}
+.pillar p{font-size:15.5px;line-height:1.6;color:var(--ink-2)}
+.trace{display:block;width:100%;height:auto;border:1px solid var(--line-soft);border-radius:2px;background:linear-gradient(90deg,var(--line-soft) 1px,transparent 1px) 0 0/22px 100%,var(--paper)}
+.trace .a,.trace .d,.trace .m,.trace .h,.trace .x{fill:none;vector-effect:non-scaling-stroke}
+.trace .a{stroke:var(--accent);stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round}
+.trace .h{stroke:var(--ink-2);stroke-width:1.2;stroke-linejoin:round;opacity:.75}
+.trace .x{stroke:var(--ink-mute);stroke-width:1.4;stroke-linecap:round}
+.trace .d{stroke:var(--ink-mute);stroke-width:1.2;stroke-dasharray:3 4}
+.trace .m{stroke:var(--ink-mute);stroke-width:1;stroke-dasharray:2 4;opacity:.7}
+.trace .fa{fill:var(--accent)}
+.trace .fd{fill:var(--ink-mute)}
+.trace .ring{fill:var(--paper);stroke:var(--accent);stroke-width:1.6;vector-effect:non-scaling-stroke}
+.ev{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:auto;padding-top:4px}
+.ev-k{font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-mute);margin-right:4px}
+.ev a{display:inline-block;font-family:var(--font-mono);font-size:12px;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:4px 11px;text-decoration:none;transition:border-color .2s,color .2s}
+.ev a:hover,.ev a:focus-visible{border-color:var(--accent);color:var(--accent)}
+
+/* ---------- 02 where I fit ---------- */
+.fit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px 40px}
+.fit-group h3{display:flex;align-items:center;gap:10px;margin-bottom:6px;font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent)}
+.fit-group h3::before{content:"";width:18px;height:1px;background:var(--accent);flex:none}
+.fit-group ul{list-style:none}
+.fit-group li{padding:11px 0;border-bottom:1px solid var(--line-soft);font-size:17px;line-height:1.35;color:var(--ink)}
+.fit-note{margin-top:38px;max-width:62ch;font-family:var(--font-display);font-size:clamp(19px,2.1vw,23px);line-height:1.45;color:var(--ink-2)}
+
+/* ---------- 03 selected work: cover cards ---------- */
+.work .cover{display:block;margin:-26px -26px 6px;aspect-ratio:2/1;overflow:hidden;border-bottom:1px solid var(--line);background:var(--paper)}
+/* Covers are older art in another palette; tint them to the scope's phosphor green.
+   A filter chain (no url() reference) so every browser renders it the same way. */
+.work .cover img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 40%;filter:grayscale(1) sepia(1) hue-rotate(105deg) saturate(1.9) brightness(.82) contrast(1.15)}
+/* two pillar tags per card: wrap between tags, never inside one */
+.work .tag{flex-wrap:wrap;column-gap:8px;row-gap:3px;line-height:1.5}
+.work .tag span{white-space:nowrap}
+.work .foot{justify-content:flex-end}
+
+/* ---------- 04 from body to machine ---------- */
+.tl{position:relative;padding:40px 0 8px}
+.tl .track{position:absolute;left:7%;right:7%;top:56px;height:2px;background:var(--line)}
+.tl .track .glow{position:absolute;left:0;top:0;height:100%;width:0;background:var(--accent);box-shadow:0 0 8px var(--accent);transition:width 1.5s cubic-bezier(.2,.7,.2,1)}
+.tl .nodes{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);position:relative}
+.tl .tn{display:flex;flex-direction:column;align-items:center;text-align:center;cursor:default;padding:0 8px}
+.tl .tn .dot{width:15px;height:15px;border-radius:50%;background:var(--panel);border:2px solid var(--accent);margin-bottom:20px;transition:box-shadow .25s,transform .25s;z-index:2}
+.tl .tn:hover .dot{box-shadow:0 0 12px var(--accent);transform:scale(1.25)}
+.tl .tn .stage{font-family:var(--font-display);font-size:23px;font-weight:500}
+.tl .tn .field{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:var(--accent);margin-top:4px}
+.tl .tn .n{font-family:var(--font-mono);font-size:10.5px;color:var(--ink-mute);margin-top:4px}
+
+/* ---------- 05 about, research network, numbers ---------- */
+.about-body p{max-width:68ch;font-size:18px;line-height:1.65;color:var(--ink-2);margin-bottom:20px}
+.about-body p:last-child{margin-bottom:0}
+
+.netbox{margin:44px 0 0;border:1px solid var(--line);background:linear-gradient(90deg,var(--line-soft) 1px,transparent 1px) 0 0/64px 100%,var(--panel);border-radius:3px;position:relative;overflow:hidden}
+.netbox .scope-label{position:absolute;top:12px;left:16px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-mute);z-index:3;pointer-events:none}
+.netbox .hint{position:absolute;bottom:10px;right:14px;font-family:var(--font-mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-mute);z-index:3;pointer-events:none}
+#net{display:block;width:100%;height:320px}
+#net line.link{stroke:var(--line);stroke-width:1}
+#net g.node{cursor:grab;touch-action:none}
+#net g.node:active{cursor:grabbing}
+#net g.node circle{fill:var(--panel);stroke:var(--accent);stroke-width:1.5;transition:filter .2s}
+#net g.node.hub circle{fill:var(--accent);stroke:var(--accent)}
+#net g.node:hover circle{filter:drop-shadow(0 0 7px var(--accent))}
+#net g.node text{font-family:var(--font-mono);font-size:11px;fill:var(--ink-2);text-anchor:middle;pointer-events:none}
+#net g.node.hub text{fill:var(--paper);font-weight:600;font-size:13px}
+.numbers{margin-top:44px}
+
+/* ---------- 06 off the clock ---------- */
+.ocA{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;text-align:center;padding:4px 0}
+.ocA .it{display:flex;flex-direction:column;align-items:center;gap:14px}
+.ocA .it svg{width:40px;height:40px;stroke:var(--accent);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 5px rgba(16,185,129,0.4))}
+.ocA .it .t{font-family:var(--font-display);font-size:20px;font-weight:500}
+.ocA .it .d{font-size:14px;color:var(--ink-mute);max-width:26ch}
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .fit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:760px){
+  .hero{padding:44px 0 20px}
+  .hero-grid{grid-template-columns:1fr;gap:34px}
+  .hero-grid .portrait{max-width:300px}
+  .sec.first{padding-top:44px}
+  .pillars{grid-template-columns:1fr}
+  .pillar{padding:22px 20px 24px}
+  .pillar:nth-child(odd){border-right:none}
+  .pillar:nth-child(n+2){border-top:1px solid var(--line)}
+  .fit-grid{grid-template-columns:1fr;gap:26px}
+  .fit-note{margin-top:30px}
+  .about-body p{font-size:17px}
+  /* the network draws in a fixed 620-unit viewBox, so phone widths shrink its labels to ~6px */
+  #net{height:250px}
+  #net g.node text{font-size:13px}
+  .tl .nodes{grid-template-columns:1fr;gap:26px}.tl .track{display:none}.tl{padding-top:8px}
+  .ocA{grid-template-columns:1fr;gap:26px}
+}
