@@ -29,9 +29,10 @@
   --todo:#F2B33C; --todo-soft:rgba(242,179,60,0.08); --todo-line:rgba(242,179,60,0.5);
   --cool:#5BA8E8; --warn:#C76B45;
 
-  --font-display:'Fraunces',Georgia,serif;
-  --font-body:'Hanken Grotesk',ui-sans-serif,system-ui,sans-serif;
-  --font-mono:'IBM Plex Mono',ui-monospace,'Courier New',monospace;
+  /* The "Fallback" families are metric-matched local fonts defined in /assets/fonts/fonts.css. */
+  --font-display:'Fraunces','Fraunces Fallback','Fraunces Fallback Noto','Fraunces Fallback Times',Georgia,serif;
+  --font-body:'Hanken Grotesk','Hanken Grotesk Fallback','Hanken Grotesk Fallback Roboto',ui-sans-serif,system-ui,sans-serif;
+  --font-mono:'IBM Plex Mono','IBM Plex Mono Fallback',ui-monospace,'Courier New',monospace;
   --maxw:1080px;
 }
 @supports (color:color-mix(in srgb,red 50%,blue)){
