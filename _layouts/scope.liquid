@@ -25,7 +25,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/scope.css">
 <link rel="stylesheet" href="/assets/enhancements.css">
-
+{% comment %} Page-level CSS/JS hooks (revision 2026-10): list paths in front matter, e.g.
+   extra_css: [/assets/pages/about.css]   extra_js: [/assets/pages/about.js]
+   Keep page files in /assets/pages/ (NOT /assets/css/, which purgecss rewrites in the deploy build). {% endcomment %}
+{% for css in page.extra_css %}<link rel="stylesheet" href="{{ css }}">
+{% endfor %}
 {% comment %} Analytics. Off until google_analytics + enable_google_analytics are set in _config.yml. Renders nothing when disabled. {% endcomment %}
 {% include scripts/analytics.liquid %}
 </head>
@@ -38,5 +42,6 @@
 {% include scope/footer.liquid %}
 {% include scope/scripts.liquid %}
 <script src="/assets/js/enhancements.js" defer></script>
-</body>
+{% for js in page.extra_js %}<script src="{{ js }}" defer></script>
+{% endfor %}</body>
 </html>
