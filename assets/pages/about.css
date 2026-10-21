@@ -60,10 +60,10 @@
 
 /* ---------- 03 selected work: cover cards ---------- */
 .work .cover{display:block;margin:-26px -26px 6px;aspect-ratio:2/1;overflow:hidden;border-bottom:1px solid var(--line);background:var(--paper)}
-/* Covers are older art in another palette; tint them to the violet accent (hue-rotate 215deg lands
-   on #A78BFA's hue; delete the filter to show the original colours). A filter chain (no url()
+/* Covers are older art in another palette; tint them to the scope's phosphor green (hue-rotate
+   105deg, as before the October 2026 revision; delete the filter to show the original colours). A filter chain (no url()
    reference) so every browser renders it the same way. */
-.work .cover img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 40%;filter:grayscale(1) sepia(1) hue-rotate(215deg) saturate(1.9) brightness(.82) contrast(1.15)}
+.work .cover img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 40%;filter:grayscale(1) sepia(1) hue-rotate(105deg) saturate(1.9) brightness(.82) contrast(1.15)}
 /* pillar tags (two or three per card): wrap between tags, never inside one */
 .work .tag{flex-wrap:wrap;column-gap:8px;row-gap:3px;line-height:1.5}
 .work .tag span{white-space:nowrap}
