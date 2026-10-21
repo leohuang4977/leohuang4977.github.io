@@ -155,6 +155,24 @@ permalink: /projects/ai-agents/
   @media (prefers-reduced-motion:reduce){html.js .sweepfx::after{display:none!important}}
   .skip{position:absolute;left:8px;top:-48px;z-index:100;background:var(--accent);color:var(--paper);font-family:var(--font-mono);font-size:13px;font-weight:600;letter-spacing:0.04em;padding:10px 16px;border-radius:0 0 4px 4px;text-decoration:none;transition:top .18s}
   .skip:focus{top:0}
+/* cs-shows + cs-pager (revision 2026-10) */
+.cs-shows{padding:0 0 8px}
+.cs-shows .wrap{display:grid;gap:10px;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:16px 0}
+.cs-shows-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+.cs-shows-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);min-width:52px}
+.cs-tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.cs-tags a{display:inline-block;font-family:var(--font-mono);font-size:12px;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:4px 11px;text-decoration:none;transition:border-color .2s,color .2s}
+.cs-tags a:hover,.cs-tags a:focus-visible{border-color:var(--accent);color:var(--accent)}
+.cs-fits{margin:0;font-size:14px;color:var(--ink-2)}
+.cs-pager{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 22px}
+.cs-pager a{display:block;border:1px solid var(--line);border-radius:4px;padding:14px 16px;color:var(--ink);text-decoration:none;font-family:var(--font-display);font-size:18px;line-height:1.25;transition:border-color .2s}
+.cs-pager a span{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:6px}
+.cs-pager .cs-next{text-align:right}
+.cs-pager a:hover,.cs-pager a:focus-visible{border-color:var(--accent)}
+@media (max-width:560px){.cs-pager{grid-template-columns:1fr}.cs-pager .cs-next{text-align:left}}
+/* fix (c2, verified): the padding above zeroes .wrap's side gutters; keep borders on the text column */
+.cs-shows .wrap{width:calc(100% - 56px);max-width:calc(var(--maxw) - 56px)}
+@media (max-width:760px){.cs-shows .wrap{width:calc(100% - 40px)}}
 </style>
 </head>
 <body>
@@ -176,10 +194,25 @@ permalink: /projects/ai-agents/
 
 <section class="case-hero">
   <div class="wrap">
-    <div class="kicker reveal"><span class="rule"></span>Strategy &amp; Segmentation · Large-Scale Weighted Survey</div>
+    <div class="kicker reveal"><span class="rule"></span>Human–AI interaction · Segmentation · Weighted survey</div>
     <h1 class="reveal" style="transition-delay:.06s">How ready people were for AI agents at work, and <em>where to start</em>.</h1>
-    <p class="lede reveal" style="transition-delay:.12s">A large stratified survey, weighted to stand in for the whole user base, that turned an open-ended bet on AI agents into a defensible order of operations.</p>
+    <p class="lede reveal" style="transition-delay:.12s">Two of the highest-readiness job functions each got a working pilot of the AI agent they had asked for, and the study anchored the next year's roadmap shareout. Both came out of a large stratified survey, weighted to stand in for the whole user base, that turned an open-ended bet on agents into a defensible order of operations.</p>
     <div class="disc reveal" style="transition-delay:.18s">// Anonymized account of confidential client work. The platform is unnamed and the charts are illustrative recreations made for this portfolio.</div>
+  </div>
+</section>
+
+<!-- cs-shows (revision 2026-10) -->
+<section class="cs-shows" aria-label="What this project shows">
+  <div class="wrap">
+    <div class="cs-shows-row"><span class="cs-shows-label">Shows</span>
+      <ul class="cs-tags">
+        <li><a href="/projects/?f=human-ai">Human–AI interaction</a></li>
+        <li><a href="/projects/?f=data-science">Behavioral data science</a></li>
+      </ul>
+    </div>
+    <div class="cs-shows-row"><span class="cs-shows-label">Fits</span>
+      <p class="cs-fits">Quantitative UX research · AI enablement and workflow design · Research scientist (human–AI interaction)</p>
+    </div>
   </div>
 </section>
 
@@ -344,7 +377,7 @@ permalink: /projects/ai-agents/
 
     <div class="body-copy reveal" style="transition-delay:.06s">
       <div class="subhead">The barrier that moved to the front</div>
-      <p>Among the people who were hesitant, the top concern had shifted. In earlier waves of AI research, accuracy and reliability led. Here, ethical implications ranked first. That turns mitigation into a design problem rather than a messaging one. Transparency, control, and a visible human in the loop become requirements in the product, not reassurances bolted on at the end.</p>
+      <p>Among the people who were hesitant, the top concern had shifted. In earlier waves of AI research, accuracy and reliability led. Here, ethical implications ranked first. That turns mitigation into a design problem rather than a messaging one. Transparency, control, and a visible human in the loop have to be built into the product from the start.</p>
     </div>
 
     <div class="figbox reveal">
@@ -415,7 +448,7 @@ permalink: /projects/ai-agents/
       <div class="rec">
         <span class="n">03</span>
         <h4>Treat ethics as a core surface</h4>
-        <p>Since it is now the top barrier, transparency and human oversight belong in the core design rather than a trust-and-safety appendix.</p>
+        <p>Ethics is now the top barrier, so transparency and human oversight belong in the core design.</p>
       </div>
     </div>
   </div>
@@ -433,6 +466,10 @@ permalink: /projects/ai-agents/
 
 <section class="contact">
   <div class="wrap">
+    <nav class="cs-pager" aria-label="More case studies">
+      <a class="cs-prev" href="/projects/accordion-usability-test/"><span>Previous</span>Accordion navigation test</a>
+      <a class="cs-next" href="/projects/in-channel-knowledge-agents/"><span>Next</span>In-channel knowledge agents</a>
+    </nav>
     <a class="backlink reveal" href="https://leohuang4977.github.io/projects/">&#8592; All projects</a>
     <footer class="foot">
       <span>© 2026 Leo Huang</span>

@@ -132,6 +132,24 @@ permalink: /projects/ai-writing-assistance/
   @media (prefers-reduced-motion:reduce){html.js .sweepfx::after{display:none!important}}
   .skip{position:absolute;left:8px;top:-48px;z-index:100;background:var(--accent);color:var(--paper);font-family:var(--font-mono);font-size:13px;font-weight:600;letter-spacing:0.04em;padding:10px 16px;border-radius:0 0 4px 4px;text-decoration:none;transition:top .18s}
   .skip:focus{top:0}
+/* cs-shows + cs-pager (revision 2026-10) */
+.cs-shows{padding:0 0 8px}
+.cs-shows .wrap{display:grid;gap:10px;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:16px 0}
+.cs-shows-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+.cs-shows-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);min-width:52px}
+.cs-tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.cs-tags a{display:inline-block;font-family:var(--font-mono);font-size:12px;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:4px 11px;text-decoration:none;transition:border-color .2s,color .2s}
+.cs-tags a:hover,.cs-tags a:focus-visible{border-color:var(--accent);color:var(--accent)}
+.cs-fits{margin:0;font-size:14px;color:var(--ink-2)}
+.cs-pager{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 22px}
+.cs-pager a{display:block;border:1px solid var(--line);border-radius:4px;padding:14px 16px;color:var(--ink);text-decoration:none;font-family:var(--font-display);font-size:18px;line-height:1.25;transition:border-color .2s}
+.cs-pager a span{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:6px}
+.cs-pager .cs-next{text-align:right}
+.cs-pager a:hover,.cs-pager a:focus-visible{border-color:var(--accent)}
+@media (max-width:560px){.cs-pager{grid-template-columns:1fr}.cs-pager .cs-next{text-align:left}}
+/* fix (c2, verified): the padding above zeroes .wrap's side gutters; keep borders on the text column */
+.cs-shows .wrap{width:calc(100% - 56px);max-width:calc(var(--maxw) - 56px)}
+@media (max-width:760px){.cs-shows .wrap{width:calc(100% - 40px)}}
 </style>
 </head>
 <body>
@@ -153,14 +171,29 @@ permalink: /projects/ai-writing-assistance/
 
 <section class="casehero">
   <div class="wrap">
-    <div class="kicker reveal"><span class="rule"></span>Quantitative UX research<span class="tag">· Workplace messaging</span></div>
+    <div class="kicker reveal"><span class="rule"></span>Behavioral data science<span class="tag">· AI feature adoption</span></div>
     <h1 class="reveal" style="transition-delay:.06s">What people want from a writing assistant, and how high they set the <em>bar</em>.</h1>
-    <p class="lede reveal" style="transition-delay:.12s">A weighted survey measuring two things at once: how much people want an in-product writing assistant, and the quality it has to clear before they keep using it. The demand was easy to find. The bar was the harder number, and the one that decided the build.</p>
+    <p class="lede reveal" style="transition-delay:.12s">An in-product AI writing assistant shipped on a narrower scope, with quality work aimed at accuracy and tone match. Both choices came from a weighted survey measuring how much people want the assistant and the quality it has to clear before they keep using it. The demand was easy to find. The bar was the harder number, and the one that decided the build.</p>
     <div class="disc reveal" style="transition-delay:.18s">// Anonymized account of client work. The numbers on this page, figures and outcome metrics included, are illustrative reconstructions for portfolio use. No client names, real estimates, or proprietary findings appear. The methodology is the study's real architecture: the weighting, the confidence intervals, and the segmentation all ran as described.</div>
   </div>
 </section>
 
-<section class="sec" style="padding-top:18px">
+<!-- cs-shows (revision 2026-10) -->
+<section class="cs-shows" aria-label="What this project shows">
+  <div class="wrap">
+    <div class="cs-shows-row"><span class="cs-shows-label">Shows</span>
+      <ul class="cs-tags">
+        <li><a href="/projects/?f=data-science">Behavioral data science</a></li>
+        <li><a href="/projects/?f=human-ai">Human–AI interaction</a></li>
+      </ul>
+    </div>
+    <div class="cs-shows-row"><span class="cs-shows-label">Fits</span>
+      <p class="cs-fits">Quantitative UX research · Behavioral and decision science · Research scientist (human–AI interaction)</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:46px">
   <div class="wrap">
     <div class="sec-head reveal"><span class="idx">01</span><h2>The question</h2></div>
     <div class="prose reveal" style="transition-delay:.08s">
@@ -263,7 +296,7 @@ permalink: /projects/ai-writing-assistance/
     </div>
 
     <div class="prose reveal" style="transition-delay:.06s">
-      <p>Reading FIG.02 takes ten seconds once you know the trick. A dot is the weighted estimate, the whiskers are the range the data can actually support, and the dashed line is the decision threshold. Where the whole interval sits past the line, the finding holds even at the pessimistic end. Where the interval crosses it, the honest answer is "can't tell yet," and accuracy and tone match were the two that held. That left one question: of everything people said mattered, what actually moves them to adopt? FIG.03 ranks the answers.</p>
+      <p>Reading FIG.02 takes ten seconds once you know the trick. A dot is the weighted estimate, the whiskers are the range the data can actually support, and the dashed line is the decision threshold. Where the whole interval sits past the line, the finding holds even at the pessimistic end. Where the interval crosses it, the honest answer is "can't tell yet." Accuracy and tone match were the two that held. That left one question: of everything people said mattered, what actually moves them to adopt? FIG.03 ranks the answers.</p>
     </div>
 
     <!-- FIG 03 — what earns adoption (ranked) -->
@@ -311,6 +344,10 @@ permalink: /projects/ai-writing-assistance/
 
 <section class="contact">
   <div class="wrap">
+    <nav class="cs-pager" aria-label="More case studies">
+      <a class="cs-prev" href="/projects/mortgage-switching/"><span>Previous</span>Mortgage switching</a>
+      <a class="cs-next" href="/projects/advice-page-optimization/"><span>Next</span>Advisor contact page</a>
+    </nav>
     <div class="reveal"><a class="backlink" href="https://leohuang4977.github.io/projects/">← All projects</a></div>
     <footer class="foot">
       <span>© 2026 Leo Huang</span>
