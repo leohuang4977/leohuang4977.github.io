@@ -1,0 +1,60 @@
+{%- comment -%}
+  Shared <head> meta (revision 2026-10): description, canonical, Open Graph, Twitter card,
+  theme colour, favicon, Google Fonts, then JSON-LD (scope/jsonld.liquid).
+  It never outputs <title>: write that first, then include this file. Works on `layout: scope`
+  pages and on `layout: none` pages that include it inside their own <head>.
+
+  Optional front matter it reads:
+    doc_title      share title (default: "<title> | Leo Huang", then site.title)
+    description    (default: site.description)
+    og_image       path or absolute URL of a 1200x630 image (default: /assets/img/og-card.png)
+    og_image_alt   alt text for og_image
+    og_type        (default: website)
+    jsonld: false  skip the structured data (the 404 page does)
+
+  Collection documents (the case studies) get an automatic page.title from the file slug
+  ("Ai Agents"), so give them doc_title and description in front matter before including this.
+{%- endcomment -%}
+{%- assign scope_meta_name = 'Leo Huang' -%}
+{%- if page.doc_title -%}
+  {%- assign scope_meta_title = page.doc_title -%}
+{%- elsif page.title -%}
+  {%- capture scope_meta_title -%}{{ page.title }} | {{ scope_meta_name }}{%- endcapture -%}
+{%- else -%}
+  {%- assign scope_meta_title = site.title | default: scope_meta_name -%}
+{%- endif -%}
+{%- assign scope_meta_desc = page.description | default: site.description | strip_html | strip_newlines | strip -%}
+{%- assign scope_meta_url = page.url | absolute_url -%}
+{%- if page.og_image -%}
+  {%- assign scope_meta_img = page.og_image | absolute_url -%}
+  {%- assign scope_meta_img_alt = page.og_image_alt | default: scope_meta_title -%}
+{%- else -%}
+  {%- assign scope_meta_img = '/assets/img/og-card.png' | absolute_url -%}
+  {%- assign scope_meta_img_alt = 'Leo Huang, behavioral scientist. I study how people make decisions, then design and test the products and journeys they move through. Experiments & causal inference. Decision & journey design. Human–AI interaction. Behavioral data science.' -%}
+{%- endif %}
+{% if scope_meta_desc != '' %}<meta name="description" content="{{ scope_meta_desc | escape }}">
+{% endif %}<link rel="canonical" href="{{ scope_meta_url }}">
+<meta name="theme-color" content="#0D0E12">
+
+<meta property="og:site_name" content="{{ scope_meta_name }}">
+<meta property="og:type" content="{{ page.og_type | default: 'website' }}">
+<meta property="og:title" content="{{ scope_meta_title | escape }}">
+{% if scope_meta_desc != '' %}<meta property="og:description" content="{{ scope_meta_desc | escape }}">
+{% endif %}<meta property="og:url" content="{{ scope_meta_url }}">
+<meta property="og:image" content="{{ scope_meta_img }}">
+{% unless page.og_image %}<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+{% endunless %}<meta property="og:image:alt" content="{{ scope_meta_img_alt | escape }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ scope_meta_title | escape }}">
+{% if scope_meta_desc != '' %}<meta name="twitter:description" content="{{ scope_meta_desc | escape }}">
+{% endif %}<meta name="twitter:image" content="{{ scope_meta_img }}">
+<meta name="twitter:image:alt" content="{{ scope_meta_img_alt | escape }}">
+
+{% comment %} Favicon: the topbar's pulsing dot as an inline SVG. A favicon cannot read CSS
+   variables, so its fill (%23 = #) is a copy of --accent in assets/scope.css: change both together. {% endcomment -%}
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='34' fill='%23A78BFA'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+{% unless page.jsonld == false %}{% include scope/jsonld.liquid %}{% endunless %}

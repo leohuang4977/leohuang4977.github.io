@@ -1,0 +1,100 @@
+{%- comment -%}
+  JSON-LD structured data (revision 2026-10), included by scope/head-meta.liquid, which sets
+  scope_meta_title, scope_meta_desc and scope_meta_url first.
+  Home page ("/"): one @graph with the Person and the WebSite.
+  Every other page: a WebPage whose author and about point at the Person's @id, plus a short
+  Person stub with the same @id so the reference resolves inside the page.
+  Person facts come from the brief's positioning and education ground truth. Profile links
+  are the ones on the live About page. Employers stay generic, as on the case studies.
+{%- endcomment -%}
+{%- assign ld_home = '/' | absolute_url -%}
+{%- capture ld_person %}{{ ld_home }}#person{% endcapture -%}
+{%- capture ld_site %}{{ ld_home }}#website{% endcapture -%}
+{%- if page.url == '/' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "{{ ld_person }}",
+      "name": "Leo Huang",
+      "url": "{{ ld_home }}",
+      "image": "{{ '/assets/img/leo-portrait.jpg' | absolute_url }}",
+      "jobTitle": "Behavioral scientist",
+      "description": "Behavioral scientist in Toronto. He studies how people make decisions, then designs and tests the products and journeys they move through. He has done industry research at a major Canadian bank and a large enterprise software company, and is finishing a social psychology PhD at the University of Toronto on human–AI interaction.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Toronto",
+        "addressRegion": "ON",
+        "addressCountry": "CA"
+      },
+      "alumniOf": [
+        { "@type": "CollegeOrUniversity", "name": "University of Toronto", "url": "https://www.utoronto.ca/" },
+        { "@type": "CollegeOrUniversity", "name": "Queen's University", "url": "https://www.queensu.ca/" }
+      ],
+      "knowsAbout": [
+        "Experiments & causal inference",
+        "Decision & journey design",
+        "Human–AI interaction",
+        "Behavioral data science",
+        "Randomized controlled trials",
+        "A/B testing",
+        "Power analysis",
+        "Journey mapping",
+        "Service design",
+        "Survey design and weighting",
+        "Psychometrics",
+        "Segmentation",
+        "Telemetry analysis",
+        "Predictive modeling",
+        "Structural equation modeling",
+        "Multilevel modeling",
+        "UX research",
+        "Social psychology"
+      ],
+      "sameAs": [
+        "https://scholar.google.com/citations?user=8s9xOScAAAAJ&hl=en",
+        "https://github.com/leohuang4977",
+        "https://www.linkedin.com/in/leo-huang-870ab2178",
+        "https://twitter.com/LeoHuan28578819"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{ ld_site }}",
+      "url": "{{ ld_home }}",
+      "name": "Leo Huang",
+      "description": {{ site.description | strip_newlines | strip | jsonify }},
+      "inLanguage": "en-US",
+      "publisher": { "@id": "{{ ld_person }}" }
+    }
+  ]
+}
+</script>
+{%- else %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "{{ scope_meta_url }}#webpage",
+      "url": "{{ scope_meta_url }}",
+      "name": {{ scope_meta_title | jsonify }},
+      "description": {{ scope_meta_desc | jsonify }},
+      "inLanguage": "en-US",
+      "isPartOf": { "@id": "{{ ld_site }}" },
+      "author": { "@id": "{{ ld_person }}" },
+      "about": { "@id": "{{ ld_person }}" }
+    },
+    {
+      "@type": "Person",
+      "@id": "{{ ld_person }}",
+      "name": "Leo Huang",
+      "url": "{{ ld_home }}"
+    }
+  ]
+}
+</script>
+{%- endif %}

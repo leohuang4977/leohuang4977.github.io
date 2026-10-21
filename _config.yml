@@ -2,15 +2,16 @@
 # Site settings
 # -----------------------------------------------------------------------------
 
-title: Leo Huang | Psychology # the website title
+title: Leo Huang | Behavioral scientist # the website title
 first_name: Leo
 middle_name:
 last_name: Huang
 email: leo.huang4977@gmail.com
-keywords: jekyll, jekyll-theme, academic-website, portfolio-website # add your own keywords or leave empty
+keywords: behavioral scientist, behavioral science, decision science, quantitative UX research, UX research, product research, research scientist, human-AI interaction, HCI, experimentation, A/B testing, causal inference, randomized controlled trials, customer journey, lifecycle, decisioning, journey mapping, service design, AI enablement, workflow design, people analytics, games user research, survey design, psychometrics, segmentation, telemetry analysis, predictive modeling, social psychology, Toronto # add your own keywords or leave empty
 icon: 🧠 # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 description: >- # the ">" symbol means to ignore newlines until "footer_text:"
-  Leo Huang's Academic Portfolio
+  Leo Huang is a behavioral scientist in Toronto. He studies how people make decisions,
+  then designs and tests the products and journeys they move through.
 url: https://leohuang4977.github.io # the base hostname & protocol for your site
 baseurl: # the subpath of your site, e.g. /blog/. Leave blank for root
 last_updated: false # set to true if you want to display last updated in the footer
