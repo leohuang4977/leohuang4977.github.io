@@ -47,10 +47,11 @@
     });
   })();
 
-  // 7.2 — Sticky / shrinking nav
+  // 7.2 — Sticky / shrinking nav. The case studies' own scope-fx script already toggles
+  // .shrunk at the same 24 px (it marks <html data-lh-fx>), so this module stands down there.
   (function () {
     var header = document.querySelector('header.topbar');
-    if (!header) return;
+    if (!header || document.documentElement.dataset.lhFx) return;
     var on = false;
     function onScroll(){ var s=(window.scrollY||document.documentElement.scrollTop)>24; if(s!==on){header.classList.toggle('shrunk',s);on=s;} }
     window.addEventListener('scroll', onScroll, { passive:true });

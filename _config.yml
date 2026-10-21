@@ -209,6 +209,7 @@ jekyll-minifier:
     - "assets/js/search/*.js"
     - "assets/libs/**/*"
     - "assets/scope.css"
+    - "assets/shell.css"
     - "assets/enhancements.css"
     - "assets/js/enhancements.js"
     - "projects/*/index.html"
