@@ -1,35 +1,33 @@
 ---
 layout: none
 permalink: /projects/ai-writing-assistance/
+title: "AI writing assistance for workplace messaging"
+doc_title: "AI writing assistance for workplace messaging — Leo Huang"
+description: "A weighted survey of 1,000 people on the quality bar an AI writing assistant must clear before people keep it on. It shipped on a narrower scope."
+og_type: article
+scope_nav: projects
 ---
 <!DOCTYPE html>
 <html lang="en" data-theme="scope">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="A weighted survey of 1,000 people measuring demand for an in-product AI writing assistant and the quality bar it has to clear before people adopt it.">
-<title>AI Writing Assistance for Workplace Messaging — Leo Huang</title>
-<link rel="canonical" href="https://leohuang4977.github.io/projects/ai-writing-assistance/">
-<meta property="og:title" content="AI Writing Assistance for Workplace Messaging — Leo Huang">
-<meta property="og:description" content="A weighted survey of 1,000 people measuring demand for an in-product AI writing assistant and the quality bar it has to clear before people adopt it.">
-<meta property="og:image" content="https://leohuang4977.github.io/assets/img/og-card.png">
-<meta property="og:url" content="https://leohuang4977.github.io/projects/ai-writing-assistance/">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='34' fill='%2310B981'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<title>{{ page.doc_title | escape }}</title>
+{% include scope/head-meta.liquid %}
+<link rel="stylesheet" href="/assets/shell.css">
+<link rel="stylesheet" href="/assets/enhancements.css">
 <style>
   :root{
     --paper:#0D0E12; --paper-2:#15171D; --panel:#15171C;
     --ink:#E9E7DF; --ink-2:#B6B4AB; --ink-mute:#84868E;
     --line:rgba(255,255,255,0.13); --line-soft:rgba(255,255,255,0.06);
-    /* Accent — emerald #10B981, matching the site design system (teal→emerald flip done in the 2026-06-11 integration pass). */
-    --accent:#10B981; --accent-deep:#059669; --cool:#5BA8E8;
-    --accent-wash:rgba(16,185,129,0.14); --accent-wash-2:rgba(16,185,129,0.07);
-    --font-display:'Fraunces',Georgia,serif;
-    --font-body:'Hanken Grotesk',ui-sans-serif,system-ui,sans-serif;
-    --font-mono:'IBM Plex Mono',ui-monospace,'Courier New',monospace;
+    /* Accent: violet #A78BFA, deep #8B5CF6 (Leo, 2026-10-21; it replaced emerald), the same values as assets/scope.css. */
+    --accent:#A78BFA; --accent-deep:#8B5CF6; --cool:#5BA8E8;
+    --accent-wash:rgba(167,139,250,0.14); --accent-wash-2:rgba(167,139,250,0.07);
+    --accent-ring:rgba(167,139,250,0.22); --focus-ring:var(--accent); /* read by /assets/shell.css */
+    --font-display:'Fraunces','Fraunces Fallback','Fraunces Fallback Noto','Fraunces Fallback Times',Georgia,serif;
+    --font-body:'Hanken Grotesk','Hanken Grotesk Fallback','Hanken Grotesk Fallback Roboto',ui-sans-serif,system-ui,sans-serif;
+    --font-mono:'IBM Plex Mono','IBM Plex Mono Fallback',ui-monospace,'Courier New',monospace;
     --maxw:1000px;
   }
   *{margin:0;padding:0;box-sizing:border-box}
@@ -42,18 +40,6 @@ permalink: /projects/ai-writing-assistance/
   .reveal{transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
   html.js .reveal{opacity:0;transform:translateY(20px)}
   html.js .reveal.in{opacity:1;transform:none}
-
-  /* topbar */
-  header.topbar{border-bottom:1px solid var(--line);background:rgba(13,14,18,0.72);backdrop-filter:blur(8px);position:sticky;top:0;z-index:50}
-  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;gap:16px;flex-wrap:wrap;max-width:1080px}
-  .wordmark{font-family:var(--font-mono);font-weight:600;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink)}
-  .wordmark .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-wash);animation:pulse 2.4s ease-in-out infinite}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.35}}
-  nav.main{display:flex;gap:24px;align-items:center;font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.05em;text-transform:uppercase}
-  nav.main a{color:var(--ink-2);text-decoration:none;position:relative;padding-bottom:3px;transition:color .2s}
-  nav.main a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--accent);transition:width .25s}
-  nav.main a:hover{color:var(--ink)}nav.main a:hover::after,nav.main a.active::after{width:100%}
-  nav.main a.active{color:var(--accent)}
 
   /* case hero */
   .casehero{padding:64px 0 26px}
@@ -99,24 +85,17 @@ permalink: /projects/ai-writing-assistance/
   .contact{border-top:1px solid var(--line);padding:44px 0 26px}
   .backlink{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:13px;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink);text-decoration:none;border-bottom:1.5px solid var(--accent);padding-bottom:3px;transition:gap .25s}
   .backlink:hover{gap:16px}
-  footer.foot{border-top:1px solid var(--line);margin-top:48px;padding:24px 0 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.04em;color:var(--ink-mute);text-transform:uppercase}
-  footer.foot .coords{color:var(--ink-2)}
 
   @media (max-width:760px){
     body{font-size:16px}
-    .wrap{padding:0 20px}.topbar .wrap{padding:16px 20px}
+    .wrap{padding:0 20px}
     .casehero{padding:46px 0 22px}
     .sec{padding:42px 0}
     .figbox{padding:30px 16px 20px}
-    nav.main{gap:15px;font-size:11px}
   }
-  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal,html.js .reveal{opacity:1;transform:none}}
   /* ═══ scope-fx · shared interaction layer — identical block on every project page ═══ */
   #scopebar{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);box-shadow:0 0 10px var(--accent);z-index:90;pointer-events:none}
-  html.js header.topbar{transition:box-shadow .3s ease}
-  html.js header.topbar .wrap{transition:padding .3s ease}
-  html.js header.topbar.shrunk .wrap{padding-top:10px;padding-bottom:10px}
-  html.js header.topbar.shrunk{box-shadow:0 10px 28px rgba(0,0,0,0.38)}
   .sweepfx{position:relative;overflow:hidden}
   html.js .sweepfx::after{content:"";position:absolute;top:0;bottom:0;left:-14%;width:9%;background:linear-gradient(90deg,transparent,var(--accent) 50%,transparent);opacity:0;pointer-events:none}
   html.js .sweepfx.swept::after{animation:scopesweep 1.05s cubic-bezier(.33,.62,.29,1) .12s 1 both}
@@ -128,39 +107,62 @@ permalink: /projects/ai-writing-assistance/
     .rec,.study,.pcard,.ta,.w{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
     .rec:hover,.study:hover,.pcard:hover,.ta:hover,.w:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 12px 30px rgba(0,0,0,0.35)}
   }
-  a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
   @media (prefers-reduced-motion:reduce){html.js .sweepfx::after{display:none!important}}
-  .skip{position:absolute;left:8px;top:-48px;z-index:100;background:var(--accent);color:var(--paper);font-family:var(--font-mono);font-size:13px;font-weight:600;letter-spacing:0.04em;padding:10px 16px;border-radius:0 0 4px 4px;text-decoration:none;transition:top .18s}
-  .skip:focus{top:0}
+/* cs-shows + cs-pager (revision 2026-10) */
+.cs-shows{padding:0 0 8px}
+.cs-shows .wrap{display:grid;gap:10px;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:16px 0}
+.cs-shows-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+.cs-shows-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);min-width:52px}
+.cs-tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.cs-tags a{display:inline-block;font-family:var(--font-mono);font-size:12px;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:4px 11px;text-decoration:none;transition:border-color .2s,color .2s}
+.cs-tags a:hover,.cs-tags a:focus-visible{border-color:var(--accent);color:var(--accent)}
+.cs-fits{margin:0;font-size:14px;color:var(--ink-2)}
+.cs-pager{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 22px}
+.cs-pager a{display:block;border:1px solid var(--line);border-radius:4px;padding:14px 16px;color:var(--ink);text-decoration:none;font-family:var(--font-display);font-size:18px;line-height:1.25;transition:border-color .2s}
+.cs-pager a span{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:6px}
+.cs-pager .cs-next{text-align:right}
+.cs-pager a:hover,.cs-pager a:focus-visible{border-color:var(--accent)}
+@media (max-width:560px){.cs-pager{grid-template-columns:1fr}.cs-pager .cs-next{text-align:left}}
+/* fix (c2, verified): the padding above zeroes .wrap's side gutters; keep borders on the text column */
+.cs-shows .wrap{width:calc(100% - 56px);max-width:calc(var(--maxw) - 56px)}
+@media (max-width:760px){.cs-shows .wrap{width:calc(100% - 40px)}}
+/* shell (revision 2026-10): topbar, footer, skip link and focus ring come from /assets/shell.css,
+   header shrink and blob cursor from /assets/enhancements.css. The shared footer now sits
+   after the main element, so the closing section keeps the old gap above it. */
+main > section:last-child{padding-bottom:48px}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="topbar">
-  <div class="wrap">
-    <a href="https://leohuang4977.github.io/" class="wordmark"><span class="dot"></span>Leo&nbsp;Huang</a>
-    <nav class="main">
-      <a href="https://leohuang4977.github.io/">About</a>
-      <a href="https://leohuang4977.github.io/projects/" class="active">Projects</a>
-      <a href="https://leohuang4977.github.io/cv/">Résumé</a>
-      <a href="https://leohuang4977.github.io/publications/">Publications</a>
-      <a href="https://leohuang4977.github.io/contact/">Contact</a>
-    </nav>
-  </div>
-</header>
+{% include scope/header.liquid %}
 <main id="main">
 
 <section class="casehero">
   <div class="wrap">
-    <div class="kicker reveal"><span class="rule"></span>Quantitative UX research<span class="tag">· Workplace messaging</span></div>
+    <div class="kicker reveal"><span class="rule"></span>Behavioral data science<span class="tag">· AI feature adoption</span></div>
     <h1 class="reveal" style="transition-delay:.06s">What people want from a writing assistant, and how high they set the <em>bar</em>.</h1>
-    <p class="lede reveal" style="transition-delay:.12s">A weighted survey measuring two things at once: how much people want an in-product writing assistant, and the quality it has to clear before they keep using it. The demand was easy to find. The bar was the harder number, and the one that decided the build.</p>
+    <p class="lede reveal" style="transition-delay:.12s">An in-product AI writing assistant shipped on a narrower scope, with quality work aimed at accuracy and tone match. Both choices came from a weighted survey measuring how much people want the assistant and the quality it has to clear before they keep using it. The demand was easy to find. The bar was the harder number, and the one that decided the build.</p>
     <div class="disc reveal" style="transition-delay:.18s">// Anonymized account of client work. The numbers on this page, figures and outcome metrics included, are illustrative reconstructions for portfolio use. No client names, real estimates, or proprietary findings appear. The methodology is the study's real architecture: the weighting, the confidence intervals, and the segmentation all ran as described.</div>
   </div>
 </section>
 
-<section class="sec" style="padding-top:18px">
+<!-- cs-shows (revision 2026-10) -->
+<section class="cs-shows" aria-label="What this project shows">
+  <div class="wrap">
+    <div class="cs-shows-row"><span class="cs-shows-label">Shows</span>
+      <ul class="cs-tags">
+        <li><a href="/projects/?f=data-science">Behavioral data science</a></li>
+        <li><a href="/projects/?f=human-ai">Human–AI interaction</a></li>
+      </ul>
+    </div>
+    <div class="cs-shows-row"><span class="cs-shows-label">Fits</span>
+      <p class="cs-fits">Quantitative UX research · Behavioral and decision science · Research scientist (human–AI interaction)</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:46px">
   <div class="wrap">
     <div class="sec-head reveal"><span class="idx">01</span><h2>The question</h2></div>
     <div class="prose reveal" style="transition-delay:.08s">
@@ -263,7 +265,7 @@ permalink: /projects/ai-writing-assistance/
     </div>
 
     <div class="prose reveal" style="transition-delay:.06s">
-      <p>Reading FIG.02 takes ten seconds once you know the trick. A dot is the weighted estimate, the whiskers are the range the data can actually support, and the dashed line is the decision threshold. Where the whole interval sits past the line, the finding holds even at the pessimistic end. Where the interval crosses it, the honest answer is "can't tell yet," and accuracy and tone match were the two that held. That left one question: of everything people said mattered, what actually moves them to adopt? FIG.03 ranks the answers.</p>
+      <p>Reading FIG.02 takes ten seconds once you know the trick. A dot is the weighted estimate, the whiskers are the range the data can actually support, and the dashed line is the decision threshold. Where the whole interval sits past the line, the finding holds even at the pessimistic end. Where the interval crosses it, the honest answer is "can't tell yet." Accuracy and tone match were the two that held. That left one question: of everything people said mattered, what actually moves them to adopt? FIG.03 ranks the answers.</p>
     </div>
 
     <!-- FIG 03 — what earns adoption (ranked) -->
@@ -311,15 +313,16 @@ permalink: /projects/ai-writing-assistance/
 
 <section class="contact">
   <div class="wrap">
+    <nav class="cs-pager" aria-label="More case studies">
+      <a class="cs-prev" href="/projects/job-search-pipeline/"><span>Previous</span>Job-search decision pipeline</a>
+      <a class="cs-next" href="/projects/advice-page-optimization/"><span>Next</span>Advisor contact page</a>
+    </nav>
     <div class="reveal"><a class="backlink" href="https://leohuang4977.github.io/projects/">← All projects</a></div>
-    <footer class="foot">
-      <span>© 2026 Leo Huang</span>
-      <span class="coords">43.6532° N, 79.3832° W — Toronto, ON</span>
-    </footer>
   </div>
 </section>
 
 </main>
+{% include scope/footer.liquid %}
 <script>
   /* scope-fx · unified page script (reveal · counters · progress · shrink · sweep) — identical on every project page */
   (function(){
@@ -384,5 +387,6 @@ permalink: /projects/ai-writing-assistance/
     }
   })();
 </script>
+<script src="/assets/js/enhancements.js" defer></script>
 </body>
 </html>

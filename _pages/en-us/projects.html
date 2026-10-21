@@ -4,127 +4,172 @@ permalink: /projects/
 page_id: projects
 title: Projects
 doc_title: Projects — Leo Huang
-description: Applied UX research that bridges academic rigor and product decisions.
+description: Case studies by Leo Huang in experiments and causal inference, decision and journey design, human–AI interaction and behavioral data science.
 scope_nav: projects
 nav: true
 nav_order: 3
+extra_css: [/assets/pages/projects.css]
+extra_js: [/assets/pages/projects.js]
+
+# Projects index content (revision 2026-10). One card template renders every item below.
+# Order of case studies = canonical order (BRIEF section 7). Filter keys = pillar keys.
+# A project's `tags` drive both its visible tags and the filter chips (?f=<key> in the URL).
+# Covers: `cover` names a 1600px PNG in assets/img (the production build adds WebP variants);
+# `cover_svg` names an inline SVG in _includes/covers/ instead (no image file).
+pillars:
+  - key: experiments
+    name: "Experiments & causal inference"
+  - key: journeys
+    name: "Decision & journey design"
+  - key: human-ai
+    name: "Human–AI interaction"
+  - key: data-science
+    name: "Behavioral data science"
+  - key: builds
+    name: "Builds"
+
+groups:
+  - id: cases
+    idx: "01"
+    heading: "Case studies"
+    items:
+      - href: /projects/ai-agents/
+        title: "How ready people were for AI agents at work, and where to start"
+        tags: [human-ai, data-science]
+        outcome: "Anchored next year's roadmap shareout, and two pilots followed. About four in five pilot users said they wanted to keep the agent."
+        methods: "Stratified survey · two-stage weighting · segmentation · R"
+        cover: agents-cover
+      - href: /projects/in-channel-knowledge-agents/
+        title: "What users want from in-channel knowledge agents"
+        tags: [human-ai, data-science, journeys]
+        outcome: "The agent shipped as a scoped pilot in the domains the study marked out, and satisfaction came back strong."
+        methods: "Survey, N&nbsp;=&nbsp;412 · six weeks of telemetry · triangulation · R"
+        cover: ckas-cover
+      - href: /projects/mortgage-switching/
+        title: "Why customers switch mortgage providers"
+        tags: [journeys, experiments, data-science]
+        outcome: "The study fed a switching-flow redesign that shipped. Switching picked up after, though rates moved over the same stretch."
+        methods: "Two-group survey, N&nbsp;=&nbsp;200 · interaction testing · Python"
+        cover: mortgage-cover
+      - href: /projects/job-search-pipeline/
+        title: "A decision pipeline for my own job search, with me at the last step"
+        tags: [journeys, human-ai]
+        outcome: "A weekly pipeline that scores postings against rules I set, has Claude vet and fill the shortlist up to Submit, and found that none of about 7,300 Canadian or remote postings used a behavioral-science title."
+        methods: "Decision-rule design · rubric scoring with a regression suite · LLM judge pass with logged reasons · human-in-the-loop form filling · failure monitoring (state probe, heartbeats, watchdog)"
+        cover_svg: job-search-pipeline
+      - href: /projects/ai-writing-assistance/
+        title: "AI writing assistance for workplace messaging"
+        tags: [data-science, human-ai]
+        outcome: "Recommended a high accuracy bar and a narrower scope. The product shipped on that scope and was well received."
+        methods: "Weighted survey · raking · 95% confidence intervals · segmentation · Python"
+        cover: writing-cover
+      - href: /projects/advice-page-optimization/
+        title: "What moves someone to contact an advisor"
+        tags: [journeys, data-science]
+        outcome: "Contact options were reordered to lead with phone and in person, and the form was trimmed to what clients were willing to share."
+        methods: "Survey, N&nbsp;=&nbsp;150 · ranking and Likert items · segmentation · thematic coding"
+        cover: advice-cover
+      - href: /projects/competitive-ux-research/
+        title: "Benchmarking a wealth-management site against its rivals"
+        tags: [experiments, journeys]
+        outcome: "The client approved the redesign this research shaped and had it implemented within the quarter."
+        methods: "Within-subjects benchmark · usability metrics · significance testing · thematic coding"
+        cover: wealth-ux-cover
+        h: 900
+      - href: /projects/generational-wealth-transfer/
+        title: "Generational wealth transfer & householding"
+        tags: [journeys]
+        outcome: "Gave the product team a direction for household tooling, built on needs advisors named firm after firm."
+        methods: "25 advisor interviews · purposive sampling · thematic synthesis"
+        cover: wealth-cover
+      - href: /projects/accordion-usability-test/
+        title: "Open vs. closed: an accordion navigation test"
+        tags: [experiments, journeys]
+        outcome: "The team adopted open-first sections, and a deep-link rule shipped that lands people on the section they came for."
+        methods: "Moderated within-subjects A/B, N&nbsp;=&nbsp;20 · task timing · Figma prototypes"
+        cover: accordion-cover
+  - id: builds
+    idx: "02"
+    heading: "Interactive & data projects"
+    dek: "Personal builds I make to answer my own questions."
+    items:
+      - href: https://leohuang4977.github.io/ghost-rivers-toronto/
+        external: true
+        wide: true
+        title: "Ghost Rivers of Toronto"
+        tags: [builds]
+        outcome: "A narrated map of Toronto's buried creeks, each keyed to the year it was last mapped. Scrub through 200 years and watch them vanish as the city grows."
+        label: "Built with"
+        methods: "Python, geopandas and GDAL · MapLibre · PMTiles · static hosting"
+        cover: ghost-rivers-cover
+        alt: "Dark map of downtown Toronto with its buried creeks glowing in cyan"
+        go: "Open the map ↗"
 ---
+{%- assign all_items = "" | split: "" -%}
+{%- for g in page.groups -%}{%- assign all_items = all_items | concat: g.items -%}{%- endfor -%}
+{%- assign total = all_items | size -%}
+{%- assign case_group = page.groups | where: "id", "cases" | first -%}
+{%- assign case_count = case_group.items | size -%}
+<div class="pf" data-active="all">
 
-<style>
-  .projects-hero{padding:62px 0 12px}
-  .projects-hero h1{font-family:var(--font-display);font-weight:500;font-size:clamp(36px,6vw,62px);line-height:1.02;letter-spacing:-0.015em;margin-bottom:20px}
-  .projects-hero .dek{font-size:clamp(16px,2vw,19px);color:var(--ink-2);max-width:60ch;line-height:1.55}
-  .projects-hero .dek em{font-style:italic;color:var(--ink)}
-  .projects-hero .note{margin-top:24px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-mute);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
-  .projects-hero .note .num{font-family:var(--font-display);font-size:20px;color:var(--accent);font-weight:500}
-  .projects-grid{padding:34px 0 24px}
-  /* Interactive & Data Projects. All selectors scoped to this section only. */
-  .projects-xtra{padding:10px 0 56px}
-  .projects-xtra .sec-dek{margin:-26px 0 30px;font-size:clamp(15px,1.6vw,17px);color:var(--ink-2);line-height:1.55;max-width:60ch}
-  .projects-xtra .card .cover{display:block;width:calc(100% + 52px);max-width:none;height:auto;margin:-26px -26px 0;border-bottom:1px solid var(--line)}
-</style>
-
-<section class="projects-hero">
+<section class="pf-hero">
   <div class="wrap">
-    <div class="kicker reveal"><span class="rule"></span>Applied UX Research</div>
-    <h1 class="reveal" style="transition-delay:.06s">Projects</h1>
-    <p class="dek reveal" style="transition-delay:.12s">I'm a social-psychology PhD and UX researcher. I bring the rigor of experimental science to real product questions by pairing quantitative methods with the qualitative depth that explains the <em>why</em> behind the numbers.</p>
-    <div class="note reveal" style="transition-delay:.18s"><span class="num"><span data-count="8">8</span></span> selected projects · Client work generalized and anonymized · Figures illustrative</div>
-  </div>
-</section>
+    <div class="kicker reveal"><span class="rule"></span>Applied behavioral science</div>
+    <h1 class="reveal">Projects</h1>
+    <p class="dek reveal">I study how people make decisions, then design and test the products and journeys they move through. Each case study below is tagged with what it shows: experiments and causal inference, decision and journey design, human–AI interaction, or behavioral data science. Most of them ended in a change a team shipped.</p>
+    <div class="note reveal"><span class="num"><span data-count="{{ case_count }}">{{ case_count }}</span></span>case studies&nbsp;· Client work generalized and anonymized, figures illustrative&nbsp;· The job-search pipeline uses real counts</div>
 
-<section class="projects-grid">
-  <div class="wrap">
-    <div class="sec-head reveal"><h2>Selected work</h2></div>
-    <div class="cards">
-
-      <a class="card reveal" href="/projects/competitive-ux-research/">
-        <span class="tag">Competitive Benchmarking</span>
-        <h3>Competitive &amp; Comprehensive UX Research</h3>
-        <p>Mixed-methods usability research benchmarking a wealth-management website and guiding its redesign.</p>
-        <div class="foot"><svg class="spark" aria-hidden="true" width="74" height="22" viewBox="0 0 74 22"><rect x="2" y="11" width="7" height="9"/><rect x="13" y="7" width="7" height="13"/><rect x="24" y="13" width="7" height="7"/><rect x="35" y="4" width="7" height="16"/><rect x="46" y="9" width="7" height="11"/><rect x="57" y="6" width="7" height="14"/></svg><span class="go">VIEW →</span></div>
-      </a>
-
-      <a class="card reveal" style="transition-delay:.08s" href="/projects/ai-agents/">
-        <span class="tag">Strategy &amp; Segmentation</span>
-        <h3>Customer Perceptions of AI Agents in the Workplace</h3>
-        <p>A large-scale weighted survey on readiness, openness, demand, and the barriers shaping where an agent roadmap should start.</p>
-        <div class="foot"><svg class="spark" aria-hidden="true" width="74" height="22" viewBox="0 0 74 22"><polyline fill="none" stroke-width="1.6" points="0,18 12,14 24,16 36,8 48,10 60,4 74,6"/></svg><span class="go">VIEW →</span></div>
-      </a>
-
-      <a class="card reveal" href="/projects/ai-writing-assistance/">
-        <span class="tag">Quantitative Rigor</span>
-        <h3>AI Writing Assistance for Workplace Messaging</h3>
-        <p>A large-scale weighted survey on what users want from an in-product writing assistant, and how high they set the bar.</p>
-        <div class="foot"><svg class="spark" aria-hidden="true" width="74" height="22" viewBox="0 0 74 22"><rect x="2" y="8" width="7" height="12"/><rect x="13" y="5" width="7" height="15"/><rect x="24" y="10" width="7" height="10"/><rect x="35" y="3" width="7" height="17"/><rect x="46" y="7" width="7" height="13"/><rect x="57" y="4" width="7" height="16"/></svg><span class="go">VIEW →</span></div>
-      </a>
-
-      <a class="card reveal" style="transition-delay:.08s" href="/projects/generational-wealth-transfer/">
-        <span class="tag">Qualitative Depth</span>
-        <h3>Generational Wealth Transfer &amp; Householding</h3>
-        <p>A qualitative study of how advisors manage complex, multi-generational client households, and where their tools fall short.</p>
-        <div class="foot"><svg class="spark" aria-hidden="true" width="74" height="22" viewBox="0 0 74 22"><polyline class="lnk" fill="none" stroke-width="1" opacity="0.5" points="8,16 26,9 44,12 62,6"/><circle cx="8" cy="16" r="3"/><circle cx="26" cy="9" r="3"/><circle cx="44" cy="12" r="3"/><circle cx="62" cy="6" r="3"/></svg><span class="go">VIEW →</span></div>
-      </a>
-
-      <a class="card reveal" href="/projects/in-channel-knowledge-agents/">
-        <span class="tag">Mixed-Method</span>
-        <h3>What Users Want from In-Channel Knowledge Agents</h3>
-        <p>A mixed-method study pairing survey attitudes with behavioral telemetry to define where an AI help-agent earns its place in team chat.</p>
-        <div class="foot"><svg class="spark" aria-hidden="true" width="74" height="22" viewBox="0 0 74 22"><polyline fill="none" stroke-width="1.6" points="0,12 12,6 24,14 36,4 48,16 60,8 74,11"/></svg><span class="go">VIEW →</span></div>
-      </a>
-
-      <a class="card reveal" style="transition-delay:.08s" href="/projects/advice-page-optimization/">
-        <span class="tag">Trust &amp; Credibility</span>
-        <h3>Advice &amp; Contact Page Optimization</h3>
-        <p>Survey research on what clients value in an advisor, and how they want to get in touch.</p>
-        <div class="foot"><svg class="spark" aria-hidden="true" width="74" height="22" viewBox="0 0 74 22"><polyline fill="none" stroke-width="1.6" points="0,16 12,12 24,13 36,7 48,9 60,5 74,4"/></svg><span class="go">VIEW →</span></div>
-      </a>
-
-      <a class="card reveal" href="/projects/mortgage-switching/">
-        <span class="tag">Comparative / Causal</span>
-        <h3>Why Customers Switch Mortgage Providers</h3>
-        <p>A 200-person comparative study on the drivers of switching versus staying put.</p>
-        <div class="foot"><svg class="spark" aria-hidden="true" width="74" height="22" viewBox="0 0 74 22"><polyline class="lnk" fill="none" stroke-width="1" opacity="0.5" points="10,14 30,8 50,15 68,6"/><circle cx="10" cy="14" r="3"/><circle cx="30" cy="8" r="3"/><circle cx="50" cy="15" r="3"/><circle cx="68" cy="6" r="3"/></svg><span class="go">VIEW →</span></div>
-      </a>
-
-      <a class="card reveal" style="transition-delay:.08s" href="/projects/accordion-usability-test/">
-        <span class="tag">Behavior Beats Preference</span>
-        <h3>Open vs. Closed: An Accordion Navigation Test</h3>
-        <p>A moderated mobile usability test comparing two navigation defaults, and what users actually did.</p>
-        <div class="foot"><svg class="spark" aria-hidden="true" width="74" height="22" viewBox="0 0 74 22"><rect x="6" y="6" width="12" height="14"/><rect x="22" y="11" width="12" height="9"/><rect x="40" y="4" width="12" height="16"/><rect x="56" y="13" width="12" height="7"/></svg><span class="go">VIEW →</span></div>
-      </a>
-
+    <!-- Filter bar: shown only when JS is on (html.js), so without JS the chips stay hidden and every card shows.
+         The filtering itself lives in /assets/pages/projects.js. -->
+    <div class="pf-bar" data-pf-bar>
+      <p class="pf-label" id="pf-label">Filter projects</p>
+      <div class="pf-chips" role="group" aria-labelledby="pf-label">
+        <button type="button" class="pf-chip" data-filter="all" data-name="All" aria-pressed="true"><span class="pf-led" aria-hidden="true"></span>All<span class="pf-n" aria-hidden="true">{{ total }}</span><span class="pf-sr"> ({{ total }} projects)</span></button>
+        {%- for p in page.pillars %}
+        {%- assign n = all_items | where_exp: "i", "i.tags contains p.key" | size %}
+        <button type="button" class="pf-chip" data-filter="{{ p.key }}" data-name="{{ p.name }}" aria-pressed="false"><span class="pf-led" aria-hidden="true"></span>{{ p.name }}<span class="pf-n" aria-hidden="true">{{ n }}</span><span class="pf-sr"> ({{ n }} {% if n == 1 %}project{% else %}projects{% endif %})</span></button>
+        {%- endfor %}
+      </div>
+      <p class="pf-status" data-pf-status role="status" aria-live="polite" aria-atomic="true">Showing all {{ total }} projects</p>
     </div>
   </div>
 </section>
 
-<section class="projects-grid projects-xtra">
+{%- for g in page.groups %}
+
+<section class="pf-sec pf-sec--{{ g.id }}" data-pf-section aria-labelledby="pf-h-{{ g.id }}">
   <div class="wrap">
-    <div class="sec-head reveal"><h2>Interactive &amp; Data Projects</h2></div>
-    <p class="sec-dek reveal">Personal builds. Data pipelines, maps, and computer-vision experiments I made to answer my own questions.</p>
-    <div class="cards">
-
-      <a class="card reveal" href="https://leohuang4977.github.io/ghost-rivers-toronto/" target="_blank" rel="noopener">
-        <img class="cover" src="/assets/img/ghost-rivers-cover.png" alt="Dark map of downtown Toronto with its buried creeks glowing in cyan" width="1600" height="1000" loading="lazy">
-        <span class="tag">Interactive Map</span>
-        <h3>Ghost Rivers of Toronto</h3>
-        <p>An interactive map of Toronto's buried creeks. Scrub through 200 years and watch them disappear as the city grows.</p>
-        <div class="foot"><svg class="spark" aria-hidden="true" width="74" height="22" viewBox="0 0 74 22"><polyline fill="none" stroke-width="1.6" points="0,5 10,8 18,7 28,12 38,11 48,16 58,15 74,19"/></svg><span class="go">VIEW →</span></div>
-      </a>
-
-      {% comment %}
-      Draft. Pokémon computer-vision project. Fill in the copy below, drop a 1600x1000
-      cover at /assets/img/pokemon-cover.png, set the href, then move this card out of
-      the comment block.
-      <a class="card reveal" style="transition-delay:.08s" href="/projects/POKEMON-SLUG/">
-        <img class="cover" src="/assets/img/pokemon-cover.png" alt="" width="1600" height="1000" loading="lazy">
-        <span class="tag">Computer Vision</span>
-        <h3>TITLE</h3>
-        <p>ONE-LINER.</p>
-        <div class="foot"><svg class="spark" aria-hidden="true" width="74" height="22" viewBox="0 0 74 22"><polyline fill="none" stroke-width="1.6" points="0,16 12,12 24,14 36,7 48,10 60,5 74,8"/></svg><span class="go">VIEW →</span></div>
-      </a>
-      {% endcomment %}
-
-    </div>
+    <div class="sec-head reveal"><span class="idx">{{ g.idx }}</span><h2 id="pf-h-{{ g.id }}">{{ g.heading }}</h2></div>
+    {%- if g.dek %}
+    <p class="pf-dek reveal">{{ g.dek }}</p>
+    {%- endif %}
+    <ul class="cards pf-grid" role="list">
+      {%- for c in g.items %}
+      <li class="card pf-card{% if c.wide %} pf-wide{% endif %} reveal" data-tags="{{ c.tags | join: ' ' }}">
+        {%- if c.cover_svg %}
+        <span class="pf-cover pf-cover--svg">{% include covers/{{ c.cover_svg }}.svg %}</span>
+        {%- else %}
+        <span class="pf-cover"><img src="/assets/img/{{ c.cover }}.png"{% if site.imagemagick.enabled %} srcset="{% for w in site.imagemagick.widths %}/assets/img/{{ c.cover }}-{{ w }}.webp {{ w }}w{% unless forloop.last %}, {% endunless %}{% endfor %}" sizes="{% if c.wide %}(max-width: 760px) 92vw, 600px{% else %}(max-width: 760px) 92vw, 504px{% endif %}"{% endif %} width="1600" height="{{ c.h | default: 1000 }}" alt="{{ c.alt }}" loading="lazy" decoding="async"></span>
+        {%- endif %}
+        <div class="pf-body">
+          <h3><a class="pf-link" href="{{ c.href }}"{% if c.external %} target="_blank" rel="noopener"{% endif %}>{{ c.title }}{% if c.external %}<span class="pf-sr"> (opens in a new tab)</span>{% endif %}</a></h3>
+          <ul class="pf-tags" aria-label="Shows">
+            {%- for t in c.tags %}{% assign pn = page.pillars | where: "key", t | first %}
+            <li data-k="{{ t }}">{{ pn.name }}</li>
+            {%- endfor %}
+          </ul>
+          <p class="pf-out">{{ c.outcome }}</p>
+          <div class="pf-foot">
+            {%- assign ms = c.methods | split: " · " %}
+            <p class="pf-meth"><span class="pf-k">{{ c.label | default: "Methods" }}</span>{% for m in ms %}<span class="pf-mi">{{ m }}{% unless forloop.last %}&nbsp;·{% endunless %}</span>{% unless forloop.last %}{{ " " }}{% endunless %}{% endfor %}</p>
+            <span class="go" aria-hidden="true">{{ c.go | default: "Read →" }}</span>
+          </div>
+        </div>
+      </li>
+      {%- endfor %}
+    </ul>
   </div>
 </section>
+{%- endfor %}
+
+</div>

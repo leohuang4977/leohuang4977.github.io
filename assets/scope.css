@@ -2,16 +2,47 @@
    assets/css/ so PurgeCSS (css: ["_site/assets/css/*.css"]) ignores it, and it is
    listed in jekyll-minifier.exclude so the CSS compressor never touches the grain
    data-URI (which it silently drops). Source of truth: leo-about-final.html.
-   Page-specific CSS stays inline in each page's own <style> block. */
+   Page-specific CSS goes in /assets/pages/<page>.css, listed in front matter as extra_css. */
 :root{
   --paper:#0D0E12; --paper-2:#15171D; --panel:#15171C;
   --ink:#E9E7DF; --ink-2:#B6B4AB; --ink-mute:#84868E;
   --line:rgba(255,255,255,0.13); --line-soft:rgba(255,255,255,0.06);
-  --accent:#10B981; --accent-deep:#059669; --cool:#5BA8E8; --warn:#C76B45;
-  --font-display:'Fraunces',Georgia,serif;
-  --font-body:'Hanken Grotesk',ui-sans-serif,system-ui,sans-serif;
-  --font-mono:'IBM Plex Mono',ui-monospace,'Courier New',monospace;
+
+  /* ACCENT, one source of truth: violet #A78BFA (Leo's call, Oct 2026; it replaced emerald
+     #10B981). Page accents, the blob cursor, rotating word and focus ring all read --accent or
+     the tones below, so a swap is --accent plus --accent-deep. Amber #F2B33C is reserved for
+     the .todo callouts: keep it out of the accent. Baked copies to update by hand: the favicon
+     fill (_includes/scope/head-meta.liquid), the share card PNG, and the case studies' own
+     :root until they move onto this file. */
+  --accent:#A78BFA;                       /* 7.09:1 on paper, 6.59:1 on panel */
+  --accent-deep:#8B5CF6;                  /* solid button hover fill */
+  /* Hex fallbacks for browsers without color-mix(); the @supports block derives them. */
+  --accent-ring:rgba(167,139,250,0.22);   /* halo around the wordmark dot */
+  --accent-soft:rgba(167,139,250,0.35);   /* resting underline on large accent links */
+  --accent-glow:rgba(167,139,250,0.5);    /* drop-shadow glow on traces and icons */
+  --accent-wash:rgba(167,139,250,0.14);   /* tinted fills (same names as the case pages) */
+  --accent-wash-2:rgba(167,139,250,0.08);
+  --focus-ring:var(--accent);
+  /* Résumé skill chips: their own lighter tone on purpose (green #4ADE80 in the emerald era). */
+  --skill-hover:#C4B5FD; --skill-hover-soft:rgba(196,181,253,.16);
+  /* "Leo to check" callouts (same values as the case studies). */
+  --todo:#F2B33C; --todo-soft:rgba(242,179,60,0.08); --todo-line:rgba(242,179,60,0.5);
+  --cool:#5BA8E8; --warn:#C76B45;
+
+  /* The "Fallback" families are metric-matched local fonts defined in /assets/fonts/fonts.css. */
+  --font-display:'Fraunces','Fraunces Fallback','Fraunces Fallback Noto','Fraunces Fallback Times',Georgia,serif;
+  --font-body:'Hanken Grotesk','Hanken Grotesk Fallback','Hanken Grotesk Fallback Roboto',ui-sans-serif,system-ui,sans-serif;
+  --font-mono:'IBM Plex Mono','IBM Plex Mono Fallback',ui-monospace,'Courier New',monospace;
   --maxw:1080px;
+}
+@supports (color:color-mix(in srgb,red 50%,blue)){
+  :root{
+    --accent-ring:color-mix(in srgb,var(--accent) 22%,transparent);
+    --accent-soft:color-mix(in srgb,var(--accent) 35%,transparent);
+    --accent-glow:color-mix(in srgb,var(--accent) 50%,transparent);
+    --accent-wash:color-mix(in srgb,var(--accent) 14%,transparent);
+    --accent-wash-2:color-mix(in srgb,var(--accent) 8%,transparent);
+  }
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -20,28 +51,16 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;bac
 body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:repeating-linear-gradient(rgba(255,255,255,0.02) 0 1px,transparent 1px 3px),radial-gradient(120% 80% at 50% 0%,transparent 55%,rgba(0,0,0,0.45) 100%)}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:1}
 
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+/* Focus ring, skip link, topbar and footer: assets/shell.css (shared with the case studies,
+   loaded right after this file). */
 
-/* skip link — off-screen until keyboard-focused, then drops in below the top edge */
-.skip{position:absolute;left:8px;top:-48px;z-index:100;background:var(--accent);color:var(--paper);font-family:var(--font-mono);font-size:13px;font-weight:600;letter-spacing:0.04em;padding:10px 16px;border-radius:0 0 4px 4px;text-decoration:none;transition:top .18s}
-.skip:focus{top:0}
+/* "Leo to check" callouts, same look as the case studies. A page's own .todo rule wins. */
+.todo{max-width:66ch;margin:6px 0 18px;border:1px dashed var(--todo-line);border-radius:3px;background:var(--todo-soft);padding:13px 16px;font-family:var(--font-mono);font-size:12px;line-height:1.6;color:var(--ink-2);letter-spacing:0.01em}
+.todo b,.todo strong{color:var(--todo);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;font-size:11px;display:block;margin-bottom:6px}
 
 .reveal{transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
 html.js .reveal{opacity:0;transform:translateY(22px)}
 html.js .reveal.in{opacity:1;transform:none}
-
-/* topbar */
-header.topbar{border-bottom:1px solid var(--line);background:rgba(13,14,18,0.72);backdrop-filter:blur(8px);position:sticky;top:0;z-index:50}
-.topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;gap:16px;flex-wrap:wrap}
-.wordmark{font-family:var(--font-mono);font-weight:600;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink)}
-.wordmark .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(16,185,129,0.22);animation:pulse 2.4s ease-in-out infinite}
-.wordmark .avatar{width:26px;height:26px;border-radius:50%;object-fit:cover;border:1px solid var(--line);display:block}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.35}}
-nav.main{display:flex;gap:26px;align-items:center;font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.05em;text-transform:uppercase}
-nav.main a{color:var(--ink-2);text-decoration:none;position:relative;padding-bottom:3px;transition:color .2s}
-nav.main a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--accent);transition:width .25s}
-nav.main a:hover{color:var(--ink)}nav.main a:hover::after,nav.main a.active::after{width:100%}
-nav.main a.active{color:var(--accent)}
 
 /* kicker / eyebrow */
 .kicker{font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:12px;margin-bottom:26px}
@@ -79,27 +98,33 @@ nav.main a.active{color:var(--accent)}
 .allwork{margin-top:26px;display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:13px;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink);text-decoration:none;border-bottom:1.5px solid var(--accent);padding-bottom:3px;transition:gap .25s}
 .allwork:hover{gap:16px}
 
+/* availability readout (Home hero, Contact): each item carries its own drawn marker, so a wrapped
+   line still starts cleanly and screen readers hear a plain list. Pages set their own margin-top. */
+.avail{list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px;margin-top:24px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink-2)}
+.avail li{display:inline-flex;align-items:center;white-space:nowrap}
+.avail li::before{content:"";flex:none;width:5px;height:5px;border-radius:50%;border:1px solid var(--ink-mute);margin-right:10px}
+.avail li:first-child::before{width:8px;height:8px;border:none;background:var(--accent);box-shadow:0 0 0 3px var(--accent-ring)}
+
 /* contact / social */
 .contact{padding:78px 0 30px}
 .contact .big{font-family:var(--font-display);font-size:clamp(28px,5vw,50px);font-weight:500;line-height:1.05;letter-spacing:-0.015em;max-width:26ch;margin-bottom:30px}
-.contact .big a{color:var(--accent);text-decoration:none;border-bottom:2px solid rgba(16,185,129,0.35);transition:border-color .2s}
+.contact .big a{color:var(--accent);text-decoration:none;border-bottom:2px solid var(--accent-soft);transition:border-color .2s}
 .contact .big a:hover{border-color:var(--accent)}
 .social{display:flex;flex-wrap:wrap;gap:24px;font-family:var(--font-mono);font-size:13px;text-transform:uppercase;letter-spacing:0.05em}
 .social a{color:var(--ink-2);text-decoration:none;display:inline-flex;align-items:center;gap:7px;transition:color .2s}
 .social a:hover{color:var(--accent)}.social a .ar{color:var(--ink-mute)}
 
-/* footer */
-footer.foot{border-top:1px solid var(--line);margin-top:0}
-footer.foot .foot-inner{max-width:var(--maxw);margin:0 auto;padding:24px 28px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.04em;color:var(--ink-mute);text-transform:uppercase}
-footer.foot .coords{color:var(--ink-2)}
-
 @media (max-width:760px){
   body{font-size:16px}
-  .wrap{padding:0 20px}.topbar .wrap{padding:12px 20px;gap:10px}
-  footer.foot .foot-inner{padding:24px 20px 60px}
+  .wrap{padding:0 20px}
   .cards{grid-template-columns:1fr}
   .sec{padding:56px 0}
-  nav.main{gap:14px;font-size:11.5px}
-  nav.main a{padding:8px 6px 3px}
 }
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+/* Reduced motion: nothing moves. Reveal content is shown in place, smooth scrolling is off,
+   and the pulse, sweeps and other keyframes (pseudo-element overlays included) hold still.
+   The JS side (count-ups, blob cursor, rotating word) checks the same query. */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal,html.js .reveal{opacity:1;transform:none}
+}

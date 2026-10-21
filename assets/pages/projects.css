@@ -1,0 +1,116 @@
+/* Projects index (/projects/), revision 2026-10. Loaded only on this page via extra_css.
+   Production minifies this file with CSSminify2, which turns calc(a + b) into the invalid
+   calc(a+b) (that is what broke the old Ghost Rivers cover), so: no calc() here, and keyframes
+   use from/to. Builds on the tokens and .card/.cards/.sec-head in scope.css. */
+
+/* Filtering toggles the hidden attribute. .card sets display:flex, which would beat the
+   browser's own [hidden] rule, so restate it for this page. */
+.pf [hidden]{display:none!important}
+
+/* ---------- hero ---------- */
+.pf-hero{padding:62px 0 4px}
+.pf-hero h1{font-family:var(--font-display);font-weight:500;font-size:clamp(36px,6vw,62px);line-height:1.02;letter-spacing:-.015em;margin-bottom:20px;transition-delay:.06s}
+.pf-hero .dek{font-size:clamp(16px,2vw,19px);color:var(--ink-2);max-width:62ch;line-height:1.55;transition-delay:.12s}
+.pf-hero .note{margin-top:24px;font-family:var(--font-mono);font-size:11.5px;line-height:1.7;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-mute);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;transition-delay:.18s}
+.pf-hero .note .num{font-family:var(--font-display);font-size:20px;line-height:1;color:var(--accent);font-weight:500;margin-right:10px}
+
+/* ---------- filter bar: instrument buttons with an LED that lights when pressed ----------
+   Hidden without JS. The shared scope script sets html.js before first paint, so showing the
+   bar from CSS (rather than unhiding it from the deferred page script) avoids a layout shift. */
+.pf-bar{display:none;gap:12px;padding:28px 0 0}
+html.js .pf-bar{display:grid}
+.pf-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute)}
+.pf-chips{display:flex;flex-wrap:wrap;gap:8px}
+.pf-chip{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:12px;font-weight:400;line-height:1.2;letter-spacing:.01em;color:var(--ink-2);background:transparent;border:1px solid var(--line);border-radius:999px;padding:7px 13px 7px 11px;cursor:pointer;text-align:left;transition:border-color .2s,color .2s,background-color .2s}
+.pf-chip:hover{border-color:var(--ink-mute);color:var(--ink)}
+.pf-chip:focus-visible{border-radius:999px}
+.pf-led{width:7px;height:7px;border-radius:50%;border:1px solid var(--ink-mute);flex:none;transition:background-color .2s,border-color .2s,box-shadow .2s}
+.pf-n{font-size:11px;color:var(--ink-mute)}
+.pf-chip[aria-pressed="true"]{color:var(--ink);border-color:var(--accent);background-color:var(--accent-wash-2)}
+.pf-chip[aria-pressed="true"] .pf-led{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-ring)}
+.pf-chip[aria-pressed="true"] .pf-n{color:var(--accent)}
+.pf-status{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.04em;color:var(--ink-mute);min-height:1.6em}
+
+/* visually hidden text for screen readers (local copy, independent of other stylesheets) */
+.pf-sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ---------- sections ---------- */
+.pf-sec{padding:46px 0 22px}
+.pf-sec .sec-head h2{line-height:1.12}
+.pf-sec--builds{padding:34px 0 64px}
+.pf-dek{margin:-26px 0 30px;font-size:clamp(15px,1.6vw,17px);color:var(--ink-2);line-height:1.55;max-width:60ch}
+
+/* ---------- cards ---------- */
+.pf-grid{list-style:none}
+.card.pf-card{padding:0;gap:0}
+.pf-cover{display:block;position:relative;background:var(--paper);border-bottom:1px solid var(--line)}
+.pf-cover img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:left center}
+/* inline SVG cover (_includes/covers/), drawn in the scope's own colours: graticule, a funnel
+   that narrows along the pipeline, and who does each step (script, Claude, Leo) */
+.pf-cover--svg svg{display:block;width:100%;height:auto;aspect-ratio:16/10}
+.jc-bg{fill:var(--paper-2)}
+.jc-grid{fill:none;stroke:var(--line-soft);stroke-width:2}
+.jc-k{fill:var(--accent);font-family:var(--font-mono);font-size:30px;letter-spacing:.16em}
+.jc-t{fill:var(--ink);font-family:var(--font-display);font-size:92px;font-weight:500;letter-spacing:-.01em}
+.jc-band{fill:var(--accent-wash)}
+.jc-tr{fill:none;stroke:var(--accent);stroke-width:4}
+.jc-s{fill:var(--ink-mute)}
+.jc-c{fill:var(--accent)}
+.jc-halo{fill:var(--accent-ring)}
+.jc-me{fill:var(--paper-2);stroke:var(--ink);stroke-width:5}
+.jc-l{fill:var(--ink-2);font-family:var(--font-mono);font-size:28px;letter-spacing:.1em}
+.jc-leg text{fill:var(--ink-mute);font-family:var(--font-mono);font-size:26px;letter-spacing:.12em}
+/* faint scanlines tie the differently coloured cover art to the oscilloscope screen */
+.pf-cover::after{content:"";position:absolute;top:0;right:0;bottom:0;left:0;pointer-events:none;background:repeating-linear-gradient(rgba(0,0,0,.18) 0 1px,transparent 1px 3px);transition:opacity .3s}
+.pf-card:hover .pf-cover::after{opacity:.35}
+.pf-body{display:flex;flex-direction:column;gap:12px;padding:20px 24px 22px;flex:1}
+.pf-card h3{font-family:var(--font-display);font-size:22px;font-weight:500;line-height:1.15;letter-spacing:-.01em}
+.pf-link{color:var(--ink);text-decoration:none}
+/* the title link covers the whole card, so the card is one click target with a short link name */
+.pf-link::after{content:"";position:absolute;top:0;right:0;bottom:0;left:0;z-index:1}
+.pf-link:focus-visible{outline:none}
+.pf-card:focus-within{border-color:var(--accent);outline:2px solid var(--accent);outline-offset:3px}
+.pf-tags{order:-1;list-style:none;display:flex;flex-wrap:wrap;gap:6px 16px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.pf-tags li{display:inline-flex;align-items:center;gap:7px}
+.pf-tags li::before{content:"";width:6px;height:6px;border-radius:50%;border:1px solid var(--ink-mute);flex:none}
+.pf-card .pf-out{font-size:15px;line-height:1.5;color:var(--ink-2);flex:1}
+.pf-foot{position:relative;border-top:1px solid var(--line-soft);padding-top:12px}
+.pf-card .pf-meth{font-family:var(--font-mono);font-size:11.5px;line-height:1.55;color:var(--ink-mute)}
+.pf-k{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:3px}
+/* each method stays on one line when it fits, and its separator never starts a line */
+.pf-mi{display:inline-block;max-width:100%}
+.pf-card .go{position:absolute;top:9px;right:0;white-space:nowrap}
+
+/* the pressed filter lights the matching tag on every card it kept */
+.pf[data-active="experiments"] .pf-tags [data-k="experiments"],
+.pf[data-active="journeys"] .pf-tags [data-k="journeys"],
+.pf[data-active="human-ai"] .pf-tags [data-k="human-ai"],
+.pf[data-active="data-science"] .pf-tags [data-k="data-science"],
+.pf[data-active="builds"] .pf-tags [data-k="builds"]{color:var(--accent)}
+.pf[data-active="experiments"] .pf-tags [data-k="experiments"]::before,
+.pf[data-active="journeys"] .pf-tags [data-k="journeys"]::before,
+.pf[data-active="human-ai"] .pf-tags [data-k="human-ai"]::before,
+.pf[data-active="data-science"] .pf-tags [data-k="data-science"]::before,
+.pf[data-active="builds"] .pf-tags [data-k="builds"]::before{background:var(--accent);border-color:var(--accent)}
+
+/* cards that a filter brings back fade in, so the change is visible */
+@keyframes pf-in{from{opacity:.15}to{opacity:1}}
+.pf-enter{animation:pf-in .3s ease-out}
+
+/* a lone build spans the grid: picture left, text right */
+@media (min-width:761px){
+  .pf-wide{grid-column:1/-1}
+  .card.pf-wide{flex-direction:row}
+  .pf-wide .pf-cover{flex:0 0 58%;border-bottom:0;border-right:1px solid var(--line)}
+  .pf-wide .pf-body{padding:28px 30px 26px;justify-content:center}
+  .pf-wide .pf-out{flex:0 1 auto}
+}
+
+@media (max-width:760px){
+  .pf-hero{padding:44px 0 2px}
+  .pf-bar{padding-top:24px}
+  .pf-chip{font-size:11.5px;padding:7px 11px 7px 10px}
+  .pf-sec{padding:38px 0 18px}
+  .pf-body{padding:18px 18px 20px}
+  .pf-card h3{font-size:20px}
+}

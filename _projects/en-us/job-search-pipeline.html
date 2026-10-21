@@ -1,0 +1,638 @@
+---
+layout: none
+permalink: /projects/job-search-pipeline/
+title: "A decision pipeline for my own job search"
+doc_title: "A decision pipeline for my own job search — Leo Huang"
+description: "A weekly job-search pipeline I designed: explicit decision rules, a Claude judge, and assisted form filling that always stops before Submit."
+og_type: article
+scope_nav: projects
+sitemap: false
+---
+<!DOCTYPE html>
+<html lang="en" data-theme="scope">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>{{ page.doc_title | escape }}</title>
+{% include scope/head-meta.liquid %}
+<link rel="stylesheet" href="/assets/shell.css">
+<link rel="stylesheet" href="/assets/enhancements.css">
+<style>
+  :root{
+    --paper:#0D0E12; --paper-2:#15171D; --panel:#15171C;
+    --ink:#E9E7DF; --ink-2:#B6B4AB; --ink-mute:#84868E;
+    --line:rgba(255,255,255,0.13); --line-soft:rgba(255,255,255,0.06);
+    /* Accent: purple #A78BFA, deep #8B5CF6 (Leo, 2026-10-21), replacing emerald. --todo stays amber. */
+    --accent:#A78BFA; --accent-deep:#8B5CF6; --cool:#5BA8E8;
+    --accent-wash:rgba(167,139,250,0.14); --accent-wash-2:rgba(167,139,250,0.08);
+    --accent-ring:rgba(167,139,250,0.22); --focus-ring:var(--accent); /* read by /assets/shell.css */
+    --todo:#F2B33C; --todo-soft:rgba(242,179,60,0.08); --todo-line:rgba(242,179,60,0.5);
+    --font-display:'Fraunces','Fraunces Fallback','Fraunces Fallback Noto','Fraunces Fallback Times',Georgia,serif;
+    --font-body:'Hanken Grotesk','Hanken Grotesk Fallback','Hanken Grotesk Fallback Roboto',ui-sans-serif,system-ui,sans-serif;
+    --font-mono:'IBM Plex Mono','IBM Plex Mono Fallback',ui-monospace,'Courier New',monospace;
+    --maxw:1000px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background-color:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");opacity:0.05;mix-blend-mode:overlay}
+  body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:repeating-linear-gradient(rgba(255,255,255,0.02) 0 1px,transparent 1px 3px),radial-gradient(120% 70% at 50% 0%,transparent 58%,rgba(0,0,0,0.4) 100%)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:1}
+
+  .reveal{transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  html.js .reveal{opacity:0;transform:translateY(20px)}
+  html.js .reveal.in{opacity:1;transform:none}
+
+  /* hero */
+  .case-hero{padding:62px 0 26px}
+  .kicker{font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:12px;margin-bottom:22px}
+  .kicker .rule{height:1px;width:46px;background:var(--accent);opacity:.5}
+  .case-hero h1{font-family:var(--font-display);font-weight:500;font-size:clamp(34px,5.4vw,58px);line-height:1.04;letter-spacing:-0.015em;max-width:20ch;margin-bottom:22px}
+  .case-hero h1 em{font-style:italic;color:var(--accent);font-weight:500}
+  .case-hero .lede{font-size:clamp(16px,2vw,20px);color:var(--ink-2);max-width:62ch;line-height:1.55}
+  .case-hero .lede b{color:var(--ink);font-weight:600}
+  .disc{margin-top:26px;font-family:var(--font-mono);font-size:11.5px;line-height:1.6;letter-spacing:0.02em;color:var(--ink-mute);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0}
+
+  /* sections */
+  .sec{padding:54px 0 0}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:26px}
+  .sec-head .idx{font-family:var(--font-mono);font-size:12.5px;color:var(--accent);letter-spacing:0.08em}
+  .sec-head h2{font-family:var(--font-display);font-weight:500;font-size:clamp(24px,3.6vw,36px);letter-spacing:-0.01em}
+  .body-copy{max-width:none}
+  .body-copy p{font-size:17.5px;color:var(--ink-2);margin-bottom:18px;line-height:1.62}
+  .body-copy p b{color:var(--ink);font-weight:600}
+  .body-copy em{color:var(--ink);font-style:italic}
+  .subhead{font-family:var(--font-display);font-size:20px;font-weight:500;color:var(--ink);margin:30px 0 14px}
+
+  /* two study blocks */
+  .studies{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:6px 0 4px}
+  .study{border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:22px 22px 20px}
+  .study .lab{font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:8px;margin-bottom:12px}
+  .study .lab::before{content:"";width:18px;height:1px;background:var(--accent)}
+  .study h4{font-family:var(--font-display);font-size:19px;font-weight:500;line-height:1.2;margin-bottom:10px;color:var(--ink)}
+  .study p{font-size:14.5px;color:var(--ink-2);line-height:1.55}
+
+  /* figure box (instrument-panel style) */
+  .figbox{margin:22px 0 6px;border:1px solid var(--line);background:linear-gradient(90deg,var(--line-soft) 1px,transparent 1px) 0 0/64px 100%,var(--panel);border-radius:3px;position:relative;overflow:hidden;padding:40px 22px 22px}
+  .figbox .scope-label{position:absolute;top:12px;left:16px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-mute);z-index:3}
+  .figcap{margin-top:14px;font-family:var(--font-mono);font-size:11px;line-height:1.55;letter-spacing:0.02em;color:var(--ink-mute)}
+  .fig{display:block;width:100%;height:auto}
+  .fig text{font-family:var(--font-mono);fill:var(--ink-2)}
+  .fig .lbl{fill:var(--accent)}
+  .fig .mut{fill:var(--ink-mute)}
+  .fig .ink{fill:var(--ink)}
+  .fig .box-o{fill:var(--panel);stroke:var(--line);stroke-width:1.2}
+  .fig .box-a{fill:var(--accent-wash);stroke:var(--accent);stroke-width:1.4}
+  .fig .ln{stroke:var(--line);stroke-width:1;fill:none}
+  .fig .lnA{stroke:var(--accent);stroke-width:1.6;fill:none}
+  .fig .dash{stroke:var(--line);stroke-width:1;stroke-dasharray:4 4;fill:none}
+  .fig .dashA{stroke:var(--accent);stroke-width:1.4;stroke-dasharray:4 4;fill:none}
+  .fig .dotA{fill:var(--accent)}
+  .fig .dotO{fill:var(--panel);stroke:var(--accent);stroke-width:1.6}
+  .fig .band{fill:var(--accent-wash-2)}
+  .fig .gap{stroke:var(--accent);stroke-width:6;opacity:.45;stroke-linecap:round}
+  .fig .fillsoft{fill:var(--line-soft)}
+  .fig .fillline{fill:var(--line)}
+
+  /* recommendations */
+  .recs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:8px 0 4px}
+  .rec{border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:22px;display:flex;flex-direction:column;gap:9px}
+  .rec .n{font-family:var(--font-mono);font-size:12px;color:var(--accent);letter-spacing:0.08em}
+  .rec h4{font-family:var(--font-display);font-size:19px;font-weight:500;line-height:1.2;color:var(--ink)}
+  .rec p{font-size:14.5px;color:var(--ink-2);line-height:1.5}
+
+  /* methods tag */
+
+  /* contact / footer */
+  .contact{border-top:1px solid var(--line);margin-top:54px;padding:44px 0 26px}
+  .backlink{font-family:var(--font-mono);font-size:12.5px;text-transform:uppercase;letter-spacing:0.05em;color:var(--ink-2);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:gap .25s,color .2s}
+  .backlink:hover{color:var(--accent);gap:14px}
+
+  @media (max-width:760px){
+    body{font-size:16px}
+    .wrap{padding:0 20px}
+    .case-hero{padding:46px 0 22px}
+    .studies{grid-template-columns:1fr}
+    .recs{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal,html.js .reveal{opacity:1;transform:none}}
+  /* ═══ scope-fx · shared interaction layer — identical block on every project page ═══ */
+  #scopebar{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);box-shadow:0 0 10px var(--accent);z-index:90;pointer-events:none}
+  .sweepfx{position:relative;overflow:hidden}
+  html.js .sweepfx::after{content:"";position:absolute;top:0;bottom:0;left:-14%;width:9%;background:linear-gradient(90deg,transparent,var(--accent) 50%,transparent);opacity:0;pointer-events:none}
+  html.js .sweepfx.swept::after{animation:scopesweep 1.05s cubic-bezier(.33,.62,.29,1) .12s 1 both}
+  @keyframes scopesweep{0%{left:-14%;opacity:0}10%{opacity:.18}90%{opacity:.14}100%{left:108%;opacity:0}}
+  .mtools{max-width:66ch;margin:30px 0 0;font-family:var(--font-mono);font-size:11.5px;line-height:1.7;letter-spacing:0.03em;color:var(--ink-mute);border-top:1px solid var(--line);padding-top:16px}
+  .mtools b{color:var(--ink-2);font-weight:600;letter-spacing:0.08em}
+  .disc{margin-top:26px;font-family:var(--font-mono);font-size:11.5px;line-height:1.6;letter-spacing:0.02em;color:var(--ink-mute);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;border-left:0;background:none;border-radius:0}
+  @media (hover:hover) and (pointer:fine){
+    .rec,.study,.pcard,.ta,.w{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+    .rec:hover,.study:hover,.pcard:hover,.ta:hover,.w:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 12px 30px rgba(0,0,0,0.35)}
+  }
+  @media (prefers-reduced-motion:reduce){html.js .sweepfx::after{display:none!important}}
+/* cs-shows + cs-pager (revision 2026-10) */
+.cs-shows{padding:0 0 8px}
+.cs-shows .wrap{display:grid;gap:10px;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:16px 0}
+.cs-shows-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+.cs-shows-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);min-width:52px}
+.cs-tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.cs-tags a{display:inline-block;font-family:var(--font-mono);font-size:12px;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:4px 11px;text-decoration:none;transition:border-color .2s,color .2s}
+.cs-tags a:hover,.cs-tags a:focus-visible{border-color:var(--accent);color:var(--accent)}
+.cs-fits{margin:0;font-size:14px;color:var(--ink-2)}
+.cs-pager{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 22px}
+.cs-pager a{display:block;border:1px solid var(--line);border-radius:4px;padding:14px 16px;color:var(--ink);text-decoration:none;font-family:var(--font-display);font-size:18px;line-height:1.25;transition:border-color .2s}
+.cs-pager a span{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:6px}
+.cs-pager .cs-next{text-align:right}
+.cs-pager a:hover,.cs-pager a:focus-visible{border-color:var(--accent)}
+@media (max-width:560px){.cs-pager{grid-template-columns:1fr}.cs-pager .cs-next{text-align:left}}
+/* fix (c2, verified): the padding above zeroes .wrap's side gutters; keep borders on the text column */
+.cs-shows .wrap{width:calc(100% - 56px);max-width:calc(var(--maxw) - 56px)}
+@media (max-width:760px){.cs-shows .wrap{width:calc(100% - 40px)}}
+/* ═══ job-search-pipeline page (d-jobsearch, revision 2026-10). New rules use tokens only. ═══ */
+/* spec readout: same component as the mortgage, advice and writing pages */
+.spec{border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:6px 24px}
+.spec .row{display:flex;align-items:baseline;gap:14px;padding:13px 0;border-bottom:1px solid var(--line-soft)}
+.spec .row:last-child{border-bottom:none}
+.spec .row .k{font-family:var(--font-mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-2);white-space:nowrap}
+.spec .row .dots{flex:1;min-width:12px;border-bottom:1px dotted var(--line);transform:translateY(-3px)}
+.spec .row .v{font-family:var(--font-display);font-size:24px;font-weight:500;line-height:1.2;color:var(--accent);text-align:right}
+.spec .row .v.txt{font-family:var(--font-mono);font-size:13.5px;font-weight:400;color:var(--ink-2)}
+.spec .row.stack{display:block}
+.spec .row.stack .k{display:block;margin-bottom:7px}
+.spec .row.stack .v{display:block;text-align:left;line-height:1.7}
+.case-hero .spec{margin-top:30px;max-width:640px}
+.spec-end{margin-top:32px;max-width:780px}
+
+/* TODO callouts (BRIEF §4, same rule as the mortgage page) */
+.todo{max-width:66ch;margin-top:22px;border:1px dashed var(--todo-line);background:var(--todo-soft);border-radius:3px;padding:13px 16px;font-family:var(--font-mono);font-size:12px;line-height:1.6;color:var(--ink-2);letter-spacing:0.01em}
+.todo b,.todo strong{color:var(--todo);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;font-size:11px;display:block;margin-bottom:6px}
+.body-copy .todo{margin:0 0 18px}
+.figbox + .todo{margin-top:14px}
+
+/* sub-headings inside body copy are real h3s */
+h3.subhead{line-height:1.3}
+.body-copy > .subhead:first-child{margin-top:0}
+
+/* FIG.01 pipeline. Without JS it is a plain list of stages. The page script adds .is-live. */
+.pipe{position:relative}
+.pipe-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin:0;padding:18px 0 8px;border-top:1px solid var(--line-soft);font-size:inherit;font-weight:400}
+.pipe-h:first-child{border-top:0;padding-top:4px}
+.pipe-n{font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;color:var(--accent)}
+.pipe-name{font-family:var(--font-display);font-size:20px;font-weight:500;line-height:1.2;color:var(--ink)}
+.pipe-who{font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-mute)}
+.pipe-h[data-who="claude"] .pipe-who{color:var(--accent)}
+.pipe-h[data-who="leo"] .pipe-who{color:var(--ink)}
+.pipe-panel{padding:2px 0 16px}
+.pipe-panel[hidden]{display:none!important}
+.pipe-top{margin-bottom:12px}
+.pipe-ptitle{display:none}
+.pipe-when{display:block;font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.04em;color:var(--ink-mute)}
+.pipe-dl{display:grid;gap:12px;margin:0}
+.pipe-dl > div{display:grid;grid-template-columns:104px minmax(0,1fr);gap:16px;align-items:baseline}
+.pipe-dl dt{font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-mute)}
+.pipe-dl dd{margin:0;font-size:15.5px;line-height:1.55;color:var(--ink-2);max-width:70ch}
+.pipe-tip{color:var(--ink-2)}
+
+.pipe.is-live{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));column-gap:8px;row-gap:12px}
+.pipe.is-live .pipe-h{grid-row:1;display:block;padding:0;border:0;position:relative}
+.pipe.is-live .pipe-panel{grid-row:2;grid-column:1/-1;border:1px solid var(--line);border-radius:3px;background:var(--paper);padding:20px 24px 22px}
+.pipe.is-live .pipe-panel:not([hidden]){animation:pipe-in .26s ease-out both}
+/* tablet and desktop: every panel sits in the same grid cell, so the row is as tall as the longest panel and
+   switching stages never shifts the page. Closed panels stay hidden from view and from assistive tech. */
+@media (min-width:761px){.pipe.is-live .pipe-panel[hidden]{display:block!important;visibility:hidden}}
+.pipe.is-live .pipe-ptitle{display:block;font-family:var(--font-display);font-size:24px;font-weight:500;line-height:1.15;color:var(--ink);margin-bottom:5px}
+@keyframes pipe-in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.pipe-btn{-webkit-appearance:none;appearance:none;display:flex;flex-direction:column;align-items:flex-start;gap:7px;width:100%;height:100%;min-height:92px;margin:0;padding:12px 12px 11px;font:inherit;color:var(--ink);text-align:left;background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;position:relative;transition:border-color .2s ease,background-color .2s ease}
+.pipe-btn .pipe-name{font-size:17px;line-height:1.15}
+.pipe-btn::before{content:"";position:absolute;left:-1px;right:-1px;top:-1px;height:2px;border-radius:3px 3px 0 0;background:transparent}
+.pipe-h[data-who="claude"] .pipe-btn::before{background:var(--accent)}
+.pipe-h[data-who="leo"] .pipe-btn::before{background:var(--ink)}
+.pipe-btn[aria-expanded="true"]{border-color:var(--accent);background:linear-gradient(var(--accent-wash),var(--accent-wash)),var(--paper)}
+.pipe-btn[aria-expanded="true"]::after{content:"";position:absolute;left:50%;bottom:-13px;width:1px;height:12px;background:var(--accent)}
+.pipe-btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media (hover:hover){.pipe-btn:hover{border-color:var(--ink-mute)}.pipe-btn[aria-expanded="true"]:hover{border-color:var(--accent)}}
+.pipe.is-live .pipe-h::after{content:"";position:absolute;top:50%;right:-9px;width:10px;height:1px;background:var(--line);transition:background-color .3s ease;transition-delay:calc(var(--i,0) * 40ms)}
+.pipe.is-live .pipe-h:last-of-type::after{display:none}
+.pipe.is-live .pipe-h.is-past::after{background:var(--accent)}
+@media (min-width:761px) and (max-width:999px){
+  .pipe.is-live{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .pipe.is-live .pipe-h:nth-of-type(n+5){grid-row:2}
+  .pipe.is-live .pipe-panel{grid-row:3}
+  .pipe.is-live .pipe-h:nth-of-type(4)::after{display:none}
+  .pipe-btn[aria-expanded="true"]::after{display:none}
+}
+@media (max-width:760px){
+  .pipe-dl > div{grid-template-columns:minmax(0,1fr);gap:3px}
+  .pipe-dl dd{font-size:15px}
+  .pipe.is-live{grid-template-columns:minmax(0,1fr);row-gap:8px}
+  .pipe.is-live .pipe-h{grid-row:auto}
+  .pipe.is-live .pipe-panel{grid-row:auto;grid-column:auto;min-height:0;margin:-2px 0 4px 21px;padding:12px 2px 12px 16px;border:0;border-left:1px solid var(--accent);border-radius:0;background:none}
+  .pipe.is-live .pipe-ptitle{display:none}
+  .pipe-btn{flex-direction:row;align-items:baseline;gap:12px;min-height:0;padding:14px}
+  .pipe-btn .pipe-who{margin-left:auto}
+  .pipe-btn::before{right:auto;bottom:-1px;width:2px;height:auto;border-radius:3px 0 0 3px}
+  .pipe-btn[aria-expanded="true"]::after{display:none}
+  .pipe.is-live .pipe-h::after{top:auto;right:auto;bottom:-9px;left:21px;width:1px;height:8px}
+}
+/* the shared reduced-motion rule (*) does not reach pseudo-elements, so the trace is covered here */
+@media (prefers-reduced-motion:reduce){.pipe.is-live .pipe-h::after{transition:none}.pipe.is-live .pipe-panel:not([hidden]){animation:none}}
+
+/* FIG.02 snapshot chart: two static layouts, wide and tall */
+.snap{overflow:visible}
+.snap .t-k{font-size:13px;fill:var(--ink-2)}
+.snap .t-v{font-size:14.5px;font-weight:600;fill:var(--ink)}
+.snap .s-f{fill:rgba(255,255,255,0.2)}
+.snap .s-c{fill:rgba(255,255,255,0.39)}
+.snap .s-o{fill:var(--accent)}
+.snap .s-r{fill:var(--accent);fill-opacity:0.6}
+.snap .zoom{fill:var(--accent);fill-opacity:0.07}
+.snap .zl{stroke:var(--accent);stroke-opacity:0.55;stroke-width:1;fill:none}
+.snap-tall{display:none;max-width:440px}
+.snap-tall .t-k{font-size:12.5px}
+.snap-tall .t-v{font-size:13.5px}
+@media (max-width:820px){.snap-wide{display:none}.snap-tall{display:block}}
+/* phones: figure labels flow above the figure instead of floating over it, so a wrapped label never overlaps */
+@media (max-width:760px){
+  .figbox{padding:16px 14px 18px}
+  .figbox .scope-label{position:static;display:block;margin-bottom:14px}
+}
+/* shell (revision 2026-10): topbar, footer, skip link and focus ring come from /assets/shell.css,
+   header shrink and blob cursor from /assets/enhancements.css. The shared footer now sits
+   after the main element, so the closing section keeps the old gap above it. */
+main > section:last-child{padding-bottom:48px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+{% include scope/header.liquid %}
+<main id="main">
+
+<section class="case-hero">
+  <div class="wrap">
+    <div class="kicker reveal"><span class="rule"></span>AI workflow design · Decision rules · Personal build</div>
+    <h1 class="reveal" style="transition-delay:.06s">A decision pipeline for my own job search, with me at the <em>last step</em>.</h1>
+    <p class="lede reveal" style="transition-delay:.12s">Every week, a pipeline I designed reads the career sites on my watchlist and scores each new posting against rules I set. Claude vets the shortlist and fills applications up to the Submit button. I press Submit myself. It also turned up the finding that changed my search: in about 7,300 postings in Canada or remote, <b>not one had a behavioral-science title</b>.</p>
+    <div class="spec stat-trigger reveal" style="transition-delay:.18s">
+      <div class="row"><span class="k">Role</span><span class="dots"></span><span class="v txt">Designer and decision owner</span></div>
+      <div class="row"><span class="k">Built</span><span class="dots"></span><span class="v txt">Aug to Oct 2026, with Claude Code</span></div>
+      <div class="row"><span class="k">Employers on watchlist</span><span class="dots"></span><span class="v"><span data-count="66">66</span></span></div>
+      <div class="row"><span class="k">Postings tracked</span><span class="dots"></span><span class="v">~<span data-count="34900">34,900</span></span></div>
+      <div class="row"><span class="k">Final step</span><span class="dots"></span><span class="v txt">I press Submit</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- cs-shows (revision 2026-10) -->
+<section class="cs-shows" aria-label="What this project shows">
+  <div class="wrap">
+    <div class="cs-shows-row"><span class="cs-shows-label">Shows</span>
+      <ul class="cs-tags">
+        <li><a href="/projects/?f=journeys">Decision &amp; journey design</a></li>
+        <li><a href="/projects/?f=human-ai">Human–AI interaction</a></li>
+      </ul>
+    </div>
+    <div class="cs-shows-row"><span class="cs-shows-label">Fits</span>
+      <p class="cs-fits">AI enablement and workflow design · Customer journey, lifecycle and decisioning · Behavioral and decision science</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">01</span><h2>Why I built it</h2></div>
+    <div class="body-copy reveal" style="transition-delay:.08s">
+      <p>In August 2026 I started a job search aimed straight at employers: a watchlist of companies in the Toronto area and remote across Canada, read on their own career sites, with no aggregators in between. Two things made that hard to do by hand.</p>
+      <p>The first was names. The work I do hadn't gone away, but it was being posted under titles that a search for "UX researcher" would never match. The second was volume. The first read of the forty-company watchlist returned 12,503 postings, and they didn't sit still. Across 602 postings on Workday sites, the median one closed 12 days after the pipeline first saw it.</p>
+      <p>Reading all of that every week, under the wrong names, was never going to work. I wanted a machine to do the reading and leave the decisions to me, with rules in between that I could inspect and change.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">02</span><h2>What I designed</h2></div>
+    <div class="body-copy reveal" style="transition-delay:.08s">
+      <p>The result is a weekly chain of eight stages. Every stage has a written rule and a guardrail, and each one belongs to a single actor: a script, Claude, or me. Scripts fetch and score. Claude reads where a rule can't decide, and drafts what I would otherwise write. Anything that commits me waits for me.</p>
+      <p>Each run starts on my Windows machine, which fetches the postings. Claude scheduled tasks then score them and build application packets, and Claude in Chrome handles assisted form filling that stops before Submit. The system never submits an application, and it stores no credentials.</p>
+      <p>I built it with Claude Code between August and October, across 71 commits and about 30 logged sessions. I set the rules and made the calls. Claude wrote and tested the code, and each working session now ends with a written handoff that marks every claim verified or unverified, so the next one starts from facts instead of memory.</p>
+    </div>
+
+    <figure class="figbox reveal" style="transition-delay:.05s">
+      <div class="scope-label">FIG.01 — The weekly pipeline, stage by stage</div>
+      <div class="pipe" id="pipe">
+        <h3 class="pipe-h" data-who="script"><span class="pipe-n">01</span><span class="pipe-name">Discover</span><span class="pipe-who">script</span></h3>
+        <div class="pipe-panel" id="pipe-p1">
+          <div class="pipe-top"><span class="pipe-ptitle" aria-hidden="true">Discover</span><span class="pipe-when">Each week, alongside the fetch</span></div>
+          <dl class="pipe-dl">
+            <div><dt>Rule</dt><dd>Every employer on my watchlist is recorded with its real careers board, its applicant-tracking system and an access tier that one successful read proved.</dd></div>
+            <div><dt>Guardrail</dt><dd>The watchlist is mine. Discovered employers go on a separate list the system owns, and moving one onto the watchlist is my call. Job aggregators are skipped by name.</dd></div>
+            <div><dt>In numbers</dt><dd>66 employers on the watchlist.</dd></div>
+          </dl>
+        </div>
+
+        <h3 class="pipe-h" data-who="script"><span class="pipe-n">02</span><span class="pipe-name">Fetch</span><span class="pipe-who">script</span></h3>
+        <div class="pipe-panel" id="pipe-p2">
+          <div class="pipe-top"><span class="pipe-ptitle" aria-hidden="true">Fetch</span><span class="pipe-when">Weekly, Windows Task Scheduler on my machine</span></div>
+          <dl class="pipe-dl">
+            <div><dt>Rule</dt><dd>Each board is read the cheapest way that works: a public feed, a plain request, or a headless browser. New descriptions go into a local cache, so scoring needs no network.</dd></div>
+            <div><dt>Guardrail</dt><dd>It never fights bot detection. A blocked site drops one tier on the spot, closer to me checking it by hand, and is not retried that run. Only I move a site back up. If the network itself is down, a preflight check ends the run before anything is written.</dd></div>
+            <div><dt>In numbers</dt><dd>27 boards read by public feed, 31 by plain request, 5 in a headless browser, 1 with me clearing a check, 2 checked by hand.</dd></div>
+          </dl>
+        </div>
+
+        <h3 class="pipe-h" data-who="script"><span class="pipe-n">03</span><span class="pipe-name">Score</span><span class="pipe-who">script</span></h3>
+        <div class="pipe-panel" id="pipe-p3">
+          <div class="pipe-top"><span class="pipe-ptitle" aria-hidden="true">Score</span><span class="pipe-when">After the fetch, code run by a Claude scheduled task</span></div>
+          <dl class="pipe-dl">
+            <div><dt>Rule</dt><dd>A rubric in code scores each posting from 0 to 5, with points for the title's role family, for methods and domain words in the description, and for location. A 3 is shown to me for review. A 4 or 5 can be picked.</dd></div>
+            <div><dt>Guardrail</dt><dd>A promising title with no description yet is floored at 3 and tagged instead of buried. False friends score 0 before anything else is read, and work I've ruled out earns no title points.</dd></div>
+            <div><dt>In numbers</dt><dd>303 test cases cover the rubric and the picking rules. Re-running the scorer on the same ledger changes nothing.</dd></div>
+          </dl>
+        </div>
+
+        <h3 class="pipe-h" data-who="claude"><span class="pipe-n">04</span><span class="pipe-name">Judge</span><span class="pipe-who">Claude</span></h3>
+        <div class="pipe-panel" id="pipe-p4">
+          <div class="pipe-top"><span class="pipe-ptitle" aria-hidden="true">Judge</span><span class="pipe-when">Right after scoring, in the same task</span></div>
+          <dl class="pipe-dl">
+            <div><dt>Rule</dt><dd>Claude reads the full description of every pick and keeps it only when the actual work is research, analytics, experimentation, behavioral science or decision design that I could credibly do.</dd></div>
+            <div><dt>Guardrail</dt><dd>The judge can send a pick back but can't add one. Each rejection carries a one-line reason, and a rejected posting is never picked again. Freed slots refill from the rubric and get judged too, two rounds at most.</dd></div>
+            <div><dt>In numbers</dt><dd>October 20 run: 18 of 42 picks sent back.</dd></div>
+          </dl>
+        </div>
+
+        <h3 class="pipe-h" data-who="script"><span class="pipe-n">05</span><span class="pipe-name">Shortlist</span><span class="pipe-who">script</span></h3>
+        <div class="pipe-panel" id="pipe-p5">
+          <div class="pipe-top"><span class="pipe-ptitle" aria-hidden="true">Shortlist</span><span class="pipe-when">End of the scoring run</span></div>
+          <dl class="pipe-dl">
+            <div><dt>Rule</dt><dd>A posting stays on the shortlist only if it passed the judge, scored 4 or 5 on a real description, counts under the main rubric or a family I've graduated, and its own location line puts it in Canada.</dd></div>
+            <div><dt>Guardrail</dt><dd>At most 30 new picks in any seven days and 3 open at one employer. The shortlist has a status of its own, separate from mine, so the system never records a decision in my name.</dd></div>
+            <div><dt>In numbers</dt><dd>25 on the shortlist on October 21.</dd></div>
+          </dl>
+        </div>
+
+        <h3 class="pipe-h" data-who="claude"><span class="pipe-n">06</span><span class="pipe-name">Prepare</span><span class="pipe-who">Claude</span></h3>
+        <div class="pipe-panel" id="pipe-p6">
+          <div class="pipe-top"><span class="pipe-ptitle" aria-hidden="true">Prepare</span><span class="pipe-when">After the shortlist, a Claude scheduled task</span></div>
+          <dl class="pipe-dl">
+            <div><dt>Rule</dt><dd>For each pick, Claude builds a packet: a draft cover letter, drafts for any free-text questions, the link to the form, and a recommendation on whether to apply at all.</dd></div>
+            <div><dt>Guardrail</dt><dd>Every letter is marked DRAFT and follows my writing rules. Résumé files are read-only, and no personal identifier is ever written down. At most 30 packets a run, 3 per employer.</dd></div>
+          </dl>
+        </div>
+
+        <h3 class="pipe-h" data-who="claude"><span class="pipe-n">07</span><span class="pipe-name">Assisted fill</span><span class="pipe-who">Claude</span></h3>
+        <div class="pipe-panel" id="pipe-p7">
+          <div class="pipe-top"><span class="pipe-ptitle" aria-hidden="true">Assisted fill</span><span class="pipe-when">Once the packets are ready, Claude in Chrome</span></div>
+          <dl class="pipe-dl">
+            <div><dt>Rule</dt><dd>Claude in Chrome fills each form from the packet and a map of answers I've already decided. Any question the map doesn't cover goes to an inbox for me.</dd></div>
+            <div><dt>Guardrail</dt><dd>It stops before Submit and stores no credentials. It never creates an account or tries to get past a CAPTCHA. At most six forms per run, with a hard stop.</dd></div>
+          </dl>
+        </div>
+
+        <h3 class="pipe-h" data-who="leo"><span class="pipe-n">08</span><span class="pipe-name">Submit</span><span class="pipe-who">Leo</span></h3>
+        <div class="pipe-panel" id="pipe-p8">
+          <div class="pipe-top"><span class="pipe-ptitle" aria-hidden="true">Submit</span><span class="pipe-when">When I review the filled forms</span></div>
+          <dl class="pipe-dl">
+            <div><dt>Rule</dt><dd>I read every filled field, fix what's wrong, attach anything missing and press Submit myself.</dd></div>
+            <div><dt>Guardrail</dt><dd>Submit is mine alone. The ledger marks a role as applied only on my word. The inputs stay mine as well: the watchlist, the rules, my answers and every status that records a decision.</dd></div>
+          </dl>
+        </div>
+      </div>
+      <figcaption class="figcap">Tags name who acts at each stage. Claude works only inside written rules, and nothing that commits me happens before the last stage.<span class="pipe-tip" id="pipe-tip" hidden> Select a stage to read its rule and guardrail. Arrow keys move between stages.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">03</span><h2>The decisions built into it</h2></div>
+    <div class="body-copy reveal" style="transition-delay:.08s">
+      <h3 class="subhead">Scores come from code, not judgment</h3>
+      <p>In the first runs, Claude scored postings by judgment, and identical postings drifted between runs. So the rubric moved into code, checked by a test suite that grew from 23 real postings in August to 303 cases by October. A promising title whose description hasn't been fetched is floored at 3 and tagged, because missing evidence is not the same as a low score.</p>
+      <h3 class="subhead">New role families start on probation</h3>
+      <p>A new family of titles starts on probation unless I graduate it on day one. On probation it gets its own section in the weekly digest and is never picked automatically, and a noisy family can be deleted without touching the rest of the rubric.</p>
+      <h3 class="subhead">Some matches are false friends</h3>
+      <p>Some jobs share a word with mine and nothing else. On Canada's Job Bank, a search for behavioral scientists returned only applied behavior analysis therapy roles. False friends like that score 0 before anything else is read. Work I've ruled out for myself earns no title points, and the judge turns away anything from that list that slips through.</p>
+      <h3 class="subhead">Caps, and a judge that can only say no</h3>
+      <p>The pipeline picks at most 30 new roles in any seven days, with no more than 3 open at one employer. Then Claude judges every pick against its full description and keeps it only when the actual work is something I could credibly do. A rejected pick gets a one-line reason and never comes back, and its slot refills from the rubric, not from the model. In the October 20 run the judge sent back 18 of 42 picks.</p>
+      <h3 class="subhead">What only I can change</h3>
+      <p>Nothing writes to the watchlist, to employer priorities or to a status that records my decision unless I say so, and the pipeline's own picks carry a separate status, so it never decides in my name. Rules change only by dated amendments I authorize. Two of the biggest changes also went through a review by a separate agent before commit. On September 28 that review found nine problems, and seven were fixed before the change went in.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">04</span><h2>What it found</h2></div>
+    <div class="body-copy reveal" style="transition-delay:.08s">
+      <p>On October 21, 2026, the ledger held about 34,900 postings first seen since August 5. The rules had filtered out most of them, and 25 sat on the shortlist.</p>
+    </div>
+
+    <figure class="figbox reveal" style="transition-delay:.05s">
+      <div class="scope-label">FIG.02 — Where the postings went · snapshot 2026-10-21</div>
+      <svg class="fig snap snap-wide" viewBox="0 0 900 178" role="img" aria-label="Ledger snapshot on 2026-10-21: about 34,900 postings tracked since August 5. About 22,800 were filtered out by the rules, about 11,300 have closed, and 809 are still open. Of the open postings, 784 are open for review and 25 are auto-shortlisted.">
+        <text class="t-k" x="0" y="14">Every posting tracked since Aug 5</text><text class="t-v" x="900" y="14" text-anchor="end">&#8776;34,900</text>
+        <text x="0" y="48"><tspan class="t-k">Filtered out by the rules</tspan><tspan class="t-v" dx="10">&#8776;22,800</tspan></text>
+        <text x="587.2" y="48"><tspan class="t-k">Closed</tspan><tspan class="t-v" dx="10">&#8776;11,300</tspan></text>
+        <text x="900" y="48" text-anchor="end"><tspan class="t-k">Still open</tspan><tspan class="t-v" dx="10">809</tspan></text>
+        <polygon class="zoom" points="879.24,80 900,80 900,126 0,126"></polygon>
+        <line class="zl" x1="879.24" y1="80" x2="0" y2="126"></line>
+        <line class="zl" x1="900" y1="80" x2="900" y2="126"></line>
+        <rect class="s-f" x="0" y="58" width="585.2" height="22"><title>Filtered out by the rules: about 22,800</title></rect>
+        <rect class="s-c" x="587.2" y="58" width="290.03" height="22"><title>Closed: about 11,300</title></rect>
+        <path class="s-o" d="M879.24,58 H896 A4,4 0 0 1 900,62 V76 A4,4 0 0 1 896,80 H879.24 Z"><title>Still open: 809</title></path>
+        <rect class="s-r" x="0" y="126" width="870.25" height="22"><title>Open for review: 784</title></rect>
+        <path class="s-o" d="M872.25,126 H896 A4,4 0 0 1 900,130 V144 A4,4 0 0 1 896,148 H872.25 Z"><title>Auto-shortlisted: 25</title></path>
+        <text x="0" y="170"><tspan class="t-k">Open for review</tspan><tspan class="t-v" dx="10">784</tspan></text>
+        <text x="900" y="170" text-anchor="end"><tspan class="t-k">Auto-shortlisted</tspan><tspan class="t-v" dx="10">25</tspan></text>
+      </svg>
+      <svg class="fig snap snap-tall" viewBox="0 0 340 232" role="img" aria-label="Ledger snapshot on 2026-10-21: about 34,900 postings tracked since August 5. About 22,800 were filtered out by the rules, about 11,300 have closed, and 809 are still open. Of the open postings, 784 are open for review and 25 are auto-shortlisted.">
+        <text class="t-k" x="0" y="14">Every posting tracked since Aug 5</text><text class="t-v" x="340" y="14" text-anchor="end">&#8776;34,900</text>
+        <rect class="s-f" x="0" y="32.5" width="10" height="10" rx="2"></rect><text class="t-k" x="18" y="42">Filtered out by the rules</text><text class="t-v" x="340" y="42" text-anchor="end">&#8776;22,800</text>
+        <rect class="s-c" x="0" y="52.5" width="10" height="10" rx="2"></rect><text class="t-k" x="18" y="62">Closed</text><text class="t-v" x="340" y="62" text-anchor="end">&#8776;11,300</text>
+        <rect class="s-o" x="0" y="72.5" width="10" height="10" rx="2"></rect><text class="t-k" x="18" y="82">Still open</text><text class="t-v" x="340" y="82" text-anchor="end">809</text>
+        <polygon class="zoom" points="332.21,114 340,114 340,158 0,158"></polygon>
+        <line class="zl" x1="332.21" y1="114" x2="0" y2="158"></line>
+        <line class="zl" x1="340" y1="114" x2="340" y2="158"></line>
+        <rect class="s-f" x="0" y="94" width="219.45" height="20"><title>Filtered out by the rules: about 22,800</title></rect>
+        <rect class="s-c" x="221.45" y="94" width="108.76" height="20"><title>Closed: about 11,300</title></rect>
+        <path class="s-o" d="M332.21,94 H337 A3,3 0 0 1 340,97 V111 A3,3 0 0 1 337,114 H332.21 Z"><title>Still open: 809</title></path>
+        <rect class="s-r" x="0" y="158" width="327.56" height="20"><title>Open for review: 784</title></rect>
+        <path class="s-o" d="M329.56,158 H337 A3,3 0 0 1 340,161 V175 A3,3 0 0 1 337,178 H329.56 Z"><title>Auto-shortlisted: 25</title></path>
+        <rect class="s-r" x="0" y="192.5" width="10" height="10" rx="2"></rect><text class="t-k" x="18" y="202">Open for review</text><text class="t-v" x="340" y="202" text-anchor="end">784</text>
+        <rect class="s-o" x="0" y="212.5" width="10" height="10" rx="2"></rect><text class="t-k" x="18" y="222">Auto-shortlisted</text><text class="t-v" x="340" y="222" text-anchor="end">25</text>
+      </svg>
+      <figcaption class="figcap">Ledger counts from state_probe.py on 2026-10-21, for every posting first seen since August 5. Counts above 1,000 are rounded to the nearest hundred. The lower bar enlarges the open sliver at the end of the upper one. Auto-shortlisted roles have passed the rules and the judge and wait for my review.</figcaption>
+    </figure>
+
+    <div class="body-copy reveal" style="transition-delay:.06s;margin-top:30px">
+      <p>The finding I use most is about the market. A read of the ledger on September 28 covered about 7,300 distinct postings in Canada or remote, at 62 employers, first seen between August 6 and September 22. None carried a behavioral-science title.</p>
+      <p>The work was there under other names. Experimentation titles had joined the rubric in early September. Another 46 postings at watchlist employers sat under journey, decisioning, AI-enablement and people-analytics titles, and every one had scored 3 or lower because the rubric gave those titles no points.</p>
+      <p>So the search changed. I added five role families for decision design, meaning work that studies how people decide and then designs and tests the steps they move through, and widened a sixth for people analytics. The judge now keeps that work. It is also why this site leads with decisions and journeys rather than UX research.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">05</span><h2>What broke, and what I changed</h2></div>
+    <div class="body-copy reveal" style="transition-delay:.08s">
+      <p>Three failures shaped the design more than any plan did. None of them announced itself.</p>
+      <h3 class="subhead">The cloud couldn't reach the job boards</h3>
+      <p>The first scheduled scan, on August 31, reached 0 of 34 boards. Every request died at the cloud sandbox's proxy, even to sites that have nothing to do with jobs, and a third sandbox gave the same answer. So I split the run along the network line: Windows Task Scheduler on my machine fetches and caches every description, and the Claude task scores offline from that cache. The fetch now checks the network before it writes anything, because the failed run had logged 34 failures against boards that were fine. On September 4 the split design ran end to end and brought in 3,856 new postings.</p>
+      <h3 class="subhead">Failures that made no noise</h3>
+      <p>On August 31 I also found the pipeline had been silent for 25 days. Its scheduled task was gone, and its scoring had been blind: none of 12,842 postings had description text, so no posting could score above 3, one short of the top tier. Twenty-two roles that fit what I wanted had been filed away as low scores. Days later, three runs stalled on a permission prompt with nobody there to answer it, and in early October I found the scoring task had been off for two weeks while the fetch kept running.</p>
+      <p>The fixes share one idea: the system has to report on itself. A state probe prints the real state in one command, scan lag and any fetch in flight included. Long scripts print timestamped heartbeats. A watchdog checks that every step of the chain left its files, and the scorer refuses any fetch that isn't from today.</p>
+      <h3 class="subhead">A board that seemed to empty overnight</h3>
+      <p>On September 4, one employer's board adapter returned 5 postings where the first read had found 3,753. Had absence meant closure, thousands of live roles would have closed in one run. A mass-disappearance guard caught it and held back about 7,600 closures across 19 employers. Then the guard stuck the other way, and by September 9 it was holding postings open at 13 employers after they had come down. The fix was an aging rule: a posting now closes only after it goes missing from three trustworthy reads in a row.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">06</span><h2>What it shows</h2></div>
+    <div class="body-copy reveal" style="transition-delay:.08s">
+      <p>The pipeline is a small version of the work I'm looking for. A decision people make over and over gets written rules, and a person stays where judgment and accountability belong. Claude reads at a scale I can't, and its authority is narrow on purpose: it can turn a pick down but never add one, and it stops at Submit. When something breaks, the system says so before I have to ask.</p>
+    </div>
+    <div class="spec spec-end reveal" style="transition-delay:.1s">
+      <div class="row stack"><span class="k">Methods</span><span class="v txt">Decision-rule design · rubric scoring with a regression suite · LLM judge pass with logged reasons · human-in-the-loop form filling · failure monitoring (state probe, heartbeats, watchdog)</span></div>
+      <div class="row stack"><span class="k">Built with</span><span class="v txt">Python 3.12 · Playwright · public applicant-tracking feeds · CSV ledger · git · Windows Task Scheduler · Claude Code · Claude in Chrome</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="wrap">
+    <nav class="cs-pager" aria-label="More case studies">
+      <a class="cs-prev" href="/projects/mortgage-switching/"><span>Previous</span>Mortgage switching</a>
+      <a class="cs-next" href="/projects/ai-writing-assistance/"><span>Next</span>AI writing assistance</a>
+    </nav>
+    <a class="backlink reveal" href="https://leohuang4977.github.io/projects/">&#8592; All projects</a>
+  </div>
+</section>
+
+</main>
+{% include scope/footer.liquid %}
+<script>
+  /* scope-fx · unified page script (reveal · counters · progress · shrink · sweep) — identical on every project page */
+  (function(){
+    var de=document.documentElement;
+    de.classList.add('js');
+    if(de.dataset.lhFx){return;} de.dataset.lhFx='1'; /* guard so a site-wide enhancement pass can no-op this block */
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* scroll progress + shrinking topbar */
+    var bar=document.createElement('div'); bar.id='scopebar'; document.body.appendChild(bar);
+    var topbar=document.querySelector('header.topbar'); var ticking=false;
+    function onScroll(){
+      if(ticking)return; ticking=true;
+      requestAnimationFrame(function(){
+        var max=de.scrollHeight-de.clientHeight;
+        bar.style.width=(max>0?(window.scrollY/max)*100:0)+'%';
+        if(topbar)topbar.classList.toggle('shrunk',window.scrollY>24);
+        ticking=false;
+      });
+    }
+    window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+    /* oscilloscope sweep targets: every figure panel */
+    document.querySelectorAll('.figbox, figure.fig, div.fig').forEach(function(f){f.classList.add('sweepfx');});
+
+    /* count-up (NaN-safe: first frame gets a real timestamp via rAF) */
+    function countUp(el){
+      if(el.dataset.done)return;
+      var t=parseFloat(el.dataset.count); if(isNaN(t))return;
+      el.dataset.done='1';
+      var fmt=function(n){return Math.round(n).toLocaleString('en-US');};
+      if(reduce){el.textContent=fmt(t);return;}
+      var dur=1100,start=null;
+      function tick(now){
+        if(start===null)start=now;
+        var p=Math.min((now-start)/dur,1);
+        el.textContent=fmt((1-Math.pow(1-p,3))*t);
+        if(p<1)requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    function arm(el){
+      el.classList.add('in');
+      if(el.classList.contains('sweepfx')&&!reduce)el.classList.add('swept');
+      el.querySelectorAll('[data-count]').forEach(countUp);
+    }
+
+    /* safety net: everything visible + counters finalized even if observers never fire */
+    setTimeout(function(){
+      document.querySelectorAll('.reveal,.sweepfx').forEach(arm);
+      document.querySelectorAll('[data-count]').forEach(countUp);
+    },1800);
+
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){
+        es.forEach(function(e){if(e.isIntersecting){arm(e.target);io.unobserve(e.target);}});
+      },{threshold:0.12,rootMargin:'0px 0px -7% 0px'});
+      document.querySelectorAll('.reveal,.sweepfx,.stat-trigger').forEach(function(el){io.observe(el);});
+    } else {
+      document.querySelectorAll('.reveal,.sweepfx').forEach(arm);
+    }
+  })();
+</script>
+<script>
+  /* FIG.01 pipeline (page-specific). Turns the static list of stages into disclosure buttons with one open panel.
+     Without this script every stage and its details stay visible as a list. Arrow keys, Home and End move focus;
+     Enter or Space opens a stage. Motion is CSS only and is switched off under prefers-reduced-motion. */
+  (function(){
+    var root=document.getElementById('pipe');
+    if(!root||!root.classList)return;
+    var heads=Array.prototype.slice.call(root.querySelectorAll('.pipe-h'));
+    var panels=heads.map(function(h){return h.nextElementSibling;});
+    if(!heads.length||panels.some(function(p){return !p||!p.classList.contains('pipe-panel')||!p.id;}))return;
+    var btns=heads.map(function(h,i){
+      var b=document.createElement('button');
+      b.type='button';
+      b.className='pipe-btn';
+      b.id='pipe-b'+(i+1);
+      b.setAttribute('aria-controls',panels[i].id);
+      b.setAttribute('aria-expanded','false');
+      while(h.firstChild)b.appendChild(h.firstChild);
+      h.appendChild(b);
+      h.style.setProperty('--i',i);
+      panels[i].setAttribute('role','region');
+      panels[i].setAttribute('aria-labelledby',b.id);
+      return b;
+    });
+    function open(k){
+      btns.forEach(function(b,j){
+        var on=j===k;
+        b.setAttribute('aria-expanded',on?'true':'false');
+        panels[j].hidden=!on;
+        heads[j].classList.toggle('is-on',on);
+        heads[j].classList.toggle('is-past',j<k);
+      });
+    }
+    btns.forEach(function(b,i){
+      b.addEventListener('click',function(){open(i);});
+      b.addEventListener('keydown',function(e){
+        var n=btns.length,t;
+        switch(e.key){
+          case 'ArrowRight':case 'ArrowDown':t=(i+1)%n;break;
+          case 'ArrowLeft':case 'ArrowUp':t=(i-1+n)%n;break;
+          case 'Home':t=0;break;
+          case 'End':t=n-1;break;
+          default:return;
+        }
+        e.preventDefault();
+        btns[t].focus();
+      });
+    });
+    root.classList.add('is-live');
+    var tip=document.getElementById('pipe-tip');
+    if(tip)tip.hidden=false;
+    open(0);
+  })();
+</script>
+<script src="/assets/js/enhancements.js" defer></script>
+</body>
+</html>
