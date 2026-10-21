@@ -133,8 +133,8 @@ permalink: /projects/generational-wealth-transfer/
   /* two-column contrast */
   .contrast{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
   .contrast .col{border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:22px 22px}
-  .contrast .col h4{font-family:var(--font-mono);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:11px}
-  .contrast .col.keep h4{color:var(--accent)}
+  .contrast .col h3{font-family:var(--font-mono);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:11px}
+  .contrast .col.keep h3{color:var(--accent)}
   .contrast .col p{font-size:15.5px;color:var(--ink-2);line-height:1.55}
 
 
@@ -180,6 +180,24 @@ permalink: /projects/generational-wealth-transfer/
   @media (prefers-reduced-motion:reduce){html.js .sweepfx::after{display:none!important}}
   .skip{position:absolute;left:8px;top:-48px;z-index:100;background:var(--accent);color:var(--paper);font-family:var(--font-mono);font-size:13px;font-weight:600;letter-spacing:0.04em;padding:10px 16px;border-radius:0 0 4px 4px;text-decoration:none;transition:top .18s}
   .skip:focus{top:0}
+  /* cs-shows + cs-pager (revision 2026-10) */
+  .cs-shows{padding:0 0 8px}
+  .cs-shows .wrap{display:grid;gap:10px;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:16px 0}
+  .cs-shows-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+  .cs-shows-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);min-width:52px}
+  .cs-tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+  .cs-tags a{display:inline-block;font-family:var(--font-mono);font-size:12px;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:4px 11px;text-decoration:none;transition:border-color .2s,color .2s}
+  .cs-tags a:hover,.cs-tags a:focus-visible{border-color:var(--accent);color:var(--accent)}
+  .cs-fits{margin:0;font-size:14px;color:var(--ink-2)}
+  .cs-pager{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 22px}
+  .cs-pager a{display:block;border:1px solid var(--line);border-radius:4px;padding:14px 16px;color:var(--ink);text-decoration:none;font-family:var(--font-display);font-size:18px;line-height:1.25;transition:border-color .2s}
+  .cs-pager a span{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:6px}
+  .cs-pager .cs-next{text-align:right}
+  .cs-pager a:hover,.cs-pager a:focus-visible{border-color:var(--accent)}
+  @media (max-width:560px){.cs-pager{grid-template-columns:1fr}.cs-pager .cs-next{text-align:left}}
+  /* c2 fix (revision 2026-10): the shared rule's padding:16px 0 drops .wrap's side gutters; keep the strip on the text column */
+  .cs-shows .wrap{width:calc(100% - 56px);max-width:calc(var(--maxw) - 56px)}
+  @media (max-width:760px){.cs-shows .wrap{width:calc(100% - 40px)}}
 </style>
 </head>
 <body>
@@ -201,9 +219,9 @@ permalink: /projects/generational-wealth-transfer/
 
 <section class="case-hero">
   <div class="wrap">
-    <div class="kicker reveal"><span class="rule"></span>Qualitative Research · Advisor Interviews</div>
-    <h1 class="reveal" style="transition-delay:.06s">Generational Wealth Transfer &amp; Householding</h1>
-    <p class="dek reveal" style="transition-delay:.12s">How financial advisors actually manage complex, multi-generational client households, and where the tools they rely on keep getting in the way.</p>
+    <div class="kicker reveal"><span class="rule"></span>Client lifecycle · Qualitative synthesis · Wealth management</div>
+    <h1 class="reveal" style="transition-delay:.06s">Generational wealth transfer &amp; householding</h1>
+    <p class="dek reveal" style="transition-delay:.12s">Twenty-five advisor interviews, one product direction: household-first tooling that can hold a whole family and flag the life events that start a transfer conversation. It rests on how advisors actually manage multi-generational households, and where their tools keep getting in the way.</p>
 
     <div class="specstrip reveal" style="transition-delay:.18s">
       <div class="cell"><div class="k">Role</div><div class="v">Lead researcher</div></div>
@@ -213,6 +231,21 @@ permalink: /projects/generational-wealth-transfer/
     </div>
 
     <div class="disclaimer reveal">Portfolio version of real client work. Client and participant details are removed, and every figure is illustrative, drawn to show the method rather than report a client's results.</div>
+  </div>
+</section>
+
+<!-- cs-shows (revision 2026-10) -->
+<section class="cs-shows" aria-label="What this project shows">
+  <div class="wrap">
+    <div class="cs-shows-row"><span class="cs-shows-label">Shows</span>
+      <ul class="cs-tags">
+        <li><a href="/projects/?f=journeys">Decision &amp; journey design</a></li>
+        <li><a href="/projects/?f=data-science">Behavioral data science</a></li>
+      </ul>
+    </div>
+    <div class="cs-shows-row"><span class="cs-shows-label">Fits</span>
+      <p class="cs-fits">UX and product research · Customer journey, lifecycle and decisioning</p>
+    </div>
   </div>
 </section>
 
@@ -393,11 +426,11 @@ permalink: /projects/generational-wealth-transfer/
     <div class="sec-head reveal"><span class="idx">05</span><h2>Why heirs leave, and what keeps them</h2></div>
     <div class="contrast reveal" style="transition-delay:.06s">
       <div class="col lose">
-        <h4>What loses the next generation</h4>
+        <h3>What loses the next generation</h3>
         <p>An advisor the heirs never actually met. A transfer handled like paperwork. And a system that kept the wider family invisible until the moment had already passed.</p>
       </div>
       <div class="col keep">
-        <h4>What keeps them</h4>
+        <h3>What keeps them</h3>
         <p>Real relationships built across the household early. The advisor seen as the family's advisor, rather than only the parents'. Tooling that helps them show up at the right moment instead of fighting them for it.</p>
       </div>
     </div>
@@ -416,6 +449,10 @@ permalink: /projects/generational-wealth-transfer/
 
 <section class="cta">
   <div class="wrap">
+    <nav class="cs-pager" aria-label="More case studies">
+      <a class="cs-prev" href="/projects/competitive-ux-research/"><span>Previous</span>Competitive benchmarking</a>
+      <a class="cs-next" href="/projects/accordion-usability-test/"><span>Next</span>Accordion navigation test</a>
+    </nav>
     <div class="actions reveal">
       <a class="back" href="https://leohuang4977.github.io/projects/">← All projects</a>
     </div>

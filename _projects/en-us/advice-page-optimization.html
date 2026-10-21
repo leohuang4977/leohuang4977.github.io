@@ -116,7 +116,7 @@ permalink: /projects/advice-page-optimization/
   .recs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:8px 0 4px}
   .rec{border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:22px;display:flex;flex-direction:column;gap:9px}
   .rec .n{font-family:var(--font-mono);font-size:12px;color:var(--accent);letter-spacing:0.08em}
-  .rec h4{font-family:var(--font-display);font-size:19px;font-weight:500;line-height:1.2;color:var(--ink)}
+  .rec h3{font-family:var(--font-display);font-size:19px;font-weight:500;line-height:1.2;color:var(--ink)}
   .rec p{font-size:14.5px;color:var(--ink-2);line-height:1.5}
 
   /* contact / footer */
@@ -155,6 +155,24 @@ permalink: /projects/advice-page-optimization/
   @media (prefers-reduced-motion:reduce){html.js .sweepfx::after{display:none!important}}
   .skip{position:absolute;left:8px;top:-48px;z-index:100;background:var(--accent);color:var(--paper);font-family:var(--font-mono);font-size:13px;font-weight:600;letter-spacing:0.04em;padding:10px 16px;border-radius:0 0 4px 4px;text-decoration:none;transition:top .18s}
   .skip:focus{top:0}
+  /* cs-shows + cs-pager (revision 2026-10) */
+  .cs-shows{padding:0 0 8px}
+  .cs-shows .wrap{display:grid;gap:10px;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:16px 0}
+  .cs-shows-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+  .cs-shows-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);min-width:52px}
+  .cs-tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+  .cs-tags a{display:inline-block;font-family:var(--font-mono);font-size:12px;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:4px 11px;text-decoration:none;transition:border-color .2s,color .2s}
+  .cs-tags a:hover,.cs-tags a:focus-visible{border-color:var(--accent);color:var(--accent)}
+  .cs-fits{margin:0;font-size:14px;color:var(--ink-2)}
+  .cs-pager{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 22px}
+  .cs-pager a{display:block;border:1px solid var(--line);border-radius:4px;padding:14px 16px;color:var(--ink);text-decoration:none;font-family:var(--font-display);font-size:18px;line-height:1.25;transition:border-color .2s}
+  .cs-pager a span{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:6px}
+  .cs-pager .cs-next{text-align:right}
+  .cs-pager a:hover,.cs-pager a:focus-visible{border-color:var(--accent)}
+  @media (max-width:560px){.cs-pager{grid-template-columns:1fr}.cs-pager .cs-next{text-align:left}}
+  /* c2 fix (revision 2026-10): the shared rule's padding:16px 0 drops .wrap's side gutters; keep the strip on the text column */
+  .cs-shows .wrap{width:calc(100% - 56px);max-width:calc(var(--maxw) - 56px)}
+  @media (max-width:760px){.cs-shows .wrap{width:calc(100% - 40px)}}
 </style>
 </head>
 <body>
@@ -176,10 +194,25 @@ permalink: /projects/advice-page-optimization/
 
 <section class="case-hero">
   <div class="wrap">
-    <div class="kicker reveal"><span class="rule"></span>Survey Research · Ranking &amp; Likert · Wealth Management</div>
+    <div class="kicker reveal"><span class="rule"></span>Decision drivers · Survey design &amp; segmentation · Wealth management</div>
     <h1 class="reveal" style="transition-delay:.06s">What moves someone to contact an advisor, and what just gets in the <em>way</em>.</h1>
-    <p class="lede reveal" style="transition-delay:.12s">A 150-person survey of current and prospective wealth clients, built to answer three questions before a redesign: <b>what people value in an advisor, what moves them to reach out, and how they want to do it.</b></p>
+    <p class="lede reveal" style="transition-delay:.12s">A wealth-management firm put phone and in-person contact ahead of the web form on its advice page, and trimmed the form to the few fields clients were willing to give up front. Both changes came from a 150-person survey of current and prospective clients on <b>what people value in an advisor, what moves them to reach out, and how they want to do it.</b></p>
     <div class="disc reveal" style="transition-delay:.18s">// Anonymized account of confidential client work. The firm is unnamed and every figure is an illustrative recreation made for this portfolio, drawn to show the method rather than report results.</div>
+  </div>
+</section>
+
+<!-- cs-shows (revision 2026-10) -->
+<section class="cs-shows" aria-label="What this project shows">
+  <div class="wrap">
+    <div class="cs-shows-row"><span class="cs-shows-label">Shows</span>
+      <ul class="cs-tags">
+        <li><a href="/projects/?f=journeys">Decision &amp; journey design</a></li>
+        <li><a href="/projects/?f=data-science">Behavioral data science</a></li>
+      </ul>
+    </div>
+    <div class="cs-shows-row"><span class="cs-shows-label">Fits</span>
+      <p class="cs-fits">Customer journey, lifecycle and decisioning · Quantitative UX research · UX and product research</p>
+    </div>
   </div>
 </section>
 
@@ -320,7 +353,7 @@ permalink: /projects/advice-page-optimization/
     </div>
 
     <div class="body-copy reveal" style="transition-delay:.08s">
-      <p style="margin-top:26px">The form itself produced the study's most useful nuance. There was no consensus on how long it should be. There was near-total agreement on what belongs in it. People volunteered the same three things: why they are reaching out, what they want help with, and enough about their financial situation to make the first conversation useful. <b>The fix was not a shorter form. It was the right fields.</b></p>
+      <p style="margin-top:26px">The form itself produced the study's most useful finding. There was no consensus on how long it should be. There was near-total agreement on what belongs in it. People volunteered the same three things: why they are reaching out, what they want help with, and enough about their financial situation to make the first conversation useful. <b>Getting the fields right mattered more than getting the form short.</b></p>
     </div>
 
     <div class="figbox reveal" style="transition-delay:.1s">
@@ -366,17 +399,17 @@ permalink: /projects/advice-page-optimization/
     <div class="recs reveal" style="transition-delay:.1s">
       <div class="rec">
         <span class="n">REC 01</span>
-        <h4>Lead with credibility</h4>
+        <h3>Lead with credibility</h3>
         <p>Put trustworthiness, ethics, and experience at the top of the page, in plain language with proof behind it. Capability messaging can support, but it should not lead.</p>
       </div>
       <div class="rec">
         <span class="n">REC 02</span>
-        <h4>Streamline the form</h4>
+        <h3>Trim the form</h3>
         <p>Ask for what clients already want to share: why they are reaching out, what they want help with, and enough financial context to route them well. Every field beyond that is friction with no consensus behind it.</p>
       </div>
       <div class="rec">
         <span class="n">REC 03</span>
-        <h4>Offer real channels</h4>
+        <h3>Offer real channels</h3>
         <p>Make a phone number, an email address, and a way to book a conversation as prominent as the form. The form is the fallback. The page should not treat it as the main event.</p>
       </div>
     </div>
@@ -395,6 +428,10 @@ permalink: /projects/advice-page-optimization/
 
 <section class="contact">
   <div class="wrap">
+    <nav class="cs-pager" aria-label="More case studies">
+      <a class="cs-prev" href="/projects/ai-writing-assistance/"><span>Previous</span>AI writing assistance</a>
+      <a class="cs-next" href="/projects/competitive-ux-research/"><span>Next</span>Competitive benchmarking</a>
+    </nav>
     <a class="backlink reveal" href="https://leohuang4977.github.io/projects/">&#8592; All projects</a>
     <footer class="foot">
       <span>© 2026 Leo Huang</span>
