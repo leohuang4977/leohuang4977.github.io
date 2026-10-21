@@ -2,119 +2,61 @@
 layout: scope
 permalink: /cv/
 page_id: cv
-title: CV
-doc_title: Résumé & CV — Leo Huang
-description: UX researcher and behavioral scientist — on-page résumé plus résumé and CV downloads.
+title: Résumé
+doc_title: Résumé — Leo Huang
+description: Résumé of Leo Huang, a Toronto behavioral scientist with UX research experience at CIBC and Slack, finishing a Social Psychology PhD on human–AI interaction.
 scope_nav: cv
 nav: true
 nav_order: 4
+extra_css: [/assets/pages/cv.css]
+extra_js: [/assets/pages/cv.js]
 ---
-
-<style>
-  .cv-hero{padding:62px 0 6px}
-  .cv-hero h1{font-family:var(--font-display);font-weight:500;font-size:clamp(36px,6vw,62px);line-height:1.02;letter-spacing:-0.015em;margin-bottom:22px}
-  .cv-hero .dek{font-size:clamp(16px,2vw,19px);color:var(--ink-2);max-width:66ch;line-height:1.6}
-  .cv-hero .dek b{color:var(--ink);font-weight:600}
-
-  .dl-row{display:flex;flex-wrap:wrap;gap:13px;margin-top:30px}
-  .btn-dl{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink);text-decoration:none;border:1px solid var(--line);border-radius:3px;padding:12px 18px;background:var(--panel);transition:border-color .25s,color .25s,transform .25s,background .25s}
-  .btn-dl:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
-  .btn-dl .ic{color:var(--accent);transition:color .25s}
-  .btn-dl.primary{background:var(--accent);color:var(--paper);border-color:var(--accent);font-weight:600}
-  .btn-dl.primary .ic{color:var(--paper)}
-  .btn-dl.primary:hover{background:var(--accent-deep);border-color:var(--accent-deep);color:var(--paper);transform:translateY(-2px)}
-
-  .cv-contact{margin-top:20px;display:flex;flex-wrap:wrap;gap:20px;font-family:var(--font-mono);font-size:12px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink-2)}
-  .cv-contact a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s,border-color .2s}
-  .cv-contact a:hover{color:var(--accent);border-color:var(--accent)}
-
-  /* résumé body */
-  .res{display:flex;flex-direction:column}
-  .res-item{padding:26px 0;border-top:1px solid var(--line-soft)}
-  .res-item:first-child{border-top:none;padding-top:4px}
-  .res-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
-  .res-role{font-family:var(--font-display);font-size:21px;font-weight:500;letter-spacing:-0.01em}
-  .res-role .org{color:var(--accent)}
-  .res-meta{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-mute);letter-spacing:0.03em;white-space:nowrap}
-  .res-loc{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-2);margin-top:5px;letter-spacing:0.03em}
-  .res-bullets{margin-top:15px;display:flex;flex-direction:column;gap:11px;max-width:78ch}
-  .res-bullets li{list-style:none;position:relative;padding-left:21px;color:var(--ink-2);font-size:15px;line-height:1.55}
-  .res-bullets li::before{content:"";position:absolute;left:0;top:8px;width:7px;height:7px;border:1.5px solid var(--accent);border-radius:50%}
-
-  /* education */
-  .edu{display:flex;flex-direction:column}
-  .edu-item{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding:18px 0;border-top:1px solid var(--line-soft)}
-  .edu-item:first-child{border-top:none;padding-top:2px}
-  .edu-deg{font-family:var(--font-display);font-size:19px;font-weight:500}
-  .edu-deg .inst{color:var(--accent)}
-  .edu-meta{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-mute);letter-spacing:0.03em}
-
-  /* skills */
-  .skills{display:flex;flex-direction:column;gap:30px}
-  .skill-group .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:9px;display:flex;align-items:center;gap:10px}
-  .skill-group .lbl::before{content:"";width:18px;height:1px;background:var(--accent)}
-  .skill-group .desc{font-style:italic;color:var(--ink-2);font-size:14.5px;line-height:1.5;margin:0 0 14px;max-width:72ch}
-  .chips{display:flex;flex-wrap:wrap;gap:8px}
-  .chip{font-family:var(--font-mono);font-size:12px;color:var(--ink-2);border:1px solid var(--line);border-radius:3px;padding:6px 11px;background:var(--panel)}
-
-  .cv-pubs{margin-top:8px}
-
-  /* Print: flip to paper so Cmd-P doesn't render a black rectangle. */
-  @media print{
-    body{background:#fff!important;color:#111!important;font-size:11pt}
-    body::before,body::after{display:none!important}
-    header.topbar,footer.foot,.dl-row,.cv-contact,.cursor-blob,.skip,.cv-pubs{display:none!important}
-    .reveal{opacity:1!important;transform:none!important}
-    .cv-hero{padding:0 0 6px}
-    .cv-hero h1,.sec-head h2,.res-role,.edu-deg{color:#111!important}
-    .kicker,.sec-head .idx,.res-role .org,.edu-deg .inst,.skill-group .lbl{color:#0a7a55!important}
-    .kicker .rule,.skill-group .lbl::before{background:#0a7a55!important}
-    .dek,.dek b,.res-bullets li,.res-loc,.res-meta,.edu-meta,.skill-group .desc{color:#222!important}
-    .res-bullets li::before{border-color:#0a7a55!important}
-    .chip{color:#222!important;border-color:#bbb!important;background:#fff!important}
-    .res-item,.edu-item{border-color:#ddd!important;break-inside:avoid}
-    .sec{padding:14px 0}
-  }
-</style>
 
 <section class="cv-hero">
   <div class="wrap">
-    <div class="kicker reveal"><span class="rule"></span>Résumé &amp; CV</div>
-    <h1 class="reveal" style="transition-delay:.06s">Résumé &amp; CV</h1>
-    <p class="dek reveal" style="transition-delay:.12s"><b>UX researcher and behavioral scientist</b> with 6+ years designing and running large-scale experiments and translating behavioral and telemetry data into product decisions. Experienced across the full research lifecycle for consumer and enterprise products, with deep expertise in causal inference and predictive modeling. Currently completing a Social Psychology PhD focused on human–AI interaction.</p>
+    <div class="kicker reveal"><span class="rule"></span>Résumé</div>
+    <h1 class="reveal" style="transition-delay:.06s">Leo Huang</h1>
+    <p class="dek reveal" style="transition-delay:.12s">I study how people make decisions, then design and test the products and processes they move through. I'm a <b>behavioral scientist</b> with more than six years of designing and running large-scale experiments and turning behavioral and telemetry data into product decisions, including UX research roles at CIBC and Slack. My social psychology PhD at the University of Toronto is on human–AI interaction, with a focus on social chatbots, wellbeing and social networks. Causal inference and predictive modeling are where my expertise runs deepest.</p>
 
-    <div class="dl-row reveal" style="transition-delay:.18s">
-      <a class="btn-dl primary" href="/assets/pdf/leo-huang-resume.pdf" download><span class="ic">↓</span> Résumé · PDF</a>
-      <a class="btn-dl" href="/assets/pdf/leo-huang-cv.pdf" download><span class="ic">↓</span> Full CV · PDF</a>
+    <dl class="cv-spec reveal" style="transition-delay:.18s">
+      <div class="row"><dt>Based in</dt><dd>Toronto, ON</dd></div>
+      <div class="row"><dt>Open to</dt><dd>Roles in the GTA, remote in Canada, or remote in the US</dd></div>
+      <div class="row"><dt>PhD defence</dt><dd>Expected December 2026</dd></div>
+      <div class="row"><dt>Team fit</dt><dd>Quantitative UX research&nbsp;<span class="sep">·</span> Human–AI interaction research&nbsp;<span class="sep">·</span> Behavioral and decision science&nbsp;<span class="sep">·</span> Experimentation</dd></div>
+      <div class="row"><dt>Contact</dt><dd><a href="mailto:leo.huang4977@gmail.com">leo.huang4977@gmail.com</a>&nbsp;<span class="sep">·</span> <a href="https://www.linkedin.com/in/leo-huang-870ab2178"><span class="scr">LinkedIn</span><span class="prt">linkedin.com/in/leo-huang-870ab2178</span></a><span class="prt">&nbsp;<span class="sep">·</span> leohuang4977.github.io</span></dd></div>
+    </dl>
+
+    <div class="cv-actions reveal" style="transition-delay:.22s">
+      <button type="button" class="btn-print" data-print hidden><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 9V3h10v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M7 14h10v7H7z"/></svg>Print or save as PDF</button>
     </div>
   </div>
 </section>
 
-<section class="sec">
+<section class="sec cv-sec" aria-labelledby="cv-experience">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="idx">01</span><h2>Experience</h2></div>
+    <div class="sec-head reveal"><span class="idx">01</span><h2 id="cv-experience">Experience</h2></div>
     <div class="res">
 
       <div class="res-item reveal">
         <div class="res-top">
-          <div class="res-role">User Experience Researcher <span class="org">· University of Toronto</span></div>
-          <div class="res-meta">Sept 2020 – Present</div>
+          <h3 class="res-role">User Experience Researcher <span class="org">· University of Toronto</span></h3>
+          <p class="res-meta">Sep 2020 – Present</p>
         </div>
-        <div class="res-loc">Toronto, ON</div>
+        <p class="res-loc">Toronto, ON</p>
         <ul class="res-bullets">
-          <li>Designed and ran an 8-week randomized controlled trial (N&nbsp;&gt;&nbsp;500) with weekly longitudinal tracking — a full experimentation pipeline from hypothesis and instrumentation through analysis — measuring the behavioral and psychological effects of sustained AI social chatbot use.</li>
+          <li>Designed and ran an 8-week randomized controlled trial (<i>N</i>&nbsp;&gt;&nbsp;500) measuring the behavioral and psychological effects of sustained AI social chatbot use, with weekly longitudinal tracking and a full experimentation pipeline from hypothesis and instrumentation through analysis.</li>
           <li>Built predictive models (LASSO, SEM, multilevel modeling) that turned complex behavioral data into decision-ready findings across 10+ studies and 8 peer-reviewed publications.</li>
         </ul>
       </div>
 
       <div class="res-item reveal">
         <div class="res-top">
-          <div class="res-role">User Experience Researcher <span class="org">· Slack</span></div>
-          <div class="res-meta">Jun 2025 – Sept 2025</div>
+          <h3 class="res-role">User Experience Researcher <span class="org">· Slack</span></h3>
+          <p class="res-meta">Jun 2025 – Sep 2025</p>
         </div>
-        <div class="res-loc">San Francisco, CA</div>
+        <p class="res-loc">San Francisco, CA</p>
         <ul class="res-bullets">
-          <li>Led mixed-methods research on adoption of Slack's native AI features (Search, Summaries, Recap, Translations), combining surveys, interviews, and behavioral/telemetry analysis to map user journeys from onboarding through sustained engagement.</li>
+          <li>Led mixed-methods research on adoption of Slack's native AI features (Search, Summaries, Recap, Translations), combining surveys, interviews, and behavioral and telemetry analysis to map user journeys from onboarding through sustained engagement.</li>
           <li>Conducted studies on engagement interventions, measuring downstream behavior change rather than surface-level click metrics, and translated results into growth recommendations.</li>
           <li>Built Slack's first user-segmentation model, turning raw self-reported data into validated archetypes adopted across product, marketing, and sales to target underperforming cohorts.</li>
         </ul>
@@ -122,25 +64,25 @@ nav_order: 4
 
       <div class="res-item reveal">
         <div class="res-top">
-          <div class="res-role">User Experience Researcher <span class="org">· CIBC</span></div>
-          <div class="res-meta">May 2024 – Aug 2024</div>
+          <h3 class="res-role">User Experience Researcher <span class="org">· CIBC</span></h3>
+          <p class="res-meta">May 2024 – Aug 2024</p>
         </div>
-        <div class="res-loc">Toronto, ON</div>
+        <p class="res-loc">Toronto, ON</p>
         <ul class="res-bullets">
-          <li>Led 11 multi-study research projects across 3 divisions using journey mapping, persona development, analytics, user testing, and AI-driven methods to identify pain points and validate features, partnering with 4 design teams on new UIs that supported $5–50M+ in assets under management.</li>
-          <li>Co-developed wireframes and prototypes that streamlined the Contact Us journey from call-center operations to sales, lifting user satisfaction by 20%.</li>
+          <li>Led 11 multi-study research projects across 3 divisions, using journey mapping, persona development, analytics, user testing, and AI-driven methods to identify pain points and validate features. Partnered with 4 design teams on new UIs that supported $5–50M+ in assets under management.</li>
+          <li>Co-developed wireframes and prototypes that simplified the Contact Us journey from call-center operations to sales, lifting user satisfaction by 20%.</li>
         </ul>
       </div>
 
       <div class="res-item reveal">
         <div class="res-top">
-          <div class="res-role">Data Analyst <span class="org">· Besample</span></div>
-          <div class="res-meta">Mar 2024 – Jun 2024</div>
+          <h3 class="res-role">Data Analyst <span class="org">· Besample</span></h3>
+          <p class="res-meta">Mar 2024 – Jun 2024</p>
         </div>
-        <div class="res-loc">Wilmington, DE</div>
+        <p class="res-loc">Wilmington, DE</p>
         <ul class="res-bullets">
           <li>Built a Python data-analysis pipeline grounded in behavioral-science principles that detected bots and low-quality respondents at scale with 97% accuracy, safeguarding data integrity.</li>
-          <li>Managed a PostgreSQL database serving 20+ users and automated feature queries that expanded KPIs from 3 to 15; built dashboards to monitor user-behavior and site-performance trends.</li>
+          <li>Managed a PostgreSQL database serving 20+ users and automated feature queries that expanded KPIs from 3 to 15. Built dashboards to monitor user-behavior and site-performance trends.</li>
         </ul>
       </div>
 
@@ -148,123 +90,143 @@ nav_order: 4
   </div>
 </section>
 
-<section class="sec" style="padding-top:0">
+<section class="sec cv-sec" style="padding-top:0" aria-labelledby="cv-education">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="idx">02</span><h2>Education</h2></div>
+    <div class="sec-head reveal"><span class="idx">02</span><h2 id="cv-education">Education</h2></div>
     <div class="edu">
       <div class="edu-item reveal">
-        <div class="edu-deg"><span class="inst">University of Toronto</span> — PhD in Psychology</div>
-        <div class="edu-meta">Class of 2026</div>
+        <div class="edu-main">
+          <h3 class="edu-deg"><span class="inst">University of Toronto</span> — PhD in Psychology</h3>
+          <p class="edu-note">Social psychology · Supervisor: Dr. Elizabeth Page-Gould</p>
+        </div>
+        <p class="edu-meta">In progress · defence expected Dec 2026</p>
       </div>
       <div class="edu-item reveal">
-        <div class="edu-deg"><span class="inst">University of Toronto</span> — MA in Psychology</div>
-        <div class="edu-meta">Class of 2022</div>
+        <div class="edu-main">
+          <h3 class="edu-deg"><span class="inst">University of Toronto</span> — MA in Psychology</h3>
+          <p class="edu-note">Collaborative Specialization in Neuroscience</p>
+        </div>
+        <p class="edu-meta">Nov 2022</p>
       </div>
       <div class="edu-item reveal">
-        <div class="edu-deg"><span class="inst">Queen's University</span> — HBSc in Kinesiology</div>
-        <div class="edu-meta">Class of 2020</div>
+        <div class="edu-main">
+          <h3 class="edu-deg"><span class="inst">Queen's University</span> — BSc (Honours) in Kinesiology</h3>
+          <p class="edu-note">With Distinction</p>
+        </div>
+        <p class="edu-meta">Jun 2020</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="sec" style="padding-top:0">
+<section class="sec cv-sec" style="padding-top:0" aria-labelledby="cv-skills">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="idx">03</span><h2>Skills</h2></div>
+    <div class="sec-head reveal"><span class="idx">03</span><h2 id="cv-skills">Skills</h2></div>
     <div class="skills reveal" style="transition-delay:.08s">
+
       <div class="skill-group">
-        <div class="lbl">1 · Experimentation &amp; causal inference</div>
-        <div class="desc">Designing studies that isolate cause, and running them end to end.</div>
-        <div class="chips">
-          <span class="chip">RCTs</span>
-          <span class="chip">A/B/n &amp; multivariate testing</span>
-          <span class="chip">Multi-armed bandits</span>
-          <span class="chip">Difference-in-differences</span>
-          <span class="chip">Regression discontinuity</span>
-          <span class="chip">Propensity-score matching &amp; weighting</span>
-          <span class="chip">Synthetic control</span>
-          <span class="chip">Mediation &amp; moderation</span>
-          <span class="chip">Conjoint</span>
-          <span class="chip">MaxDiff</span>
-          <span class="chip">CUPED</span>
-          <span class="chip">Power analysis &amp; sample-size planning</span>
-        </div>
+        <div class="sg-head"><h3 class="lbl">Experiments &amp; causal inference</h3><a class="sg-link" href="/projects/?f=experiments">Related projects →</a></div>
+        <p class="desc">Designing studies that isolate cause, then running them end to end.</p>
+        <ul class="chips">
+          <li class="chip">RCTs</li>
+          <li class="chip">A/B/n &amp; multivariate testing</li>
+          <li class="chip">Power analysis &amp; sample-size planning</li>
+          <li class="chip">Difference-in-differences</li>
+          <li class="chip">Regression discontinuity</li>
+          <li class="chip">Propensity-score matching &amp; weighting</li>
+          <li class="chip">Synthetic control</li>
+          <li class="chip">Multi-armed bandits</li>
+          <li class="chip">CUPED</li>
+          <li class="chip">Mediation &amp; moderation</li>
+          <li class="chip">Conjoint</li>
+          <li class="chip">MaxDiff</li>
+        </ul>
       </div>
+
       <div class="skill-group">
-        <div class="lbl">2 · Statistical modeling</div>
-        <div class="desc">Turning messy behavioral and telemetry data into a decision-ready finding.</div>
-        <div class="chips">
-          <span class="chip">Regression &amp; GLMs (logistic, Poisson / negative-binomial, ordinal, GAMs, quantile)</span>
-          <span class="chip">Multilevel / mixed-effects &amp; longitudinal models (lme4)</span>
-          <span class="chip">SEM &amp; path analysis (lavaan)</span>
-          <span class="chip">Factor analysis &amp; psychometrics (CFA/EFA, IRT, reliability, measurement invariance, latent class/profile)</span>
-          <span class="chip">Survival / time-to-event (Cox PH, Kaplan–Meier, discrete-time hazard, competing risks)</span>
-          <span class="chip">Bayesian modeling (Stan / PyMC / brms)</span>
-          <span class="chip">Multivariate &amp; dimensionality reduction (PCA, MDS, clustering)</span>
-          <span class="chip">Multiple imputation</span>
-          <span class="chip">Bootstrapping &amp; resampling</span>
-          <span class="chip">Meta-analysis</span>
-        </div>
+        <div class="sg-head"><h3 class="lbl">Decision &amp; journey design</h3><a class="sg-link" href="/projects/?f=journeys">Related projects →</a></div>
+        <p class="desc">Mapping where people decide or drop off, and redesigning the journey around those points.</p>
+        <ul class="chips">
+          <li class="chip">End-to-end UX research</li>
+          <li class="chip">Journey mapping</li>
+          <li class="chip">Persona development</li>
+          <li class="chip">User interviews</li>
+          <li class="chip">Usability testing (moderated &amp; unmoderated)</li>
+          <li class="chip">Concept &amp; prototype testing</li>
+          <li class="chip">Ethnography / contextual inquiry</li>
+          <li class="chip">Diary &amp; experience-sampling studies</li>
+          <li class="chip">Affinity diagramming</li>
+          <li class="chip">Jobs-to-be-done</li>
+          <li class="chip">Reflexive thematic analysis</li>
+          <li class="chip">Grounded theory</li>
+        </ul>
       </div>
+
       <div class="skill-group">
-        <div class="lbl">3 · Machine learning, text &amp; networks</div>
-        <div class="desc">Pattern-finding at scale — in numbers, language, and relationships.</div>
-        <div class="chips">
-          <span class="chip">Regularized regression / LASSO–ridge–elastic net (glmnet)</span>
-          <span class="chip">Gradient boosting (XGBoost / LightGBM) &amp; random forests</span>
-          <span class="chip">Classification, ROC/AUC, cross-validation &amp; feature selection</span>
-          <span class="chip">Sentiment analysis (dictionary- &amp; model-based)</span>
-          <span class="chip">Topic modeling &amp; embeddings</span>
-          <span class="chip">LLM-assisted coding &amp; classification</span>
-          <span class="chip">Social network analysis — centrality, density, transitivity, community detection (igraph)</span>
-        </div>
+        <div class="sg-head"><h3 class="lbl">Human–AI interaction</h3><a class="sg-link" href="/projects/?f=human-ai">Related projects →</a></div>
+        <p class="desc">How people take up AI features and agents at work, and how social chatbots affect wellbeing.</p>
+        <ul class="chips">
+          <li class="chip">AI feature adoption: Search, Summaries, Recap, Translations</li>
+          <li class="chip">Readiness, adoption barriers &amp; trust in AI agents</li>
+          <li class="chip">Social chatbot use &amp; wellbeing (8-week RCT)</li>
+          <li class="chip">Longitudinal &amp; cross-sectional studies of AI use</li>
+          <li class="chip">LLM-assisted coding &amp; classification, with human validation</li>
+        </ul>
       </div>
+
       <div class="skill-group">
-        <div class="lbl">4 · UX research (applied lifecycle)</div>
-        <div class="desc">What people do, instrumented and measured.</div>
-        <div class="chips">
-          <span class="chip">End-to-end UX research</span>
-          <span class="chip">Usability testing (moderated &amp; unmoderated)</span>
-          <span class="chip">User interviews</span>
-          <span class="chip">Journey mapping</span>
-          <span class="chip">Persona development</span>
-          <span class="chip">Concept &amp; prototype testing</span>
-          <span class="chip">Behavioral &amp; telemetry analysis</span>
-        </div>
+        <div class="sg-head"><h3 class="lbl">Behavioral data science</h3><a class="sg-link" href="/projects/?f=data-science">Related projects →</a></div>
+        <p class="desc">Turning messy behavioral and telemetry data into decision-ready findings.</p>
+        <ul class="chips">
+          <li class="chip">Segmentation &amp; archetypes</li>
+          <li class="chip">Survey design &amp; weighting</li>
+          <li class="chip">Behavioral &amp; telemetry analysis</li>
+          <li class="chip">Data-quality pipelines (bot &amp; low-quality respondent detection)</li>
+          <li class="chip">KPI design &amp; dashboards</li>
+          <li class="chip">Regression &amp; GLMs (logistic, Poisson / negative-binomial, ordinal, GAMs, quantile)</li>
+          <li class="chip">Regularized regression: LASSO, ridge, elastic net (glmnet)</li>
+          <li class="chip">Multilevel / mixed-effects &amp; longitudinal models (lme4)</li>
+          <li class="chip">SEM &amp; path analysis (lavaan)</li>
+          <li class="chip">Factor analysis &amp; psychometrics (CFA/EFA, IRT, reliability, measurement invariance, latent class/profile)</li>
+          <li class="chip">Survival / time-to-event (Cox PH, Kaplan–Meier, discrete-time hazard, competing risks)</li>
+          <li class="chip">Bayesian modeling (Stan / PyMC / brms)</li>
+          <li class="chip">Gradient boosting (XGBoost / LightGBM) &amp; random forests</li>
+          <li class="chip">Classification, ROC/AUC, cross-validation &amp; feature selection</li>
+          <li class="chip">Multivariate &amp; dimensionality reduction (PCA, MDS, clustering)</li>
+          <li class="chip">Multiple imputation</li>
+          <li class="chip">Bootstrapping &amp; resampling</li>
+          <li class="chip">Meta-analysis</li>
+          <li class="chip">Sentiment analysis (dictionary- &amp; model-based)</li>
+          <li class="chip">Topic modeling &amp; embeddings</li>
+          <li class="chip">Social network analysis: centrality, density, transitivity, community detection (igraph)</li>
+        </ul>
       </div>
+
       <div class="skill-group">
-        <div class="lbl">5 · Qualitative &amp; mixed methods</div>
-        <div class="desc">Making qualitative signal countable without flattening the nuance.</div>
-        <div class="chips">
-          <span class="chip">Reflexive thematic analysis</span>
-          <span class="chip">Grounded theory</span>
-          <span class="chip">Ethnography / contextual inquiry</span>
-          <span class="chip">Diary &amp; experience-sampling studies</span>
-          <span class="chip">LLM-assisted coding with human validation</span>
-          <span class="chip">Affinity diagramming</span>
-          <span class="chip">Jobs-to-be-done</span>
-        </div>
+        <div class="sg-head"><h3 class="lbl">Tools</h3></div>
+        <p class="desc">The stack behind the work.</p>
+        <ul class="chips">
+          <li class="chip">R (primary)</li>
+          <li class="chip">Python</li>
+          <li class="chip">SQL</li>
+          <li class="chip">PostgreSQL</li>
+          <li class="chip">MATLAB</li>
+          <li class="chip">bash</li>
+          <li class="chip">Qualtrics</li>
+          <li class="chip">UserTesting</li>
+          <li class="chip">Maze</li>
+          <li class="chip">Dovetail</li>
+          <li class="chip">Optimal Workshop</li>
+          <li class="chip">Quirkos</li>
+          <li class="chip">Figma / FigJam</li>
+          <li class="chip">Miro</li>
+          <li class="chip">Google Analytics</li>
+          <li class="chip">Adobe Analytics</li>
+          <li class="chip">Tableau</li>
+        </ul>
       </div>
-      <div class="skill-group">
-        <div class="lbl">6 · Tools &amp; languages</div>
-        <div class="desc">The stack behind the work.</div>
-        <div class="chips">
-          <span class="chip">R (primary)</span>
-          <span class="chip">Python</span>
-          <span class="chip">SQL</span>
-          <span class="chip">MATLAB</span>
-          <span class="chip">bash</span>
-          <span class="chip">Qualtrics</span>
-          <span class="chip">UserTesting</span>
-          <span class="chip">Maze</span>
-          <span class="chip">Quirkos</span>
-          <span class="chip">Google Analytics</span>
-          <span class="chip">Adobe Analytics</span>
-          <span class="chip">Tableau</span>
-          <span class="chip">Figma / FigJam</span>
-        </div>
-      </div>
+
     </div>
-    <a class="allwork cv-pubs reveal" href="/publications/">View the full peer-reviewed record →</a>
+    <a class="allwork cv-more reveal" href="/publications/">View the full peer-reviewed record →</a>
   </div>
 </section>
