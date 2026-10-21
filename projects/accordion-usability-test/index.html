@@ -4,30 +4,73 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Open vs. Closed: An Accordion Navigation Test — Leo Huang</title>
+<title>Open vs. closed: an accordion navigation test — Leo Huang</title>
+
+<meta name="description" content="Open or collapsed by default? Twenty people used both versions in moderated sessions, and task timing settled what stated preference could not.">
 <link rel="canonical" href="https://leohuang4977.github.io/projects/accordion-usability-test/">
-<meta property="og:title" content="Open vs. Closed: An Accordion Navigation Test — Leo Huang">
-<meta property="og:description" content="A moderated mobile-app usability test of two navigation defaults — and what people actually did.">
-<meta property="og:image" content="https://leohuang4977.github.io/assets/img/og-card.png">
+<meta name="theme-color" content="#0D0E12">
+
+<meta property="og:site_name" content="Leo Huang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Open vs. closed: an accordion navigation test — Leo Huang">
+<meta property="og:description" content="Open or collapsed by default? Twenty people used both versions in moderated sessions, and task timing settled what stated preference could not.">
 <meta property="og:url" content="https://leohuang4977.github.io/projects/accordion-usability-test/">
+<meta property="og:image" content="https://leohuang4977.github.io/assets/img/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Leo Huang, behavioral scientist. I study how people make decisions, then design and test the products and journeys they move through. Experiments &amp; causal inference. Decision &amp; journey design. Human–AI interaction. Behavioral data science.">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ccircle%20cx='50'%20cy='50'%20r='34'%20fill='%2310B981'/%3E%3C/svg%3E">
-<meta name="description" content="A moderated mobile-app usability test of two navigation defaults — and what people actually did.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet">
+<meta name="twitter:title" content="Open vs. closed: an accordion navigation test — Leo Huang">
+<meta name="twitter:description" content="Open or collapsed by default? Twenty people used both versions in moderated sessions, and task timing settled what stated preference could not.">
+<meta name="twitter:image" content="https://leohuang4977.github.io/assets/img/og-card.png">
+<meta name="twitter:image:alt" content="Leo Huang, behavioral scientist. I study how people make decisions, then design and test the products and journeys they move through. Experiments &amp; causal inference. Decision &amp; journey design. Human–AI interaction. Behavioral data science.">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ccircle%20cx='50'%20cy='50'%20r='34'%20fill='%23A78BFA'/%3E%3C/svg%3E">
+<link rel="preload" href="/assets/fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/fraunces-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://leohuang4977.github.io/projects/accordion-usability-test/#webpage",
+      "url": "https://leohuang4977.github.io/projects/accordion-usability-test/",
+      "name": "Open vs. closed: an accordion navigation test — Leo Huang",
+      "description": "Open or collapsed by default? Twenty people used both versions in moderated sessions, and task timing settled what stated preference could not.",
+      "inLanguage": "en-US",
+      "isPartOf": { "@id": "https://leohuang4977.github.io/#website" },
+      "author": { "@id": "https://leohuang4977.github.io/#person" },
+      "about": { "@id": "https://leohuang4977.github.io/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://leohuang4977.github.io/#person",
+      "name": "Leo Huang",
+      "url": "https://leohuang4977.github.io/"
+    }
+  ]
+}
+</script>
+
+
+<link rel="stylesheet" href="/assets/shell.css">
+<link rel="stylesheet" href="/assets/enhancements.css">
 <style>
   :root{
     --paper:#0D0E12; --paper-2:#15171D; --panel:#15171C;
     --ink:#E9E7DF; --ink-2:#B6B4AB; --ink-mute:#84868E;
     --line:rgba(255,255,255,0.13); --line-soft:rgba(255,255,255,0.06);
-    /* Accent — emerald #10B981, matching the site design system (teal→emerald flip done in the 2026-06-11 integration pass). --warn stays amber. */
-    --accent:#10B981; --accent-deep:#059669; --cool:#5BA8E8;
-    --accent-wash:rgba(16,185,129,0.14); --accent-wash-2:rgba(16,185,129,0.07);
-    --warn:#F2B33C; /* annotation hue — amber, kept distinct from the emerald accent */
-    --font-display:'Fraunces',Georgia,serif;
-    --font-body:'Hanken Grotesk',ui-sans-serif,system-ui,sans-serif;
-    --font-mono:'IBM Plex Mono',ui-monospace,'Courier New',monospace;
+    /* Accent: violet #A78BFA, deep #8B5CF6 (Leo, 2026-10-21; it replaced emerald), the same values as assets/scope.css. --warn stays amber. */
+    --accent:#A78BFA; --accent-deep:#8B5CF6; --cool:#5BA8E8;
+    --accent-wash:rgba(167,139,250,0.14); --accent-wash-2:rgba(167,139,250,0.07);
+    --accent-ring:rgba(167,139,250,0.22); --focus-ring:var(--accent); /* read by /assets/shell.css */
+    --warn:#F2B33C; /* annotation hue — amber, kept distinct from the violet accent */
+    --font-display:'Fraunces','Fraunces Fallback','Fraunces Fallback Noto','Fraunces Fallback Times',Georgia,serif;
+    --font-body:'Hanken Grotesk','Hanken Grotesk Fallback','Hanken Grotesk Fallback Roboto',ui-sans-serif,system-ui,sans-serif;
+    --font-mono:'IBM Plex Mono','IBM Plex Mono Fallback',ui-monospace,'Courier New',monospace;
     --maxw:1000px;
   }
   *{margin:0;padding:0;box-sizing:border-box}
@@ -40,18 +83,6 @@
   .reveal{transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
   html.js .reveal{opacity:0;transform:translateY(20px)}
   html.js .reveal.in{opacity:1;transform:none}
-
-  /* topbar */
-  header.topbar{border-bottom:1px solid var(--line);background:rgba(13,14,18,0.72);backdrop-filter:blur(8px);position:sticky;top:0;z-index:50}
-  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;gap:16px;flex-wrap:wrap;max-width:1080px}
-  .wordmark{font-family:var(--font-mono);font-weight:600;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink)}
-  .wordmark .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-wash);animation:pulse 2.4s ease-in-out infinite}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.35}}
-  nav.main{display:flex;gap:24px;align-items:center;font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.05em;text-transform:uppercase}
-  nav.main a{color:var(--ink-2);text-decoration:none;position:relative;padding-bottom:3px;transition:color .2s}
-  nav.main a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--accent);transition:width .25s}
-  nav.main a:hover{color:var(--ink)}nav.main a:hover::after,nav.main a.active::after{width:100%}
-  nav.main a.active{color:var(--accent)}
 
   /* breadcrumb */
 
@@ -117,26 +148,18 @@
   .cta .back{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12.5px;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-2);text-decoration:none;transition:gap .25s,color .2s}
   .cta .back:hover{color:var(--accent);gap:16px}
 
-  footer.foot{border-top:1px solid var(--line);margin-top:48px;padding:24px 0 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.04em;color:var(--ink-mute);text-transform:uppercase}
-  footer.foot .coords{color:var(--ink-2)}
-
   @media (max-width:760px){
     body{font-size:16px}
-    .wrap{padding:0 20px}.topbar .wrap{padding:16px 20px}
+    .wrap{padding:0 20px}
     .cs-hero{padding:22px 0 14px}
     .specstrip{grid-template-columns:1fr}
     .specstrip .cell{border-right:none;border-bottom:1px solid var(--line-soft)}
     .specstrip .cell:last-child{border-bottom:none}
     .recs{grid-template-columns:1fr}
-    nav.main{gap:15px;font-size:11px}
   }
-  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal,html.js .reveal{opacity:1;transform:none}}
   /* ═══ scope-fx · shared interaction layer — identical block on every project page ═══ */
   #scopebar{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);box-shadow:0 0 10px var(--accent);z-index:90;pointer-events:none}
-  html.js header.topbar{transition:box-shadow .3s ease}
-  html.js header.topbar .wrap{transition:padding .3s ease}
-  html.js header.topbar.shrunk .wrap{padding-top:10px;padding-bottom:10px}
-  html.js header.topbar.shrunk{box-shadow:0 10px 28px rgba(0,0,0,0.38)}
   .sweepfx{position:relative;overflow:hidden}
   html.js .sweepfx::after{content:"";position:absolute;top:0;bottom:0;left:-14%;width:9%;background:linear-gradient(90deg,transparent,var(--accent) 50%,transparent);opacity:0;pointer-events:none}
   html.js .sweepfx.swept::after{animation:scopesweep 1.05s cubic-bezier(.33,.62,.29,1) .12s 1 both}
@@ -148,35 +171,56 @@
     .rec,.study,.pcard,.ta,.w{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
     .rec:hover,.study:hover,.pcard:hover,.ta:hover,.w:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 12px 30px rgba(0,0,0,0.35)}
   }
-  a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
   @media (prefers-reduced-motion:reduce){html.js .sweepfx::after{display:none!important}}
-  .skip{position:absolute;left:8px;top:-48px;z-index:100;background:var(--accent);color:var(--paper);font-family:var(--font-mono);font-size:13px;font-weight:600;letter-spacing:0.04em;padding:10px 16px;border-radius:0 0 4px 4px;text-decoration:none;transition:top .18s}
-  .skip:focus{top:0}
+  /* cs-shows + cs-pager (revision 2026-10) */
+  .cs-shows{padding:0 0 8px}
+  .cs-shows .wrap{display:grid;gap:10px;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:16px 0}
+  .cs-shows-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+  .cs-shows-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);min-width:52px}
+  .cs-tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+  .cs-tags a{display:inline-block;font-family:var(--font-mono);font-size:12px;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:4px 11px;text-decoration:none;transition:border-color .2s,color .2s}
+  .cs-tags a:hover,.cs-tags a:focus-visible{border-color:var(--accent);color:var(--accent)}
+  .cs-fits{margin:0;font-size:14px;color:var(--ink-2)}
+  .cs-pager{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 22px}
+  .cs-pager a{display:block;border:1px solid var(--line);border-radius:4px;padding:14px 16px;color:var(--ink);text-decoration:none;font-family:var(--font-display);font-size:18px;line-height:1.25;transition:border-color .2s}
+  .cs-pager a span{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:6px}
+  .cs-pager .cs-next{text-align:right}
+  .cs-pager a:hover,.cs-pager a:focus-visible{border-color:var(--accent)}
+  @media (max-width:560px){.cs-pager{grid-template-columns:1fr}.cs-pager .cs-next{text-align:left}}
+  /* c2 fix (revision 2026-10): the shared rule's padding:16px 0 drops .wrap's side gutters; keep the strip on the text column */
+  .cs-shows .wrap{width:calc(100% - 56px);max-width:calc(var(--maxw) - 56px)}
+  @media (max-width:760px){.cs-shows .wrap{width:calc(100% - 40px)}}
+/* shell (revision 2026-10): topbar, footer, skip link and focus ring come from /assets/shell.css,
+   header shrink and blob cursor from /assets/enhancements.css. The shared footer now sits
+   after the main element, so the closing section keeps the old gap above it. */
+main > section:last-child{padding-bottom:48px}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
+
 <header class="topbar">
   <div class="wrap">
-    <a href="https://leohuang4977.github.io/" class="wordmark"><span class="dot"></span>Leo Huang</a>
-    <nav class="main">
-      <a href="https://leohuang4977.github.io/">About</a>
-      <a href="https://leohuang4977.github.io/projects/" class="active">Projects</a>
-      <a href="https://leohuang4977.github.io/cv/">Résumé</a>
-      <a href="https://leohuang4977.github.io/publications/">Publications</a>
-      <a href="https://leohuang4977.github.io/contact/">Contact</a>
+    <a href="/" class="wordmark"><span class="dot"></span><img class="avatar" src="/assets/img/leo-avatar-104.webp" alt="" width="26" height="26" decoding="async">Leo Huang</a>
+    <nav class="main" aria-label="Main">
+      <a href="/">About</a>
+      <a href="/projects/" class="active" aria-current="true">Projects</a>
+      <a href="/cv/">Résumé</a>
+      <a href="/publications/">Publications</a>
+      <a href="/contact/">Contact</a>
     </nav>
   </div>
 </header>
+
 <main id="main">
 
 <section class="cs-hero">
   <div class="wrap">
     <div class="kicker reveal">
-<span class="rule"></span>Behavior Beats Preference · Mobile App Usability</div>
-    <h1 class="reveal" style="transition-delay:.06s">Open vs. Closed: an accordion navigation test</h1>
-    <p class="lede reveal" style="transition-delay:.12s">A moderated usability test of two in-app navigation defaults. <b>Stated preference couldn't settle it. Behavior could.</b></p>
+<span class="rule"></span>Within-subjects experiment · Behavior vs. stated preference · Mobile app</div>
+    <h1 class="reveal" style="transition-delay:.06s">Open vs. closed: an accordion navigation test</h1>
+    <p class="lede reveal" style="transition-delay:.12s">The design team adopted an open-first default for the redesigned section screens, with deep links allowed to override it. The call came from moderated sessions where 20 people used both versions. <b>Stated preference couldn't settle it. Behavior could.</b></p>
 
     <div class="tagstrip reveal" style="transition-delay:.16s">
       <span class="t"><b>Method</b> Moderated, within-subjects A/B</span>
@@ -199,6 +243,23 @@
 <div class="v">A / B</div>
 <div class="k">Within-subjects, Figma</div>
 </div>
+    </div>
+  </div>
+</section>
+
+<!-- cs-shows (revision 2026-10) -->
+<section class="cs-shows" aria-label="What this project shows">
+  <div class="wrap">
+    <div class="cs-shows-row">
+<span class="cs-shows-label">Shows</span>
+      <ul class="cs-tags">
+        <li><a href="/projects/?f=experiments">Experiments &amp; causal inference</a></li>
+        <li><a href="/projects/?f=journeys">Decision &amp; journey design</a></li>
+      </ul>
+    </div>
+    <div class="cs-shows-row">
+<span class="cs-shows-label">Fits</span>
+      <p class="cs-fits">UX and product research · Quantitative UX research · Experimentation</p>
     </div>
   </div>
 </section>
@@ -421,7 +482,7 @@
 
     <div class="fig reveal" style="transition-delay:.14s">
       <div class="flabel">FIG.04 — The shipping rule</div>
-      <svg class="plot" viewbox="0 0 620 212" role="img" aria-label="Decision rule: if the user arrived via a deep link, open that section; otherwise open the first section by default.">
+      <svg class="plot" viewbox="0 0 620 212" role="img" aria-label="Decision rule: if the user arrived via a deep link, open that section. Otherwise open the first section by default.">
         <g font-size="11.5" style="font-family:var(--font-mono)">
           <rect x="28" y="80" width="132" height="40" rx="6" style="fill:var(--panel);stroke:var(--line)"></rect>
           <text x="94" y="104" text-anchor="middle" style="fill:var(--ink-2)">User opens screen</text>
@@ -469,15 +530,24 @@
 
 <section class="cta">
   <div class="wrap">
+    <nav class="cs-pager" aria-label="More case studies">
+      <a class="cs-prev" href="/projects/generational-wealth-transfer/"><span>Previous</span>Generational wealth transfer</a>
+      <a class="cs-next" href="/projects/ai-agents/"><span>Next</span>AI agents at work</a>
+    </nav>
     <a class="back reveal" style="transition-delay:.08s" href="https://leohuang4977.github.io/projects/">← All projects</a>
-    <footer class="foot">
-      <span>© 2026 Leo Huang</span>
-      <span class="coords">43.6532° N, 79.3832° W — Toronto, ON</span>
-    </footer>
   </div>
 </section>
 
 </main>
+<!-- Shared footer: copyright only. The Toronto coordinate now lives ONLY on the
+     Contact page, which opts in by setting `footer_coords` in its front matter. -->
+<footer class="foot">
+  <div class="foot-inner">
+    <span>© 2026 Leo Huang</span>
+    
+  </div>
+</footer>
+
 <script>
   /* scope-fx · unified page script (reveal · counters · progress · shrink · sweep) — identical on every project page */
   (function(){
@@ -542,5 +612,6 @@
     }
   })();
 </script>
+<script src="/assets/js/enhancements.js" defer></script>
 </body>
 </html>
