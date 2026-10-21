@@ -72,7 +72,7 @@
 @page{size:letter;margin:0.5in 0.55in}
 
 @media print{
-  :root{--paper:#fff;--panel:#fff;--ink:#111;--ink-2:#2b2b2b;--ink-mute:#555;--line:#c8c8c8;--line-soft:#e3e3e3;--accent:#6D28D9;--accent-deep:#6D28D9}
+  :root{--paper:#fff;--panel:#fff;--ink:#111;--ink-2:#2b2b2b;--ink-mute:#555;--line:#c8c8c8;--line-soft:#e3e3e3;--accent:#0a7a55;--accent-deep:#0a7a55}
   html,body{background:#fff!important;color:#111!important}
   body{font-size:10pt;line-height:1.4}
   body::before,body::after{content:none!important;display:none!important}

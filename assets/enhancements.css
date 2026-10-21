@@ -1,5 +1,5 @@
 /* Interactive enhancements layer — additive only, references the shared --accent
-   token (violet) from assets/scope.css, which must load first. Served verbatim: this file lives OUTSIDE assets/css/ so PurgeCSS
+   token (emerald) from assets/scope.css, which must load first. Served verbatim: this file lives OUTSIDE assets/css/ so PurgeCSS
    (css: ["_site/assets/css/*.css"]) never strips the JS-toggled classes
    (.shrunk, .cursor-blob, .has-cursor-blob), and it is listed in
    jekyll-minifier.exclude so the compressor leaves it alone — same handling as
@@ -36,7 +36,7 @@ header.topbar.shrunk .wordmark{ font-size:13px; }                       /* was ~
 @media (prefers-reduced-motion:reduce){ .cursor-blob{ display:none; } }
 
 /* Skills chips — cursor-reactive hover (CV/Résumé Skills section only).
-   Uses a DEDICATED hover token (a lighter violet), intentionally separate from --accent.
+   Uses a DEDICATED hover token (a lighter green), intentionally separate from --accent.
    The tokens (--skill-hover, --skill-hover-soft) sit next to --accent in assets/scope.css.
    Scoped to `.skills .chip` so nothing outside the Skills section is affected. */
 .skills .chip{
