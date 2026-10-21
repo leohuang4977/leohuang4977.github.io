@@ -8,23 +8,23 @@
   --ink:#E9E7DF; --ink-2:#B6B4AB; --ink-mute:#84868E;
   --line:rgba(255,255,255,0.13); --line-soft:rgba(255,255,255,0.06);
 
-  /* ACCENT, one source of truth: violet #A78BFA (Leo's call, Oct 2026; it replaced emerald
-     #10B981). Page accents, the blob cursor, rotating word and focus ring all read --accent or
+  /* ACCENT, one source of truth: emerald #10B981 (Leo's call, 2026-10-21: violet #A78BFA was
+     tried that morning and reverted). Page accents, the blob cursor, rotating word and focus ring all read --accent or
      the tones below, so a swap is --accent plus --accent-deep. Amber #F2B33C is reserved for
      the .todo callouts: keep it out of the accent. Baked copies to update by hand: the favicon
      fill (_includes/scope/head-meta.liquid), the share card PNG, and the case studies' own
      :root until they move onto this file. */
-  --accent:#A78BFA;                       /* 7.09:1 on paper, 6.59:1 on panel */
-  --accent-deep:#8B5CF6;                  /* solid button hover fill */
+  --accent:#10B981;                       /* 7.60:1 on paper, 7.07:1 on panel */
+  --accent-deep:#059669;                  /* solid button hover fill */
   /* Hex fallbacks for browsers without color-mix(); the @supports block derives them. */
-  --accent-ring:rgba(167,139,250,0.22);   /* halo around the wordmark dot */
-  --accent-soft:rgba(167,139,250,0.35);   /* resting underline on large accent links */
-  --accent-glow:rgba(167,139,250,0.5);    /* drop-shadow glow on traces and icons */
-  --accent-wash:rgba(167,139,250,0.14);   /* tinted fills (same names as the case pages) */
-  --accent-wash-2:rgba(167,139,250,0.08);
+  --accent-ring:rgba(16,185,129,0.22);   /* halo around the wordmark dot */
+  --accent-soft:rgba(16,185,129,0.35);   /* resting underline on large accent links */
+  --accent-glow:rgba(16,185,129,0.5);    /* drop-shadow glow on traces and icons */
+  --accent-wash:rgba(16,185,129,0.14);   /* tinted fills (same names as the case pages) */
+  --accent-wash-2:rgba(16,185,129,0.08);
   --focus-ring:var(--accent);
-  /* Résumé skill chips: their own lighter tone on purpose (green #4ADE80 in the emerald era). */
-  --skill-hover:#C4B5FD; --skill-hover-soft:rgba(196,181,253,.16);
+  /* Résumé skill chips: their own lighter green on purpose. */
+  --skill-hover:#4ADE80; --skill-hover-soft:rgba(74,222,128,.16);
   /* "Leo to check" callouts (same values as the case studies). */
   --todo:#F2B33C; --todo-soft:rgba(242,179,60,0.08); --todo-line:rgba(242,179,60,0.5);
   --cool:#5BA8E8; --warn:#C76B45;
