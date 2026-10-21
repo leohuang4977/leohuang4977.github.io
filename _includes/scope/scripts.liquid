@@ -1,6 +1,7 @@
 <!-- Shared motion. Progressive enhancement: content is visible by default and only
      hidden for animation once html.js is present, with a ~1.8s safety net that reveals
-     everything and fills all numbers/bars even if observers fail. -->
+     everything and fills all numbers/bars even if observers fail. Under
+     prefers-reduced-motion everything is shown in its final state at once. -->
 <script>
 {% raw %}
 (function () {
@@ -27,29 +28,37 @@
   }
   function fillBar(el) { el.style.width = el.dataset.w + '%'; }
 
-  // Safety net — reveal everything and bake in final numbers/bars no matter what.
-  setTimeout(function () {
+  function showAll() {
     document.querySelectorAll('.reveal').forEach(function (e) { e.classList.add('in'); });
     document.querySelectorAll('[data-count]').forEach(countUp);
     document.querySelectorAll('[data-w]').forEach(fillBar);
-  }, 1800);
+  }
 
-  // Orchestrated reveal on scroll.
-  var io = new IntersectionObserver(function (es) {
-    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  // Reduced motion (or no IntersectionObserver): final state straight away. Content is
+  // already in place, numbers show their final value and bars are filled. No observers.
+  if (reduce || !('IntersectionObserver' in window)) {
+    showAll();
+  } else {
+    // Safety net — reveal everything and bake in final numbers/bars no matter what.
+    setTimeout(showAll, 1800);
 
-  // Numbers count up / bars fill when scrolled into view (page-agnostic — targets the data elements directly).
-  var cIO = new IntersectionObserver(function (es) {
-    es.forEach(function (e) { if (!e.isIntersecting) return; countUp(e.target); cIO.unobserve(e.target); });
-  }, { threshold: 0.6 });
-  document.querySelectorAll('[data-count]').forEach(function (el) { cIO.observe(el); });
+    // Orchestrated reveal on scroll.
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
 
-  var bIO = new IntersectionObserver(function (es) {
-    es.forEach(function (e) { if (!e.isIntersecting) return; fillBar(e.target); bIO.unobserve(e.target); });
-  }, { threshold: 0.4 });
-  document.querySelectorAll('[data-w]').forEach(function (el) { bIO.observe(el); });
+    // Numbers count up / bars fill when scrolled into view (page-agnostic — targets the data elements directly).
+    var cIO = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (!e.isIntersecting) return; countUp(e.target); cIO.unobserve(e.target); });
+    }, { threshold: 0.6 });
+    document.querySelectorAll('[data-count]').forEach(function (el) { cIO.observe(el); });
+
+    var bIO = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (!e.isIntersecting) return; fillBar(e.target); bIO.unobserve(e.target); });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('[data-w]').forEach(function (el) { bIO.observe(el); });
+  }
 
   // Force-directed research network — About page only; bails out cleanly elsewhere.
   (function () {

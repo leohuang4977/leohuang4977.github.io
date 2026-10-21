@@ -5,9 +5,11 @@
 (function () {
   'use strict';
 
-  // 7.1 — Rotating hero word
+  // 7.1 — Rotating hero word. Holds the first word under reduced motion, including when the
+  // setting is switched on after the page has loaded.
   (function () {
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var reduce = mq.matches;
     document.querySelectorAll('.rotate[data-words]').forEach(function (el) {
       var words = el.getAttribute('data-words').split(',').map(function (w){return w.trim();}).filter(Boolean);
       if (words.length < 2) return;
@@ -34,6 +36,7 @@
       var i = 0;
       el.style.transition = 'opacity .25s ease, transform .25s ease';
       setInterval(function () {
+        if (mq.matches) return;
         el.style.opacity = '0'; el.style.transform = 'translateY(-4px)';
         setTimeout(function () {
           i = (i + 1) % words.length;
@@ -54,7 +57,9 @@
     onScroll();
   })();
 
-  // 7.4 — Custom cursor "squishy blob"
+  // 7.4 — Custom cursor "squishy blob". Colour comes from --accent in CSS. Not created on
+  // touch screens or under reduced motion; CSS hides it and restores the cursor if reduced
+  // motion is switched on later.
   (function () {
     var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -82,7 +87,7 @@
   })();
 
   // Skills chips — cursor-follow tilt + neighbor echo (CV/Résumé Skills section only).
-  // Skips coarse pointers and reduced motion; static green hover stays via CSS.
+  // Skips coarse pointers and reduced motion; the static hover colour stays via CSS.
   (function () {
     var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
