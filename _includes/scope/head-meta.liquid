@@ -1,6 +1,7 @@
 {%- comment -%}
   Shared <head> meta (revision 2026-10): description, canonical, Open Graph, Twitter card,
-  theme colour, favicon, Google Fonts, then JSON-LD (scope/jsonld.liquid).
+  theme colour, favicon, self-hosted fonts (preloads + /assets/fonts/fonts.css), then JSON-LD
+  (scope/jsonld.liquid).
   It never outputs <title>: write that first, then include this file. Works on `layout: scope`
   pages and on `layout: none` pages that include it inside their own <head>.
 
@@ -54,7 +55,10 @@
 {% comment %} Favicon: the topbar's pulsing dot as an inline SVG. A favicon cannot read CSS
    variables, so its fill (%23 = #) is a copy of --accent in assets/scope.css: change both together. {% endcomment -%}
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='34' fill='%23A78BFA'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+{% comment %} Fonts are self-hosted (revision 2026-10): /assets/fonts/fonts.css holds the @font-face rules and
+   the metric-matched fallbacks. The two preloads are the fonts of the first screen's large text (h1 and
+   the lede/body copy); the mono and italic files load when the CSS asks for them. {% endcomment -%}
+<link rel="preload" href="/assets/fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/fraunces-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
 {% unless page.jsonld == false %}{% include scope/jsonld.liquid %}{% endunless %}

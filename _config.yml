@@ -213,6 +213,7 @@ jekyll-minifier:
     - "assets/enhancements.css"
     - "assets/js/enhancements.js"
     - "assets/pages/*"
+    - "assets/fonts/fonts.css"
     - "projects/*/index.html"
     - "projects/**/*.html"
   uglifier_args:
