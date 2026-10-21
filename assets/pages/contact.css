@@ -1,14 +1,11 @@
 /* Contact page (/contact/, _pages/en-us/contact.html). Loaded through the page's extra_css hook.
-   Revision 2026-10. The .avail readout mirrors the one on the home page (assets/pages/about.css). */
+   Revision 2026-10. The .avail readout is the shared component in assets/scope.css. */
 .ct-hero{padding:78px 0 64px}
 .ct-hero h1{font-family:var(--font-display);font-weight:500;font-size:clamp(36px,6vw,62px);line-height:1.02;letter-spacing:-0.015em;margin-bottom:24px}
 .ct-msg{font-size:clamp(17px,2.1vw,21px);color:var(--ink-2);max-width:58ch;line-height:1.6}
 .ct-msg + .ct-msg{margin-top:14px}
 
-.avail{list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px;margin-top:28px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink-2)}
-.avail li{display:inline-flex;align-items:center;white-space:nowrap}
-.avail li::before{content:"";flex:none;width:5px;height:5px;border-radius:50%;border:1px solid var(--ink-mute);margin-right:10px}
-.avail li:first-child::before{width:8px;height:8px;border:none;background:var(--accent);box-shadow:0 0 0 3px rgba(16,185,129,0.2)}
+.avail{margin-top:28px}
 
 .ct-cta{display:flex;flex-direction:column;align-items:flex-start;gap:16px;margin-top:38px}
 .btn-email{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:13px;letter-spacing:0.06em;text-transform:uppercase;font-weight:600;color:var(--paper);background:var(--accent);border:1px solid var(--accent);border-radius:3px;padding:15px 26px;text-decoration:none;transition:background .25s,border-color .25s,transform .25s}

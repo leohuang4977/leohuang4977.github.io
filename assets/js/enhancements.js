@@ -16,6 +16,9 @@
       // Markup ships ONE word. Build the static screen-reader twin and hide the
       // animated word from assistive tech + crawlers, so the sentence is read /
       // indexed once ("...how people make decisions...") instead of doubled.
+      // The visible word is drawn by CSS from data-word (.rotate[data-word]::before), so the
+      // page text holds the word once, in the twin: copy, text extraction and crawlers that
+      // run scripts get "how people decide", not "how people people decide".
       var base = (el.textContent || words[0]).trim();
       el.setAttribute('aria-hidden', 'true');
       if (!(el.nextSibling && el.nextSibling.classList && el.nextSibling.classList.contains('sr-only'))) {
@@ -31,7 +34,8 @@
       words.forEach(function (w){ probe.textContent = w; max = Math.max(max, probe.offsetWidth); });
       el.removeChild(probe);
       el.style.minWidth = Math.ceil(max) + 'px';   // reserve widest word → no horizontal reflow
-      el.textContent = words[0];
+      el.textContent = '';
+      el.setAttribute('data-word', words[0]);
       if (reduce) return;                            // static first word under reduced motion
       var i = 0;
       el.style.transition = 'opacity .25s ease, transform .25s ease';
@@ -40,17 +44,18 @@
         el.style.opacity = '0'; el.style.transform = 'translateY(-4px)';
         setTimeout(function () {
           i = (i + 1) % words.length;
-          el.textContent = words[i];
+          el.setAttribute('data-word', words[i]);
           el.style.opacity = '1'; el.style.transform = 'none';
         }, 260);
       }, 2200);
     });
   })();
 
-  // 7.2 — Sticky / shrinking nav
+  // 7.2 — Sticky / shrinking nav. The case studies' own scope-fx script already toggles
+  // .shrunk at the same 24 px (it marks <html data-lh-fx>), so this module stands down there.
   (function () {
     var header = document.querySelector('header.topbar');
-    if (!header) return;
+    if (!header || document.documentElement.dataset.lhFx) return;
     var on = false;
     function onScroll(){ var s=(window.scrollY||document.documentElement.scrollTop)>24; if(s!==on){header.classList.toggle('shrunk',s);on=s;} }
     window.addEventListener('scroll', onScroll, { passive:true });

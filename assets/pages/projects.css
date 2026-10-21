@@ -3,17 +3,6 @@
    calc(a+b) (that is what broke the old Ghost Rivers cover), so: no calc() here, and keyframes
    use from/to. Builds on the tokens and .card/.cards/.sec-head in scope.css. */
 
-/* TEMPORARY, mirrors a cross-file request to the shell owner for assets/scope.css.
-   The shared topbar nav is 400px wide on phones, so every scope page scrolls sideways
-   by 30px at 390px. Delete this block once scope.css carries the same rules. */
-@media (max-width:459px){
-  nav.main{width:100%;justify-content:space-between;gap:4px}
-  nav.main a{padding:8px 2px 3px}
-}
-@media (max-width:359px){
-  nav.main{font-size:10.5px;letter-spacing:0}
-}
-
 /* Filtering toggles the hidden attribute. .card sets display:flex, which would beat the
    browser's own [hidden] rule, so restate it for this page. */
 .pf [hidden]{display:none!important}
@@ -37,8 +26,8 @@ html.js .pf-bar{display:grid}
 .pf-chip:focus-visible{border-radius:999px}
 .pf-led{width:7px;height:7px;border-radius:50%;border:1px solid var(--ink-mute);flex:none;transition:background-color .2s,border-color .2s,box-shadow .2s}
 .pf-n{font-size:11px;color:var(--ink-mute)}
-.pf-chip[aria-pressed="true"]{color:var(--ink);border-color:var(--accent);background-color:rgba(16,185,129,.08)}
-.pf-chip[aria-pressed="true"] .pf-led{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 3px rgba(16,185,129,.22)}
+.pf-chip[aria-pressed="true"]{color:var(--ink);border-color:var(--accent);background-color:var(--accent-wash-2)}
+.pf-chip[aria-pressed="true"] .pf-led{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-ring)}
 .pf-chip[aria-pressed="true"] .pf-n{color:var(--accent)}
 .pf-status{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.04em;color:var(--ink-mute);min-height:1.6em}
 
@@ -56,6 +45,21 @@ html.js .pf-bar{display:grid}
 .card.pf-card{padding:0;gap:0}
 .pf-cover{display:block;position:relative;background:var(--paper);border-bottom:1px solid var(--line)}
 .pf-cover img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:left center}
+/* inline SVG cover (_includes/covers/), drawn in the scope's own colours: graticule, a funnel
+   that narrows along the pipeline, and who does each step (script, Claude, Leo) */
+.pf-cover--svg svg{display:block;width:100%;height:auto;aspect-ratio:16/10}
+.jc-bg{fill:var(--paper-2)}
+.jc-grid{fill:none;stroke:var(--line-soft);stroke-width:2}
+.jc-k{fill:var(--accent);font-family:var(--font-mono);font-size:30px;letter-spacing:.16em}
+.jc-t{fill:var(--ink);font-family:var(--font-display);font-size:92px;font-weight:500;letter-spacing:-.01em}
+.jc-band{fill:var(--accent-wash)}
+.jc-tr{fill:none;stroke:var(--accent);stroke-width:4}
+.jc-s{fill:var(--ink-mute)}
+.jc-c{fill:var(--accent)}
+.jc-halo{fill:var(--accent-ring)}
+.jc-me{fill:var(--paper-2);stroke:var(--ink);stroke-width:5}
+.jc-l{fill:var(--ink-2);font-family:var(--font-mono);font-size:28px;letter-spacing:.1em}
+.jc-leg text{fill:var(--ink-mute);font-family:var(--font-mono);font-size:26px;letter-spacing:.12em}
 /* faint scanlines tie the differently coloured cover art to the oscilloscope screen */
 .pf-cover::after{content:"";position:absolute;top:0;right:0;bottom:0;left:0;pointer-events:none;background:repeating-linear-gradient(rgba(0,0,0,.18) 0 1px,transparent 1px 3px);transition:opacity .3s}
 .pf-card:hover .pf-cover::after{opacity:.35}

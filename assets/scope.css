@@ -50,13 +50,8 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;bac
 body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:repeating-linear-gradient(rgba(255,255,255,0.02) 0 1px,transparent 1px 3px),radial-gradient(120% 80% at 50% 0%,transparent 55%,rgba(0,0,0,0.45) 100%)}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:1}
 
-/* focus: one visible ring for anything reached by keyboard. Mouse clicks do not show it. */
-:focus-visible{outline:2px solid var(--focus-ring);outline-offset:3px}
-a:focus-visible,button:focus-visible{border-radius:2px}
-
-/* skip link: off-screen until keyboard-focused, then drops in below the top edge */
-.skip{position:absolute;left:8px;top:-60px;z-index:100;background:var(--accent);color:var(--paper);font-family:var(--font-mono);font-size:13px;font-weight:600;letter-spacing:0.04em;padding:10px 16px;border-radius:4px;text-decoration:none;transition:top .18s}
-.skip:focus,.skip:focus-visible{top:8px}
+/* Focus ring, skip link, topbar and footer: assets/shell.css (shared with the case studies,
+   loaded right after this file). */
 
 /* "Leo to check" callouts, same look as the case studies. A page's own .todo rule wins. */
 .todo{max-width:66ch;margin:6px 0 18px;border:1px dashed var(--todo-line);border-radius:3px;background:var(--todo-soft);padding:13px 16px;font-family:var(--font-mono);font-size:12px;line-height:1.6;color:var(--ink-2);letter-spacing:0.01em}
@@ -65,19 +60,6 @@ a:focus-visible,button:focus-visible{border-radius:2px}
 .reveal{transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
 html.js .reveal{opacity:0;transform:translateY(22px)}
 html.js .reveal.in{opacity:1;transform:none}
-
-/* topbar */
-header.topbar{border-bottom:1px solid var(--line);background:rgba(13,14,18,0.72);backdrop-filter:blur(8px);position:sticky;top:0;z-index:50}
-.topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;gap:16px;flex-wrap:wrap}
-.wordmark{font-family:var(--font-mono);font-weight:600;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink)}
-.wordmark .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-ring);animation:pulse 2.4s ease-in-out infinite}
-.wordmark .avatar{width:26px;height:26px;border-radius:50%;object-fit:cover;border:1px solid var(--line);display:block}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.35}}
-nav.main{display:flex;gap:26px;align-items:center;font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.05em;text-transform:uppercase}
-nav.main a{color:var(--ink-2);text-decoration:none;position:relative;padding-bottom:3px;transition:color .2s}
-nav.main a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--accent);transition:width .25s}
-nav.main a:hover{color:var(--ink)}nav.main a:hover::after,nav.main a.active::after{width:100%}
-nav.main a.active{color:var(--accent)}
 
 /* kicker / eyebrow */
 .kicker{font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:12px;margin-bottom:26px}
@@ -115,6 +97,13 @@ nav.main a.active{color:var(--accent)}
 .allwork{margin-top:26px;display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:13px;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink);text-decoration:none;border-bottom:1.5px solid var(--accent);padding-bottom:3px;transition:gap .25s}
 .allwork:hover{gap:16px}
 
+/* availability readout (Home hero, Contact): each item carries its own drawn marker, so a wrapped
+   line still starts cleanly and screen readers hear a plain list. Pages set their own margin-top. */
+.avail{list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px;margin-top:24px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink-2)}
+.avail li{display:inline-flex;align-items:center;white-space:nowrap}
+.avail li::before{content:"";flex:none;width:5px;height:5px;border-radius:50%;border:1px solid var(--ink-mute);margin-right:10px}
+.avail li:first-child::before{width:8px;height:8px;border:none;background:var(--accent);box-shadow:0 0 0 3px var(--accent-ring)}
+
 /* contact / social */
 .contact{padding:78px 0 30px}
 .contact .big{font-family:var(--font-display);font-size:clamp(28px,5vw,50px);font-weight:500;line-height:1.05;letter-spacing:-0.015em;max-width:26ch;margin-bottom:30px}
@@ -124,34 +113,11 @@ nav.main a.active{color:var(--accent)}
 .social a{color:var(--ink-2);text-decoration:none;display:inline-flex;align-items:center;gap:7px;transition:color .2s}
 .social a:hover{color:var(--accent)}.social a .ar{color:var(--ink-mute)}
 
-/* footer */
-footer.foot{border-top:1px solid var(--line);margin-top:0}
-footer.foot .foot-inner{max-width:var(--maxw);margin:0 auto;padding:24px 28px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.04em;color:var(--ink-mute);text-transform:uppercase}
-footer.foot .coords{color:var(--ink-2)}
-
 @media (max-width:760px){
   body{font-size:16px}
-  .wrap{padding:0 20px}.topbar .wrap{padding:12px 20px;gap:10px}
-  footer.foot .foot-inner{padding:24px 20px 60px}
+  .wrap{padding:0 20px}
   .cards{grid-template-columns:1fr}
   .sec{padding:56px 0}
-  nav.main{gap:14px;font-size:11.5px}
-  nav.main a{padding:8px 6px 3px}
-}
-/* Phones: the wordmark keeps the first row and the five nav items share the second row
-   edge to edge (they fit down to 360 px; each tap target stays about 34 px tall). */
-@media (max-width:640px){
-  .topbar .wrap{padding:12px 20px 4px;row-gap:6px}
-  nav.main{flex:1 1 100%;justify-content:space-between;gap:10px;font-size:11px;letter-spacing:0.04em}
-  nav.main a{padding:9px 0 7px}
-  nav.main a::after{bottom:3px}
-}
-/* Narrower than 360 px: slightly smaller type keeps all five visible down to 320 px. If a
-   fallback font runs wider, the row scrolls sideways (no visible scrollbar) instead of
-   widening the page. The 5 px padding/negative margin keeps focus rings from being clipped. */
-@media (max-width:359px){
-  nav.main{font-size:10px;letter-spacing:0.03em;gap:8px;overflow-x:auto;scrollbar-width:none;padding:5px;margin:-5px}
-  nav.main::-webkit-scrollbar{display:none}
 }
 /* Reduced motion: nothing moves. Reveal content is shown in place, smooth scrolling is off,
    and the pulse, sweeps and other keyframes (pseudo-element overlays included) hold still.

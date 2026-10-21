@@ -2,8 +2,6 @@
    Revision 2026-10: moved here from the page's inline <style>; APA 7 entry lines, year
    headings, the research intro and the shared amber TODO callout added. */
 
-:root{--todo:#F2B33C;--todo-soft:rgba(242,179,60,0.08);--todo-line:rgba(242,179,60,0.5)}
-
 /* narrow the reading column for the list (topbar stays full width) */
 .pubs-hero .wrap,.pubs .wrap{max-width:900px}
 
@@ -30,7 +28,7 @@
 .pub:hover::before{width:2px}
 .pub .title{font-family:var(--font-display);font-size:clamp(18px,2.4vw,21px);font-weight:500;line-height:1.25;letter-spacing:-0.01em;color:var(--ink)}
 .pub .title a.ti{color:inherit;text-decoration:none;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
-.pub .title a.ti:hover,.pub .title a.ti:focus-visible{color:var(--accent);border-color:rgba(16,185,129,0.4)}
+.pub .title a.ti:hover,.pub .title a.ti:focus-visible{color:var(--accent);border-color:var(--accent-soft)}
 .pub .title a.ti .ext{color:var(--ink-mute);font-size:0.62em;vertical-align:2px}
 .pub .authors{font-size:14px;color:var(--ink-2);margin-top:9px;line-height:1.55}
 .pub .authors .me{color:var(--ink);font-weight:600}

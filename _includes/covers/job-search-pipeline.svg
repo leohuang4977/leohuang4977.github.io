@@ -1,0 +1,26 @@
+<svg class="jc" viewBox="0 0 1600 1000" width="1600" height="1000" aria-hidden="true" focusable="false">
+<rect class="jc-bg" width="1600" height="1000"/>
+<path class="jc-grid" d="M100 0V1000M200 0V1000M300 0V1000M400 0V1000M500 0V1000M600 0V1000M700 0V1000M800 0V1000M900 0V1000M1000 0V1000M1100 0V1000M1200 0V1000M1300 0V1000M1400 0V1000M1500 0V1000M0 100H1600M0 200H1600M0 300H1600M0 400H1600M0 500H1600M0 600H1600M0 700H1600M0 800H1600M0 900H1600"/>
+<text class="jc-k" x="110" y="168">CASE STUDY · DECISION PIPELINE</text>
+<text class="jc-t" x="104" y="290">Job-search decision</text>
+<text class="jc-t" x="104" y="392">pipeline</text>
+<path class="jc-band" d="M170 554C620 554 900 614 1430 628L1430 652C900 666 620 726 170 726Z"/>
+<path class="jc-tr" d="M170 640H1430"/>
+<circle class="jc-s" cx="170" cy="640" r="12"/>
+<text class="jc-l" x="156" y="528" text-anchor="start">DISCOVER</text>
+<circle class="jc-s" cx="350" cy="640" r="12"/>
+<text class="jc-l" x="350" y="780" text-anchor="middle">FETCH</text>
+<circle class="jc-s" cx="530" cy="640" r="12"/>
+<text class="jc-l" x="530" y="528" text-anchor="middle">SCORE</text>
+<circle class="jc-halo" cx="710" cy="640" r="30"/><circle class="jc-c" cx="710" cy="640" r="15"/>
+<text class="jc-l" x="710" y="780" text-anchor="middle">JUDGE</text>
+<circle class="jc-s" cx="890" cy="640" r="12"/>
+<text class="jc-l" x="890" y="528" text-anchor="middle">SHORTLIST</text>
+<circle class="jc-halo" cx="1070" cy="640" r="30"/><circle class="jc-c" cx="1070" cy="640" r="15"/>
+<text class="jc-l" x="1070" y="780" text-anchor="middle">PREPARE</text>
+<circle class="jc-halo" cx="1250" cy="640" r="30"/><circle class="jc-c" cx="1250" cy="640" r="15"/>
+<text class="jc-l" x="1250" y="528" text-anchor="middle">ASSISTED FILL</text>
+<circle class="jc-me" cx="1430" cy="640" r="19"/>
+<text class="jc-l" x="1444" y="780" text-anchor="end">SUBMIT</text>
+<g class="jc-leg"><circle class="jc-s" cx="122" cy="900" r="10"/><text x="146" y="910">SCRIPT</text><circle class="jc-c" cx="352" cy="900" r="11"/><text x="376" y="910">CLAUDE</text><circle class="jc-me" cx="586" cy="900" r="13"/><text x="612" y="910">LEO</text></g>
+</svg>
