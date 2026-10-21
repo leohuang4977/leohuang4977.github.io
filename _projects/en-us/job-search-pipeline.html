@@ -6,12 +6,14 @@ doc_title: "A decision pipeline for my own job search — Leo Huang"
 description: "A weekly job-search pipeline I designed: explicit decision rules, a Claude judge, and assisted form filling that always stops before Submit."
 og_type: article
 scope_nav: projects
+sitemap: false
 ---
 <!DOCTYPE html>
 <html lang="en" data-theme="scope">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
 <title>{{ page.doc_title | escape }}</title>
 {% include scope/head-meta.liquid %}
 <link rel="stylesheet" href="/assets/shell.css">
@@ -271,7 +273,7 @@ main > section:last-child{padding-bottom:48px}
   <div class="wrap">
     <div class="kicker reveal"><span class="rule"></span>AI workflow design · Decision rules · Personal build</div>
     <h1 class="reveal" style="transition-delay:.06s">A decision pipeline for my own job search, with me at the <em>last step</em>.</h1>
-    <p class="lede reveal" style="transition-delay:.12s">Every Tuesday evening, a pipeline I designed reads the career sites on my watchlist and scores each new posting against rules I set. Claude vets the shortlist and fills applications up to the Submit button. I press Submit myself. It also turned up the finding that changed my search: in about 7,300 postings in Canada or remote, <b>not one had a behavioral-science title</b>.</p>
+    <p class="lede reveal" style="transition-delay:.12s">Every week, a pipeline I designed reads the career sites on my watchlist and scores each new posting against rules I set. Claude vets the shortlist and fills applications up to the Submit button. I press Submit myself. It also turned up the finding that changed my search: in about 7,300 postings in Canada or remote, <b>not one had a behavioral-science title</b>.</p>
     <div class="spec stat-trigger reveal" style="transition-delay:.18s">
       <div class="row"><span class="k">Role</span><span class="dots"></span><span class="v txt">Designer and decision owner</span></div>
       <div class="row"><span class="k">Built</span><span class="dots"></span><span class="v txt">Aug to Oct 2026, with Claude Code</span></div>
@@ -314,8 +316,8 @@ main > section:last-child{padding-bottom:48px}
     <div class="sec-head reveal"><span class="idx">02</span><h2>What I designed</h2></div>
     <div class="body-copy reveal" style="transition-delay:.08s">
       <p>The result is a weekly chain of eight stages. Every stage has a written rule and a guardrail, and each one belongs to a single actor: a script, Claude, or me. Scripts fetch and score. Claude reads where a rule can't decide, and drafts what I would otherwise write. Anything that commits me waits for me.</p>
-      <p>It runs on Tuesday evenings. My Windows machine fetches at 19:00, and Claude scheduled tasks score at 20:15 and build application packets at 21:45. At 23:00, Claude in Chrome starts filling forms in my own browser and stops before Submit. The system never submits an application. It never types a password or creates an account either.</p>
-      <div class="todo" role="note"><strong>Leo to check:</strong> The brief asked me to say the system never signs in for you. Since your September 28 decision on account-walled forms (D2, option B), the fill may press Sign In after Chrome fills your saved password, so I wrote "never types a password or creates an account" instead. Reword if you want the Sign In click described.</div>
+      <p>Each run starts on my Windows machine, which fetches the postings. Claude scheduled tasks then score them and build application packets, and Claude in Chrome handles assisted form filling that stops before Submit. The system never submits an application, and it stores no credentials.</p>
+      <div class="todo" role="note"><strong>Leo to check:</strong> Confirm the sign-in wording above matches your September 28 decision.</div>
       <p>I built it with Claude Code between August and October, across 71 commits and about 30 logged sessions. I set the rules and made the calls. Claude wrote and tested the code, and each working session now ends with a written handoff that marks every claim verified or unverified, so the next one starts from facts instead of memory.</p>
     </div>
 
@@ -324,17 +326,17 @@ main > section:last-child{padding-bottom:48px}
       <div class="pipe" id="pipe">
         <h3 class="pipe-h" data-who="script"><span class="pipe-n">01</span><span class="pipe-name">Discover</span><span class="pipe-who">script</span></h3>
         <div class="pipe-panel" id="pipe-p1">
-          <div class="pipe-top"><span class="pipe-ptitle" aria-hidden="true">Discover</span><span class="pipe-when">Each Tuesday, alongside the fetch</span></div>
+          <div class="pipe-top"><span class="pipe-ptitle" aria-hidden="true">Discover</span><span class="pipe-when">Each week, alongside the fetch</span></div>
           <dl class="pipe-dl">
-            <div><dt>Rule</dt><dd>Every employer on my watchlist is recorded with its real careers board, its applicant-tracking system and an access tier that one successful read proved. Since late September, a discovery step also reads a public dataset of applicant-tracking boards for employers outside the watchlist that post in Canada.</dd></div>
+            <div><dt>Rule</dt><dd>Every employer on my watchlist is recorded with its real careers board, its applicant-tracking system and an access tier that one successful read proved.</dd></div>
             <div><dt>Guardrail</dt><dd>The watchlist is mine. Discovered employers go on a separate list the system owns, and moving one onto the watchlist is my call. Job aggregators are skipped by name.</dd></div>
-            <div><dt>In numbers</dt><dd>66 employers on the watchlist. About 2,900 more had Canadian postings in the dataset when discovery was added.</dd></div>
+            <div><dt>In numbers</dt><dd>66 employers on the watchlist.</dd></div>
           </dl>
         </div>
 
         <h3 class="pipe-h" data-who="script"><span class="pipe-n">02</span><span class="pipe-name">Fetch</span><span class="pipe-who">script</span></h3>
         <div class="pipe-panel" id="pipe-p2">
-          <div class="pipe-top"><span class="pipe-ptitle" aria-hidden="true">Fetch</span><span class="pipe-when">Tuesday 19:00, Windows Task Scheduler on my machine</span></div>
+          <div class="pipe-top"><span class="pipe-ptitle" aria-hidden="true">Fetch</span><span class="pipe-when">Weekly, Windows Task Scheduler on my machine</span></div>
           <dl class="pipe-dl">
             <div><dt>Rule</dt><dd>Each board is read the cheapest way that works: a public feed, a plain request, or a headless browser. New descriptions go into a local cache, so scoring needs no network.</dd></div>
             <div><dt>Guardrail</dt><dd>It never fights bot detection. A blocked site drops one tier on the spot, closer to me checking it by hand, and is not retried that run. Only I move a site back up. If the network itself is down, a preflight check ends the run before anything is written.</dd></div>
@@ -344,7 +346,7 @@ main > section:last-child{padding-bottom:48px}
 
         <h3 class="pipe-h" data-who="script"><span class="pipe-n">03</span><span class="pipe-name">Score</span><span class="pipe-who">script</span></h3>
         <div class="pipe-panel" id="pipe-p3">
-          <div class="pipe-top"><span class="pipe-ptitle" aria-hidden="true">Score</span><span class="pipe-when">Tuesday 20:15, code run by a Claude scheduled task</span></div>
+          <div class="pipe-top"><span class="pipe-ptitle" aria-hidden="true">Score</span><span class="pipe-when">After the fetch, code run by a Claude scheduled task</span></div>
           <dl class="pipe-dl">
             <div><dt>Rule</dt><dd>A rubric in code scores each posting from 0 to 5, with points for the title's role family, for methods and domain words in the description, and for location. A 3 is shown to me for review. A 4 or 5 can be picked.</dd></div>
             <div><dt>Guardrail</dt><dd>A promising title with no description yet is floored at 3 and tagged instead of buried. False friends score 0 before anything else is read, and work I've ruled out earns no title points.</dd></div>
@@ -374,7 +376,7 @@ main > section:last-child{padding-bottom:48px}
 
         <h3 class="pipe-h" data-who="claude"><span class="pipe-n">06</span><span class="pipe-name">Prepare</span><span class="pipe-who">Claude</span></h3>
         <div class="pipe-panel" id="pipe-p6">
-          <div class="pipe-top"><span class="pipe-ptitle" aria-hidden="true">Prepare</span><span class="pipe-when">Tuesday 21:45, a Claude scheduled task</span></div>
+          <div class="pipe-top"><span class="pipe-ptitle" aria-hidden="true">Prepare</span><span class="pipe-when">After the shortlist, a Claude scheduled task</span></div>
           <dl class="pipe-dl">
             <div><dt>Rule</dt><dd>For each pick, Claude builds a packet: a draft cover letter, drafts for any free-text questions, the link to the form, and a recommendation on whether to apply at all.</dd></div>
             <div><dt>Guardrail</dt><dd>Every letter is marked DRAFT and follows my writing rules. Résumé files are read-only, and no personal identifier is ever written down. At most 30 packets a run, 3 per employer.</dd></div>
@@ -383,16 +385,16 @@ main > section:last-child{padding-bottom:48px}
 
         <h3 class="pipe-h" data-who="claude"><span class="pipe-n">07</span><span class="pipe-name">Assisted fill</span><span class="pipe-who">Claude</span></h3>
         <div class="pipe-panel" id="pipe-p7">
-          <div class="pipe-top"><span class="pipe-ptitle" aria-hidden="true">Assisted fill</span><span class="pipe-when">23:00, Tuesday to Saturday, Claude in Chrome</span></div>
+          <div class="pipe-top"><span class="pipe-ptitle" aria-hidden="true">Assisted fill</span><span class="pipe-when">Once the packets are ready, Claude in Chrome</span></div>
           <dl class="pipe-dl">
-            <div><dt>Rule</dt><dd>Claude in Chrome fills each form in my own browser from the packet and a map of answers I've already decided. Any question the map doesn't cover goes to an inbox for me.</dd></div>
-            <div><dt>Guardrail</dt><dd>It stops before Submit. It never types into a login or password field, never creates an account, never tries to get past a CAPTCHA, and stores no passwords or cookies. At most six forms a night, with a hard stop.</dd></div>
+            <div><dt>Rule</dt><dd>Claude in Chrome fills each form from the packet and a map of answers I've already decided. Any question the map doesn't cover goes to an inbox for me.</dd></div>
+            <div><dt>Guardrail</dt><dd>It stops before Submit and stores no credentials. It never creates an account or tries to get past a CAPTCHA. At most six forms per run, with a hard stop.</dd></div>
           </dl>
         </div>
 
         <h3 class="pipe-h" data-who="leo"><span class="pipe-n">08</span><span class="pipe-name">Submit</span><span class="pipe-who">Leo</span></h3>
         <div class="pipe-panel" id="pipe-p8">
-          <div class="pipe-top"><span class="pipe-ptitle" aria-hidden="true">Submit</span><span class="pipe-when">When I review the night's forms</span></div>
+          <div class="pipe-top"><span class="pipe-ptitle" aria-hidden="true">Submit</span><span class="pipe-when">When I review the filled forms</span></div>
           <dl class="pipe-dl">
             <div><dt>Rule</dt><dd>I read every filled field, fix what's wrong, attach anything missing and press Submit myself.</dd></div>
             <div><dt>Guardrail</dt><dd>Submit is mine alone. The ledger marks a role as applied only on my word. The inputs stay mine as well: the watchlist, the rules, my answers and every status that records a decision.</dd></div>
@@ -463,9 +465,8 @@ main > section:last-child{padding-bottom:48px}
         <rect class="s-r" x="0" y="192.5" width="10" height="10" rx="2"></rect><text class="t-k" x="18" y="202">Open for review</text><text class="t-v" x="340" y="202" text-anchor="end">784</text>
         <rect class="s-o" x="0" y="212.5" width="10" height="10" rx="2"></rect><text class="t-k" x="18" y="222">Auto-shortlisted</text><text class="t-v" x="340" y="222" text-anchor="end">25</text>
       </svg>
-      <figcaption class="figcap">Ledger counts from state_probe.py on 2026-10-21, for every posting first seen since August 5. Counts above 1,000 are rounded to the nearest hundred. The lower bar enlarges the open sliver at the end of the upper one. Auto-shortlisted roles have passed the rules and the judge and sit in the apply queue.</figcaption>
+      <figcaption class="figcap">Ledger counts from state_probe.py on 2026-10-21, for every posting first seen since August 5. Counts above 1,000 are rounded to the nearest hundred. The lower bar enlarges the open sliver at the end of the upper one. Auto-shortlisted roles have passed the rules and the judge and wait for my review.</figcaption>
     </figure>
-    <div class="todo reveal" role="note"><strong>Leo to check:</strong> Keep the big counts rounded when you refresh this figure and the hero. If every status count is exact, the one count this page leaves out can be worked out from the total.</div>
 
     <div class="body-copy reveal" style="transition-delay:.06s;margin-top:30px">
       <p>The finding I use most is about the market. A read of the ledger on September 28 covered about 7,300 distinct postings in Canada or remote, at 62 employers, first seen between August 6 and September 22. None carried a behavioral-science title.</p>
@@ -483,7 +484,7 @@ main > section:last-child{padding-bottom:48px}
       <h3 class="subhead">The cloud couldn't reach the job boards</h3>
       <p>The first scheduled scan, on August 31, reached 0 of 34 boards. Every request died at the cloud sandbox's proxy, even to sites that have nothing to do with jobs, and a third sandbox gave the same answer. So I split the run along the network line: Windows Task Scheduler on my machine fetches and caches every description, and the Claude task scores offline from that cache. The fetch now checks the network before it writes anything, because the failed run had logged 34 failures against boards that were fine. On September 4 the split design ran end to end and brought in 3,856 new postings.</p>
       <h3 class="subhead">Failures that made no noise</h3>
-      <p>The same day, I found the pipeline had been silent for 25 days. Its scheduled task was gone, and its scoring had been blind: none of 12,842 postings had description text, so no posting could score above 3, one short of the top tier. Twenty-two roles that fit what I wanted had been filed away as low scores. Days later, three runs stalled on a permission prompt with nobody there to answer it, and in early October I found the scoring task had been off for two Tuesdays while the fetch kept running.</p>
+      <p>On August 31 I also found the pipeline had been silent for 25 days. Its scheduled task was gone, and its scoring had been blind: none of 12,842 postings had description text, so no posting could score above 3, one short of the top tier. Twenty-two roles that fit what I wanted had been filed away as low scores. Days later, three runs stalled on a permission prompt with nobody there to answer it, and in early October I found the scoring task had been off for two weeks while the fetch kept running.</p>
       <p>The fixes share one idea: the system has to report on itself. A state probe prints the real state in one command, scan lag and any fetch in flight included. Long scripts print timestamped heartbeats. A watchdog checks that every step of the chain left its files, and the scorer refuses any fetch that isn't from today.</p>
       <h3 class="subhead">A board that seemed to empty overnight</h3>
       <p>On September 4, one employer's board adapter returned 5 postings where the first read had found 3,753. Had absence meant closure, thousands of live roles would have closed in one run. A mass-disappearance guard caught it and held back about 7,600 closures across 19 employers. Then the guard stuck the other way, and by September 9 it was holding postings open at 13 employers after they had come down. The fix was an aging rule: a posting now closes only after it goes missing from three trustworthy reads in a row.</p>

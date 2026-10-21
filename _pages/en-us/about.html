@@ -18,7 +18,7 @@ extra_css: [/assets/pages/about.css]
         <ul class="avail reveal d2" aria-label="Location and availability">
           <li>Based in Toronto</li>
           <li>Open to GTA, remote Canada, remote US</li>
-          <li>PhD defence December 2026</li>
+          <li>PhD defence expected December 2026</li>
         </ul>
         <div class="hero-actions reveal d3">
           <a class="hbtn primary" href="/projects/">View projects</a>
@@ -62,7 +62,7 @@ extra_css: [/assets/pages/about.css]
         </ul>
       </div>
     </div>
-    <p class="fit-note reveal">My academic and industry work share one toolkit: the experiments and models behind my peer-reviewed research are the same ones I use to help teams decide what to build or change next.</p>
+    <p class="fit-note reveal">My academic and industry work share one toolkit: the experiments and models behind my PhD research, like an 8-week randomized trial and multilevel models, are the ones I use to help teams decide what to build or change next.</p>
   </div>
 </section>
 
@@ -93,7 +93,7 @@ extra_css: [/assets/pages/about.css]
           <circle class="fa" cx="420" cy="15" r="4.5"/>
         </svg>
         <h3>Decision &amp; journey design</h3>
-        <p>I look for the points where people hesitate or give up, then help redesign the steps around them. At a major Canadian bank I co-developed a Contact Us journey redesign with a 20% lift in user satisfaction.</p>
+        <p>I look for the points where people hesitate or give up, then help redesign the steps around them. At a major Canadian bank I co-developed the wireframes and prototypes for a Contact Us redesign, and user satisfaction rose 20% after it.</p>
         <p class="ev"><span class="ev-k">Evidence</span><a href="/projects/mortgage-switching/">Mortgage switching</a><a href="/projects/advice-page-optimization/">Advisor contact page</a><a href="/projects/job-search-pipeline/">Job-search decision pipeline</a></p>
       </li>
       <li class="pillar">
@@ -112,7 +112,7 @@ extra_css: [/assets/pages/about.css]
           <g class="fa"><circle cx="249" cy="24" r="2.6"/><circle cx="303" cy="20" r="2.6"/><circle cx="307" cy="19" r="2.6"/><circle cx="328" cy="14" r="2.6"/><circle cx="336" cy="14" r="2.6"/><circle cx="345" cy="14" r="2.6"/><circle cx="355" cy="13" r="2.6"/><circle cx="357" cy="11" r="2.6"/><circle cx="373" cy="9" r="2.6"/><circle cx="376" cy="10" r="2.6"/><circle cx="389" cy="10" r="2.6"/><circle cx="393" cy="8" r="2.6"/><circle cx="402" cy="14" r="2.6"/></g>
         </svg>
         <h3>Behavioral data science</h3>
-        <p>I build the measurement a decision rests on: weighted surveys, psychometrics, telemetry analysis and predictive models. That includes my team's first user-segmentation model at a large enterprise software company, and a Python pipeline that caught bots and low-quality survey respondents with 97% accuracy.</p>
+        <p>I build the measurement a decision rests on: weighted surveys, psychometrics, telemetry analysis and predictive models. That includes a large enterprise software company's first user-segmentation model, and a Python pipeline that caught bots and low-quality survey respondents with 97% accuracy.</p>
         <p class="ev"><span class="ev-k">Evidence</span><a href="/projects/ai-writing-assistance/">AI writing assistance</a><a href="/projects/in-channel-knowledge-agents/">In-channel knowledge agents</a></p>
       </li>
     </ul>
@@ -148,7 +148,7 @@ extra_css: [/assets/pages/about.css]
         <span class="cover"><img src="/assets/img/advice-cover.png"{% if site.imagemagick.enabled %} srcset="/assets/img/advice-cover-480.webp 480w, /assets/img/advice-cover-800.webp 800w, /assets/img/advice-cover-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 504px"{% endif %} alt="" width="1600" height="1000" loading="lazy" decoding="async"></span>
         <span class="tag"><span>Decision &amp; journey design</span><span aria-hidden="true">·</span><span>Behavioral data science</span></span>
         <h3>What moves someone to contact an advisor</h3>
-        <p>A survey of 150 wealth clients ranked trust and experience far above technology, and they wanted a person on the other end. The redesign put phone and in-person contact first and trimmed the form to what people offered up front.</p>
+        <p>A survey of 150 current and prospective wealth clients ranked trust and experience far above technology, and they wanted a person on the other end. The redesign put phone and in-person contact first and trimmed the form to what people offered up front.</p>
         <div class="foot"><span class="go">VIEW →</span></div>
       </a>
     </div>
@@ -187,6 +187,13 @@ extra_css: [/assets/pages/about.css]
       <div class="hint" aria-hidden="true">drag to explore ↗</div>
     </figure>
 
+    {%- comment -%} Days in grad school: no-JS fallback computed at build time, counted from
+        2020-09-01 (start of the U of T MA). The page script below replaces it with today's count. {%- endcomment -%}
+    {%- assign gs_start = '2020-09-01' | date: '%s' | plus: 0 -%}
+    {%- assign gs_now = site.time | date: '%s' | plus: 0 -%}
+    {%- assign gs_days = gs_now | minus: gs_start | divided_by: 86400 -%}
+    {%- assign gs_thousands = gs_days | divided_by: 1000 -%}
+    {%- assign gs_rest = gs_days | modulo: 1000 | plus: 1000 | append: '' | slice: 1, 3 %}
     <div class="numbers reveal">
       <div class="spec-eyebrow">FIG.02 — By the numbers</div>
       <div class="spec stat-trigger">
@@ -194,7 +201,7 @@ extra_css: [/assets/pages/about.css]
         <div class="row"><span class="k">Years researching</span><span class="dots"></span><span class="v"><span data-count="9">9</span></span></div>
         <div class="row"><span class="k">Studies run</span><span class="dots"></span><span class="v"><span data-count="100">100</span>+</span></div>
         <div class="row"><span class="k">People studied</span><span class="dots"></span><span class="v"><span data-count="10000">10,000</span>+</span></div>
-        <div class="row"><span class="k">Days on Earth</span><span class="dots"></span><span class="v"><span data-count="10693" data-days-since="1997-03-01">10,693</span></span></div>
+        <div class="row"><span class="k">Days in grad school</span><span class="dots"></span><span class="v"><span data-count="{{ gs_days }}" data-days-since="2020-09-01">{{ gs_thousands }},{{ gs_rest }}</span></span></div>
       </div>
     </div>
   </div>
@@ -234,14 +241,15 @@ extra_css: [/assets/pages/about.css]
 </section>
 
 <script>
-  // Days on Earth — set the live target before the shared count-up runs.
-  // Runs in page content, so it executes before the shared scripts include
-  // (and its count-up) reads the data-count attribute.
+  // Days in grad school: counts from 2020-09-01, the start of the U of T MA.
+  // Sets the live target before the shared count-up runs. It sits in page content,
+  // so it executes before the shared scripts include (and its count-up) reads the
+  // data-count attribute.
   (function () {
     var el = document.querySelector('[data-days-since]');
     if (!el) return;
-    var birth = new Date(el.getAttribute('data-days-since') + 'T00:00:00');
-    var days = Math.floor((Date.now() - birth.getTime()) / 86400000);
+    var start = new Date(el.getAttribute('data-days-since') + 'T00:00:00');
+    var days = Math.floor((Date.now() - start.getTime()) / 86400000);
     el.setAttribute('data-count', String(days));   // existing countUp() animates to this
     el.textContent = days.toLocaleString('en-US');  // no-JS-animation fallback
   })();
