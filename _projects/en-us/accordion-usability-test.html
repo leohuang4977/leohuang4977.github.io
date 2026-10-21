@@ -155,6 +155,24 @@ permalink: /projects/accordion-usability-test/
   @media (prefers-reduced-motion:reduce){html.js .sweepfx::after{display:none!important}}
   .skip{position:absolute;left:8px;top:-48px;z-index:100;background:var(--accent);color:var(--paper);font-family:var(--font-mono);font-size:13px;font-weight:600;letter-spacing:0.04em;padding:10px 16px;border-radius:0 0 4px 4px;text-decoration:none;transition:top .18s}
   .skip:focus{top:0}
+  /* cs-shows + cs-pager (revision 2026-10) */
+  .cs-shows{padding:0 0 8px}
+  .cs-shows .wrap{display:grid;gap:10px;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:16px 0}
+  .cs-shows-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+  .cs-shows-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);min-width:52px}
+  .cs-tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+  .cs-tags a{display:inline-block;font-family:var(--font-mono);font-size:12px;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:4px 11px;text-decoration:none;transition:border-color .2s,color .2s}
+  .cs-tags a:hover,.cs-tags a:focus-visible{border-color:var(--accent);color:var(--accent)}
+  .cs-fits{margin:0;font-size:14px;color:var(--ink-2)}
+  .cs-pager{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 22px}
+  .cs-pager a{display:block;border:1px solid var(--line);border-radius:4px;padding:14px 16px;color:var(--ink);text-decoration:none;font-family:var(--font-display);font-size:18px;line-height:1.25;transition:border-color .2s}
+  .cs-pager a span{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:6px}
+  .cs-pager .cs-next{text-align:right}
+  .cs-pager a:hover,.cs-pager a:focus-visible{border-color:var(--accent)}
+  @media (max-width:560px){.cs-pager{grid-template-columns:1fr}.cs-pager .cs-next{text-align:left}}
+  /* c2 fix (revision 2026-10): the shared rule's padding:16px 0 drops .wrap's side gutters; keep the strip on the text column */
+  .cs-shows .wrap{width:calc(100% - 56px);max-width:calc(var(--maxw) - 56px)}
+  @media (max-width:760px){.cs-shows .wrap{width:calc(100% - 40px)}}
 </style>
 </head>
 <body>
@@ -176,9 +194,9 @@ permalink: /projects/accordion-usability-test/
 
 <section class="cs-hero">
   <div class="wrap">
-    <div class="kicker reveal"><span class="rule"></span>Behavior Beats Preference · Mobile App Usability</div>
-    <h1 class="reveal" style="transition-delay:.06s">Open vs. Closed: an accordion navigation test</h1>
-    <p class="lede reveal" style="transition-delay:.12s">A moderated usability test of two in-app navigation defaults. <b>Stated preference couldn't settle it. Behavior could.</b></p>
+    <div class="kicker reveal"><span class="rule"></span>Within-subjects experiment · Behavior vs. stated preference · Mobile app</div>
+    <h1 class="reveal" style="transition-delay:.06s">Open vs. closed: an accordion navigation test</h1>
+    <p class="lede reveal" style="transition-delay:.12s">The design team adopted an open-first default for the redesigned section screens, with deep links allowed to override it. The call came from moderated sessions where 20 people used both versions. <b>Stated preference couldn't settle it. Behavior could.</b></p>
 
     <div class="tagstrip reveal" style="transition-delay:.16s">
       <span class="t"><b>Method</b> Moderated, within-subjects A/B</span>
@@ -192,6 +210,21 @@ permalink: /projects/accordion-usability-test/
       <div class="cell"><div class="v">20</div><div class="k">Participants, moderated</div></div>
       <div class="cell"><div class="v">2</div><div class="k">Prototype versions</div></div>
       <div class="cell"><div class="v">A / B</div><div class="k">Within-subjects, Figma</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- cs-shows (revision 2026-10) -->
+<section class="cs-shows" aria-label="What this project shows">
+  <div class="wrap">
+    <div class="cs-shows-row"><span class="cs-shows-label">Shows</span>
+      <ul class="cs-tags">
+        <li><a href="/projects/?f=experiments">Experiments &amp; causal inference</a></li>
+        <li><a href="/projects/?f=journeys">Decision &amp; journey design</a></li>
+      </ul>
+    </div>
+    <div class="cs-shows-row"><span class="cs-shows-label">Fits</span>
+      <p class="cs-fits">UX and product research · Quantitative UX research · Experimentation</p>
     </div>
   </div>
 </section>
@@ -399,7 +432,7 @@ permalink: /projects/accordion-usability-test/
 
     <div class="fig reveal" style="transition-delay:.14s">
       <div class="flabel">FIG.04 — The shipping rule</div>
-      <svg class="plot" viewBox="0 0 620 212" role="img" aria-label="Decision rule: if the user arrived via a deep link, open that section; otherwise open the first section by default.">
+      <svg class="plot" viewBox="0 0 620 212" role="img" aria-label="Decision rule: if the user arrived via a deep link, open that section. Otherwise open the first section by default.">
         <g font-size="11.5" style="font-family:var(--font-mono)">
           <rect x="28" y="80" width="132" height="40" rx="6" style="fill:var(--panel);stroke:var(--line)"/>
           <text x="94" y="104" text-anchor="middle" style="fill:var(--ink-2)">User opens screen</text>
@@ -443,6 +476,10 @@ permalink: /projects/accordion-usability-test/
 
 <section class="cta">
   <div class="wrap">
+    <nav class="cs-pager" aria-label="More case studies">
+      <a class="cs-prev" href="/projects/generational-wealth-transfer/"><span>Previous</span>Generational wealth transfer</a>
+      <a class="cs-next" href="/projects/ai-agents/"><span>Next</span>AI agents at work</a>
+    </nav>
     <a class="back reveal" style="transition-delay:.08s" href="https://leohuang4977.github.io/projects/">← All projects</a>
     <footer class="foot">
       <span>© 2026 Leo Huang</span>

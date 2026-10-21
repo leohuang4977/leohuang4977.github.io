@@ -96,7 +96,7 @@ permalink: /projects/mortgage-switching/
 
   /* pre-publish TODO marker (kept visible until Leo fills it in) */
   .todo{margin-top:18px;border:1px dashed var(--todo-line);background:var(--todo-soft);border-radius:3px;padding:13px 16px;font-family:var(--font-mono);font-size:12px;line-height:1.6;color:var(--ink-2);letter-spacing:0.01em}
-  .todo b{color:var(--todo);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;font-size:11px;display:block;margin-bottom:6px}
+  .todo b,.todo strong{color:var(--todo);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;font-size:11px;display:block;margin-bottom:6px}
 
   /* conceptual figures */
   .fig{border:1px solid var(--line);border-radius:3px;background:linear-gradient(90deg,var(--line-soft) 1px,transparent 1px) 0 0/56px 100%,var(--panel);padding:22px 22px 16px;margin:26px 0 0;position:relative;overflow:hidden}
@@ -126,7 +126,7 @@ permalink: /projects/mortgage-switching/
   .rec{border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:22px 22px 20px;position:relative;overflow:hidden;transition:transform .3s cubic-bezier(.2,.7,.2,1),border-color .3s}
   .rec:hover{transform:translateY(-3px);border-color:var(--accent)}
   .rec .n{font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:0.08em;margin-bottom:12px}
-  .rec h4{font-family:var(--font-display);font-size:19px;font-weight:500;line-height:1.18;margin-bottom:10px}
+  .rec h3{font-family:var(--font-display);font-size:19px;font-weight:500;line-height:1.18;margin-bottom:10px}
   .rec p{font-size:14.5px;color:var(--ink-2);line-height:1.5}
 
   /* methods & tools tag */
@@ -169,6 +169,37 @@ permalink: /projects/mortgage-switching/
   @media (prefers-reduced-motion:reduce){html.js .sweepfx::after{display:none!important}}
   .skip{position:absolute;left:8px;top:-48px;z-index:100;background:var(--accent);color:var(--paper);font-family:var(--font-mono);font-size:13px;font-weight:600;letter-spacing:0.04em;padding:10px 16px;border-radius:0 0 4px 4px;text-decoration:none;transition:top .18s}
   .skip:focus{top:0}
+  /* cs-shows + cs-pager (revision 2026-10) */
+  .cs-shows{padding:0 0 8px}
+  .cs-shows .wrap{display:grid;gap:10px;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:16px 0}
+  .cs-shows-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+  .cs-shows-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);min-width:52px}
+  .cs-tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+  .cs-tags a{display:inline-block;font-family:var(--font-mono);font-size:12px;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:4px 11px;text-decoration:none;transition:border-color .2s,color .2s}
+  .cs-tags a:hover,.cs-tags a:focus-visible{border-color:var(--accent);color:var(--accent)}
+  .cs-fits{margin:0;font-size:14px;color:var(--ink-2)}
+  .cs-pager{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 22px}
+  .cs-pager a{display:block;border:1px solid var(--line);border-radius:4px;padding:14px 16px;color:var(--ink);text-decoration:none;font-family:var(--font-display);font-size:18px;line-height:1.25;transition:border-color .2s}
+  .cs-pager a span{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:6px}
+  .cs-pager .cs-next{text-align:right}
+  .cs-pager a:hover,.cs-pager a:focus-visible{border-color:var(--accent)}
+  @media (max-width:560px){.cs-pager{grid-template-columns:1fr}.cs-pager .cs-next{text-align:left}}
+  /* c2 fix (revision 2026-10): the shared rule's padding:16px 0 drops .wrap's side gutters; keep the strip on the text column */
+  .cs-shows .wrap{width:calc(100% - 56px);max-width:calc(var(--maxw) - 56px)}
+  @media (max-width:760px){.cs-shows .wrap{width:calc(100% - 40px)}}
+
+  /* renewal-journey concept, section 07 (revision 2026-10) */
+  .prose p b{color:var(--ink);font-weight:600}
+  .fig .lab.md{font-size:12px}
+  .fig .lab.xs{font-size:11px}
+  .fig .band{fill:var(--accent-wash-2);stroke:var(--line);stroke-width:1}
+  .fig .jr-tall{display:none}
+  .jr-stages{list-style:none;grid-template-columns:repeat(4,1fr);margin-top:22px}
+  .jr-stages .n{text-transform:uppercase}
+  .jr-stages .rec .jr-from{font-family:var(--font-mono);font-size:11px;line-height:1.5;letter-spacing:0.02em;color:var(--ink-mute);margin-top:12px}
+  @media (max-width:900px){.jr-stages{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:700px){.fig .jr-wide{display:none}.fig .jr-tall{display:block;max-width:420px;margin:0 auto}}
+  @media (max-width:560px){.jr-stages{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -190,10 +221,26 @@ permalink: /projects/mortgage-switching/
 
 <section class="cs-hero">
   <div class="wrap">
-    <div class="kicker reveal"><span class="rule"></span>Comparative survey · Retail banking</div>
+    <div class="kicker reveal"><span class="rule"></span>Decision &amp; journey design · Comparative survey · Retail banking</div>
     <h1 class="reveal" style="transition-delay:.06s">Why customers switch mortgage providers</h1>
-    <p class="lede reveal" style="transition-delay:.12s">A two-group survey built to read switchers and non-switchers side by side, so a bank could see what actually moves a mortgage and what keeps one parked.</p>
+    <p class="lede reveal" style="transition-delay:.12s">A retail bank shipped a new mortgage-switching flow with the rate at the top and a step-by-step path for first-time switchers. Both choices came from this study, which compared 100 recent switchers with 100 stayers to see what actually moves a mortgage and what keeps one parked.</p>
     <div class="disc reveal" style="transition-delay:.18s">Anonymized portfolio version of a client study. The bank is unnamed and the figures are illustrative, recreated to show the design and analysis rather than to report real results.</div>
+  </div>
+</section>
+
+<!-- cs-shows (revision 2026-10) -->
+<section class="cs-shows" aria-label="What this project shows">
+  <div class="wrap">
+    <div class="cs-shows-row"><span class="cs-shows-label">Shows</span>
+      <ul class="cs-tags">
+        <li><a href="/projects/?f=journeys">Decision &amp; journey design</a></li>
+        <li><a href="/projects/?f=experiments">Experiments &amp; causal inference</a></li>
+        <li><a href="/projects/?f=data-science">Behavioral data science</a></li>
+      </ul>
+    </div>
+    <div class="cs-shows-row"><span class="cs-shows-label">Fits</span>
+      <p class="cs-fits">Customer journey, lifecycle and decisioning · Behavioral and decision science · Quantitative UX research</p>
+    </div>
   </div>
 </section>
 
@@ -300,7 +347,7 @@ permalink: /projects/mortgage-switching/
       </div>
       <figure class="fig">
         <div class="fig-label">FIG.03 — An interaction, not a main effect</div>
-        <svg viewBox="0 0 720 250" role="img" aria-label="Perceived ease lifts intent sharply for first-timers and barely at all for prior switchers; the two lines converge when switching feels easy.">
+        <svg viewBox="0 0 720 250" role="img" aria-label="Perceived ease lifts intent sharply for first-timers and barely at all for prior switchers. The two lines converge when switching feels easy.">
           <!-- axes -->
           <line x1="70" y1="40" x2="70" y2="200" class="ax"/>
           <line x1="70" y1="200" x2="660" y2="200" class="ax"/>
@@ -355,17 +402,17 @@ permalink: /projects/mortgage-switching/
     <div class="recs reveal" style="transition-delay:.08s">
       <div class="rec">
         <div class="n">01</div>
-        <h4>Demystify the move</h4>
+        <h3>Demystify the move</h3>
         <p>Show, step by step, how ordinary switching a mortgage really is. Aim it at first-time switchers, who tend to overestimate the hassle.</p>
       </div>
       <div class="rec">
         <div class="n">02</div>
-        <h4>Put the rate first</h4>
+        <h3>Put the rate first</h3>
         <p>Make the rate the most prominent, scannable thing on the page. It drives the decision more than anything else does.</p>
       </div>
       <div class="rec">
         <div class="n">03</div>
-        <h4>Clear the obstacles early</h4>
+        <h3>Clear the obstacles early</h3>
         <p>Name the things people dread, like paperwork and penalties, and answer them up front instead of leaving them to the end of the flow.</p>
       </div>
     </div>
@@ -382,8 +429,138 @@ permalink: /projects/mortgage-switching/
   </div>
 </section>
 
+<!-- renewal-journey concept (revision 2026-10): designed after the study, never shipped or measured -->
+<section class="sec gap">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">07</span><h2>From findings to a renewal journey</h2></div>
+    <div class="prose reveal" style="transition-delay:.08s">
+      <p>This part came after the study. It is a concept, built only from the findings above, for how a bank could use them at renewal, the point where a mortgage holder decides again whether to stay or move. It was never shipped, and none of it has been measured.</p>
+    </div>
+
+    <figure class="fig reveal" style="transition-delay:.12s">
+      <div class="fig-label">FIG.05 — Renewal journey (concept)</div>
+      <svg class="jr-wide" viewBox="0 0 720 344" role="img" aria-label="Concept renewal journey over the 120 days before a mortgage matures. At 120 days, customers are sorted by switching history. Prior switchers get a rate-first offer at 90 days. Customers who have never switched get the rate-first offer with a step-by-step guide at 60 days. Anyone still undecided gets a one-step renewal at 30 days, before the renew-or-move decision at maturity. A random split compares the journey with a holdout on the current process, measured on retention at renewal, with complaints and opt-outs as guardrails.">
+        <!-- legend: same encoding as FIG.03 -->
+        <line x1="40" y1="30" x2="64" y2="30" class="lineA"/>
+        <text x="72" y="34" class="lab md a">switched before</text>
+        <line x1="214" y1="30" x2="238" y2="30" class="lineB"/>
+        <text x="246" y="34" class="lab md">never switched</text>
+        <!-- 120 days: the first decision -->
+        <rect x="26" y="106" width="140" height="44" rx="6" class="boxO"/>
+        <text x="96" y="124" class="lab md" text-anchor="middle">sort by</text>
+        <text x="96" y="140" class="lab md" text-anchor="middle">switching history</text>
+        <!-- lanes -->
+        <path class="lineA" d="M166 120 C190 120, 190 88, 214 88 H652"/>
+        <path class="lineB" d="M166 136 C190 136, 190 168, 214 168 H652"/>
+        <!-- switched before: offer at 90 days, one-step renewal at 30 -->
+        <circle class="dotA" cx="236" cy="88" r="6"/>
+        <text x="236" y="70" class="lab md" text-anchor="middle">rate-first offer</text>
+        <circle class="dotA" cx="516" cy="88" r="6"/>
+        <text x="516" y="70" class="lab md" text-anchor="middle">one-step renewal</text>
+        <circle class="endA" cx="652" cy="88" r="6"/>
+        <!-- never switched: offer plus guide at 60 days, one-step renewal at 30 -->
+        <circle class="dotB" cx="376" cy="168" r="6"/>
+        <text x="376" y="192" class="lab md" text-anchor="middle">rate-first offer</text>
+        <text x="376" y="207" class="lab md" text-anchor="middle">+ step-by-step</text>
+        <circle class="dotB" cx="516" cy="168" r="6"/>
+        <text x="516" y="192" class="lab md" text-anchor="middle">one-step renewal</text>
+        <circle class="endB" cx="652" cy="168" r="6"/>
+        <text x="652" y="132" class="lab sm" text-anchor="middle">renew or move</text>
+        <!-- time axis -->
+        <line x1="26" y1="236" x2="684" y2="236" class="ax"/>
+        <line x1="96" y1="232" x2="96" y2="240" class="ax"/><line x1="236" y1="232" x2="236" y2="240" class="ax"/><line x1="376" y1="232" x2="376" y2="240" class="ax"/><line x1="516" y1="232" x2="516" y2="240" class="ax"/><line x1="652" y1="232" x2="652" y2="240" class="ax"/>
+        <text x="96" y="256" class="lab sm" text-anchor="middle">120 days</text>
+        <text x="236" y="256" class="lab sm" text-anchor="middle">90 days</text>
+        <text x="376" y="256" class="lab sm" text-anchor="middle">60 days</text>
+        <text x="516" y="256" class="lab sm" text-anchor="middle">30 days</text>
+        <text x="652" y="256" class="lab sm" text-anchor="middle">maturity</text>
+        <!-- how it would be tested -->
+        <rect x="26" y="278" width="658" height="50" rx="4" class="band"/>
+        <text x="44" y="298" class="lab md">random split: <tspan style="fill:var(--accent)">challenger = this journey</tspan> · holdout = current process</text>
+        <text x="44" y="316" class="lab sm">primary metric: retention at renewal · guardrails: complaints, opt-outs</text>
+      </svg>
+      <svg class="jr-tall" viewBox="0 0 320 540" role="img" aria-label="Concept renewal journey over the 120 days before a mortgage matures. At 120 days, customers are sorted by switching history. Prior switchers get a rate-first offer at 90 days. Customers who have never switched get the rate-first offer with a step-by-step guide at 60 days. Anyone still undecided gets a one-step renewal at 30 days, before the renew-or-move decision at maturity. A random split compares the journey with a holdout on the current process, measured on retention at renewal, with complaints and opt-outs as guardrails.">
+        <line x1="12" y1="18" x2="32" y2="18" class="lineA"/>
+        <text x="38" y="22" class="lab md a">switched before</text>
+        <line x1="170" y1="18" x2="190" y2="18" class="lineB"/>
+        <text x="196" y="22" class="lab md">never switched</text>
+        <!-- time labels -->
+        <text x="12" y="77" class="lab sm">120 days</text>
+        <text x="12" y="154" class="lab sm">90 days</text>
+        <text x="12" y="232" class="lab sm">60 days</text>
+        <text x="12" y="310" class="lab sm">30 days</text>
+        <text x="12" y="388" class="lab sm">maturity</text>
+        <!-- 120 days: the first decision -->
+        <rect x="87" y="52" width="150" height="42" rx="6" class="boxO"/>
+        <text x="162" y="69" class="lab md" text-anchor="middle">sort by</text>
+        <text x="162" y="85" class="lab md" text-anchor="middle">switching history</text>
+        <!-- lanes -->
+        <path class="lineA" d="M130 94 C130 110, 96 106, 96 124 V384"/>
+        <path class="lineB" d="M194 94 C194 110, 228 106, 228 124 V384"/>
+        <circle class="dotA" cx="96" cy="150" r="6"/>
+        <text x="108" y="154" class="lab xs">rate-first offer</text>
+        <circle class="dotB" cx="228" cy="228" r="6"/>
+        <text x="216" y="225" class="lab xs" text-anchor="end">rate-first offer</text>
+        <text x="216" y="240" class="lab xs" text-anchor="end">+ step-by-step</text>
+        <circle class="dotA" cx="96" cy="306" r="6"/>
+        <circle class="dotB" cx="228" cy="306" r="6"/>
+        <text x="162" y="310" class="lab xs" text-anchor="middle">one-step renewal</text>
+        <circle class="endA" cx="96" cy="384" r="6"/>
+        <circle class="endB" cx="228" cy="384" r="6"/>
+        <text x="162" y="388" class="lab sm" text-anchor="middle">renew or move</text>
+        <!-- how it would be tested -->
+        <rect x="12" y="416" width="296" height="108" rx="4" class="band"/>
+        <text x="26" y="438" class="lab xs">random split of maturing mortgages</text>
+        <text x="26" y="456" class="lab xs"><tspan style="fill:var(--accent)">challenger:</tspan> this journey</text>
+        <text x="26" y="474" class="lab xs">holdout: current process</text>
+        <text x="26" y="494" class="lab sm">primary: retention at renewal</text>
+        <text x="26" y="512" class="lab sm">guardrails: complaints, opt-outs</text>
+      </svg>
+      <figcaption>Concept, designed after the study from its findings. Nothing here shipped or was measured, and the timings are placeholders.</figcaption>
+    </figure>
+
+    <ol class="recs jr-stages reveal" style="transition-delay:.08s">
+      <li class="rec">
+        <div class="n">120 days out</div>
+        <h3>Sort by switching history</h3>
+        <p>Prior experience was the strongest signal in the study. Age, income, and region barely registered next to it. So the first decision is whether a customer has moved a mortgage before.</p>
+        <p class="jr-from">From FIG.02: experience predicts switching</p>
+      </li>
+      <li class="rec">
+        <div class="n">90 days out</div>
+        <h3>Reach prior switchers first</h3>
+        <p>They are the likeliest to move, so they hear from the bank early. The rate leads the offer, with fees and penalties stated plainly beside it, the order customers ranked them in.</p>
+        <p class="jr-from">From FIG.02 and FIG.04: rate sits on top</p>
+      </li>
+      <li class="rec">
+        <div class="n">60 days out</div>
+        <h3>Walk first-timers through it</h3>
+        <p>Customers who have never switched get the same rate-first offer, plus a short step-by-step of what renewing involves, with paperwork and penalties answered up front. Their dread tracked inexperience more than the process.</p>
+        <p class="jr-from">From FIG.03: difficulty is the wall for first-timers</p>
+      </li>
+      <li class="rec">
+        <div class="n">30 days out</div>
+        <h3>Make the last step easy</h3>
+        <p>Anyone still undecided sees the offer again, with a single way to accept it. Expected difficulty held first-timers back, so the last ask should take as little effort as possible.</p>
+        <p class="jr-from">From FIG.03 and FIG.04</p>
+      </li>
+    </ol>
+
+    <div class="prose reveal" style="transition-delay:.08s">
+      <p style="margin-top:30px"><b>How I'd test it.</b> Champion/challenger, with a real holdout. Maturing mortgages are split at random: the journey is the challenger, and a holdout stays on the current renewal process, the champion. Both groups renew over the same months, so rate moves hit them alike and the gap between them can be credited to the journey. That is the clean comparison the shipped redesign never had. The holdout is sized before launch so that a lift worth acting on would be detectable.</p>
+      <p>The primary metric is retention at renewal: the share of maturing mortgages renewed with the bank, read separately for prior switchers and first-timers, since the study found they respond to different things. Complaints and opt-outs from renewal messages are the guardrails. One rule holds at every stage. The journey never makes switching look harder than it is, even though first-timers' dread of the process would make that an easy way to keep them.</p>
+    </div>
+
+    <div class="todo reveal" role="note"><strong>Leo to check:</strong> This renewal journey is a concept drafted during the October 2026 site revision, built only from this page's findings. It was not part of the original study and was never shipped or tested. Confirm you want it published (interviewers may ask about it), or delete section 07.</div>
+  </div>
+</section>
+
 <section class="cta">
   <div class="wrap">
+    <nav class="cs-pager" aria-label="More case studies">
+      <a class="cs-prev" href="/projects/in-channel-knowledge-agents/"><span>Previous</span>In-channel knowledge agents</a>
+      <a class="cs-next" href="/projects/ai-writing-assistance/"><span>Next</span>AI writing assistance</a>
+    </nav>
     <a class="back reveal" style="transition-delay:.08s" href="https://leohuang4977.github.io/projects/">← All projects</a>
     <footer class="foot">
       <span>© 2026 Leo Huang</span>
