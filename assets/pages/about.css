@@ -13,7 +13,7 @@
 .avail{list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px;margin-top:24px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink-2)}
 .avail li{display:inline-flex;align-items:center;white-space:nowrap}
 .avail li::before{content:"";flex:none;width:5px;height:5px;border-radius:50%;border:1px solid var(--ink-mute);margin-right:10px}
-.avail li:first-child::before{width:8px;height:8px;border:none;background:var(--accent);box-shadow:0 0 0 3px rgba(16,185,129,0.2)}
+.avail li:first-child::before{width:8px;height:8px;border:none;background:var(--accent);box-shadow:0 0 0 3px var(--accent-ring)}
 
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
 .hbtn{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:3px;padding:13px 20px;transition:border-color .25s,color .25s,background .25s,transform .25s}
@@ -65,9 +65,10 @@
 
 /* ---------- 03 selected work: cover cards ---------- */
 .work .cover{display:block;margin:-26px -26px 6px;aspect-ratio:2/1;overflow:hidden;border-bottom:1px solid var(--line);background:var(--paper)}
-/* Covers are older art in another palette; tint them to the scope's phosphor green.
-   A filter chain (no url() reference) so every browser renders it the same way. */
-.work .cover img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 40%;filter:grayscale(1) sepia(1) hue-rotate(105deg) saturate(1.9) brightness(.82) contrast(1.15)}
+/* Covers are older art in another palette; tint them to the violet accent (hue-rotate 215deg lands
+   on #A78BFA's hue; delete the filter to show the original colours). A filter chain (no url()
+   reference) so every browser renders it the same way. */
+.work .cover img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 40%;filter:grayscale(1) sepia(1) hue-rotate(215deg) saturate(1.9) brightness(.82) contrast(1.15)}
 /* two pillar tags per card: wrap between tags, never inside one */
 .work .tag{flex-wrap:wrap;column-gap:8px;row-gap:3px;line-height:1.5}
 .work .tag span{white-space:nowrap}
@@ -106,7 +107,7 @@
 /* ---------- 06 off the clock ---------- */
 .ocA{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;text-align:center;padding:4px 0}
 .ocA .it{display:flex;flex-direction:column;align-items:center;gap:14px}
-.ocA .it svg{width:40px;height:40px;stroke:var(--accent);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 5px rgba(16,185,129,0.4))}
+.ocA .it svg{width:40px;height:40px;stroke:var(--accent);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 5px var(--accent-glow))}
 .ocA .it .t{font-family:var(--font-display);font-size:20px;font-weight:500}
 .ocA .it .d{font-size:14px;color:var(--ink-mute);max-width:26ch}
 
