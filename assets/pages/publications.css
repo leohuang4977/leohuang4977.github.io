@@ -2,8 +2,6 @@
    Revision 2026-10: moved here from the page's inline <style>; APA 7 entry lines, year
    headings, the research intro and the shared amber TODO callout added. */
 
-:root{--todo:#F2B33C;--todo-soft:rgba(242,179,60,0.08);--todo-line:rgba(242,179,60,0.5)}
-
 /* narrow the reading column for the list (topbar stays full width) */
 .pubs-hero .wrap,.pubs .wrap{max-width:900px}
 

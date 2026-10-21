@@ -27,7 +27,7 @@ extra_css: [/assets/pages/about.css]
         </div>
       </div>
       <figure class="portrait reveal d2">
-        <img src="/assets/img/leo-portrait.jpg" alt="Leo Huang" width="1080" height="1350" loading="eager" fetchpriority="high">
+        <img src="/assets/img/leo-portrait.jpg" srcset="/assets/img/leo-portrait-480w.webp 480w, /assets/img/leo-portrait-720w.webp 720w, /assets/img/leo-portrait.webp 1080w" sizes="(max-width: 760px) 284px, 372px" alt="Leo Huang" width="1080" height="1350" loading="eager" fetchpriority="high">
       </figure>
     </div>
   </div>
@@ -94,7 +94,7 @@ extra_css: [/assets/pages/about.css]
         </svg>
         <h3>Decision &amp; journey design</h3>
         <p>I look for the points where people hesitate or give up, then help redesign the steps around them. At a major Canadian bank I co-developed a Contact Us journey redesign with a 20% lift in user satisfaction.</p>
-        <p class="ev"><span class="ev-k">Evidence</span><a href="/projects/mortgage-switching/">Mortgage switching</a><a href="/projects/advice-page-optimization/">Advisor contact page</a></p>
+        <p class="ev"><span class="ev-k">Evidence</span><a href="/projects/mortgage-switching/">Mortgage switching</a><a href="/projects/advice-page-optimization/">Advisor contact page</a><a href="/projects/job-search-pipeline/">Job-search decision pipeline</a></p>
       </li>
       <li class="pillar">
         <svg class="trace" viewBox="0 0 440 60" width="440" height="60" aria-hidden="true" focusable="false">
@@ -124,35 +124,36 @@ extra_css: [/assets/pages/about.css]
     <div class="sec-head reveal"><span class="idx">03</span><h2>Selected work</h2></div>
     <div class="cards work">
       <a class="card reveal" href="/projects/in-channel-knowledge-agents/">
-        <span class="cover"><img src="/assets/img/ckas-cover.png" alt="" width="1600" height="1000" loading="lazy" decoding="async"></span>
-        <span class="tag"><span>Human–AI interaction</span><span aria-hidden="true">·</span><span>Behavioral data science</span></span>
+        <span class="cover"><img src="/assets/img/ckas-cover.png"{% if site.imagemagick.enabled %} srcset="/assets/img/ckas-cover-480.webp 480w, /assets/img/ckas-cover-800.webp 800w, /assets/img/ckas-cover-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 504px"{% endif %} alt="" width="1600" height="1000" loading="lazy" decoding="async"></span>
+        <span class="tag"><span>Human–AI interaction</span><span aria-hidden="true">·</span><span>Behavioral data science</span><span aria-hidden="true">·</span><span>Decision &amp; journey design</span></span>
         <h3>What users want from in-channel knowledge agents</h3>
         <p>On the survey, people said they searched the knowledge base first. The telemetry showed they messaged a colleague instead. That gap reframed the agent's job, and it shipped as a pilot in the domains the study marked out.</p>
         <div class="foot"><span class="go">VIEW →</span></div>
       </a>
       <a class="card reveal" href="/projects/ai-agents/">
-        <span class="cover"><img src="/assets/img/agents-cover.png" alt="" width="1600" height="1000" loading="lazy" decoding="async"></span>
+        <span class="cover"><img src="/assets/img/agents-cover.png"{% if site.imagemagick.enabled %} srcset="/assets/img/agents-cover-480.webp 480w, /assets/img/agents-cover-800.webp 800w, /assets/img/agents-cover-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 504px"{% endif %} alt="" width="1600" height="1000" loading="lazy" decoding="async"></span>
         <span class="tag"><span>Human–AI interaction</span><span aria-hidden="true">·</span><span>Behavioral data science</span></span>
         <h3>How ready people were for AI agents at work</h3>
         <p>A weighted survey found near-universal awareness of AI agents but little real use, with readiness clustered in a few job functions. The two most ready functions got the first working pilots.</p>
         <div class="foot"><span class="go">VIEW →</span></div>
       </a>
       <a class="card reveal" href="/projects/mortgage-switching/">
-        <span class="cover"><img src="/assets/img/mortgage-cover.png" alt="" width="1600" height="1000" loading="lazy" decoding="async"></span>
-        <span class="tag"><span>Decision &amp; journey design</span><span aria-hidden="true">·</span><span>Experiments &amp; causal inference</span></span>
+        <span class="cover"><img src="/assets/img/mortgage-cover.png"{% if site.imagemagick.enabled %} srcset="/assets/img/mortgage-cover-480.webp 480w, /assets/img/mortgage-cover-800.webp 800w, /assets/img/mortgage-cover-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 504px"{% endif %} alt="" width="1600" height="1000" loading="lazy" decoding="async"></span>
+        <span class="tag"><span>Decision &amp; journey design</span><span aria-hidden="true">·</span><span>Experiments &amp; causal inference</span><span aria-hidden="true">·</span><span>Behavioral data science</span></span>
         <h3>Why customers switch mortgage providers</h3>
         <p>Comparing 100 recent switchers with 100 stayers showed that first-timers overestimate the hassle. The redesigned switching flow put the rate first and spelled out the steps.</p>
         <div class="foot"><span class="go">VIEW →</span></div>
       </a>
       <a class="card reveal" href="/projects/advice-page-optimization/">
-        <span class="cover"><img src="/assets/img/advice-cover.png" alt="" width="1600" height="1000" loading="lazy" decoding="async"></span>
+        <span class="cover"><img src="/assets/img/advice-cover.png"{% if site.imagemagick.enabled %} srcset="/assets/img/advice-cover-480.webp 480w, /assets/img/advice-cover-800.webp 800w, /assets/img/advice-cover-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 504px"{% endif %} alt="" width="1600" height="1000" loading="lazy" decoding="async"></span>
         <span class="tag"><span>Decision &amp; journey design</span><span aria-hidden="true">·</span><span>Behavioral data science</span></span>
         <h3>What moves someone to contact an advisor</h3>
         <p>A survey of 150 wealth clients ranked trust and experience far above technology, and they wanted a person on the other end. The redesign put phone and in-person contact first and trimmed the form to what people offered up front.</p>
         <div class="foot"><span class="go">VIEW →</span></div>
       </a>
     </div>
-    <a class="allwork" href="/projects/">View all 8 projects →</a>
+    {%- assign case_count = site.projects | size %}
+    <a class="allwork" href="/projects/">View all {{ case_count }} case studies →</a>
   </div>
 </section>
 
@@ -244,30 +245,4 @@ extra_css: [/assets/pages/about.css]
     el.setAttribute('data-count', String(days));   // existing countUp() animates to this
     el.textContent = days.toLocaleString('en-US');  // no-JS-animation fallback
   })();
-</script>
-
-<script type="application/ld+json">
-{% raw %}
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Leo Huang",
-  "url": "https://leohuang4977.github.io/",
-  "image": "https://leohuang4977.github.io/assets/img/leo-portrait.jpg",
-  "jobTitle": "Behavioral Scientist",
-  "description": "Behavioral scientist who studies how people make decisions, then designs and tests the products, journeys and processes they move through.",
-  "homeLocation": { "@type": "Place", "name": "Toronto, ON, Canada" },
-  "alumniOf": [
-    { "@type": "CollegeOrUniversity", "name": "University of Toronto" },
-    { "@type": "CollegeOrUniversity", "name": "Queen's University" }
-  ],
-  "knowsAbout": ["Behavioral science", "Experiments and causal inference", "Decision and journey design", "Human-AI interaction", "Behavioral data science", "UX research", "Social psychology"],
-  "sameAs": [
-    "https://scholar.google.com/citations?user=8s9xOScAAAAJ&hl=en",
-    "https://github.com/leohuang4977",
-    "https://www.linkedin.com/in/leo-huang-870ab2178",
-    "https://twitter.com/LeoHuan28578819"
-  ]
-}
-{% endraw %}
 </script>

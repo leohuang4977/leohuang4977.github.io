@@ -8,12 +8,7 @@
 .hero h1{font-family:var(--font-display);font-weight:500;font-size:clamp(34px,4.6vw,56px);line-height:1.07;letter-spacing:-0.015em;margin-bottom:26px}
 .hero .lede{font-size:clamp(17px,1.9vw,20px);color:var(--ink-2);max-width:54ch;line-height:1.55}
 
-/* availability readout: each item carries its own drawn marker, so a wrapped line
-   still starts cleanly and screen readers hear a plain three-item list */
-.avail{list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px;margin-top:24px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink-2)}
-.avail li{display:inline-flex;align-items:center;white-space:nowrap}
-.avail li::before{content:"";flex:none;width:5px;height:5px;border-radius:50%;border:1px solid var(--ink-mute);margin-right:10px}
-.avail li:first-child::before{width:8px;height:8px;border:none;background:var(--accent);box-shadow:0 0 0 3px var(--accent-ring)}
+/* availability readout (.avail): shared component in assets/scope.css */
 
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
 .hbtn{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:3px;padding:13px 20px;transition:border-color .25s,color .25s,background .25s,transform .25s}
@@ -69,7 +64,7 @@
    on #A78BFA's hue; delete the filter to show the original colours). A filter chain (no url()
    reference) so every browser renders it the same way. */
 .work .cover img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 40%;filter:grayscale(1) sepia(1) hue-rotate(215deg) saturate(1.9) brightness(.82) contrast(1.15)}
-/* two pillar tags per card: wrap between tags, never inside one */
+/* pillar tags (two or three per card): wrap between tags, never inside one */
 .work .tag{flex-wrap:wrap;column-gap:8px;row-gap:3px;line-height:1.5}
 .work .tag span{white-space:nowrap}
 .work .foot{justify-content:flex-end}

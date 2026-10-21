@@ -7,6 +7,8 @@
 
 /* 7.1 — Rotating hero word */
 .rotate{ color: var(--accent); display:inline-block; text-align:left; will-change: opacity, transform; }
+/* once the script runs, the visible word comes from data-word (the sr-only twin holds the text) */
+.rotate[data-word]::before{ content: attr(data-word); }
 .sr-only{ position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 
 /* 7.2 — Sticky / shrinking nav */
