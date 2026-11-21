@@ -10,21 +10,14 @@
 
   function fmt(n) { return Math.round(n).toLocaleString('en-US'); }
 
-  // Count-up. NOTE: kicked off with requestAnimationFrame(tick), never tick() directly —
-  // calling tick() with no timestamp makes the first frame NaN and the counter sticks.
+  // Numbers show their final value straight away. The count-up animation was retired in
+  // the 2026-11 motion budget; data-count stays on the markup so the value is set in one place.
   function countUp(el) {
     if (el.dataset.done) return;
     var t = parseFloat(el.dataset.count);
     if (isNaN(t)) return;
     el.dataset.done = '1';
-    if (reduce) { el.textContent = fmt(t); return; }
-    var dur = 1300, start = performance.now();
-    function tick(now) {
-      var p = Math.min((now - start) / dur, 1);
-      el.textContent = fmt((1 - Math.pow(1 - p, 3)) * t);
-      if (p < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
+    el.textContent = fmt(t);
   }
   function fillBar(el) { el.style.width = el.dataset.w + '%'; }
 
@@ -98,12 +91,16 @@
         var rest = (a.hub || b.hub) ? 98 : 124; var f = (d - rest) * 0.02; var fx = dx / d * f, fy = dy / d * f;
         if (!a.fixed) { a.vx += fx; a.vy += fy; } if (!b.fixed) { b.vx -= fx; b.vy -= fy; }
       });
+      var maxV = 0;
       nodes.forEach(function (n) {
         if (n.fixed) return;
+        var ox = n.x, oy = n.y;
         n.vx += (W / 2 - n.x) * 0.004; n.vy += (H / 2 - n.y) * 0.004; n.vx *= 0.85; n.vy *= 0.85; n.x += n.vx; n.y += n.vy;
         n.x = Math.max(36, Math.min(W - 36, n.x)); n.y = Math.max(28, Math.min(H - 28, n.y));
+        maxV = Math.max(maxV, Math.abs(n.x - ox), Math.abs(n.y - oy)); // real movement, so a node held at the edge counts as still
       });
       draw();
+      return maxV;
     }
     function draw() {
       links.forEach(function (l, i) { L[i].setAttribute('x1', l.s.x); L[i].setAttribute('y1', l.s.y); L[i].setAttribute('x2', l.t.x); L[i].setAttribute('y2', l.t.y); });
@@ -111,10 +108,19 @@
     }
     var drag = null;
     function toSVG(e) { var p = svg.createSVGPoint(); p.x = e.clientX; p.y = e.clientY; return p.matrixTransform(svg.getScreenCTM().inverse()); }
-    function startDrag(e, n) { e.preventDefault(); drag = n; n.fixed = true; try { svg.setPointerCapture(e.pointerId); } catch (_) {} window.addEventListener('pointermove', onMove); window.addEventListener('pointerup', endDrag); }
+    function startDrag(e, n) { e.preventDefault(); drag = n; n.fixed = true; try { svg.setPointerCapture(e.pointerId); } catch (_) {} window.addEventListener('pointermove', onMove); window.addEventListener('pointerup', endDrag); wake(); }
     function onMove(e) { if (!drag) return; var p = toSVG(e); drag.x = Math.max(36, Math.min(W - 36, p.x)); drag.y = Math.max(28, Math.min(H - 28, p.y)); drag.vx = 0; drag.vy = 0; if (reduce) draw(); }
     function endDrag() { if (drag) { drag.fixed = false; drag = null; } window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', endDrag); }
-    if (reduce) { for (var k = 0; k < 420; k++) step(); draw(); } else { (function loop() { step(); requestAnimationFrame(loop); })(); }
+    // The animation loop pauses once the graph settles (no drag and every node nearly still for
+    // about half a second), so an idle page costs nothing. Dragging a node wakes it again.
+    var running = false, calm = 0;
+    function loop() {
+      var v = step();
+      if (!drag && v < 0.02) { if (++calm > 30) { running = false; return; } } else { calm = 0; }
+      requestAnimationFrame(loop);
+    }
+    function wake() { if (reduce || running) return; running = true; calm = 0; requestAnimationFrame(loop); }
+    if (reduce) { for (var k = 0; k < 420; k++) step(); draw(); } else { wake(); }
   })();
 })();
 {% endraw %}
