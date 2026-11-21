@@ -10,8 +10,6 @@
 .hero h1{font-family:var(--font-display);font-weight:500;font-size:clamp(34px,4.6vw,56px);line-height:1.07;letter-spacing:-0.015em;margin-bottom:28px}
 .hero .lede{font-size:clamp(17px,1.9vw,20px);color:var(--ink-2);max-width:54ch;line-height:1.55}
 
-/* availability readout (.avail): shared component in assets/scope.css */
-
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
 .hbtn{display:inline-flex;align-items:center;gap:12px;font-family:var(--font-body);font-size:15px;font-weight:600;text-decoration:none;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:3px;padding:12px 20px;transition:border-color .25s,color .25s,background .25s}
 .hbtn:hover{border-color:var(--accent);color:var(--accent)}

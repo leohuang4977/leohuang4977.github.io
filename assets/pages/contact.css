@@ -1,11 +1,10 @@
 /* Contact page (/contact/, _pages/en-us/contact.html). Loaded through the page's extra_css hook.
-   Revision 2026-10. The .avail readout is the shared component in assets/scope.css. */
+   Revision 2026-10. */
 .ct-hero{padding:78px 0 64px}
 .ct-hero h1{font-family:var(--font-display);font-weight:500;font-size:clamp(36px,6vw,62px);line-height:1.02;letter-spacing:-0.015em;margin-bottom:24px}
 .ct-msg{font-size:clamp(17px,2.1vw,21px);color:var(--ink-2);max-width:58ch;line-height:1.6}
 .ct-msg + .ct-msg{margin-top:14px}
 
-.avail{margin-top:28px}
 
 .ct-cta{display:flex;flex-direction:column;align-items:flex-start;gap:16px;margin-top:38px}
 .btn-email{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-body);font-size:15px;font-weight:600;color:var(--paper);background:var(--accent);border:1px solid var(--accent);border-radius:3px;padding:15px 26px;text-decoration:none;transition:background .25s,border-color .25s,transform .25s}
