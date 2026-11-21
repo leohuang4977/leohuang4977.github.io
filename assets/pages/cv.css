@@ -21,7 +21,7 @@
 
 /* print button: revealed by cv.js, so it never shows without a working window.print */
 .cv-actions{margin-top:22px}
-.btn-print{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-2);background:transparent;border:1px solid var(--line);border-radius:3px;padding:10px 15px;cursor:pointer;transition:color .2s,border-color .2s}
+.btn-print{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-body);font-size:14px;color:var(--ink-2);background:transparent;border:1px solid var(--line);border-radius:3px;padding:10px 15px;cursor:pointer;transition:color .2s,border-color .2s}
 .btn-print:hover,.btn-print:focus-visible{color:var(--accent);border-color:var(--accent)}
 .btn-print[hidden]{display:none}
 .btn-print svg{width:15px;height:15px;flex:none;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linejoin:round}
@@ -51,9 +51,9 @@
 /* ---------- skills (the .skills .chip hover/tilt lives in enhancements.css/.js) ---------- */
 .skills{display:flex;flex-direction:column;gap:32px}
 .sg-head{display:flex;justify-content:space-between;align-items:baseline;gap:6px 16px;flex-wrap:wrap;margin-bottom:9px}
-.skill-group .lbl{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:10px}
+.skill-group .lbl{font-family:var(--font-body);font-size:15px;font-weight:600;color:var(--accent);display:flex;align-items:center;gap:10px}
 .skill-group .lbl::before{content:"";width:18px;height:1px;background:var(--accent)}
-.sg-link{font-family:var(--font-mono);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-mute);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s,border-color .2s}
+.sg-link{font-family:var(--font-body);font-size:13px;color:var(--ink-mute);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s,border-color .2s}
 .sg-link:hover,.sg-link:focus-visible{color:var(--accent);border-color:var(--accent)}
 .skill-group .desc{font-style:italic;color:var(--ink-2);font-size:14.5px;line-height:1.5;margin:0 0 14px;max-width:72ch}
 .chips{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
@@ -77,7 +77,7 @@
   body{font-size:10pt;line-height:1.4}
   body::before,body::after{content:none!important;display:none!important}
 
-  /* chrome: nav, footer, skip link, blob cursor, on-screen-only controls */
+  /* chrome: nav, footer, skip link, on-screen-only controls */
   header.topbar,footer.foot,.skip,.cursor-blob,.cv-actions,.sg-link,.cv-more,.cv-hero .kicker,.sec-head .idx,.scr{display:none!important}
   /* anything else the shell adds beside <main> later (kept separate: an unsupported :has() only drops this rule) */
   body > :not(main):not(:has(main)){display:none!important}
