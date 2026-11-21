@@ -11,7 +11,7 @@
 .pf-hero{padding:62px 0 4px}
 .pf-hero h1{font-family:var(--font-display);font-weight:500;font-size:clamp(36px,6vw,62px);line-height:1.02;letter-spacing:-.015em;margin-bottom:20px;transition-delay:.06s}
 .pf-hero .dek{font-size:clamp(16px,2vw,19px);color:var(--ink-2);max-width:62ch;line-height:1.55;transition-delay:.12s}
-.pf-hero .note{margin-top:24px;font-family:var(--font-mono);font-size:11.5px;line-height:1.7;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-mute);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;transition-delay:.18s}
+.pf-hero .note{margin-top:24px;font-family:var(--font-body);font-size:14px;line-height:1.7;color:var(--ink-mute);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;transition-delay:.18s}
 .pf-hero .note .num{font-family:var(--font-display);font-size:20px;line-height:1;color:var(--accent);font-weight:500;margin-right:10px}
 
 /* ---------- filter bar: instrument buttons with an LED that lights when pressed ----------
@@ -19,11 +19,11 @@
    bar from CSS (rather than unhiding it from the deferred page script) avoids a layout shift. */
 .pf-bar{display:none;gap:12px;padding:28px 0 0}
 html.js .pf-bar{display:grid}
-.pf-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute)}
+.pf-label{font-family:var(--font-body);font-size:13px;color:var(--ink-mute)}
 .pf-chips{display:flex;flex-wrap:wrap;gap:8px}
-.pf-chip{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:12px;font-weight:400;line-height:1.2;letter-spacing:.01em;color:var(--ink-2);background:transparent;border:1px solid var(--line);border-radius:999px;padding:7px 13px 7px 11px;cursor:pointer;text-align:left;transition:border-color .2s,color .2s,background-color .2s}
+.pf-chip{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:12px;font-weight:400;line-height:1.2;letter-spacing:.01em;color:var(--ink-2);background:transparent;border:1px solid var(--line);border-radius:3px;padding:7px 13px 7px 11px;cursor:pointer;text-align:left;transition:border-color .2s,color .2s,background-color .2s}
 .pf-chip:hover{border-color:var(--ink-mute);color:var(--ink)}
-.pf-chip:focus-visible{border-radius:999px}
+.pf-chip:focus-visible{border-radius:3px}
 .pf-led{width:7px;height:7px;border-radius:50%;border:1px solid var(--ink-mute);flex:none;transition:background-color .2s,border-color .2s,box-shadow .2s}
 .pf-n{font-size:11px;color:var(--ink-mute)}
 .pf-chip[aria-pressed="true"]{color:var(--ink);border-color:var(--accent);background-color:var(--accent-wash-2)}
@@ -70,13 +70,13 @@ html.js .pf-bar{display:grid}
 .pf-link::after{content:"";position:absolute;top:0;right:0;bottom:0;left:0;z-index:1}
 .pf-link:focus-visible{outline:none}
 .pf-card:focus-within{border-color:var(--accent);outline:2px solid var(--accent);outline-offset:3px}
-.pf-tags{order:-1;list-style:none;display:flex;flex-wrap:wrap;gap:6px 16px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.pf-tags{order:-1;list-style:none;display:flex;flex-wrap:wrap;gap:6px 16px;font-family:var(--font-body);font-size:13px;color:var(--ink-2)}
 .pf-tags li{display:inline-flex;align-items:center;gap:7px}
 .pf-tags li::before{content:"";width:6px;height:6px;border-radius:50%;border:1px solid var(--ink-mute);flex:none}
 .pf-card .pf-out{font-size:15px;line-height:1.5;color:var(--ink-2);flex:1}
 .pf-foot{position:relative;border-top:1px solid var(--line-soft);padding-top:12px}
 .pf-card .pf-meth{font-family:var(--font-mono);font-size:11.5px;line-height:1.55;color:var(--ink-mute)}
-.pf-k{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:3px}
+.pf-k{font-family:var(--font-body);display:block;font-size:12.5px;margin-bottom:3px}
 /* each method stays on one line when it fits, and its separator never starts a line */
 .pf-mi{display:inline-block;max-width:100%}
 .pf-card .go{position:absolute;top:9px;right:0;white-space:nowrap}

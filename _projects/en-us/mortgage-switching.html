@@ -45,8 +45,7 @@ scope_nav: projects
 
   /* hero */
   .cs-hero{padding:30px 0 26px}
-  .kicker{font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:12px;margin-bottom:22px;flex-wrap:wrap}
-  .kicker .rule{height:1px;width:46px;background:var(--accent);opacity:.5}
+  .kicker{font-family:var(--font-body);font-size:17px;line-height:1.5;color:var(--ink-mute);margin:-6px 0 24px;max-width:60ch}
   .cs-hero h1{font-family:var(--font-display);font-weight:500;font-size:clamp(34px,6vw,60px);line-height:1.03;letter-spacing:-0.015em;margin-bottom:22px;max-width:18ch}
   .cs-hero .lede{font-size:clamp(17px,2.1vw,20px);color:var(--ink-2);max-width:58ch;line-height:1.55}
 
@@ -110,7 +109,7 @@ scope_nav: projects
   /* recommendation cards */
   .recs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
   .rec{border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:22px 22px 20px;position:relative;overflow:hidden;transition:transform .3s cubic-bezier(.2,.7,.2,1),border-color .3s}
-  .rec:hover{transform:translateY(-3px);border-color:var(--accent)}
+  .rec:hover{border-color:var(--accent)}
   .rec .n{font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:0.08em;margin-bottom:12px}
   .rec h3{font-family:var(--font-display);font-size:19px;font-weight:500;line-height:1.18;margin-bottom:10px}
   .rec p{font-size:14.5px;color:var(--ink-2);line-height:1.5}
@@ -119,7 +118,7 @@ scope_nav: projects
 
   /* contact CTA */
   .cta{border-top:1px solid var(--line);margin-top:56px;padding:44px 0 26px}
-  .cta .back{font-family:var(--font-mono);font-size:12.5px;text-transform:uppercase;letter-spacing:0.05em;color:var(--ink-2);text-decoration:none;display:inline-flex;align-items:center;gap:9px;transition:color .2s,gap .2s}
+  .cta .back{font-family:var(--font-body);font-size:15px;color:var(--ink-2);text-decoration:none;display:inline-flex;align-items:center;gap:9px;transition:color .2s,gap .2s}
   .cta .back:hover{color:var(--accent);gap:13px}
 
   @media (max-width:760px){
@@ -141,21 +140,21 @@ scope_nav: projects
   .disc{margin-top:26px;font-family:var(--font-mono);font-size:11.5px;line-height:1.6;letter-spacing:0.02em;color:var(--ink-mute);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;border-left:0;background:none;border-radius:0}
   @media (hover:hover) and (pointer:fine){
     .rec,.study,.pcard,.ta,.w{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
-    .rec:hover,.study:hover,.pcard:hover,.ta:hover,.w:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 12px 30px rgba(0,0,0,0.35)}
+    .rec:hover,.study:hover,.pcard:hover,.ta:hover,.w:hover{border-color:var(--accent);box-shadow:0 12px 30px rgba(0,0,0,0.35)}
   }
   @media (prefers-reduced-motion:reduce){html.js .sweepfx::after{display:none!important}}
   /* cs-shows + cs-pager (revision 2026-10) */
   .cs-shows{padding:0 0 8px}
   .cs-shows .wrap{display:grid;gap:10px;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:16px 0}
   .cs-shows-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
-  .cs-shows-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);min-width:52px}
+  .cs-shows-label{font-family:var(--font-body);font-size:13px;color:var(--ink-mute);min-width:52px}
   .cs-tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-  .cs-tags a{display:inline-block;font-family:var(--font-mono);font-size:12px;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:4px 11px;text-decoration:none;transition:border-color .2s,color .2s}
+  .cs-tags a{display:inline-block;font-family:var(--font-mono);font-size:12px;color:var(--ink);border:1px solid var(--line);border-radius:3px;padding:4px 11px;text-decoration:none;transition:border-color .2s,color .2s}
   .cs-tags a:hover,.cs-tags a:focus-visible{border-color:var(--accent);color:var(--accent)}
   .cs-fits{margin:0;font-size:14px;color:var(--ink-2)}
   .cs-pager{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 22px}
   .cs-pager a{display:block;border:1px solid var(--line);border-radius:4px;padding:14px 16px;color:var(--ink);text-decoration:none;font-family:var(--font-display);font-size:18px;line-height:1.25;transition:border-color .2s}
-  .cs-pager a span{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:6px}
+  .cs-pager a span{display:block;font-family:var(--font-body);font-size:13px;color:var(--ink-mute);margin-bottom:6px}
   .cs-pager .cs-next{text-align:right}
   .cs-pager a:hover,.cs-pager a:focus-visible{border-color:var(--accent)}
   @media (max-width:560px){.cs-pager{grid-template-columns:1fr}.cs-pager .cs-next{text-align:left}}
@@ -189,8 +188,8 @@ main > section:last-child{padding-bottom:48px}
 
 <section class="cs-hero">
   <div class="wrap">
-    <div class="kicker reveal"><span class="rule"></span>Decision &amp; journey design · Comparative survey · Retail banking</div>
     <h1 class="reveal" style="transition-delay:.06s">Why customers switch mortgage providers</h1>
+    <p class="kicker reveal" style="transition-delay:.09s">Decision &amp; journey design · Comparative survey · Retail banking</p>
     <p class="lede reveal" style="transition-delay:.12s">A retail bank shipped a new mortgage-switching flow with the rate at the top and a step-by-step path for first-time switchers. Both choices came from this study, which compared 100 recent switchers with 100 stayers to see what actually moves a mortgage and what keeps one parked.</p>
     <div class="disc reveal" style="transition-delay:.18s">Anonymized portfolio version of a client study. The bank is unnamed and the figures are illustrative, recreated to show the design and analysis rather than to report real results.</div>
   </div>
@@ -559,21 +558,13 @@ main > section:last-child{padding-bottom:48px}
     /* oscilloscope sweep targets: every figure panel */
     document.querySelectorAll('.figbox, figure.fig, div.fig').forEach(function(f){f.classList.add('sweepfx');});
 
-    /* count-up (NaN-safe: first frame gets a real timestamp via rAF) */
+    /* numbers: final value straight away (count-up retired 2026-11) */
     function countUp(el){
       if(el.dataset.done)return;
       var t=parseFloat(el.dataset.count); if(isNaN(t))return;
       el.dataset.done='1';
       var fmt=function(n){return Math.round(n).toLocaleString('en-US');};
-      if(reduce){el.textContent=fmt(t);return;}
-      var dur=1100,start=null;
-      function tick(now){
-        if(start===null)start=now;
-        var p=Math.min((now-start)/dur,1);
-        el.textContent=fmt((1-Math.pow(1-p,3))*t);
-        if(p<1)requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
+      el.textContent=fmt(t);
     }
 
     function arm(el){

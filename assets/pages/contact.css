@@ -8,8 +8,8 @@
 .avail{margin-top:28px}
 
 .ct-cta{display:flex;flex-direction:column;align-items:flex-start;gap:16px;margin-top:38px}
-.btn-email{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:13px;letter-spacing:0.06em;text-transform:uppercase;font-weight:600;color:var(--paper);background:var(--accent);border:1px solid var(--accent);border-radius:3px;padding:15px 26px;text-decoration:none;transition:background .25s,border-color .25s,transform .25s}
-.btn-email:hover{background:var(--accent-deep);border-color:var(--accent-deep);transform:translateY(-2px)}
+.btn-email{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-body);font-size:15px;font-weight:600;color:var(--paper);background:var(--accent);border:1px solid var(--accent);border-radius:3px;padding:15px 26px;text-decoration:none;transition:background .25s,border-color .25s,transform .25s}
+.btn-email:hover{background:var(--accent-deep);border-color:var(--accent-deep)}
 .btn-email .ar{transition:transform .25s}
 .btn-email:hover .ar{transform:translateX(4px)}
 .ct-addr{font-family:var(--font-mono);font-size:13.5px;color:var(--ink-2);letter-spacing:0.02em}
